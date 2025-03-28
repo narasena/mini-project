@@ -4,6 +4,7 @@ import styles from './page.module.css'
 export default function Home() {
   return (
     <main className={styles.main}>
+      <h1 className="text-2xl font-bold text-blue-500">Hello, Tailwind!</h1>
       <div className={styles.description}>
         <p>
           Get started by editing&nbsp;
@@ -91,5 +92,5 @@ export default function Home() {
         </a>
       </div>
     </main>
-  )
+  );
 }
