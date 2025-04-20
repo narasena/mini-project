@@ -1,0 +1,123 @@
+@import 'tailwindcss';
+@plugin "daisyui" {
+  themes: light --default;
+}
+@import '../../../../node_modules/preline/variants.css';
+
+@layer base {
+  ul {
+    @apply block list-disc my-4 pl-10;
+  }
+  li {
+    @apply list-item;
+  }
+}
+
+@layer components {
+  .s-navbar {
+    @apply block [box-shadow:0_2px_6px_0_rgba(28,29,29,0.25)] relative;
+  }
+  .navbar-bottom {
+    @apply p-4 lg:p-[16px_40px] grid grid-cols-[1fr_auto] gap-[60px] items-start bg-[#152955];
+  }
+  .navbar-nav {
+    @apply w-full inline-flex md:grid md:items-center md:grid-cols-[122px_1fr] md:gap-[60px] m-0 p-0 list-none;
+  }
+  .navbar-left {
+    @apply flex flex-wrap items-center flex-1;
+  }
+  .navbar-nav > li > a {
+    @apply text-white font-semibold tracking-[1px] uppercase flex justify-center items-center min-h-[55px] p-[0_15px] text-xs;
+  }
+  .navbar-item {
+    @apply text-[#494a4a];
+  }
+  .logo {
+    @apply text-2xl text-[#494a4a];
+  }
+  .link a {
+    @apply text-[#fb7221] cursor-pointer;
+  }
+  .navbar .navbar-bottom .navbar-left .navbar-item {
+    @apply !min-h-0 p-0;
+  }
+  .navbar-item img {
+    @apply h-auto transform scale-100 md:scale-110 md:-mt-0.5;
+  }
+
+  .navbar-logo {
+    @apply h-[30px];
+  }
+  .navbar-elastic-search-container {
+    @apply w-full max-w-[810px] flex-1;
+  }
+  .navbar-elastic-search-wrapper {
+    @apply relative;
+  }
+  .navbar-elastic-search-form {
+    @apply relative m-0 flex items-center;
+  }
+  .nes-search {
+    @apply w-full rounded-[0_8px_8px_0] overflow-hidden;
+  }
+  .navbar-elastic-search-wrapper input.s-input {
+    @apply w-full !pr-20 rounded-lg h-[35px] bg-[#12244d] text-sm text-[#dbdfe7] border-0 p-[10px_15px] align-middle inline-block max-w-full m-0 cursor-text tracking-normal leading-normal;
+  }
+  .button-reset {
+    @apply absolute top-1/2 right-10 h-9 w-10 border-0 bg-transparent transform -translate-y-1/2 cursor-pointer;
+  }
+  .button-reset span {
+    @apply pointer-events-none;
+  }
+  .s-icon {
+    @apply text-inherit
+           normal-case
+           bg-transparent
+           inline-block
+           fill-current
+           m-0
+           border-0
+           rounded-none
+           overflow-visible
+           p-0;
+  }
+  .button-search {
+    @apply absolute top-1/2 right-0 h-9 w-10 rounded-tr-sm rounded-br-sm bg-[#0049cc] transform -translate-y-1/2 cursor-pointer;
+  }
+  .button-search span {
+    @apply text-white pointer-events-none;
+  }
+  .navbar-right {
+    @apply flex items-center flex-nowrap ml-auto;
+  }
+  .navbar-desktop {
+    @apply h-[35px] flex m-0 p-0 items-center float-right;
+  }
+  .navbar-link {
+    @apply h-5;
+  }
+  .navbar-link>a {
+    @apply text-white font-semibold tracking-[1px] flex justify-center items-center p-[0_15px] text-xs !capitalize
+  }
+  .navbar-link>a>span {
+    @apply text-xl mr-[9px];
+  }
+  .svg-white {
+    @apply [filter:brightness(0)_saturate(100%)_invert(100%)_sepia(56%)_saturate(964%)_hue-rotate(172deg)_brightness(119%)_contrast(109%)];
+  }
+  .auth-navbar-button-container {
+    @apply hidden lg:block ml-3;
+  }
+  .navbar-auth-button {
+    @apply flex;
+  }
+  .auth-signup-button{
+    @apply border border-[#dbdfe7] !text-white bg-transparent p-[9px_16px] min-w-[82px] leading-[20px] rounded-lg font-medium text-sm !m-0
+  }
+  .auth-signin-button{
+    @apply bg-[#0049cc] text-white min-w-[82px] p-[10px_16px] leading-[20px] rounded-lg font-medium text-sm !m-0
+  }
+}
+
+@layer utilities {
+}

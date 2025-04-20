@@ -10,24 +10,37 @@
     "test": "npx cypress verify & cypress run --component"
   },
   "dependencies": {
-    "@tailwindcss/postcss": "^4.0.17",
+    "@tailwindcss/postcss": "^4.1.4",
     "cross-env": "^7.0.3",
-    "next": "^14.2.26",
+    "formik": "^2.4.6",
+    "jquery": "^3.7.1",
+    "lodash": "^4.17.21",
+    "next": "^15.3.1",
+    "nouislider": "^15.8.1",
     "postcss-remove-selectors": "^2.0.1",
+    "preline": "^3.0.1",
     "react": "^18",
     "react-dom": "^18",
-    "rifraf": "^2.0.3"
+    "react-icons": "^5.5.0",
+    "rifraf": "^2.0.3",
+    "vanilla-calendar-pro": "^3.0.4",
+    "yap": "^0.0.2",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/datatables.net": "^1.10.28",
+    "@types/jquery": "^3.5.32",
+    "@types/lodash": "^4.17.16",
+    "@types/node": "^22.14.1",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
     "autoprefixer": "^10.4.21",
-    "cypress": "^13.6.2",
+    "cypress": "^14.3.1",
+    "daisyui": "^5.0.27",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "postcss": "^8.5.3",
-    "tailwindcss": "^4.0.17",
-    "typescript": "^5"
+    "tailwindcss": "^4.1.4",
+    "typescript": "^5.8.3"
   }
 }

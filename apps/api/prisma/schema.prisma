@@ -3,19 +3,52 @@
 
 generator client {
   provider = "prisma-client-js"
+  output = "../src/prisma-generated/client"
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl= env("DIRECT_URL")
 }
 
-model Sample {
-  id        Int      @id @default(autoincrement())
-  name      String
-  code      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model CountryPhone{
+  id                Int         @id @default(autoincrement())
+  name              String      @unique
+  code              String      @unique
+  mobileCode        String      
+  members           Member[]
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  deletedAt         DateTime?
 
-  @@map("samples") // if you want to use snake_case format
+  @@map ("country_phone")
+}
+
+model Member {
+  id                String        @id @default(uuid())
+  email             String        @unique
+  isEmailVerified   Boolean       @default(false)
+  countryPhoneId    Int  
+  countryPhone      CountryPhone  @relation(fields: [countryPhoneId], references: [id])
+  phoneNumber       String        @unique
+  firstName         String
+  lastName          String?
+  birthDate         String
+  sex               Sex
+  termsPrivacyAccepted Boolean
+  personalDataConsentAccepted Boolean
+  eventPromoAccepted Boolean      @default(true)
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  deletedAt         DateTime?
+
+  @@map("members")
+}
+
+enum Sex {
+  MALE
+  FEMALE
+  OTHER
+  PREFER_NOT_TO_SAY
 }
