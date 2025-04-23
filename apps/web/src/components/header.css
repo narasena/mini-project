@@ -18,10 +18,10 @@
     @apply block [box-shadow:0_2px_6px_0_rgba(28,29,29,0.25)] relative;
   }
   .navbar-bottom {
-    @apply p-4 lg:p-[16px_40px] grid grid-cols-[1fr_auto] gap-[60px] items-start bg-[#152955];
+    @apply p-4 lg:p-[16px_40px] grid grid-cols-[1fr_auto] items-start bg-[#152955];
   }
   .navbar-nav {
-    @apply w-full inline-flex md:grid md:items-center md:grid-cols-[122px_1fr] md:gap-[60px] m-0 p-0 list-none;
+    @apply w-full inline-flex md:grid md:items-center md:grid-cols-[122px_1fr] lg:gap-[60px] m-0 p-0 list-none;
   }
   .navbar-left {
     @apply flex flex-wrap items-center flex-1;
@@ -38,12 +38,16 @@
   .link a {
     @apply text-[#fb7221] cursor-pointer;
   }
-  .navbar .navbar-bottom .navbar-left .navbar-item {
+  .navbar-item {
     @apply !min-h-0 p-0;
   }
-  .navbar-item img {
-    @apply h-auto transform scale-100 md:scale-110 md:-mt-0.5;
+  .navbar-item-img {
+    @apply w-[122px] h-[33px]      /* mobile default size */
+         md:w-[134px] md:h-[36px] /* at ≥md: 134×36 */
+         block                   /* make sure it isn’t being flex‑scaled */
+         max-w-none              /* don’t let max-w-full override your px sizes */              /* maintain aspect ratio if you drop explicit h */
   }
+    
 
   .navbar-logo {
     @apply h-[30px];
@@ -91,7 +95,7 @@
     @apply flex items-center flex-nowrap ml-auto;
   }
   .navbar-desktop {
-    @apply h-[35px] flex m-0 p-0 items-center float-right;
+    @apply h-[35px] flex m-0 p-0 items-center float-right list-none;
   }
   .navbar-link {
     @apply h-5;
@@ -116,6 +120,15 @@
   }
   .auth-signin-button{
     @apply bg-[#0049cc] text-white min-w-[82px] p-[10px_16px] leading-[20px] rounded-lg font-medium text-sm !m-0
+  }
+  .auth-signup-button-mobile{
+    @apply border border-[#0049cc] !text-[#0049cc] bg-transparent p-[9px_16px] min-w-full leading-[20px] rounded-lg font-medium text-sm !m-0
+  }
+  .auth-signin-button-mobile{
+    @apply bg-[#0049cc] text-white min-w-full p-[10px_16px] leading-[20px] rounded-lg font-medium text-sm !m-0
+  }
+  .nav-divider{
+    @apply border border-[#e5e5e5] min-w-full
   }
 }
 

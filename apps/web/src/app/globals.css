@@ -170,6 +170,12 @@ body * {
   .flex-middle-center {
     @apply flex items-center justify-center;
   }
+  .hidden-md {
+    @apply md:hidden;
+  }
+  .visible-md {
+    @apply max-md:hidden;
+  }
   .hidden-lg {
     @apply lg:hidden;
   }
