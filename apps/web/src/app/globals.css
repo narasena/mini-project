@@ -3,12 +3,12 @@
   themes: light --default;
 }
 @import '../../../../node_modules/preline/variants.css';
-
-body * {
-  box-sizing: border-box;
-}
+ @source "../../../../node_modules/preline/dist.js";
 
 @layer base {
+  body * {
+  box-sizing: border-box;
+}
   button {
     @apply appearance-auto tracking-normal leading-normal transform-none indent-0 flex items-center justify-center !text-center m-0 py-[1px] px-[6px];
   }
@@ -163,6 +163,9 @@ body * {
   .width-1-2 {
     @apply w-1/2;
   }
+  .box-shadow-small{
+    @apply shadow-[0_2px_8px_rgba(0,0,0,.08)]
+  }
   .margin-small-left {
     @apply !ml-2.5;
   }
@@ -200,7 +203,7 @@ body * {
     @apply appearance-none inline-block align-middle text-center tracking-[1.5px] overflow-visible
   }
   .s-button-primary{
-    @apply text-white bg-[#0049cc]
+    @apply text-white bg-[#0049cc] rounded-lg
   }
   .active::after{
     @apply content-[''] w-full h-1 absolute bottom-[-1px] block bg-[#0049cc] rounded-[4px_4px_0_0] overflow-hidden

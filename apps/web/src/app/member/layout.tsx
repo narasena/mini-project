@@ -37,7 +37,7 @@ export default function MemberDashBoardLayout({
       ],
       eventCreator: [
         { title: 'Dashboard', icon: <GoHomeFill />, link: '/member' },
-        { title: 'Event Saya', icon: <FiFileText />, link: '/' },
+        { title: 'Event Saya', icon: <FiFileText />, link: '/member/events' },
       ],
     },
     account: [
@@ -73,6 +73,8 @@ export default function MemberDashBoardLayout({
         return 'Home';
       case '/member/tiket-saya':
         return 'Tiket Saya';
+      case '/member/events':
+        return 'Event Saya';
       case pathName.includes('/member/profile') ? pathName : '':
         return 'Profil Kamu';
       default:
@@ -102,7 +104,7 @@ export default function MemberDashBoardLayout({
         </div>
         <div className="sidebar-list-menu mb-[50px] py-2.5">
           {/* parent dashboard menu */}
-          <ul className="*:p-[10px_20px] *:font-normal *:text-sm ">
+          <ul className="*:p-[10px_20px] *:font-normal *:text-sm list-none">
             {!isBuyerMode && <li>Dashboard</li>}
             {isBuyerMode
               ? sidebarMenuList.parent.buyer.map((item, index) => (
@@ -128,7 +130,7 @@ export default function MemberDashBoardLayout({
             <li className="border-t border-white w-full"></li>
           </ul>
           {/* account cp dashboard menu */}
-          <ul className="*:p-[10px_20px] *:font-normal *:text-sm ">
+          <ul className="*:p-[10px_20px] *:font-normal *:text-sm list-none">
             <li>Akun</li>
             {sidebarMenuList.account.map((item, index) =>
               isBuyerMode ? (
@@ -156,7 +158,7 @@ export default function MemberDashBoardLayout({
             <li className="border-t border-white w-full"></li>
           </ul>
           {/* user mode  */}
-          <ul>
+          <ul className='list-none'>
             <li>Mode User</li>
             <li>
               <button

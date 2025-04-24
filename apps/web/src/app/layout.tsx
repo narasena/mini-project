@@ -3,7 +3,6 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import PrelineScriptWrapper from '@/components/PrelineScriptWrapper';
 
-
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -18,9 +17,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <script src="../../../../node_modules/preline/dist/preline.js"></script>
-        {children}
+      <body className={''}>
+        <div>{children}</div>
       </body>
       <PrelineScriptWrapper />
     </html>
