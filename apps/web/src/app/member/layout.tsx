@@ -102,7 +102,7 @@ export default function MemberDashBoardLayout({
         </div>
         <div className="sidebar-list-menu mb-[50px] py-2.5">
           {/* parent dashboard menu */}
-          <ul>
+          <ul className="*:p-[10px_20px] *:font-normal *:text-sm ">
             {!isBuyerMode && <li>Dashboard</li>}
             {isBuyerMode
               ? sidebarMenuList.parent.buyer.map((item, index) => (
@@ -125,10 +125,10 @@ export default function MemberDashBoardLayout({
                     </Link>
                   </li>
                 ))}
-            <li className="border border-white w-full"></li>
+            <li className="border-t border-white w-full"></li>
           </ul>
           {/* account cp dashboard menu */}
-          <ul>
+          <ul className="*:p-[10px_20px] *:font-normal *:text-sm ">
             <li>Akun</li>
             {sidebarMenuList.account.map((item, index) =>
               isBuyerMode ? (
@@ -153,7 +153,7 @@ export default function MemberDashBoardLayout({
                 </li>
               ),
             )}
-            <li className="border border-white w-full"></li>
+            <li className="border-t border-white w-full"></li>
           </ul>
           {/* user mode  */}
           <ul>
@@ -190,8 +190,8 @@ export default function MemberDashBoardLayout({
               </div>
               <div className="nav-auth flex items-center">
                 <div className="create-event-nav md:block md:mr-5 font-medium bg-[#adb6c9] border-[#adb6c9] text-base leading-6 p-[7px_16px] rounded-lg text-center tracking-[0.001em] outline-none inline-flex flex-row gap-2 whitespace-nowrap border">
-                  <button className="">
-                    <TbCalendarClock />
+                  <button className="flex items-center gap-2">
+                    <TbCalendarClock className="text-2xl" />
                     <span>Buat Event</span>
                   </button>
                 </div>
@@ -233,9 +233,7 @@ export default function MemberDashBoardLayout({
           </div>
         </div>
         {/* main content children  */}
-        <div className="dashboard-content-children p-[20px_40px]">
-          {children}
-        </div>
+        <div className="dashboard-content-children">{children}</div>
       </div>
     </div>
   );

@@ -23,7 +23,7 @@ export default function DashboardProfileLayout({
     }
   };
   return (
-    <div>
+    <div className="p-[25px_40px]">
       <div className="flex flex-wrap">
         <div className="w-full max-w-full pl-[30px] -ml-[30px] ">
           <div className="border-b-2 border-[#d8d8d8] ">
@@ -33,7 +33,7 @@ export default function DashboardProfileLayout({
           </div>
         </div>
       </div>
-      {children}
+      <div>{children}</div>
     </div>
   );
 }

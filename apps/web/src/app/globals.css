@@ -151,7 +151,9 @@ body * {
   .c-button-primary:focus {
     @apply text-white bg-[#005eff];
   }
-
+  .c-button-tertiary{
+    @apply text-[#151416] border-[#151416] bg-white
+  }
   .c-button-1 {
     @apply p-[11px_23px];
   }
@@ -169,6 +171,9 @@ body * {
   }
   .flex-middle-center {
     @apply flex items-center justify-center;
+  }
+  .flex-middle-between {
+    @apply flex items-center justify-between;
   }
   .hidden-md {
     @apply md:hidden;
@@ -195,6 +200,12 @@ body * {
     @apply appearance-none inline-block align-middle text-center tracking-[1.5px] overflow-visible
   }
   .s-button-primary{
-
+    @apply text-white bg-[#0049cc]
+  }
+  .active::after{
+    @apply content-[''] w-full h-1 absolute bottom-[-1px] block bg-[#0049cc] rounded-[4px_4px_0_0] overflow-hidden
+  }
+  .padding-remove-top{
+    @apply !pt-0
   }
 }
