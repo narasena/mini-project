@@ -59,6 +59,8 @@ export default function CreateEventPage() {
                                 width={898}
                                 height={421}
                                 alt=""
+                                quality={100}
+                                priority={true}
                                 className="w-full max-w-full"
                               />
                               <div className="banner-image-action absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center max-w-full lg:w-[60%] w-full">
@@ -78,7 +80,9 @@ export default function CreateEventPage() {
                         </div>
                       </div>
                     </div>
-                    <div className="event-card-body"></div>
+                    <div className="event-card-body p-[15px_40px_40px]">
+                      
+                    </div>
                   </div>
                 </div>
               </div>
