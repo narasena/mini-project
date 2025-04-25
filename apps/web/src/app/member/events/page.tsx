@@ -1,4 +1,6 @@
 'use client'
+import Image from 'next/image';
+import Link from 'next/link';
 import * as React from 'react';
 import { CiSearch } from 'react-icons/ci';
 
@@ -59,7 +61,7 @@ export default function DashboardMyEventPage() {
           </div>
         </div>
         {/* event tab title  */}
-        <div className="mt-[30px] pl-[30px] w-full max-w-full">
+        <div className="mt-[30px] pl-[30px] w-full max-w-full after:border-b-2 after:border-[#d7d7d7]">
           <div className="tabs-nav relative w-full flex !uppercase">
             <div
               onClick={() => handleTabClick('active')}
@@ -90,7 +92,22 @@ export default function DashboardMyEventPage() {
             </div>
           </div>
         </div>
-        <div></div>
+        {/* event tab content no data */}
+        <div className="mt-[30px] mb-5 pl-5 text-center w-full max-w-full">
+          <div className="lokasi-event padding-large p-[30px] xl:p-[70px]">
+            <div className="mb-5 relative flex-middle-center">
+              <Image
+                src={'/images/icon-event-first-user.svg'}
+                width={232}
+                height={137}
+                alt="Events"
+              />
+            </div>
+            <Link href={'/member/events'} className='s-button-primary s-button'>Buat Event</Link>
+            <h2 className='mb-[5px] pr-[25px] text-[19px] text-[#595959] font-medium whitespace-nowrap overflow-ellipsis'>{'Hai, terima kasih telah menggunakan layanan LOKET'}</h2>
+            <p className='text-sm text-[#595959]'>{'Silahkan buat eventmu dengan klik tombol "Buat Event" di atas'}</p>
+          </div>
+        </div>
       </div>
     </div>
   );
