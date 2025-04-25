@@ -20,7 +20,8 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@preline/*":["../../node_modules/preline/*"],
+      "@preline/*": ["../../node_modules/preline/*"],
+      "/*": ["./*", "./public/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

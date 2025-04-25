@@ -50,6 +50,9 @@
   input {
     @apply tracking-normal leading-normal normal-case indent-0 no-underline inline-block text-start appearance-auto cursor-text shadow-none;
   }
+  h2{
+    @apply leading-[1.3]
+  }
 }
 
 @layer components {
