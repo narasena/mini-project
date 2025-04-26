@@ -1,3 +1,4 @@
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
@@ -8,7 +9,17 @@ import { LuUpload } from 'react-icons/lu';
 import { IoCalendar } from 'react-icons/io5';
 import { IoTime } from 'react-icons/io5';
 import { IoLocationSharp } from 'react-icons/io5';
+import { CiCirclePlus } from 'react-icons/ci';
 export default function CreateEventPage() {
+  const [activeTab, setActiveTab] = React.useState<'category' | 'desc'>('category');
+  const ticketType = ['Berbayar', 'Bayar Sesukamu', 'Gratis'];
+    const tabStyles = {
+      active: ' active text-[#151416]',
+      inactive: ' text-[#8e919b]',
+  };
+  const handleTabClick = (tab: 'category' | 'desc') => {
+    setActiveTab(tab);
+  };
   return (
     <div className="relative">
       <div className="header-nav-top absolute top-0 left-0 right-0 z-10 bg-white box-shadow-small">
@@ -200,7 +211,78 @@ export default function CreateEventPage() {
                 </div>
               </div>
             </div>
-            
+            <div className="create-event-container-2 xl:mb-[70px] mb-10 max-w-[900px] lg:px-10 sm:px-[30px] mx-auto box-content">
+              <div className="create-event-tabs-nav w-full max-w-full border-b border-[#d8d8d8]">
+                <div className="tabs-nav relative flex uppercase">
+                  <div
+                    onClick={() => handleTabClick('category')}
+                    className={
+                      'relative pb-4 cursor-pointer tracking-[0.3px] flex-1 text-center border-b-[#e8e8e8] font-medium leading-6' +
+                      (activeTab === 'category'
+                        ? tabStyles.active
+                        : tabStyles.inactive)
+                    }
+                  >
+                    Kategori Tiket
+                  </div>
+                  <div
+                    onClick={() => handleTabClick('desc')}
+                    className={
+                      'relative pb-4 cursor-pointer tracking-[0.3px] flex-1 text-center border-b-[#e8e8e8] font-medium leading-6' +
+                      (activeTab === 'desc'
+                        ? tabStyles.active
+                        : tabStyles.inactive)
+                    }
+                  >
+                    Deskripsi Event
+                  </div>
+                </div>
+              </div>
+              <div className="create-event-content mt-8">
+                <div className="ticket-category-info grid grid-rows-[1fr] gap-8 ">
+                  <div className="ticket-category">
+                    <div className="ticket-category-container md:block hidden">
+                      <div className="flex-middle-center ">
+                        <div className="md:grid md:grid-cols-[repeat(3,1fr)] grid-cols-[repeat(1,1fr)] gap-[15px] w-full max-w-full">
+                          <div className="w-full max-w-full">
+                            <button className="ticket-category-button">
+                              <div className="flex">
+                                <div className="barcode w-[53px] max-w-full flex-middle-center py-4 overflow-hidden border-r border-[#d8dfe7]">
+                                  <Image
+                                    src={'/images/icon-barcode.svg'}
+                                    width={9}
+                                    height={58}
+                                    alt=""
+                                    className="h-auto max-w-full align-middle"
+                                  />
+                                </div>
+                                <div className="ticket-label">
+                                  <div className="flex flex-col justify-center capitalize">
+                                    <p className="font-normal text-sm leading-[1.5]">
+                                      Buat Tiket
+                                    </p>
+                                    <span className="text-lg ">Berbayar</span>
+                                  </div>
+                                <div className="add-ticket-button z-[2] flex items-center">
+                                  <span className='text-[42px] text-[#adb6c9]'>
+                                    <CiCirclePlus />
+                                  </span>
+                                </div>
+                                </div>
+                              </div>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="add-ticket-mobile"></div>
+                  </div>
+                  <div className="event-contact-info"></div>
+                  <div className="event-settings"></div>
+                </div>
+                <div className="ticket-desc"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
