@@ -11,11 +11,13 @@ import { IoTime } from 'react-icons/io5';
 import { IoLocationSharp } from 'react-icons/io5';
 import { CiCirclePlus } from 'react-icons/ci';
 export default function CreateEventPage() {
-  const [activeTab, setActiveTab] = React.useState<'category' | 'desc'>('category');
+  const [activeTab, setActiveTab] = React.useState<'category' | 'desc'>(
+    'category',
+  );
   const ticketType = ['Berbayar', 'Bayar Sesukamu', 'Gratis'];
-    const tabStyles = {
-      active: ' active text-[#151416]',
-      inactive: ' text-[#8e919b]',
+  const tabStyles = {
+    active: ' active text-[#151416]',
+    inactive: ' text-[#8e919b]',
   };
   const handleTabClick = (tab: 'category' | 'desc') => {
     setActiveTab(tab);
@@ -244,34 +246,36 @@ export default function CreateEventPage() {
                     <div className="ticket-category-container md:block hidden">
                       <div className="flex-middle-center ">
                         <div className="md:grid md:grid-cols-[repeat(3,1fr)] grid-cols-[repeat(1,1fr)] gap-[15px] w-full max-w-full">
-                          <div className="w-full max-w-full">
-                            <button className="ticket-category-button">
-                              <div className="flex">
-                                <div className="barcode w-[53px] max-w-full flex-middle-center py-4 overflow-hidden border-r border-[#d8dfe7]">
-                                  <Image
-                                    src={'/images/icon-barcode.svg'}
-                                    width={9}
-                                    height={58}
-                                    alt=""
-                                    className="h-auto max-w-full align-middle"
-                                  />
-                                </div>
-                                <div className="ticket-label">
-                                  <div className="flex flex-col justify-center capitalize">
-                                    <p className="font-normal text-sm leading-[1.5]">
-                                      Buat Tiket
-                                    </p>
-                                    <span className="text-lg ">Berbayar</span>
+                          {ticketType.map((item, index) => (
+                            <div className="w-full max-w-full" key={index}>
+                              <button className="ticket-category-button">
+                                <div className="flex">
+                                  <div className="barcode w-[53px] max-w-full flex-middle-center py-4 overflow-hidden border-r border-[#d8dfe7]">
+                                    <Image
+                                      src={'/images/icon-barcode.svg'}
+                                      width={9}
+                                      height={58}
+                                      alt=""
+                                      className="h-auto max-w-full align-middle"
+                                    />
                                   </div>
-                                <div className="add-ticket-button z-[2] flex items-center">
-                                  <span className='text-[42px] text-[#adb6c9]'>
-                                    <CiCirclePlus />
-                                  </span>
+                                  <div className="ticket-label">
+                                    <div className="flex flex-col justify-center capitalize">
+                                      <p className="font-normal text-sm leading-[1.5]">
+                                        Buat Tiket
+                                      </p>
+                                      <span className="text-lg ">{item}</span>
+                                    </div>
+                                    <div className="add-ticket-button z-[2] flex items-center">
+                                      <span className="text-[42px] text-[#adb6c9]">
+                                        <CiCirclePlus />
+                                      </span>
+                                    </div>
+                                  </div>
                                 </div>
-                                </div>
-                              </div>
-                            </button>
-                          </div>
+                              </button>
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </div>

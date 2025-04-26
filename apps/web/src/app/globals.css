@@ -161,10 +161,10 @@
     @apply p-[11px_23px];
   }
   .ticket-category-button{
-@apply  relative text-[1.3rem] rounded-lg border border-[#dbdfe7] cursor-pointer text-[#4d4d4d] bg-white w-full max-w-full inline-block align-middle leading-[38px] font-medium text-center capitalize
+@apply  relative text-[1.3rem] rounded-lg border border-[#dbdfe7] cursor-pointer text-[#4d4d4d] bg-white hover:text-white hover:bg-[#007AFF] w-full max-w-full inline-block align-middle leading-[38px] font-medium text-center capitalize
   }
   .ticket-category-button::before{
-    @apply content-[''] w-2.5 h-5 absolute left-[-1px] top-[38%] rounded-[0_75px_75px_0] border border-l-0 border-[#dbdfe7] bg-white
+    @apply content-[''] w-2.5 h-5 absolute left-[-1px] top-[38%] rounded-[0_75px_75px_0] border border-l-0 border-[#dbdfe7] bg-white 
   }
   .ticket-label{
     @apply  relative flex justify-between p-[16px_12px] text-left leading-1 flex-1 w-full
