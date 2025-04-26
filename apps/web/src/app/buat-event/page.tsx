@@ -12,6 +12,7 @@ import { IoLocationSharp } from 'react-icons/io5';
 import { CiCirclePlus } from 'react-icons/ci';
 import { IoIosArrowDown } from 'react-icons/io';
 import { countryCodes } from '../../../../api/prisma/seedData/countries'
+import { IoIosInformationCircle } from 'react-icons/io';
 export default function CreateEventPage() {
   const [activeTab, setActiveTab] = React.useState<'category' | 'desc'>(
     'category',
@@ -405,7 +406,7 @@ export default function CreateEventPage() {
                       <div className="mt-2.5 -ml-[15px] flex flex-wrap">
                         {orderDataFormCheck.map((item, index) => (
                           <div
-                            className={`w-full ${index===0?'':'mt-[15px]'} pl-[15px] md:text-base text-sm text-[#595959]`}
+                            className={`w-full ${index === 0 ? '' : 'mt-[15px]'} pl-[15px] md:text-base text-sm text-[#595959]`}
                             key={index}
                           >
                             <input
@@ -421,7 +422,18 @@ export default function CreateEventPage() {
                           </div>
                         ))}
                       </div>
-                      <div></div>
+                      <div className="form-info mt-4 p-[16px_12px] border border-[#dbdfe7] bg-[#f5f7fa] rounded-lg flex text-[#494a4a] gap-3 text-sm">
+                        <div className="mt-[5px] text-[#adb6c9] text-sm">
+                          <IoIosInformationCircle />
+                        </div>
+                        <p>
+                          Kamu dapat menambah{' '}
+                          <Link href="#" className="text-[#151416] underline font-bold">
+                            Formulir Data Tambahan
+                          </Link>{' '}
+                          di Dashboard Event.
+                        </p>
+                      </div>
                     </div>
                     <div></div>
                   </div>
