@@ -10,11 +10,21 @@ import { IoCalendar } from 'react-icons/io5';
 import { IoTime } from 'react-icons/io5';
 import { IoLocationSharp } from 'react-icons/io5';
 import { CiCirclePlus } from 'react-icons/ci';
+import { IoIosArrowDown } from 'react-icons/io';
+import { countryCodes } from '../../../../api/prisma/seedData/countries'
 export default function CreateEventPage() {
   const [activeTab, setActiveTab] = React.useState<'category' | 'desc'>(
     'category',
   );
   const ticketType = ['Berbayar', 'Bayar Sesukamu', 'Gratis'];
+  const orderDataFormCheck = [
+    {id:'fullName',formTitle: 'Nama Lengkap', checkStatus: true },
+    {id:'email',formTitle:'Email', checkStatus: true},
+    {id:'phoneNumber',formTitle:'Nomor Handphone', checkStatus: true},
+    {id:'idCardNumber',formTitle:'No. KTP', checkStatus: false},
+    {id:'birthDate',formTitle:'Tanggal Lahir', checkStatus: true},
+    {id:'gender',formTitle:'Jenis Kelamin', checkStatus: true}
+  ]
   const tabStyles = {
     active: ' active text-[#151416]',
     inactive: ' text-[#8e919b]',
@@ -281,8 +291,140 @@ export default function CreateEventPage() {
                     </div>
                     <div className="add-ticket-mobile"></div>
                   </div>
-                  <div className="event-contact-info"></div>
-                  <div className="event-settings"></div>
+                  <div className="event-contact-info">
+                    <div className="header-contact-info mb-4">
+                      <div className="title-contact-info">
+                        <span className="text-[#152955] text-[1.313rem] mb-2.5 font-medium">
+                          Info Kontak
+                        </span>
+                      </div>
+                      <span className="text-[#8e919b] text-sm">
+                        Informasi narahubung yang dapat dihubungi oleh pembeli
+                        akan muncul di E-Ticket.
+                      </span>
+                    </div>
+                    <div className="body-contact-info">
+                      <div className="mb-3">
+                        <div className="mb-2.5 relative">
+                          <label className="text-sm font-medium text-[#595959] capitalize">
+                            Nama Narahubung<em className="text-[#f0506e]">*</em>
+                          </label>
+                        </div>
+                        <div className="w-full max-w-full">
+                          <div className="form-control w-full max-w-full">
+                            <div className="form-control-input">
+                              <input
+                                type="text"
+                                placeholder="Nama narahubung"
+                                className="c-input"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="mb-3">
+                        <div className="mb-2.5 relative">
+                          <label className="text-sm font-medium text-[#595959] capitalize">
+                            Email<em className="text-[#f0506e]">*</em>
+                          </label>
+                        </div>
+                        <div className="w-full max-w-full">
+                          <div className="form-control w-full max-w-full">
+                            <div className="form-control-input">
+                              <input
+                                type="text"
+                                placeholder="Email yang dapat dihubungi"
+                                className="c-input"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="mb-3">
+                        <div className="mb-2.5 relative">
+                          <label className="text-sm font-medium text-[#595959] capitalize">
+                            {'No. Ponsel'}
+                            <em className="text-[#f0506e]">*</em>
+                          </label>
+                        </div>
+                        <div className="w-full max-w-full">
+                          <div className="form-control w-full max-w-full flex justify-center">
+                            <div className="relative">
+                              <select
+                                name=""
+                                id=""
+                                className="mr-2.5 c-select"
+                                defaultValue={'+62'}
+                              >
+                                {countryCodes.map((country, index) => (
+                                  <option
+                                    key={index}
+                                    value={country.mobileCode}
+                                  >
+                                    {country.code + country.mobileCode}
+                                  </option>
+                                ))}
+                              </select>
+                              <div className="absolute right-3 top-1/2 -translate-y-1/2">
+                                <IoIosArrowDown className="text-2xl text-[#8E919B] " />
+                              </div>
+                            </div>
+
+                            <div className="w-full max-w-full">
+                              <div className="form-control w-full max-w-full">
+                                <div className="form-control-input">
+                                  <input
+                                    type="text"
+                                    inputMode="numeric"
+                                    pattern="[0-9]*"
+                                    placeholder="Contoh: 081100001111"
+                                    className="c-input"
+                                    onChange={(e) => {
+                                      e.target.value = e.target.value.replace(
+                                        /[^0-9]/g,
+                                        '',
+                                      );
+                                    }}
+                                    maxLength={12}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="event-settings">
+                    <div>
+                      <div className="title-event-settings mb-[5px] pb-2.5">
+                        <span className="sm:text-[1.313rem] text-[1.212rem] text-[#152955] font-medium mb-2.5">
+                          Formulir Data Pemesanan
+                        </span>
+                      </div>
+                      <div className="mt-2.5 -ml-[15px] flex flex-wrap">
+                        {orderDataFormCheck.map((item, index) => (
+                          <div
+                            className={`w-full ${index===0?'':'mt-[15px]'} pl-[15px] md:text-base text-sm text-[#595959]`}
+                            key={index}
+                          >
+                            <input
+                              type="checkbox"
+                              id={item.id}
+                              value={item.id}
+                              className="-mt-1 mr-2 size-4"
+                              {...(item.checkStatus === true
+                                ? { checked: true }
+                                : {})}
+                            />
+                            <label htmlFor={item.id}>{item.formTitle}</label>
+                          </div>
+                        ))}
+                      </div>
+                      <div></div>
+                    </div>
+                    <div></div>
+                  </div>
                 </div>
                 <div className="ticket-desc"></div>
               </div>

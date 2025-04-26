@@ -143,6 +143,9 @@
   .auth-form-input {
     @apply w-full flex items-center p-[12px_42px_12px_16px] border border-[#e8e8e8] rounded-lg text-sm text-[#151416] bg-white leading-[22px] focus:bg-[#EBF4FF] focus:outline-none focus:ring-0 focus:shadow-[0px_0px_0px_1px_rgba(59,130,246,0.5)];
   }
+  .event-settings{
+    @apply md:grid-cols-[0.5fr_1fr] grid gap-6
+  }
 
   .c-button {
     @apply p-[7px_16px] rounded-lg text-center tracking-[0.001em] outline-none inline-flex flex-row justify-center items-center gap-2 whitespace-nowrap border cursor-pointer transition-all duration-300 ease-[cubic-bezier(0.64,0.5,0.35,1)] font-medium text-base leading-6;
@@ -159,6 +162,12 @@
   }
   .c-button-1 {
     @apply p-[11px_23px];
+  }
+  .c-input{
+    @apply w-full flex items-center p-[12px_16px] border border-[#e8e8e8] rounded-lg text-sm text-[#151416] bg-white leading-[22px] outline-none
+  }
+  .c-select{
+    @apply rounded-lg relative p-[12px_42px_12px_16px] border border-[#e8e8e8] bg-white leading-[22px] text-sm
   }
   .ticket-category-button{
 @apply  relative text-[1.3rem] rounded-lg border border-[#dbdfe7] cursor-pointer text-[#4d4d4d] bg-white hover:text-white hover:bg-[#007AFF] w-full max-w-full inline-block align-middle leading-[38px] font-medium text-center capitalize
