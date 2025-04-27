@@ -11,21 +11,40 @@ import { IoTime } from 'react-icons/io5';
 import { IoLocationSharp } from 'react-icons/io5';
 import { CiCirclePlus } from 'react-icons/ci';
 import { IoIosArrowDown } from 'react-icons/io';
-import { countryCodes } from '../../../../api/prisma/seedData/countries'
+import { countryCodes } from '../../../../api/prisma/seedData/countries';
 import { IoIosInformationCircle } from 'react-icons/io';
 export default function CreateEventPage() {
   const [activeTab, setActiveTab] = React.useState<'category' | 'desc'>(
     'category',
   );
+  const [ticketMaxOpen, setTicketMaxOpen] = React.useState(true);
+  const [ticketPurchasedMax, setTicketPurchasedMax] = React.useState<number>(3);
   const ticketType = ['Berbayar', 'Bayar Sesukamu', 'Gratis'];
+  const handleSelectMaxTicket = (e:any) => {
+    e.preventDefault();
+    setTicketMaxOpen(!ticketMaxOpen);
+  };
+  const dropdownRef = React.useRef<HTMLDivElement>(null);
+  const handleOutsideClick = (e: MouseEvent) => {
+    if(dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+      setTicketMaxOpen(false);
+    }
+  };
+  React.useEffect(() => {
+    document.addEventListener('click', handleOutsideClick);
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, [ticketMaxOpen]);
   const orderDataFormCheck = [
-    {id:'fullName',formTitle: 'Nama Lengkap', checkStatus: true },
-    {id:'email',formTitle:'Email', checkStatus: true},
-    {id:'phoneNumber',formTitle:'Nomor Handphone', checkStatus: true},
-    {id:'idCardNumber',formTitle:'No. KTP', checkStatus: false},
-    {id:'birthDate',formTitle:'Tanggal Lahir', checkStatus: true},
-    {id:'gender',formTitle:'Jenis Kelamin', checkStatus: true}
-  ]
+    { id: 'fullName', formTitle: 'Nama Lengkap', checkStatus: true },
+    { id: 'email', formTitle: 'Email', checkStatus: true },
+    { id: 'phoneNumber', formTitle: 'Nomor Handphone', checkStatus: true },
+    { id: 'idCardNumber', formTitle: 'No. KTP', checkStatus: false },
+    { id: 'birthDate', formTitle: 'Tanggal Lahir', checkStatus: true },
+    { id: 'gender', formTitle: 'Jenis Kelamin', checkStatus: true },
+  ];
+  const ticketPerPurchaseMax = [1, 2, 3, 4, 5];
   const tabStyles = {
     active: ' active text-[#151416]',
     inactive: ' text-[#8e919b]',
@@ -428,17 +447,124 @@ export default function CreateEventPage() {
                         </div>
                         <p>
                           Kamu dapat menambah{' '}
-                          <Link href="#" className="text-[#151416] underline font-bold">
+                          <Link
+                            href="#"
+                            className="text-[#151416] underline font-bold"
+                          >
                             Formulir Data Tambahan
                           </Link>{' '}
                           di Dashboard Event.
                         </p>
                       </div>
                     </div>
-                    <div></div>
+                    <div>
+                      <div className="title-event-settings mb-[5px] pb-2.5">
+                        <span className="sm:text-[1.313rem] text-[1.212rem] text-[#152955] font-medium mb-2.5">
+                          Pengaturan Tambahan
+                        </span>
+                      </div>
+                      <div className="mt-2.5 **:leading-[28px] flex ">
+                        <div className="flex flex-col flex-1">
+                          <span className="mt-1 text-base text-[#151416]">
+                            {'Jumlah maks. tiket per transaksi'}
+                          </span>
+                          <span className="text-sm text-[#8e919b]">
+                            Jumlah maksimal tiket yang dapat dibeli dalam 1
+                            transaksi
+                          </span>
+                        </div>
+                        <div className="w-auto max-w-full pl-[15px]">
+                          <div className="w-full md:w-[60%] max-w-full relative z-999">
+                            <Link href={''} onClick={handleSelectMaxTicket}>
+                              <h2 className="min-w-20 p-3 relative text-sm border border-[#e8e8e8] rounded-lg">
+                                5 Tiket
+                                <IoIosArrowDown className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-[#8E919B] " />
+                              </h2>
+                            </Link>
+                            <div
+                              className={`${ticketMaxOpen ? ' block' : 'hidden'} absolute left-0 top-full mt-0.5 max-w-[120px] min-w-[120px] rounded-lg bg-white text-[#595959] overflow-hidden shadow-[0_5px_12px_rgba(0,0,0,.15)]`}
+                              ref={dropdownRef}
+                            >
+                              <ul className="whitespace-nowrap text-sm list-none">
+                                {ticketPerPurchaseMax.map((item, index) => (
+                                  <li
+                                    className="p-[10px_15px] cursor-pointer hover:bg-[#f7f7f7]"
+                                    key={index}
+                                  >
+                                    {item}
+                                    {' Tiket'}
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="mt-2.5 **:leading-[28px] flex ">
+                        <div className="flex flex-col flex-1">
+                          <span className="mt-1 text-base text-[#151416]">
+                            {'1 akun email - 1 kali transaksi'}
+                          </span>
+                          <span className="text-sm text-[#8e919b]">
+                            {
+                              '1 akun email hanya dapat melakukan 1 kali transaksi pembelian tiket.'
+                            }
+                          </span>
+                        </div>
+                        <div className="w-auto max-w-full pl-[15px]">
+                          <label
+                            htmlFor="hs-basic-usage"
+                            className="relative inline-block w-11 h-6 cursor-pointer"
+                          >
+                            <input
+                              type="checkbox"
+                              id="hs-basic-usage"
+                              className="peer sr-only"
+                            />
+                            <span className="absolute inset-0 bg-gray-200 rounded-full transition-colors duration-200 ease-in-out peer-checked:bg-blue-600 dark:bg-neutral-700 dark:peer-checked:bg-blue-500 peer-disabled:opacity-50 peer-disabled:pointer-events-none"></span>
+                            <span className="absolute top-1/2 start-0.5 -translate-y-1/2 size-5 bg-white rounded-full shadow-xs transition-transform duration-200 ease-in-out peer-checked:translate-x-full dark:bg-neutral-400 dark:peer-checked:bg-white"></span>
+                          </label>
+                        </div>
+                      </div>
+                      <div className="mt-2.5 **:leading-[28px] flex ">
+                        <div className="flex flex-col flex-1">
+                          <span className="mt-1 text-base text-[#151416]">
+                            {'Jumlah maks. tiket per transaksi'}
+                          </span>
+                          <span className="text-sm text-[#8e919b]">
+                            Jumlah maksimal tiket yang dapat dibeli dalam 1
+                            transaksi
+                          </span>
+                        </div>
+                        <div className="w-auto max-w-full pl-[15px]">
+                          <label
+                            htmlFor="hs-basic-usage"
+                            className="relative inline-block w-11 h-6 cursor-pointer"
+                          >
+                            <input
+                              type="checkbox"
+                              id="hs-basic-usage"
+                              className="peer sr-only"
+                            />
+                            <span className="absolute inset-0 bg-gray-200 rounded-full transition-colors duration-200 ease-in-out peer-checked:bg-blue-600 dark:bg-neutral-700 dark:peer-checked:bg-blue-500 peer-disabled:opacity-50 peer-disabled:pointer-events-none"></span>
+                            <span className="absolute top-1/2 start-0.5 -translate-y-1/2 size-5 bg-white rounded-full shadow-xs transition-transform duration-200 ease-in-out peer-checked:translate-x-full dark:bg-neutral-400 dark:peer-checked:bg-white"></span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div className="ticket-desc"></div>
+              </div>
+            </div>
+          </div>
+          <div className="footer-cta fixed bottom-0 w-full py-[15px] bg-white shadow-[0_-1px_3px_0_hsla(0,0%,79.6%,.5)] z-[909]">
+            <div className='lg:px-10 sm:px-[30px] px-[15px] ml-auto max-w-[1200px]'>
+              <div className='flex items-center '>
+                <div className='lg:flex-1 xl:pl-10 sm:px-[30px] px-[15px] w-full max-w-full '>
+                  <h3>{"Yeay! "}<span>Tinggal selangkah lagi dan event kamu berhasil dibuat</span></h3>
+                </div>
+                <div></div>
               </div>
             </div>
           </div>
