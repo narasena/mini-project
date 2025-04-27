@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { IAuthController } from './type';
+import { generateEmailVerificationCode } from '@/services/email.verification/generateVerificationCode';
 
 export async function registerMember(
   req: Request,
@@ -25,15 +26,16 @@ export async function registerMember(
   }
 }
 
-export async function verifyEmail(
+export async function sendEmailVerificationCode (
   req: Request,
   res: Response,
   next: NextFunction,
 ) {
   try {
-      const { email, type } = req.body;
-      const
+    const { email, type } = req.body
+    const verificationCode = await generateEmailVerificationCode(email, type)
   } catch (error) {
     next(error);
+    
   }
 }
