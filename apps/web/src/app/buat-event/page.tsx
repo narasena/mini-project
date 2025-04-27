@@ -20,13 +20,16 @@ export default function CreateEventPage() {
   const [ticketMaxOpen, setTicketMaxOpen] = React.useState(true);
   const [ticketPurchasedMax, setTicketPurchasedMax] = React.useState<number>(3);
   const ticketType = ['Berbayar', 'Bayar Sesukamu', 'Gratis'];
-  const handleSelectMaxTicket = (e:any) => {
+  const handleSelectMaxTicket = (e: any) => {
     e.preventDefault();
     setTicketMaxOpen(!ticketMaxOpen);
   };
   const dropdownRef = React.useRef<HTMLDivElement>(null);
   const handleOutsideClick = (e: MouseEvent) => {
-    if(dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(e.target as Node)
+    ) {
       setTicketMaxOpen(false);
     }
   };
@@ -559,12 +562,28 @@ export default function CreateEventPage() {
             </div>
           </div>
           <div className="footer-cta fixed bottom-0 w-full py-[15px] bg-white shadow-[0_-1px_3px_0_hsla(0,0%,79.6%,.5)] z-[909]">
-            <div className='lg:px-10 sm:px-[30px] px-[15px] ml-auto max-w-[1200px]'>
-              <div className='flex items-center '>
-                <div className='lg:flex-1 xl:pl-10 sm:px-[30px] px-[15px] w-full max-w-full '>
-                  <h3>{"Yeay! "}<span>Tinggal selangkah lagi dan event kamu berhasil dibuat</span></h3>
+            <div className="lg:px-10 sm:px-[30px] px-[15px] mx-auto max-w-[1200px]">
+              <div className="flex items-center ">
+                <div className="lg:flex-1 xl:pl-10 sm:pl-[30px] w-full max-w-full ">
+                  <h3 className="text-[1.5rem] font-medium leading-[1.4] text-[#4d4d4d] block">
+                    {'Yeay! '}
+                    <span className="text-sm font-normal">
+                      Tinggal selangkah lagi dan event kamu berhasil dibuat
+                    </span>
+                  </h3>{' '}
                 </div>
-                <div></div>
+                <div className="lg:w-auto w-full max-w-full lg:pl-10 sm:pl-[30px] flex ">
+                  <div className="flex lg:w-auto w-1/2 max-w-full pl-[15px] ">
+                    <button className="w-full max-w-full c-button c-button-tertiary">
+                      <span>Simpan Draf</span>
+                    </button>
+                  </div>
+                  <div className="flex-1 lg:w-auto w-1/2 max-w-full pl-[15px] ">
+                    <button className="w-full max-w-full c-button c-button-primary">
+                      <span>Buat Event Sekarang</span>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
