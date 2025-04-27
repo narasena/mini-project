@@ -217,13 +217,6 @@ export const countryCodes = [
     mobileCode: '+267',
   },
   {
-    name: 'Bouvet Island',
-    code: 'BV',
-    timezone: 'UTC',
-    utc: 'UTC',
-    mobileCode: '+',
-  },
-  {
     name: 'Brazil',
     code: 'BR',
     timezone: 'E. South America Standard Time',
@@ -459,7 +452,14 @@ export const countryCodes = [
     code: 'DO',
     timezone: 'SA Western Standard Time',
     utc: 'UTC-04:00',
-    mobileCode: '+1-809 and 1-829',
+    mobileCode: '+1-809',
+  },
+  {
+    name: 'Dominican Republic 2',
+    code: 'DO',
+    timezone: 'SA Western Standard Time',
+    utc: 'UTC-04:00',
+    mobileCode: '+1-829',
   },
   {
     name: 'Ecuador',
@@ -558,13 +558,6 @@ export const countryCodes = [
     timezone: 'Hawaiian Standard Time',
     utc: 'UTC-10:00',
     mobileCode: '+689',
-  },
-  {
-    name: 'French Southern and Antarctic Lands',
-    code: 'TF',
-    timezone: 'West Asia Standard Time',
-    utc: 'UTC+05:00',
-    mobileCode: '+',
   },
   {
     name: 'Gabon',
@@ -1271,7 +1264,14 @@ export const countryCodes = [
     code: 'PR',
     timezone: 'SA Western Standard Time',
     utc: 'UTC-04:00',
-    mobileCode: '+1-787 and 1-939',
+    mobileCode: '+1-787',
+  },
+  {
+    name: 'Puerto Rico 2',
+    code: 'PR',
+    timezone: 'SA Western Standard Time',
+    utc: 'UTC-04:00',
+    mobileCode: '+1-939',
   },
   {
     name: 'Qatar',
@@ -1461,13 +1461,6 @@ export const countryCodes = [
     timezone: 'South Africa Standard Time',
     utc: 'UTC+02:00',
     mobileCode: '+27',
-  },
-  {
-    name: 'South Georgia and the South Sandwich Islands',
-    code: 'GS',
-    timezone: 'UTC-02',
-    utc: 'UTC-02:00',
-    mobileCode: '+',
   },
   {
     name: 'South Sudan',

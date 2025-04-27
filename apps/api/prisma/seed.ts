@@ -5,7 +5,9 @@ import { countryCodes } from './seedData/countries';
 class DatabaseSeeder {
   private async seedCountryPhones() {
     console.log('🌱 Seeding country phones...');
-      console.log(`Total countries in data: ${countryCodes.length}`);
+    console.log(`Total countries in data: ${countryCodes.length}`);
+    
+    await prisma.countryPhone.deleteMany();
       
       let successCount = 0
     for (const country of countryCodes) {
@@ -24,7 +26,7 @@ class DatabaseSeeder {
         console.error(`Failed to seed country: ${country.name}`, error);
       }
     }
-    console.log(`Successfully seeded ${successCount} countries`);
+    console.log(`Successfully seeded ${successCount} countries from total countries in data: ${countryCodes.length}`);
     console.log('🪴 Seeding country phones finished');
   }
 

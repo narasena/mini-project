@@ -1,10 +1,10 @@
-import App from './app';
+import App from "./app2";
 
-const main = () => {
+
+const main = async () => {
   // init db here
 
-  const app = new App();
-  app.start();
+  await App()
 };
 
-main();
+main().catch(console.error)
