@@ -23,6 +23,11 @@ export type CountryPhone = $Result.DefaultSelection<Prisma.$CountryPhonePayload>
  * 
  */
 export type Member = $Result.DefaultSelection<Prisma.$MemberPayload>
+/**
+ * Model VerificationCode
+ * 
+ */
+export type VerificationCode = $Result.DefaultSelection<Prisma.$VerificationCodePayload>
 
 /**
  * Enums
@@ -37,11 +42,23 @@ export namespace $Enums {
 
 export type Sex = (typeof Sex)[keyof typeof Sex]
 
+
+export const CodeType: {
+  REGISTRATION: 'REGISTRATION',
+  LOGIN: 'LOGIN'
+};
+
+export type CodeType = (typeof CodeType)[keyof typeof CodeType]
+
 }
 
 export type Sex = $Enums.Sex
 
 export const Sex: typeof $Enums.Sex
+
+export type CodeType = $Enums.CodeType
+
+export const CodeType: typeof $Enums.CodeType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -187,6 +204,16 @@ export class PrismaClient<
     * ```
     */
   get member(): Prisma.MemberDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.verificationCode`: Exposes CRUD operations for the **VerificationCode** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more VerificationCodes
+    * const verificationCodes = await prisma.verificationCode.findMany()
+    * ```
+    */
+  get verificationCode(): Prisma.VerificationCodeDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -628,7 +655,8 @@ export namespace Prisma {
 
   export const ModelName: {
     CountryPhone: 'CountryPhone',
-    Member: 'Member'
+    Member: 'Member',
+    VerificationCode: 'VerificationCode'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -647,7 +675,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "countryPhone" | "member"
+      modelProps: "countryPhone" | "member" | "verificationCode"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -799,6 +827,80 @@ export namespace Prisma {
           }
         }
       }
+      VerificationCode: {
+        payload: Prisma.$VerificationCodePayload<ExtArgs>
+        fields: Prisma.VerificationCodeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.VerificationCodeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationCodePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.VerificationCodeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationCodePayload>
+          }
+          findFirst: {
+            args: Prisma.VerificationCodeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationCodePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.VerificationCodeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationCodePayload>
+          }
+          findMany: {
+            args: Prisma.VerificationCodeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationCodePayload>[]
+          }
+          create: {
+            args: Prisma.VerificationCodeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationCodePayload>
+          }
+          createMany: {
+            args: Prisma.VerificationCodeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.VerificationCodeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationCodePayload>[]
+          }
+          delete: {
+            args: Prisma.VerificationCodeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationCodePayload>
+          }
+          update: {
+            args: Prisma.VerificationCodeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationCodePayload>
+          }
+          deleteMany: {
+            args: Prisma.VerificationCodeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.VerificationCodeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.VerificationCodeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationCodePayload>[]
+          }
+          upsert: {
+            args: Prisma.VerificationCodeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VerificationCodePayload>
+          }
+          aggregate: {
+            args: Prisma.VerificationCodeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateVerificationCode>
+          }
+          groupBy: {
+            args: Prisma.VerificationCodeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<VerificationCodeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.VerificationCodeCountArgs<ExtArgs>
+            result: $Utils.Optional<VerificationCodeCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -885,6 +987,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     countryPhone?: CountryPhoneOmit
     member?: MemberOmit
+    verificationCode?: VerificationCodeOmit
   }
 
   /* Types for Logging */
@@ -1002,6 +1105,37 @@ export namespace Prisma {
    */
   export type CountryPhoneCountOutputTypeCountMembersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: MemberWhereInput
+  }
+
+
+  /**
+   * Count Type MemberCountOutputType
+   */
+
+  export type MemberCountOutputType = {
+    verificationCodes: number
+  }
+
+  export type MemberCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    verificationCodes?: boolean | MemberCountOutputTypeCountVerificationCodesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * MemberCountOutputType without action
+   */
+  export type MemberCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MemberCountOutputType
+     */
+    select?: MemberCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * MemberCountOutputType without action
+   */
+  export type MemberCountOutputTypeCountVerificationCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VerificationCodeWhereInput
   }
 
 
@@ -2162,55 +2296,55 @@ export namespace Prisma {
   export type MemberMinAggregateOutputType = {
     id: string | null
     email: string | null
-    isEmailVerified: boolean | null
     countryPhoneId: number | null
     phoneNumber: string | null
     firstName: string | null
     lastName: string | null
     birthDate: string | null
-    sex: $Enums.Sex | null
-    termsPrivacyAccepted: boolean | null
-    personalDataConsentAccepted: boolean | null
-    eventPromoAccepted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
     deletedAt: Date | null
+    eventPromoAccepted: boolean | null
+    personalDataConsentAccepted: boolean | null
+    termsPrivacyAccepted: boolean | null
+    sex: $Enums.Sex | null
+    isEmailVerified: boolean | null
   }
 
   export type MemberMaxAggregateOutputType = {
     id: string | null
     email: string | null
-    isEmailVerified: boolean | null
     countryPhoneId: number | null
     phoneNumber: string | null
     firstName: string | null
     lastName: string | null
     birthDate: string | null
-    sex: $Enums.Sex | null
-    termsPrivacyAccepted: boolean | null
-    personalDataConsentAccepted: boolean | null
-    eventPromoAccepted: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
     deletedAt: Date | null
+    eventPromoAccepted: boolean | null
+    personalDataConsentAccepted: boolean | null
+    termsPrivacyAccepted: boolean | null
+    sex: $Enums.Sex | null
+    isEmailVerified: boolean | null
   }
 
   export type MemberCountAggregateOutputType = {
     id: number
     email: number
-    isEmailVerified: number
     countryPhoneId: number
     phoneNumber: number
     firstName: number
     lastName: number
     birthDate: number
-    sex: number
-    termsPrivacyAccepted: number
-    personalDataConsentAccepted: number
-    eventPromoAccepted: number
     createdAt: number
     updatedAt: number
     deletedAt: number
+    eventPromoAccepted: number
+    personalDataConsentAccepted: number
+    termsPrivacyAccepted: number
+    sex: number
+    isEmailVerified: number
     _all: number
   }
 
@@ -2226,55 +2360,55 @@ export namespace Prisma {
   export type MemberMinAggregateInputType = {
     id?: true
     email?: true
-    isEmailVerified?: true
     countryPhoneId?: true
     phoneNumber?: true
     firstName?: true
     lastName?: true
     birthDate?: true
-    sex?: true
-    termsPrivacyAccepted?: true
-    personalDataConsentAccepted?: true
-    eventPromoAccepted?: true
     createdAt?: true
     updatedAt?: true
     deletedAt?: true
+    eventPromoAccepted?: true
+    personalDataConsentAccepted?: true
+    termsPrivacyAccepted?: true
+    sex?: true
+    isEmailVerified?: true
   }
 
   export type MemberMaxAggregateInputType = {
     id?: true
     email?: true
-    isEmailVerified?: true
     countryPhoneId?: true
     phoneNumber?: true
     firstName?: true
     lastName?: true
     birthDate?: true
-    sex?: true
-    termsPrivacyAccepted?: true
-    personalDataConsentAccepted?: true
-    eventPromoAccepted?: true
     createdAt?: true
     updatedAt?: true
     deletedAt?: true
+    eventPromoAccepted?: true
+    personalDataConsentAccepted?: true
+    termsPrivacyAccepted?: true
+    sex?: true
+    isEmailVerified?: true
   }
 
   export type MemberCountAggregateInputType = {
     id?: true
     email?: true
-    isEmailVerified?: true
     countryPhoneId?: true
     phoneNumber?: true
     firstName?: true
     lastName?: true
     birthDate?: true
-    sex?: true
-    termsPrivacyAccepted?: true
-    personalDataConsentAccepted?: true
-    eventPromoAccepted?: true
     createdAt?: true
     updatedAt?: true
     deletedAt?: true
+    eventPromoAccepted?: true
+    personalDataConsentAccepted?: true
+    termsPrivacyAccepted?: true
+    sex?: true
+    isEmailVerified?: true
     _all?: true
   }
 
@@ -2367,19 +2501,19 @@ export namespace Prisma {
   export type MemberGroupByOutputType = {
     id: string
     email: string
-    isEmailVerified: boolean
     countryPhoneId: number
     phoneNumber: string
     firstName: string
     lastName: string | null
     birthDate: string
-    sex: $Enums.Sex
-    termsPrivacyAccepted: boolean
-    personalDataConsentAccepted: boolean
-    eventPromoAccepted: boolean
     createdAt: Date
     updatedAt: Date
     deletedAt: Date | null
+    eventPromoAccepted: boolean
+    personalDataConsentAccepted: boolean
+    termsPrivacyAccepted: boolean
+    sex: $Enums.Sex
+    isEmailVerified: boolean
     _count: MemberCountAggregateOutputType | null
     _avg: MemberAvgAggregateOutputType | null
     _sum: MemberSumAggregateOutputType | null
@@ -2404,81 +2538,85 @@ export namespace Prisma {
   export type MemberSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
-    isEmailVerified?: boolean
     countryPhoneId?: boolean
     phoneNumber?: boolean
     firstName?: boolean
     lastName?: boolean
     birthDate?: boolean
-    sex?: boolean
-    termsPrivacyAccepted?: boolean
-    personalDataConsentAccepted?: boolean
-    eventPromoAccepted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
+    eventPromoAccepted?: boolean
+    personalDataConsentAccepted?: boolean
+    termsPrivacyAccepted?: boolean
+    sex?: boolean
+    isEmailVerified?: boolean
     countryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+    verificationCodes?: boolean | Member$verificationCodesArgs<ExtArgs>
+    _count?: boolean | MemberCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["member"]>
 
   export type MemberSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
-    isEmailVerified?: boolean
     countryPhoneId?: boolean
     phoneNumber?: boolean
     firstName?: boolean
     lastName?: boolean
     birthDate?: boolean
-    sex?: boolean
-    termsPrivacyAccepted?: boolean
-    personalDataConsentAccepted?: boolean
-    eventPromoAccepted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
+    eventPromoAccepted?: boolean
+    personalDataConsentAccepted?: boolean
+    termsPrivacyAccepted?: boolean
+    sex?: boolean
+    isEmailVerified?: boolean
     countryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["member"]>
 
   export type MemberSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     email?: boolean
-    isEmailVerified?: boolean
     countryPhoneId?: boolean
     phoneNumber?: boolean
     firstName?: boolean
     lastName?: boolean
     birthDate?: boolean
-    sex?: boolean
-    termsPrivacyAccepted?: boolean
-    personalDataConsentAccepted?: boolean
-    eventPromoAccepted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
+    eventPromoAccepted?: boolean
+    personalDataConsentAccepted?: boolean
+    termsPrivacyAccepted?: boolean
+    sex?: boolean
+    isEmailVerified?: boolean
     countryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["member"]>
 
   export type MemberSelectScalar = {
     id?: boolean
     email?: boolean
-    isEmailVerified?: boolean
     countryPhoneId?: boolean
     phoneNumber?: boolean
     firstName?: boolean
     lastName?: boolean
     birthDate?: boolean
-    sex?: boolean
-    termsPrivacyAccepted?: boolean
-    personalDataConsentAccepted?: boolean
-    eventPromoAccepted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
+    eventPromoAccepted?: boolean
+    personalDataConsentAccepted?: boolean
+    termsPrivacyAccepted?: boolean
+    sex?: boolean
+    isEmailVerified?: boolean
   }
 
-  export type MemberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "isEmailVerified" | "countryPhoneId" | "phoneNumber" | "firstName" | "lastName" | "birthDate" | "sex" | "termsPrivacyAccepted" | "personalDataConsentAccepted" | "eventPromoAccepted" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["member"]>
+  export type MemberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "countryPhoneId" | "phoneNumber" | "firstName" | "lastName" | "birthDate" | "createdAt" | "updatedAt" | "deletedAt" | "eventPromoAccepted" | "personalDataConsentAccepted" | "termsPrivacyAccepted" | "sex" | "isEmailVerified", ExtArgs["result"]["member"]>
   export type MemberInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     countryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+    verificationCodes?: boolean | Member$verificationCodesArgs<ExtArgs>
+    _count?: boolean | MemberCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MemberIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     countryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
@@ -2491,23 +2629,24 @@ export namespace Prisma {
     name: "Member"
     objects: {
       countryPhone: Prisma.$CountryPhonePayload<ExtArgs>
+      verificationCodes: Prisma.$VerificationCodePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       email: string
-      isEmailVerified: boolean
       countryPhoneId: number
       phoneNumber: string
       firstName: string
       lastName: string | null
       birthDate: string
-      sex: $Enums.Sex
-      termsPrivacyAccepted: boolean
-      personalDataConsentAccepted: boolean
-      eventPromoAccepted: boolean
       createdAt: Date
       updatedAt: Date
       deletedAt: Date | null
+      eventPromoAccepted: boolean
+      personalDataConsentAccepted: boolean
+      termsPrivacyAccepted: boolean
+      sex: $Enums.Sex
+      isEmailVerified: boolean
     }, ExtArgs["result"]["member"]>
     composites: {}
   }
@@ -2903,6 +3042,7 @@ export namespace Prisma {
   export interface Prisma__MemberClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     countryPhone<T extends CountryPhoneDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CountryPhoneDefaultArgs<ExtArgs>>): Prisma__CountryPhoneClient<$Result.GetResult<Prisma.$CountryPhonePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    verificationCodes<T extends Member$verificationCodesArgs<ExtArgs> = {}>(args?: Subset<T, Member$verificationCodesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VerificationCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2934,19 +3074,19 @@ export namespace Prisma {
   interface MemberFieldRefs {
     readonly id: FieldRef<"Member", 'String'>
     readonly email: FieldRef<"Member", 'String'>
-    readonly isEmailVerified: FieldRef<"Member", 'Boolean'>
     readonly countryPhoneId: FieldRef<"Member", 'Int'>
     readonly phoneNumber: FieldRef<"Member", 'String'>
     readonly firstName: FieldRef<"Member", 'String'>
     readonly lastName: FieldRef<"Member", 'String'>
     readonly birthDate: FieldRef<"Member", 'String'>
-    readonly sex: FieldRef<"Member", 'Sex'>
-    readonly termsPrivacyAccepted: FieldRef<"Member", 'Boolean'>
-    readonly personalDataConsentAccepted: FieldRef<"Member", 'Boolean'>
-    readonly eventPromoAccepted: FieldRef<"Member", 'Boolean'>
     readonly createdAt: FieldRef<"Member", 'DateTime'>
     readonly updatedAt: FieldRef<"Member", 'DateTime'>
     readonly deletedAt: FieldRef<"Member", 'DateTime'>
+    readonly eventPromoAccepted: FieldRef<"Member", 'Boolean'>
+    readonly personalDataConsentAccepted: FieldRef<"Member", 'Boolean'>
+    readonly termsPrivacyAccepted: FieldRef<"Member", 'Boolean'>
+    readonly sex: FieldRef<"Member", 'Sex'>
+    readonly isEmailVerified: FieldRef<"Member", 'Boolean'>
   }
     
 
@@ -3343,6 +3483,30 @@ export namespace Prisma {
   }
 
   /**
+   * Member.verificationCodes
+   */
+  export type Member$verificationCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationCode
+     */
+    select?: VerificationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationCode
+     */
+    omit?: VerificationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationCodeInclude<ExtArgs> | null
+    where?: VerificationCodeWhereInput
+    orderBy?: VerificationCodeOrderByWithRelationInput | VerificationCodeOrderByWithRelationInput[]
+    cursor?: VerificationCodeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VerificationCodeScalarFieldEnum | VerificationCodeScalarFieldEnum[]
+  }
+
+  /**
    * Member without action
    */
   export type MemberDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3358,6 +3522,1195 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: MemberInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model VerificationCode
+   */
+
+  export type AggregateVerificationCode = {
+    _count: VerificationCodeCountAggregateOutputType | null
+    _avg: VerificationCodeAvgAggregateOutputType | null
+    _sum: VerificationCodeSumAggregateOutputType | null
+    _min: VerificationCodeMinAggregateOutputType | null
+    _max: VerificationCodeMaxAggregateOutputType | null
+  }
+
+  export type VerificationCodeAvgAggregateOutputType = {
+    attempts: number | null
+  }
+
+  export type VerificationCodeSumAggregateOutputType = {
+    attempts: number | null
+  }
+
+  export type VerificationCodeMinAggregateOutputType = {
+    id: string | null
+    code: string | null
+    email: string | null
+    type: $Enums.CodeType | null
+    expiredAt: Date | null
+    isUsed: boolean | null
+    attempts: number | null
+    memberId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+  }
+
+  export type VerificationCodeMaxAggregateOutputType = {
+    id: string | null
+    code: string | null
+    email: string | null
+    type: $Enums.CodeType | null
+    expiredAt: Date | null
+    isUsed: boolean | null
+    attempts: number | null
+    memberId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+  }
+
+  export type VerificationCodeCountAggregateOutputType = {
+    id: number
+    code: number
+    email: number
+    type: number
+    expiredAt: number
+    isUsed: number
+    attempts: number
+    memberId: number
+    createdAt: number
+    updatedAt: number
+    deletedAt: number
+    _all: number
+  }
+
+
+  export type VerificationCodeAvgAggregateInputType = {
+    attempts?: true
+  }
+
+  export type VerificationCodeSumAggregateInputType = {
+    attempts?: true
+  }
+
+  export type VerificationCodeMinAggregateInputType = {
+    id?: true
+    code?: true
+    email?: true
+    type?: true
+    expiredAt?: true
+    isUsed?: true
+    attempts?: true
+    memberId?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+  }
+
+  export type VerificationCodeMaxAggregateInputType = {
+    id?: true
+    code?: true
+    email?: true
+    type?: true
+    expiredAt?: true
+    isUsed?: true
+    attempts?: true
+    memberId?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+  }
+
+  export type VerificationCodeCountAggregateInputType = {
+    id?: true
+    code?: true
+    email?: true
+    type?: true
+    expiredAt?: true
+    isUsed?: true
+    attempts?: true
+    memberId?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+    _all?: true
+  }
+
+  export type VerificationCodeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which VerificationCode to aggregate.
+     */
+    where?: VerificationCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VerificationCodes to fetch.
+     */
+    orderBy?: VerificationCodeOrderByWithRelationInput | VerificationCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: VerificationCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VerificationCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VerificationCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned VerificationCodes
+    **/
+    _count?: true | VerificationCodeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: VerificationCodeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: VerificationCodeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: VerificationCodeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: VerificationCodeMaxAggregateInputType
+  }
+
+  export type GetVerificationCodeAggregateType<T extends VerificationCodeAggregateArgs> = {
+        [P in keyof T & keyof AggregateVerificationCode]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVerificationCode[P]>
+      : GetScalarType<T[P], AggregateVerificationCode[P]>
+  }
+
+
+
+
+  export type VerificationCodeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VerificationCodeWhereInput
+    orderBy?: VerificationCodeOrderByWithAggregationInput | VerificationCodeOrderByWithAggregationInput[]
+    by: VerificationCodeScalarFieldEnum[] | VerificationCodeScalarFieldEnum
+    having?: VerificationCodeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: VerificationCodeCountAggregateInputType | true
+    _avg?: VerificationCodeAvgAggregateInputType
+    _sum?: VerificationCodeSumAggregateInputType
+    _min?: VerificationCodeMinAggregateInputType
+    _max?: VerificationCodeMaxAggregateInputType
+  }
+
+  export type VerificationCodeGroupByOutputType = {
+    id: string
+    code: string
+    email: string
+    type: $Enums.CodeType
+    expiredAt: Date
+    isUsed: boolean
+    attempts: number
+    memberId: string | null
+    createdAt: Date
+    updatedAt: Date
+    deletedAt: Date | null
+    _count: VerificationCodeCountAggregateOutputType | null
+    _avg: VerificationCodeAvgAggregateOutputType | null
+    _sum: VerificationCodeSumAggregateOutputType | null
+    _min: VerificationCodeMinAggregateOutputType | null
+    _max: VerificationCodeMaxAggregateOutputType | null
+  }
+
+  type GetVerificationCodeGroupByPayload<T extends VerificationCodeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<VerificationCodeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof VerificationCodeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], VerificationCodeGroupByOutputType[P]>
+            : GetScalarType<T[P], VerificationCodeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type VerificationCodeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    email?: boolean
+    type?: boolean
+    expiredAt?: boolean
+    isUsed?: boolean
+    attempts?: boolean
+    memberId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    member?: boolean | VerificationCode$memberArgs<ExtArgs>
+  }, ExtArgs["result"]["verificationCode"]>
+
+  export type VerificationCodeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    email?: boolean
+    type?: boolean
+    expiredAt?: boolean
+    isUsed?: boolean
+    attempts?: boolean
+    memberId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    member?: boolean | VerificationCode$memberArgs<ExtArgs>
+  }, ExtArgs["result"]["verificationCode"]>
+
+  export type VerificationCodeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    code?: boolean
+    email?: boolean
+    type?: boolean
+    expiredAt?: boolean
+    isUsed?: boolean
+    attempts?: boolean
+    memberId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    member?: boolean | VerificationCode$memberArgs<ExtArgs>
+  }, ExtArgs["result"]["verificationCode"]>
+
+  export type VerificationCodeSelectScalar = {
+    id?: boolean
+    code?: boolean
+    email?: boolean
+    type?: boolean
+    expiredAt?: boolean
+    isUsed?: boolean
+    attempts?: boolean
+    memberId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+  }
+
+  export type VerificationCodeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "code" | "email" | "type" | "expiredAt" | "isUsed" | "attempts" | "memberId" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["verificationCode"]>
+  export type VerificationCodeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    member?: boolean | VerificationCode$memberArgs<ExtArgs>
+  }
+  export type VerificationCodeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    member?: boolean | VerificationCode$memberArgs<ExtArgs>
+  }
+  export type VerificationCodeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    member?: boolean | VerificationCode$memberArgs<ExtArgs>
+  }
+
+  export type $VerificationCodePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "VerificationCode"
+    objects: {
+      member: Prisma.$MemberPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      code: string
+      email: string
+      type: $Enums.CodeType
+      expiredAt: Date
+      isUsed: boolean
+      attempts: number
+      memberId: string | null
+      createdAt: Date
+      updatedAt: Date
+      deletedAt: Date | null
+    }, ExtArgs["result"]["verificationCode"]>
+    composites: {}
+  }
+
+  type VerificationCodeGetPayload<S extends boolean | null | undefined | VerificationCodeDefaultArgs> = $Result.GetResult<Prisma.$VerificationCodePayload, S>
+
+  type VerificationCodeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<VerificationCodeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: VerificationCodeCountAggregateInputType | true
+    }
+
+  export interface VerificationCodeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['VerificationCode'], meta: { name: 'VerificationCode' } }
+    /**
+     * Find zero or one VerificationCode that matches the filter.
+     * @param {VerificationCodeFindUniqueArgs} args - Arguments to find a VerificationCode
+     * @example
+     * // Get one VerificationCode
+     * const verificationCode = await prisma.verificationCode.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends VerificationCodeFindUniqueArgs>(args: SelectSubset<T, VerificationCodeFindUniqueArgs<ExtArgs>>): Prisma__VerificationCodeClient<$Result.GetResult<Prisma.$VerificationCodePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one VerificationCode that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {VerificationCodeFindUniqueOrThrowArgs} args - Arguments to find a VerificationCode
+     * @example
+     * // Get one VerificationCode
+     * const verificationCode = await prisma.verificationCode.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends VerificationCodeFindUniqueOrThrowArgs>(args: SelectSubset<T, VerificationCodeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__VerificationCodeClient<$Result.GetResult<Prisma.$VerificationCodePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first VerificationCode that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VerificationCodeFindFirstArgs} args - Arguments to find a VerificationCode
+     * @example
+     * // Get one VerificationCode
+     * const verificationCode = await prisma.verificationCode.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends VerificationCodeFindFirstArgs>(args?: SelectSubset<T, VerificationCodeFindFirstArgs<ExtArgs>>): Prisma__VerificationCodeClient<$Result.GetResult<Prisma.$VerificationCodePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first VerificationCode that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VerificationCodeFindFirstOrThrowArgs} args - Arguments to find a VerificationCode
+     * @example
+     * // Get one VerificationCode
+     * const verificationCode = await prisma.verificationCode.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends VerificationCodeFindFirstOrThrowArgs>(args?: SelectSubset<T, VerificationCodeFindFirstOrThrowArgs<ExtArgs>>): Prisma__VerificationCodeClient<$Result.GetResult<Prisma.$VerificationCodePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more VerificationCodes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VerificationCodeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all VerificationCodes
+     * const verificationCodes = await prisma.verificationCode.findMany()
+     * 
+     * // Get first 10 VerificationCodes
+     * const verificationCodes = await prisma.verificationCode.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const verificationCodeWithIdOnly = await prisma.verificationCode.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends VerificationCodeFindManyArgs>(args?: SelectSubset<T, VerificationCodeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VerificationCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a VerificationCode.
+     * @param {VerificationCodeCreateArgs} args - Arguments to create a VerificationCode.
+     * @example
+     * // Create one VerificationCode
+     * const VerificationCode = await prisma.verificationCode.create({
+     *   data: {
+     *     // ... data to create a VerificationCode
+     *   }
+     * })
+     * 
+     */
+    create<T extends VerificationCodeCreateArgs>(args: SelectSubset<T, VerificationCodeCreateArgs<ExtArgs>>): Prisma__VerificationCodeClient<$Result.GetResult<Prisma.$VerificationCodePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many VerificationCodes.
+     * @param {VerificationCodeCreateManyArgs} args - Arguments to create many VerificationCodes.
+     * @example
+     * // Create many VerificationCodes
+     * const verificationCode = await prisma.verificationCode.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends VerificationCodeCreateManyArgs>(args?: SelectSubset<T, VerificationCodeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many VerificationCodes and returns the data saved in the database.
+     * @param {VerificationCodeCreateManyAndReturnArgs} args - Arguments to create many VerificationCodes.
+     * @example
+     * // Create many VerificationCodes
+     * const verificationCode = await prisma.verificationCode.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many VerificationCodes and only return the `id`
+     * const verificationCodeWithIdOnly = await prisma.verificationCode.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends VerificationCodeCreateManyAndReturnArgs>(args?: SelectSubset<T, VerificationCodeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VerificationCodePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a VerificationCode.
+     * @param {VerificationCodeDeleteArgs} args - Arguments to delete one VerificationCode.
+     * @example
+     * // Delete one VerificationCode
+     * const VerificationCode = await prisma.verificationCode.delete({
+     *   where: {
+     *     // ... filter to delete one VerificationCode
+     *   }
+     * })
+     * 
+     */
+    delete<T extends VerificationCodeDeleteArgs>(args: SelectSubset<T, VerificationCodeDeleteArgs<ExtArgs>>): Prisma__VerificationCodeClient<$Result.GetResult<Prisma.$VerificationCodePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one VerificationCode.
+     * @param {VerificationCodeUpdateArgs} args - Arguments to update one VerificationCode.
+     * @example
+     * // Update one VerificationCode
+     * const verificationCode = await prisma.verificationCode.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends VerificationCodeUpdateArgs>(args: SelectSubset<T, VerificationCodeUpdateArgs<ExtArgs>>): Prisma__VerificationCodeClient<$Result.GetResult<Prisma.$VerificationCodePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more VerificationCodes.
+     * @param {VerificationCodeDeleteManyArgs} args - Arguments to filter VerificationCodes to delete.
+     * @example
+     * // Delete a few VerificationCodes
+     * const { count } = await prisma.verificationCode.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends VerificationCodeDeleteManyArgs>(args?: SelectSubset<T, VerificationCodeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more VerificationCodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VerificationCodeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many VerificationCodes
+     * const verificationCode = await prisma.verificationCode.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends VerificationCodeUpdateManyArgs>(args: SelectSubset<T, VerificationCodeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more VerificationCodes and returns the data updated in the database.
+     * @param {VerificationCodeUpdateManyAndReturnArgs} args - Arguments to update many VerificationCodes.
+     * @example
+     * // Update many VerificationCodes
+     * const verificationCode = await prisma.verificationCode.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more VerificationCodes and only return the `id`
+     * const verificationCodeWithIdOnly = await prisma.verificationCode.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends VerificationCodeUpdateManyAndReturnArgs>(args: SelectSubset<T, VerificationCodeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VerificationCodePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one VerificationCode.
+     * @param {VerificationCodeUpsertArgs} args - Arguments to update or create a VerificationCode.
+     * @example
+     * // Update or create a VerificationCode
+     * const verificationCode = await prisma.verificationCode.upsert({
+     *   create: {
+     *     // ... data to create a VerificationCode
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the VerificationCode we want to update
+     *   }
+     * })
+     */
+    upsert<T extends VerificationCodeUpsertArgs>(args: SelectSubset<T, VerificationCodeUpsertArgs<ExtArgs>>): Prisma__VerificationCodeClient<$Result.GetResult<Prisma.$VerificationCodePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of VerificationCodes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VerificationCodeCountArgs} args - Arguments to filter VerificationCodes to count.
+     * @example
+     * // Count the number of VerificationCodes
+     * const count = await prisma.verificationCode.count({
+     *   where: {
+     *     // ... the filter for the VerificationCodes we want to count
+     *   }
+     * })
+    **/
+    count<T extends VerificationCodeCountArgs>(
+      args?: Subset<T, VerificationCodeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], VerificationCodeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a VerificationCode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VerificationCodeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends VerificationCodeAggregateArgs>(args: Subset<T, VerificationCodeAggregateArgs>): Prisma.PrismaPromise<GetVerificationCodeAggregateType<T>>
+
+    /**
+     * Group by VerificationCode.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VerificationCodeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends VerificationCodeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: VerificationCodeGroupByArgs['orderBy'] }
+        : { orderBy?: VerificationCodeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, VerificationCodeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVerificationCodeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the VerificationCode model
+   */
+  readonly fields: VerificationCodeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for VerificationCode.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__VerificationCodeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    member<T extends VerificationCode$memberArgs<ExtArgs> = {}>(args?: Subset<T, VerificationCode$memberArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the VerificationCode model
+   */
+  interface VerificationCodeFieldRefs {
+    readonly id: FieldRef<"VerificationCode", 'String'>
+    readonly code: FieldRef<"VerificationCode", 'String'>
+    readonly email: FieldRef<"VerificationCode", 'String'>
+    readonly type: FieldRef<"VerificationCode", 'CodeType'>
+    readonly expiredAt: FieldRef<"VerificationCode", 'DateTime'>
+    readonly isUsed: FieldRef<"VerificationCode", 'Boolean'>
+    readonly attempts: FieldRef<"VerificationCode", 'Int'>
+    readonly memberId: FieldRef<"VerificationCode", 'String'>
+    readonly createdAt: FieldRef<"VerificationCode", 'DateTime'>
+    readonly updatedAt: FieldRef<"VerificationCode", 'DateTime'>
+    readonly deletedAt: FieldRef<"VerificationCode", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * VerificationCode findUnique
+   */
+  export type VerificationCodeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationCode
+     */
+    select?: VerificationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationCode
+     */
+    omit?: VerificationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which VerificationCode to fetch.
+     */
+    where: VerificationCodeWhereUniqueInput
+  }
+
+  /**
+   * VerificationCode findUniqueOrThrow
+   */
+  export type VerificationCodeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationCode
+     */
+    select?: VerificationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationCode
+     */
+    omit?: VerificationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which VerificationCode to fetch.
+     */
+    where: VerificationCodeWhereUniqueInput
+  }
+
+  /**
+   * VerificationCode findFirst
+   */
+  export type VerificationCodeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationCode
+     */
+    select?: VerificationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationCode
+     */
+    omit?: VerificationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which VerificationCode to fetch.
+     */
+    where?: VerificationCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VerificationCodes to fetch.
+     */
+    orderBy?: VerificationCodeOrderByWithRelationInput | VerificationCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for VerificationCodes.
+     */
+    cursor?: VerificationCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VerificationCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VerificationCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of VerificationCodes.
+     */
+    distinct?: VerificationCodeScalarFieldEnum | VerificationCodeScalarFieldEnum[]
+  }
+
+  /**
+   * VerificationCode findFirstOrThrow
+   */
+  export type VerificationCodeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationCode
+     */
+    select?: VerificationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationCode
+     */
+    omit?: VerificationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which VerificationCode to fetch.
+     */
+    where?: VerificationCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VerificationCodes to fetch.
+     */
+    orderBy?: VerificationCodeOrderByWithRelationInput | VerificationCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for VerificationCodes.
+     */
+    cursor?: VerificationCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VerificationCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VerificationCodes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of VerificationCodes.
+     */
+    distinct?: VerificationCodeScalarFieldEnum | VerificationCodeScalarFieldEnum[]
+  }
+
+  /**
+   * VerificationCode findMany
+   */
+  export type VerificationCodeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationCode
+     */
+    select?: VerificationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationCode
+     */
+    omit?: VerificationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationCodeInclude<ExtArgs> | null
+    /**
+     * Filter, which VerificationCodes to fetch.
+     */
+    where?: VerificationCodeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of VerificationCodes to fetch.
+     */
+    orderBy?: VerificationCodeOrderByWithRelationInput | VerificationCodeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing VerificationCodes.
+     */
+    cursor?: VerificationCodeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` VerificationCodes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` VerificationCodes.
+     */
+    skip?: number
+    distinct?: VerificationCodeScalarFieldEnum | VerificationCodeScalarFieldEnum[]
+  }
+
+  /**
+   * VerificationCode create
+   */
+  export type VerificationCodeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationCode
+     */
+    select?: VerificationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationCode
+     */
+    omit?: VerificationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationCodeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a VerificationCode.
+     */
+    data: XOR<VerificationCodeCreateInput, VerificationCodeUncheckedCreateInput>
+  }
+
+  /**
+   * VerificationCode createMany
+   */
+  export type VerificationCodeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many VerificationCodes.
+     */
+    data: VerificationCodeCreateManyInput | VerificationCodeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * VerificationCode createManyAndReturn
+   */
+  export type VerificationCodeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationCode
+     */
+    select?: VerificationCodeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationCode
+     */
+    omit?: VerificationCodeOmit<ExtArgs> | null
+    /**
+     * The data used to create many VerificationCodes.
+     */
+    data: VerificationCodeCreateManyInput | VerificationCodeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationCodeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * VerificationCode update
+   */
+  export type VerificationCodeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationCode
+     */
+    select?: VerificationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationCode
+     */
+    omit?: VerificationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationCodeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a VerificationCode.
+     */
+    data: XOR<VerificationCodeUpdateInput, VerificationCodeUncheckedUpdateInput>
+    /**
+     * Choose, which VerificationCode to update.
+     */
+    where: VerificationCodeWhereUniqueInput
+  }
+
+  /**
+   * VerificationCode updateMany
+   */
+  export type VerificationCodeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update VerificationCodes.
+     */
+    data: XOR<VerificationCodeUpdateManyMutationInput, VerificationCodeUncheckedUpdateManyInput>
+    /**
+     * Filter which VerificationCodes to update
+     */
+    where?: VerificationCodeWhereInput
+    /**
+     * Limit how many VerificationCodes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * VerificationCode updateManyAndReturn
+   */
+  export type VerificationCodeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationCode
+     */
+    select?: VerificationCodeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationCode
+     */
+    omit?: VerificationCodeOmit<ExtArgs> | null
+    /**
+     * The data used to update VerificationCodes.
+     */
+    data: XOR<VerificationCodeUpdateManyMutationInput, VerificationCodeUncheckedUpdateManyInput>
+    /**
+     * Filter which VerificationCodes to update
+     */
+    where?: VerificationCodeWhereInput
+    /**
+     * Limit how many VerificationCodes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationCodeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * VerificationCode upsert
+   */
+  export type VerificationCodeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationCode
+     */
+    select?: VerificationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationCode
+     */
+    omit?: VerificationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationCodeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the VerificationCode to update in case it exists.
+     */
+    where: VerificationCodeWhereUniqueInput
+    /**
+     * In case the VerificationCode found by the `where` argument doesn't exist, create a new VerificationCode with this data.
+     */
+    create: XOR<VerificationCodeCreateInput, VerificationCodeUncheckedCreateInput>
+    /**
+     * In case the VerificationCode was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<VerificationCodeUpdateInput, VerificationCodeUncheckedUpdateInput>
+  }
+
+  /**
+   * VerificationCode delete
+   */
+  export type VerificationCodeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationCode
+     */
+    select?: VerificationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationCode
+     */
+    omit?: VerificationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationCodeInclude<ExtArgs> | null
+    /**
+     * Filter which VerificationCode to delete.
+     */
+    where: VerificationCodeWhereUniqueInput
+  }
+
+  /**
+   * VerificationCode deleteMany
+   */
+  export type VerificationCodeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which VerificationCodes to delete
+     */
+    where?: VerificationCodeWhereInput
+    /**
+     * Limit how many VerificationCodes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * VerificationCode.member
+   */
+  export type VerificationCode$memberArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Member
+     */
+    select?: MemberSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Member
+     */
+    omit?: MemberOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MemberInclude<ExtArgs> | null
+    where?: MemberWhereInput
+  }
+
+  /**
+   * VerificationCode without action
+   */
+  export type VerificationCodeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VerificationCode
+     */
+    select?: VerificationCodeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the VerificationCode
+     */
+    omit?: VerificationCodeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VerificationCodeInclude<ExtArgs> | null
   }
 
 
@@ -3391,22 +4744,39 @@ export namespace Prisma {
   export const MemberScalarFieldEnum: {
     id: 'id',
     email: 'email',
-    isEmailVerified: 'isEmailVerified',
     countryPhoneId: 'countryPhoneId',
     phoneNumber: 'phoneNumber',
     firstName: 'firstName',
     lastName: 'lastName',
     birthDate: 'birthDate',
-    sex: 'sex',
-    termsPrivacyAccepted: 'termsPrivacyAccepted',
-    personalDataConsentAccepted: 'personalDataConsentAccepted',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt',
     eventPromoAccepted: 'eventPromoAccepted',
+    personalDataConsentAccepted: 'personalDataConsentAccepted',
+    termsPrivacyAccepted: 'termsPrivacyAccepted',
+    sex: 'sex',
+    isEmailVerified: 'isEmailVerified'
+  };
+
+  export type MemberScalarFieldEnum = (typeof MemberScalarFieldEnum)[keyof typeof MemberScalarFieldEnum]
+
+
+  export const VerificationCodeScalarFieldEnum: {
+    id: 'id',
+    code: 'code',
+    email: 'email',
+    type: 'type',
+    expiredAt: 'expiredAt',
+    isUsed: 'isUsed',
+    attempts: 'attempts',
+    memberId: 'memberId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     deletedAt: 'deletedAt'
   };
 
-  export type MemberScalarFieldEnum = (typeof MemberScalarFieldEnum)[keyof typeof MemberScalarFieldEnum]
+  export type VerificationCodeScalarFieldEnum = (typeof VerificationCodeScalarFieldEnum)[keyof typeof VerificationCodeScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -3502,6 +4872,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'CodeType'
+   */
+  export type EnumCodeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CodeType'>
+    
+
+
+  /**
+   * Reference to a field of type 'CodeType[]'
+   */
+  export type ListEnumCodeTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'CodeType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -3591,39 +4975,41 @@ export namespace Prisma {
     NOT?: MemberWhereInput | MemberWhereInput[]
     id?: StringFilter<"Member"> | string
     email?: StringFilter<"Member"> | string
-    isEmailVerified?: BoolFilter<"Member"> | boolean
     countryPhoneId?: IntFilter<"Member"> | number
     phoneNumber?: StringFilter<"Member"> | string
     firstName?: StringFilter<"Member"> | string
     lastName?: StringNullableFilter<"Member"> | string | null
     birthDate?: StringFilter<"Member"> | string
-    sex?: EnumSexFilter<"Member"> | $Enums.Sex
-    termsPrivacyAccepted?: BoolFilter<"Member"> | boolean
-    personalDataConsentAccepted?: BoolFilter<"Member"> | boolean
-    eventPromoAccepted?: BoolFilter<"Member"> | boolean
     createdAt?: DateTimeFilter<"Member"> | Date | string
     updatedAt?: DateTimeFilter<"Member"> | Date | string
     deletedAt?: DateTimeNullableFilter<"Member"> | Date | string | null
+    eventPromoAccepted?: BoolFilter<"Member"> | boolean
+    personalDataConsentAccepted?: BoolFilter<"Member"> | boolean
+    termsPrivacyAccepted?: BoolFilter<"Member"> | boolean
+    sex?: EnumSexFilter<"Member"> | $Enums.Sex
+    isEmailVerified?: BoolFilter<"Member"> | boolean
     countryPhone?: XOR<CountryPhoneScalarRelationFilter, CountryPhoneWhereInput>
+    verificationCodes?: VerificationCodeListRelationFilter
   }
 
   export type MemberOrderByWithRelationInput = {
     id?: SortOrder
     email?: SortOrder
-    isEmailVerified?: SortOrder
     countryPhoneId?: SortOrder
     phoneNumber?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrderInput | SortOrder
     birthDate?: SortOrder
-    sex?: SortOrder
-    termsPrivacyAccepted?: SortOrder
-    personalDataConsentAccepted?: SortOrder
-    eventPromoAccepted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     deletedAt?: SortOrderInput | SortOrder
+    eventPromoAccepted?: SortOrder
+    personalDataConsentAccepted?: SortOrder
+    termsPrivacyAccepted?: SortOrder
+    sex?: SortOrder
+    isEmailVerified?: SortOrder
     countryPhone?: CountryPhoneOrderByWithRelationInput
+    verificationCodes?: VerificationCodeOrderByRelationAggregateInput
   }
 
   export type MemberWhereUniqueInput = Prisma.AtLeast<{
@@ -3633,37 +5019,38 @@ export namespace Prisma {
     AND?: MemberWhereInput | MemberWhereInput[]
     OR?: MemberWhereInput[]
     NOT?: MemberWhereInput | MemberWhereInput[]
-    isEmailVerified?: BoolFilter<"Member"> | boolean
     countryPhoneId?: IntFilter<"Member"> | number
     firstName?: StringFilter<"Member"> | string
     lastName?: StringNullableFilter<"Member"> | string | null
     birthDate?: StringFilter<"Member"> | string
-    sex?: EnumSexFilter<"Member"> | $Enums.Sex
-    termsPrivacyAccepted?: BoolFilter<"Member"> | boolean
-    personalDataConsentAccepted?: BoolFilter<"Member"> | boolean
-    eventPromoAccepted?: BoolFilter<"Member"> | boolean
     createdAt?: DateTimeFilter<"Member"> | Date | string
     updatedAt?: DateTimeFilter<"Member"> | Date | string
     deletedAt?: DateTimeNullableFilter<"Member"> | Date | string | null
+    eventPromoAccepted?: BoolFilter<"Member"> | boolean
+    personalDataConsentAccepted?: BoolFilter<"Member"> | boolean
+    termsPrivacyAccepted?: BoolFilter<"Member"> | boolean
+    sex?: EnumSexFilter<"Member"> | $Enums.Sex
+    isEmailVerified?: BoolFilter<"Member"> | boolean
     countryPhone?: XOR<CountryPhoneScalarRelationFilter, CountryPhoneWhereInput>
+    verificationCodes?: VerificationCodeListRelationFilter
   }, "id" | "email" | "phoneNumber">
 
   export type MemberOrderByWithAggregationInput = {
     id?: SortOrder
     email?: SortOrder
-    isEmailVerified?: SortOrder
     countryPhoneId?: SortOrder
     phoneNumber?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrderInput | SortOrder
     birthDate?: SortOrder
-    sex?: SortOrder
-    termsPrivacyAccepted?: SortOrder
-    personalDataConsentAccepted?: SortOrder
-    eventPromoAccepted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     deletedAt?: SortOrderInput | SortOrder
+    eventPromoAccepted?: SortOrder
+    personalDataConsentAccepted?: SortOrder
+    termsPrivacyAccepted?: SortOrder
+    sex?: SortOrder
+    isEmailVerified?: SortOrder
     _count?: MemberCountOrderByAggregateInput
     _avg?: MemberAvgOrderByAggregateInput
     _max?: MemberMaxOrderByAggregateInput
@@ -3677,19 +5064,106 @@ export namespace Prisma {
     NOT?: MemberScalarWhereWithAggregatesInput | MemberScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Member"> | string
     email?: StringWithAggregatesFilter<"Member"> | string
-    isEmailVerified?: BoolWithAggregatesFilter<"Member"> | boolean
     countryPhoneId?: IntWithAggregatesFilter<"Member"> | number
     phoneNumber?: StringWithAggregatesFilter<"Member"> | string
     firstName?: StringWithAggregatesFilter<"Member"> | string
     lastName?: StringNullableWithAggregatesFilter<"Member"> | string | null
     birthDate?: StringWithAggregatesFilter<"Member"> | string
-    sex?: EnumSexWithAggregatesFilter<"Member"> | $Enums.Sex
-    termsPrivacyAccepted?: BoolWithAggregatesFilter<"Member"> | boolean
-    personalDataConsentAccepted?: BoolWithAggregatesFilter<"Member"> | boolean
-    eventPromoAccepted?: BoolWithAggregatesFilter<"Member"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Member"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Member"> | Date | string
     deletedAt?: DateTimeNullableWithAggregatesFilter<"Member"> | Date | string | null
+    eventPromoAccepted?: BoolWithAggregatesFilter<"Member"> | boolean
+    personalDataConsentAccepted?: BoolWithAggregatesFilter<"Member"> | boolean
+    termsPrivacyAccepted?: BoolWithAggregatesFilter<"Member"> | boolean
+    sex?: EnumSexWithAggregatesFilter<"Member"> | $Enums.Sex
+    isEmailVerified?: BoolWithAggregatesFilter<"Member"> | boolean
+  }
+
+  export type VerificationCodeWhereInput = {
+    AND?: VerificationCodeWhereInput | VerificationCodeWhereInput[]
+    OR?: VerificationCodeWhereInput[]
+    NOT?: VerificationCodeWhereInput | VerificationCodeWhereInput[]
+    id?: StringFilter<"VerificationCode"> | string
+    code?: StringFilter<"VerificationCode"> | string
+    email?: StringFilter<"VerificationCode"> | string
+    type?: EnumCodeTypeFilter<"VerificationCode"> | $Enums.CodeType
+    expiredAt?: DateTimeFilter<"VerificationCode"> | Date | string
+    isUsed?: BoolFilter<"VerificationCode"> | boolean
+    attempts?: IntFilter<"VerificationCode"> | number
+    memberId?: StringNullableFilter<"VerificationCode"> | string | null
+    createdAt?: DateTimeFilter<"VerificationCode"> | Date | string
+    updatedAt?: DateTimeFilter<"VerificationCode"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"VerificationCode"> | Date | string | null
+    member?: XOR<MemberNullableScalarRelationFilter, MemberWhereInput> | null
+  }
+
+  export type VerificationCodeOrderByWithRelationInput = {
+    id?: SortOrder
+    code?: SortOrder
+    email?: SortOrder
+    type?: SortOrder
+    expiredAt?: SortOrder
+    isUsed?: SortOrder
+    attempts?: SortOrder
+    memberId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    member?: MemberOrderByWithRelationInput
+  }
+
+  export type VerificationCodeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: VerificationCodeWhereInput | VerificationCodeWhereInput[]
+    OR?: VerificationCodeWhereInput[]
+    NOT?: VerificationCodeWhereInput | VerificationCodeWhereInput[]
+    code?: StringFilter<"VerificationCode"> | string
+    email?: StringFilter<"VerificationCode"> | string
+    type?: EnumCodeTypeFilter<"VerificationCode"> | $Enums.CodeType
+    expiredAt?: DateTimeFilter<"VerificationCode"> | Date | string
+    isUsed?: BoolFilter<"VerificationCode"> | boolean
+    attempts?: IntFilter<"VerificationCode"> | number
+    memberId?: StringNullableFilter<"VerificationCode"> | string | null
+    createdAt?: DateTimeFilter<"VerificationCode"> | Date | string
+    updatedAt?: DateTimeFilter<"VerificationCode"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"VerificationCode"> | Date | string | null
+    member?: XOR<MemberNullableScalarRelationFilter, MemberWhereInput> | null
+  }, "id">
+
+  export type VerificationCodeOrderByWithAggregationInput = {
+    id?: SortOrder
+    code?: SortOrder
+    email?: SortOrder
+    type?: SortOrder
+    expiredAt?: SortOrder
+    isUsed?: SortOrder
+    attempts?: SortOrder
+    memberId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    _count?: VerificationCodeCountOrderByAggregateInput
+    _avg?: VerificationCodeAvgOrderByAggregateInput
+    _max?: VerificationCodeMaxOrderByAggregateInput
+    _min?: VerificationCodeMinOrderByAggregateInput
+    _sum?: VerificationCodeSumOrderByAggregateInput
+  }
+
+  export type VerificationCodeScalarWhereWithAggregatesInput = {
+    AND?: VerificationCodeScalarWhereWithAggregatesInput | VerificationCodeScalarWhereWithAggregatesInput[]
+    OR?: VerificationCodeScalarWhereWithAggregatesInput[]
+    NOT?: VerificationCodeScalarWhereWithAggregatesInput | VerificationCodeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"VerificationCode"> | string
+    code?: StringWithAggregatesFilter<"VerificationCode"> | string
+    email?: StringWithAggregatesFilter<"VerificationCode"> | string
+    type?: EnumCodeTypeWithAggregatesFilter<"VerificationCode"> | $Enums.CodeType
+    expiredAt?: DateTimeWithAggregatesFilter<"VerificationCode"> | Date | string
+    isUsed?: BoolWithAggregatesFilter<"VerificationCode"> | boolean
+    attempts?: IntWithAggregatesFilter<"VerificationCode"> | number
+    memberId?: StringNullableWithAggregatesFilter<"VerificationCode"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"VerificationCode"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"VerificationCode"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"VerificationCode"> | Date | string | null
   }
 
   export type CountryPhoneCreateInput = {
@@ -3766,123 +5240,224 @@ export namespace Prisma {
   export type MemberCreateInput = {
     id?: string
     email: string
-    isEmailVerified?: boolean
     phoneNumber: string
     firstName: string
     lastName?: string | null
     birthDate: string
-    sex: $Enums.Sex
-    termsPrivacyAccepted: boolean
-    personalDataConsentAccepted: boolean
-    eventPromoAccepted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
+    eventPromoAccepted?: boolean
+    personalDataConsentAccepted: boolean
+    termsPrivacyAccepted: boolean
+    sex: $Enums.Sex
+    isEmailVerified?: boolean
     countryPhone: CountryPhoneCreateNestedOneWithoutMembersInput
+    verificationCodes?: VerificationCodeCreateNestedManyWithoutMemberInput
   }
 
   export type MemberUncheckedCreateInput = {
     id?: string
     email: string
-    isEmailVerified?: boolean
     countryPhoneId: number
     phoneNumber: string
     firstName: string
     lastName?: string | null
     birthDate: string
-    sex: $Enums.Sex
-    termsPrivacyAccepted: boolean
-    personalDataConsentAccepted: boolean
-    eventPromoAccepted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
+    eventPromoAccepted?: boolean
+    personalDataConsentAccepted: boolean
+    termsPrivacyAccepted: boolean
+    sex: $Enums.Sex
+    isEmailVerified?: boolean
+    verificationCodes?: VerificationCodeUncheckedCreateNestedManyWithoutMemberInput
   }
 
   export type MemberUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     phoneNumber?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: StringFieldUpdateOperationsInput | string
-    sex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
-    termsPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
-    personalDataConsentAccepted?: BoolFieldUpdateOperationsInput | boolean
-    eventPromoAccepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    eventPromoAccepted?: BoolFieldUpdateOperationsInput | boolean
+    personalDataConsentAccepted?: BoolFieldUpdateOperationsInput | boolean
+    termsPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
+    sex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     countryPhone?: CountryPhoneUpdateOneRequiredWithoutMembersNestedInput
+    verificationCodes?: VerificationCodeUpdateManyWithoutMemberNestedInput
   }
 
   export type MemberUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     countryPhoneId?: IntFieldUpdateOperationsInput | number
     phoneNumber?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: StringFieldUpdateOperationsInput | string
-    sex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
-    termsPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
-    personalDataConsentAccepted?: BoolFieldUpdateOperationsInput | boolean
-    eventPromoAccepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    eventPromoAccepted?: BoolFieldUpdateOperationsInput | boolean
+    personalDataConsentAccepted?: BoolFieldUpdateOperationsInput | boolean
+    termsPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
+    sex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCodes?: VerificationCodeUncheckedUpdateManyWithoutMemberNestedInput
   }
 
   export type MemberCreateManyInput = {
     id?: string
     email: string
-    isEmailVerified?: boolean
     countryPhoneId: number
     phoneNumber: string
     firstName: string
     lastName?: string | null
     birthDate: string
-    sex: $Enums.Sex
-    termsPrivacyAccepted: boolean
-    personalDataConsentAccepted: boolean
-    eventPromoAccepted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
+    eventPromoAccepted?: boolean
+    personalDataConsentAccepted: boolean
+    termsPrivacyAccepted: boolean
+    sex: $Enums.Sex
+    isEmailVerified?: boolean
   }
 
   export type MemberUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     phoneNumber?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: StringFieldUpdateOperationsInput | string
-    sex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
-    termsPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
-    personalDataConsentAccepted?: BoolFieldUpdateOperationsInput | boolean
-    eventPromoAccepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    eventPromoAccepted?: BoolFieldUpdateOperationsInput | boolean
+    personalDataConsentAccepted?: BoolFieldUpdateOperationsInput | boolean
+    termsPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
+    sex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MemberUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     countryPhoneId?: IntFieldUpdateOperationsInput | number
     phoneNumber?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: StringFieldUpdateOperationsInput | string
-    sex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
-    termsPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
-    personalDataConsentAccepted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     eventPromoAccepted?: BoolFieldUpdateOperationsInput | boolean
+    personalDataConsentAccepted?: BoolFieldUpdateOperationsInput | boolean
+    termsPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
+    sex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type VerificationCodeCreateInput = {
+    id?: string
+    code: string
+    email: string
+    type: $Enums.CodeType
+    expiredAt: Date | string
+    isUsed?: boolean
+    attempts?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    member?: MemberCreateNestedOneWithoutVerificationCodesInput
+  }
+
+  export type VerificationCodeUncheckedCreateInput = {
+    id?: string
+    code: string
+    email: string
+    type: $Enums.CodeType
+    expiredAt: Date | string
+    isUsed?: boolean
+    attempts?: number
+    memberId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type VerificationCodeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    type?: EnumCodeTypeFieldUpdateOperationsInput | $Enums.CodeType
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isUsed?: BoolFieldUpdateOperationsInput | boolean
+    attempts?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    member?: MemberUpdateOneWithoutVerificationCodesNestedInput
+  }
+
+  export type VerificationCodeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    type?: EnumCodeTypeFieldUpdateOperationsInput | $Enums.CodeType
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isUsed?: BoolFieldUpdateOperationsInput | boolean
+    attempts?: IntFieldUpdateOperationsInput | number
+    memberId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type VerificationCodeCreateManyInput = {
+    id?: string
+    code: string
+    email: string
+    type: $Enums.CodeType
+    expiredAt: Date | string
+    isUsed?: boolean
+    attempts?: number
+    memberId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type VerificationCodeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    type?: EnumCodeTypeFieldUpdateOperationsInput | $Enums.CodeType
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isUsed?: BoolFieldUpdateOperationsInput | boolean
+    attempts?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type VerificationCodeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    type?: EnumCodeTypeFieldUpdateOperationsInput | $Enums.CodeType
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isUsed?: BoolFieldUpdateOperationsInput | boolean
+    attempts?: IntFieldUpdateOperationsInput | number
+    memberId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -4051,11 +5626,6 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -4071,6 +5641,11 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type EnumSexFilter<$PrismaModel = never> = {
     equals?: $Enums.Sex | EnumSexFieldRefInput<$PrismaModel>
     in?: $Enums.Sex[] | ListEnumSexFieldRefInput<$PrismaModel>
@@ -4083,22 +5658,32 @@ export namespace Prisma {
     isNot?: CountryPhoneWhereInput
   }
 
+  export type VerificationCodeListRelationFilter = {
+    every?: VerificationCodeWhereInput
+    some?: VerificationCodeWhereInput
+    none?: VerificationCodeWhereInput
+  }
+
+  export type VerificationCodeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type MemberCountOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
-    isEmailVerified?: SortOrder
     countryPhoneId?: SortOrder
     phoneNumber?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
     birthDate?: SortOrder
-    sex?: SortOrder
-    termsPrivacyAccepted?: SortOrder
-    personalDataConsentAccepted?: SortOrder
-    eventPromoAccepted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     deletedAt?: SortOrder
+    eventPromoAccepted?: SortOrder
+    personalDataConsentAccepted?: SortOrder
+    termsPrivacyAccepted?: SortOrder
+    sex?: SortOrder
+    isEmailVerified?: SortOrder
   }
 
   export type MemberAvgOrderByAggregateInput = {
@@ -4108,49 +5693,41 @@ export namespace Prisma {
   export type MemberMaxOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
-    isEmailVerified?: SortOrder
     countryPhoneId?: SortOrder
     phoneNumber?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
     birthDate?: SortOrder
-    sex?: SortOrder
-    termsPrivacyAccepted?: SortOrder
-    personalDataConsentAccepted?: SortOrder
-    eventPromoAccepted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     deletedAt?: SortOrder
+    eventPromoAccepted?: SortOrder
+    personalDataConsentAccepted?: SortOrder
+    termsPrivacyAccepted?: SortOrder
+    sex?: SortOrder
+    isEmailVerified?: SortOrder
   }
 
   export type MemberMinOrderByAggregateInput = {
     id?: SortOrder
     email?: SortOrder
-    isEmailVerified?: SortOrder
     countryPhoneId?: SortOrder
     phoneNumber?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
     birthDate?: SortOrder
-    sex?: SortOrder
-    termsPrivacyAccepted?: SortOrder
-    personalDataConsentAccepted?: SortOrder
-    eventPromoAccepted?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     deletedAt?: SortOrder
+    eventPromoAccepted?: SortOrder
+    personalDataConsentAccepted?: SortOrder
+    termsPrivacyAccepted?: SortOrder
+    sex?: SortOrder
+    isEmailVerified?: SortOrder
   }
 
   export type MemberSumOrderByAggregateInput = {
     countryPhoneId?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -4171,6 +5748,14 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type EnumSexWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Sex | EnumSexFieldRefInput<$PrismaModel>
     in?: $Enums.Sex[] | ListEnumSexFieldRefInput<$PrismaModel>
@@ -4179,6 +5764,78 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumSexFilter<$PrismaModel>
     _max?: NestedEnumSexFilter<$PrismaModel>
+  }
+
+  export type EnumCodeTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.CodeType | EnumCodeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CodeType[] | ListEnumCodeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CodeType[] | ListEnumCodeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumCodeTypeFilter<$PrismaModel> | $Enums.CodeType
+  }
+
+  export type MemberNullableScalarRelationFilter = {
+    is?: MemberWhereInput | null
+    isNot?: MemberWhereInput | null
+  }
+
+  export type VerificationCodeCountOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    email?: SortOrder
+    type?: SortOrder
+    expiredAt?: SortOrder
+    isUsed?: SortOrder
+    attempts?: SortOrder
+    memberId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type VerificationCodeAvgOrderByAggregateInput = {
+    attempts?: SortOrder
+  }
+
+  export type VerificationCodeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    email?: SortOrder
+    type?: SortOrder
+    expiredAt?: SortOrder
+    isUsed?: SortOrder
+    attempts?: SortOrder
+    memberId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type VerificationCodeMinOrderByAggregateInput = {
+    id?: SortOrder
+    code?: SortOrder
+    email?: SortOrder
+    type?: SortOrder
+    expiredAt?: SortOrder
+    isUsed?: SortOrder
+    attempts?: SortOrder
+    memberId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type VerificationCodeSumOrderByAggregateInput = {
+    attempts?: SortOrder
+  }
+
+  export type EnumCodeTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CodeType | EnumCodeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CodeType[] | ListEnumCodeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CodeType[] | ListEnumCodeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumCodeTypeWithAggregatesFilter<$PrismaModel> | $Enums.CodeType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCodeTypeFilter<$PrismaModel>
+    _max?: NestedEnumCodeTypeFilter<$PrismaModel>
   }
 
   export type MemberCreateNestedManyWithoutCountryPhoneInput = {
@@ -4249,12 +5906,26 @@ export namespace Prisma {
     connect?: CountryPhoneWhereUniqueInput
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
+  export type VerificationCodeCreateNestedManyWithoutMemberInput = {
+    create?: XOR<VerificationCodeCreateWithoutMemberInput, VerificationCodeUncheckedCreateWithoutMemberInput> | VerificationCodeCreateWithoutMemberInput[] | VerificationCodeUncheckedCreateWithoutMemberInput[]
+    connectOrCreate?: VerificationCodeCreateOrConnectWithoutMemberInput | VerificationCodeCreateOrConnectWithoutMemberInput[]
+    createMany?: VerificationCodeCreateManyMemberInputEnvelope
+    connect?: VerificationCodeWhereUniqueInput | VerificationCodeWhereUniqueInput[]
+  }
+
+  export type VerificationCodeUncheckedCreateNestedManyWithoutMemberInput = {
+    create?: XOR<VerificationCodeCreateWithoutMemberInput, VerificationCodeUncheckedCreateWithoutMemberInput> | VerificationCodeCreateWithoutMemberInput[] | VerificationCodeUncheckedCreateWithoutMemberInput[]
+    connectOrCreate?: VerificationCodeCreateOrConnectWithoutMemberInput | VerificationCodeCreateOrConnectWithoutMemberInput[]
+    createMany?: VerificationCodeCreateManyMemberInputEnvelope
+    connect?: VerificationCodeWhereUniqueInput | VerificationCodeWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type EnumSexFieldUpdateOperationsInput = {
@@ -4267,6 +5938,54 @@ export namespace Prisma {
     upsert?: CountryPhoneUpsertWithoutMembersInput
     connect?: CountryPhoneWhereUniqueInput
     update?: XOR<XOR<CountryPhoneUpdateToOneWithWhereWithoutMembersInput, CountryPhoneUpdateWithoutMembersInput>, CountryPhoneUncheckedUpdateWithoutMembersInput>
+  }
+
+  export type VerificationCodeUpdateManyWithoutMemberNestedInput = {
+    create?: XOR<VerificationCodeCreateWithoutMemberInput, VerificationCodeUncheckedCreateWithoutMemberInput> | VerificationCodeCreateWithoutMemberInput[] | VerificationCodeUncheckedCreateWithoutMemberInput[]
+    connectOrCreate?: VerificationCodeCreateOrConnectWithoutMemberInput | VerificationCodeCreateOrConnectWithoutMemberInput[]
+    upsert?: VerificationCodeUpsertWithWhereUniqueWithoutMemberInput | VerificationCodeUpsertWithWhereUniqueWithoutMemberInput[]
+    createMany?: VerificationCodeCreateManyMemberInputEnvelope
+    set?: VerificationCodeWhereUniqueInput | VerificationCodeWhereUniqueInput[]
+    disconnect?: VerificationCodeWhereUniqueInput | VerificationCodeWhereUniqueInput[]
+    delete?: VerificationCodeWhereUniqueInput | VerificationCodeWhereUniqueInput[]
+    connect?: VerificationCodeWhereUniqueInput | VerificationCodeWhereUniqueInput[]
+    update?: VerificationCodeUpdateWithWhereUniqueWithoutMemberInput | VerificationCodeUpdateWithWhereUniqueWithoutMemberInput[]
+    updateMany?: VerificationCodeUpdateManyWithWhereWithoutMemberInput | VerificationCodeUpdateManyWithWhereWithoutMemberInput[]
+    deleteMany?: VerificationCodeScalarWhereInput | VerificationCodeScalarWhereInput[]
+  }
+
+  export type VerificationCodeUncheckedUpdateManyWithoutMemberNestedInput = {
+    create?: XOR<VerificationCodeCreateWithoutMemberInput, VerificationCodeUncheckedCreateWithoutMemberInput> | VerificationCodeCreateWithoutMemberInput[] | VerificationCodeUncheckedCreateWithoutMemberInput[]
+    connectOrCreate?: VerificationCodeCreateOrConnectWithoutMemberInput | VerificationCodeCreateOrConnectWithoutMemberInput[]
+    upsert?: VerificationCodeUpsertWithWhereUniqueWithoutMemberInput | VerificationCodeUpsertWithWhereUniqueWithoutMemberInput[]
+    createMany?: VerificationCodeCreateManyMemberInputEnvelope
+    set?: VerificationCodeWhereUniqueInput | VerificationCodeWhereUniqueInput[]
+    disconnect?: VerificationCodeWhereUniqueInput | VerificationCodeWhereUniqueInput[]
+    delete?: VerificationCodeWhereUniqueInput | VerificationCodeWhereUniqueInput[]
+    connect?: VerificationCodeWhereUniqueInput | VerificationCodeWhereUniqueInput[]
+    update?: VerificationCodeUpdateWithWhereUniqueWithoutMemberInput | VerificationCodeUpdateWithWhereUniqueWithoutMemberInput[]
+    updateMany?: VerificationCodeUpdateManyWithWhereWithoutMemberInput | VerificationCodeUpdateManyWithWhereWithoutMemberInput[]
+    deleteMany?: VerificationCodeScalarWhereInput | VerificationCodeScalarWhereInput[]
+  }
+
+  export type MemberCreateNestedOneWithoutVerificationCodesInput = {
+    create?: XOR<MemberCreateWithoutVerificationCodesInput, MemberUncheckedCreateWithoutVerificationCodesInput>
+    connectOrCreate?: MemberCreateOrConnectWithoutVerificationCodesInput
+    connect?: MemberWhereUniqueInput
+  }
+
+  export type EnumCodeTypeFieldUpdateOperationsInput = {
+    set?: $Enums.CodeType
+  }
+
+  export type MemberUpdateOneWithoutVerificationCodesNestedInput = {
+    create?: XOR<MemberCreateWithoutVerificationCodesInput, MemberUncheckedCreateWithoutVerificationCodesInput>
+    connectOrCreate?: MemberCreateOrConnectWithoutVerificationCodesInput
+    upsert?: MemberUpsertWithoutVerificationCodesInput
+    disconnect?: MemberWhereInput | boolean
+    delete?: MemberWhereInput | boolean
+    connect?: MemberWhereUniqueInput
+    update?: XOR<XOR<MemberUpdateToOneWithWhereWithoutVerificationCodesInput, MemberUpdateWithoutVerificationCodesInput>, MemberUncheckedUpdateWithoutVerificationCodesInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -4399,11 +6118,6 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -4418,19 +6132,16 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedEnumSexFilter<$PrismaModel = never> = {
     equals?: $Enums.Sex | EnumSexFieldRefInput<$PrismaModel>
     in?: $Enums.Sex[] | ListEnumSexFieldRefInput<$PrismaModel>
     notIn?: $Enums.Sex[] | ListEnumSexFieldRefInput<$PrismaModel>
     not?: NestedEnumSexFilter<$PrismaModel> | $Enums.Sex
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -4450,6 +6161,14 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type NestedEnumSexWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Sex | EnumSexFieldRefInput<$PrismaModel>
     in?: $Enums.Sex[] | ListEnumSexFieldRefInput<$PrismaModel>
@@ -4460,38 +6179,57 @@ export namespace Prisma {
     _max?: NestedEnumSexFilter<$PrismaModel>
   }
 
+  export type NestedEnumCodeTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.CodeType | EnumCodeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CodeType[] | ListEnumCodeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CodeType[] | ListEnumCodeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumCodeTypeFilter<$PrismaModel> | $Enums.CodeType
+  }
+
+  export type NestedEnumCodeTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.CodeType | EnumCodeTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.CodeType[] | ListEnumCodeTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.CodeType[] | ListEnumCodeTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumCodeTypeWithAggregatesFilter<$PrismaModel> | $Enums.CodeType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumCodeTypeFilter<$PrismaModel>
+    _max?: NestedEnumCodeTypeFilter<$PrismaModel>
+  }
+
   export type MemberCreateWithoutCountryPhoneInput = {
     id?: string
     email: string
-    isEmailVerified?: boolean
     phoneNumber: string
     firstName: string
     lastName?: string | null
     birthDate: string
-    sex: $Enums.Sex
-    termsPrivacyAccepted: boolean
-    personalDataConsentAccepted: boolean
-    eventPromoAccepted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
+    eventPromoAccepted?: boolean
+    personalDataConsentAccepted: boolean
+    termsPrivacyAccepted: boolean
+    sex: $Enums.Sex
+    isEmailVerified?: boolean
+    verificationCodes?: VerificationCodeCreateNestedManyWithoutMemberInput
   }
 
   export type MemberUncheckedCreateWithoutCountryPhoneInput = {
     id?: string
     email: string
-    isEmailVerified?: boolean
     phoneNumber: string
     firstName: string
     lastName?: string | null
     birthDate: string
-    sex: $Enums.Sex
-    termsPrivacyAccepted: boolean
-    personalDataConsentAccepted: boolean
-    eventPromoAccepted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
+    eventPromoAccepted?: boolean
+    personalDataConsentAccepted: boolean
+    termsPrivacyAccepted: boolean
+    sex: $Enums.Sex
+    isEmailVerified?: boolean
+    verificationCodes?: VerificationCodeUncheckedCreateNestedManyWithoutMemberInput
   }
 
   export type MemberCreateOrConnectWithoutCountryPhoneInput = {
@@ -4526,19 +6264,19 @@ export namespace Prisma {
     NOT?: MemberScalarWhereInput | MemberScalarWhereInput[]
     id?: StringFilter<"Member"> | string
     email?: StringFilter<"Member"> | string
-    isEmailVerified?: BoolFilter<"Member"> | boolean
     countryPhoneId?: IntFilter<"Member"> | number
     phoneNumber?: StringFilter<"Member"> | string
     firstName?: StringFilter<"Member"> | string
     lastName?: StringNullableFilter<"Member"> | string | null
     birthDate?: StringFilter<"Member"> | string
-    sex?: EnumSexFilter<"Member"> | $Enums.Sex
-    termsPrivacyAccepted?: BoolFilter<"Member"> | boolean
-    personalDataConsentAccepted?: BoolFilter<"Member"> | boolean
-    eventPromoAccepted?: BoolFilter<"Member"> | boolean
     createdAt?: DateTimeFilter<"Member"> | Date | string
     updatedAt?: DateTimeFilter<"Member"> | Date | string
     deletedAt?: DateTimeNullableFilter<"Member"> | Date | string | null
+    eventPromoAccepted?: BoolFilter<"Member"> | boolean
+    personalDataConsentAccepted?: BoolFilter<"Member"> | boolean
+    termsPrivacyAccepted?: BoolFilter<"Member"> | boolean
+    sex?: EnumSexFilter<"Member"> | $Enums.Sex
+    isEmailVerified?: BoolFilter<"Member"> | boolean
   }
 
   export type CountryPhoneCreateWithoutMembersInput = {
@@ -4563,6 +6301,42 @@ export namespace Prisma {
   export type CountryPhoneCreateOrConnectWithoutMembersInput = {
     where: CountryPhoneWhereUniqueInput
     create: XOR<CountryPhoneCreateWithoutMembersInput, CountryPhoneUncheckedCreateWithoutMembersInput>
+  }
+
+  export type VerificationCodeCreateWithoutMemberInput = {
+    id?: string
+    code: string
+    email: string
+    type: $Enums.CodeType
+    expiredAt: Date | string
+    isUsed?: boolean
+    attempts?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type VerificationCodeUncheckedCreateWithoutMemberInput = {
+    id?: string
+    code: string
+    email: string
+    type: $Enums.CodeType
+    expiredAt: Date | string
+    isUsed?: boolean
+    attempts?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type VerificationCodeCreateOrConnectWithoutMemberInput = {
+    where: VerificationCodeWhereUniqueInput
+    create: XOR<VerificationCodeCreateWithoutMemberInput, VerificationCodeUncheckedCreateWithoutMemberInput>
+  }
+
+  export type VerificationCodeCreateManyMemberInputEnvelope = {
+    data: VerificationCodeCreateManyMemberInput | VerificationCodeCreateManyMemberInput[]
+    skipDuplicates?: boolean
   }
 
   export type CountryPhoneUpsertWithoutMembersInput = {
@@ -4595,69 +6369,244 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type MemberCreateManyCountryPhoneInput = {
+  export type VerificationCodeUpsertWithWhereUniqueWithoutMemberInput = {
+    where: VerificationCodeWhereUniqueInput
+    update: XOR<VerificationCodeUpdateWithoutMemberInput, VerificationCodeUncheckedUpdateWithoutMemberInput>
+    create: XOR<VerificationCodeCreateWithoutMemberInput, VerificationCodeUncheckedCreateWithoutMemberInput>
+  }
+
+  export type VerificationCodeUpdateWithWhereUniqueWithoutMemberInput = {
+    where: VerificationCodeWhereUniqueInput
+    data: XOR<VerificationCodeUpdateWithoutMemberInput, VerificationCodeUncheckedUpdateWithoutMemberInput>
+  }
+
+  export type VerificationCodeUpdateManyWithWhereWithoutMemberInput = {
+    where: VerificationCodeScalarWhereInput
+    data: XOR<VerificationCodeUpdateManyMutationInput, VerificationCodeUncheckedUpdateManyWithoutMemberInput>
+  }
+
+  export type VerificationCodeScalarWhereInput = {
+    AND?: VerificationCodeScalarWhereInput | VerificationCodeScalarWhereInput[]
+    OR?: VerificationCodeScalarWhereInput[]
+    NOT?: VerificationCodeScalarWhereInput | VerificationCodeScalarWhereInput[]
+    id?: StringFilter<"VerificationCode"> | string
+    code?: StringFilter<"VerificationCode"> | string
+    email?: StringFilter<"VerificationCode"> | string
+    type?: EnumCodeTypeFilter<"VerificationCode"> | $Enums.CodeType
+    expiredAt?: DateTimeFilter<"VerificationCode"> | Date | string
+    isUsed?: BoolFilter<"VerificationCode"> | boolean
+    attempts?: IntFilter<"VerificationCode"> | number
+    memberId?: StringNullableFilter<"VerificationCode"> | string | null
+    createdAt?: DateTimeFilter<"VerificationCode"> | Date | string
+    updatedAt?: DateTimeFilter<"VerificationCode"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"VerificationCode"> | Date | string | null
+  }
+
+  export type MemberCreateWithoutVerificationCodesInput = {
     id?: string
     email: string
-    isEmailVerified?: boolean
     phoneNumber: string
     firstName: string
     lastName?: string | null
     birthDate: string
-    sex: $Enums.Sex
-    termsPrivacyAccepted: boolean
-    personalDataConsentAccepted: boolean
-    eventPromoAccepted?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
+    eventPromoAccepted?: boolean
+    personalDataConsentAccepted: boolean
+    termsPrivacyAccepted: boolean
+    sex: $Enums.Sex
+    isEmailVerified?: boolean
+    countryPhone: CountryPhoneCreateNestedOneWithoutMembersInput
+  }
+
+  export type MemberUncheckedCreateWithoutVerificationCodesInput = {
+    id?: string
+    email: string
+    countryPhoneId: number
+    phoneNumber: string
+    firstName: string
+    lastName?: string | null
+    birthDate: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    eventPromoAccepted?: boolean
+    personalDataConsentAccepted: boolean
+    termsPrivacyAccepted: boolean
+    sex: $Enums.Sex
+    isEmailVerified?: boolean
+  }
+
+  export type MemberCreateOrConnectWithoutVerificationCodesInput = {
+    where: MemberWhereUniqueInput
+    create: XOR<MemberCreateWithoutVerificationCodesInput, MemberUncheckedCreateWithoutVerificationCodesInput>
+  }
+
+  export type MemberUpsertWithoutVerificationCodesInput = {
+    update: XOR<MemberUpdateWithoutVerificationCodesInput, MemberUncheckedUpdateWithoutVerificationCodesInput>
+    create: XOR<MemberCreateWithoutVerificationCodesInput, MemberUncheckedCreateWithoutVerificationCodesInput>
+    where?: MemberWhereInput
+  }
+
+  export type MemberUpdateToOneWithWhereWithoutVerificationCodesInput = {
+    where?: MemberWhereInput
+    data: XOR<MemberUpdateWithoutVerificationCodesInput, MemberUncheckedUpdateWithoutVerificationCodesInput>
+  }
+
+  export type MemberUpdateWithoutVerificationCodesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    eventPromoAccepted?: BoolFieldUpdateOperationsInput | boolean
+    personalDataConsentAccepted?: BoolFieldUpdateOperationsInput | boolean
+    termsPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
+    sex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    countryPhone?: CountryPhoneUpdateOneRequiredWithoutMembersNestedInput
+  }
+
+  export type MemberUncheckedUpdateWithoutVerificationCodesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    countryPhoneId?: IntFieldUpdateOperationsInput | number
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    eventPromoAccepted?: BoolFieldUpdateOperationsInput | boolean
+    personalDataConsentAccepted?: BoolFieldUpdateOperationsInput | boolean
+    termsPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
+    sex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type MemberCreateManyCountryPhoneInput = {
+    id?: string
+    email: string
+    phoneNumber: string
+    firstName: string
+    lastName?: string | null
+    birthDate: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    eventPromoAccepted?: boolean
+    personalDataConsentAccepted: boolean
+    termsPrivacyAccepted: boolean
+    sex: $Enums.Sex
+    isEmailVerified?: boolean
   }
 
   export type MemberUpdateWithoutCountryPhoneInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     phoneNumber?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: StringFieldUpdateOperationsInput | string
-    sex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
-    termsPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
-    personalDataConsentAccepted?: BoolFieldUpdateOperationsInput | boolean
-    eventPromoAccepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    eventPromoAccepted?: BoolFieldUpdateOperationsInput | boolean
+    personalDataConsentAccepted?: BoolFieldUpdateOperationsInput | boolean
+    termsPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
+    sex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCodes?: VerificationCodeUpdateManyWithoutMemberNestedInput
   }
 
   export type MemberUncheckedUpdateWithoutCountryPhoneInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     phoneNumber?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: StringFieldUpdateOperationsInput | string
-    sex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
-    termsPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
-    personalDataConsentAccepted?: BoolFieldUpdateOperationsInput | boolean
-    eventPromoAccepted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    eventPromoAccepted?: BoolFieldUpdateOperationsInput | boolean
+    personalDataConsentAccepted?: BoolFieldUpdateOperationsInput | boolean
+    termsPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
+    sex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCodes?: VerificationCodeUncheckedUpdateManyWithoutMemberNestedInput
   }
 
   export type MemberUncheckedUpdateManyWithoutCountryPhoneInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     phoneNumber?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
     birthDate?: StringFieldUpdateOperationsInput | string
-    sex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
-    termsPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
-    personalDataConsentAccepted?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     eventPromoAccepted?: BoolFieldUpdateOperationsInput | boolean
+    personalDataConsentAccepted?: BoolFieldUpdateOperationsInput | boolean
+    termsPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
+    sex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type VerificationCodeCreateManyMemberInput = {
+    id?: string
+    code: string
+    email: string
+    type: $Enums.CodeType
+    expiredAt: Date | string
+    isUsed?: boolean
+    attempts?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type VerificationCodeUpdateWithoutMemberInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    type?: EnumCodeTypeFieldUpdateOperationsInput | $Enums.CodeType
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isUsed?: BoolFieldUpdateOperationsInput | boolean
+    attempts?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type VerificationCodeUncheckedUpdateWithoutMemberInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    type?: EnumCodeTypeFieldUpdateOperationsInput | $Enums.CodeType
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isUsed?: BoolFieldUpdateOperationsInput | boolean
+    attempts?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type VerificationCodeUncheckedUpdateManyWithoutMemberInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    type?: EnumCodeTypeFieldUpdateOperationsInput | $Enums.CodeType
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    isUsed?: BoolFieldUpdateOperationsInput | boolean
+    attempts?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null

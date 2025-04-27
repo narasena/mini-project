@@ -24,3 +24,16 @@ export async function registerMember(
     next(error);
   }
 }
+
+export async function verifyEmail(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  try {
+      const { email, type } = req.body;
+      const
+  } catch (error) {
+    next(error);
+  }
+}
