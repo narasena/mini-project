@@ -27,7 +27,8 @@
     "swiper": "^11.2.6",
     "vanilla-calendar-pro": "^3.0.4",
     "yap": "^0.0.2",
-    "yup": "^1.6.1"
+    "yup": "^1.6.1",
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@types/datatables.net": "^1.10.28",

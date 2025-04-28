@@ -21,7 +21,14 @@ export default function LoginPage() {
       setIsOTPLoginSent(true);
     } catch (error:any) {
       console.log(error);
-      toast.error(error.response.data.message);
+      if (error.response.data.pushToRegister) {
+        toast.error(error.response.data.message);
+        setTimeout(() => {
+          router.push('/register')
+        },2000)
+      } else {
+        toast.error(error.response.data.message);        
+      }
       
     }
   };

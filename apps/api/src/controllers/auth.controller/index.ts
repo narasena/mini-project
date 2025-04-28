@@ -121,7 +121,12 @@ export async function loginMember(
       });
     }
     if (existingMember.isEmailVerified === false) {
-      return res.status(400).json({ success: false, message: 'Email not verified', data: null });
+      return res.status(400).json({
+        success: false,
+        message: 'Email not verified',
+        pushToRegister: true,
+        data: null
+      });
     }
 
     await sendEmailVerificationCode(req, res, next);
