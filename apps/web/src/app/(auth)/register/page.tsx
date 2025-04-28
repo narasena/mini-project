@@ -1,33 +1,35 @@
 'use client';
-import { emailValidationSchema, registerValidationSchema } from '@/features/schemas/auth.schema/authSchema';
+import {
+  emailValidationSchema,
+  registerValidationSchema,
+} from '@/features/schemas/auth.schema/authSchema';
 import apiInstance from '@/utils/axiosInstance';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Link from 'next/link';
 import * as React from 'react';
 import { toast } from 'react-toastify';
 
-
 export default function RegisterPage() {
   const [isEmailAvailable, setIsEmailAvailable] = React.useState(false);
-  const [tempEmail, setTempEmail] = React.useState('')
-  const [isRegisterSuccses, setIsRegisterSucces] = React.useState(false)
-  const [isEmailVerified, setIsEmailVerified] = React.useState(false)
+  const [tempEmail, setTempEmail] = React.useState('');
+  const [isRegisterSuccess, setIsRegisterSuccess] = React.useState(false);
+  const [isEmailVerified, setIsEmailVerified] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const handleEmailCheck = async (email: string) => {
     try {
       setIsLoading(true);
-      const response = await apiInstance.post('/auth/register-check', email)
-      toast.success(response.data.message)
-      setIsEmailAvailable(true)
-      setTempEmail(email)
-    } catch (error:any) {
+      const response = await apiInstance.post('/auth/register-check', email);
+      toast.success(response.data.message);
+      setIsEmailAvailable(true);
+      setTempEmail(email);
+    } catch (error: any) {
       console.error(error);
       if (!error.response.data.isVerified) {
-        setIsEmailVerified(true)
-        setIsRegisterSucces(true)
-        setTempEmail(email)
+        setIsEmailVerified(true);
+        setIsRegisterSuccess(true);
+        setTempEmail(email);
       }
-      toast.error(error.response.data.message)
+      toast.error(error.response.data.message);
     } finally {
       setIsLoading(false);
     }
@@ -35,68 +37,85 @@ export default function RegisterPage() {
 
   const handleRegisterNewMember = async (values: any) => {
     try {
-      setIsLoading(true)
-      const response = await apiInstance.post('/auth/register', { email: tempEmail, values, type: "REGISTRATION" })
-      toast.success(response.data.message)
-      setIsRegisterSucces(true)
+      setIsLoading(true);
+      const response = await apiInstance.post('/auth/register', {
+        email: tempEmail,
+        values,
+        type: 'REGISTRATION',
+      });
+      toast.success(response.data.message);
+      setIsRegisterSuccess(true);
     } catch (error) {
-      console.error(error)
+      console.error(error);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleGenerateCode = async (email: string) => {
-  try {
-    const response = await apiInstance.post('/send-otp', email)
-    toast.success(response.data.message)
-  } catch (error:any) {
-    toast.error(error.response.data.message)
-  }
-}
-const <handleMemberRegister></handleMemberRegister>VerifyCode = async(code:string) => {
-  
-}
+    try {
+      const response = await apiInstance.post('/send-otp', email);
+      toast.success(response.data.message);
+    } catch (error: any) {
+      toast.error(error.response.data.message);
+    }
+  };
+  const handleMemberRegisterVerifyCode = async (code: string) => {
+    try {
+      const response = await apiInstance.post('/auth/verify-new-member', {
+        email: tempEmail,
+        code,
+        type: 'REGISTRATION',
+      });
+      toast.success(response.data.message);
+      setIsEmailVerified(true);
+    } catch (error: any) {
+      toast.error(error.response.data.message);
+    }
+  };
 
   const handlePostRegister = async () => {
-  try {
-    if(isRegisterSuccses) {
-      setTimeout(() => {
-        window.location.href = '/'
-      }, 2500)
+    try {
+      if (isEmailVerified) {
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 2500);
+      }
+    } catch (error) {
+      console.error(error); // Add error logging
     }
-  } catch (error) {
-    console.error(error); // Add error logging
-  }
-}
+  };
 
-React.useEffect(() => {
-  if(isRegisterSuccses) { // Only call when true
-    handlePostRegister();
-  }
-}, [isRegisterSuccses]);
+  React.useEffect(() => {
+    if (isEmailVerified) {
+      // Only call when true
+      handlePostRegister();
+    }
+  }, [isEmailVerified]);
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center w-56 h-56 border border-gray-200 rounded-lg bg-gray-50/50 dark:bg-gray-800/30 dark:border-gray-700">
-        <div role="status">
-          <svg
-            aria-hidden="true"
-            className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
-            viewBox="0 0 100 101"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-              fill="currentColor"
-            />
-            <path
-              d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-              fill="currentFill"
-            />
-          </svg>
-          <span className="sr-only">Loading...</span>
+      <div className="flex items-center justify-center min-w-screen min-h-screen bg-white/30">
+        <div className="flex items-center justify-center w-10 h-10 border border-gray-200 rounded-lg bg-gray-50/50 dark:bg-gray-800/30 dark:border-gray-700">
+          <div role="status">
+            <svg
+              aria-hidden="true"
+              className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+              viewBox="0 0 100 101"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                fill="currentColor"
+              />
+              <path
+                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                fill="currentFill"
+              />
+            </svg>
+            <span className="sr-only">Loading...</span>
+          </div>
         </div>
       </div>
     );
@@ -162,7 +181,7 @@ React.useEffect(() => {
           <div className="auth-bg"></div>
         </div>
       )}
-      {isEmailAvailable && !isRegisterSuccses && (
+      {isEmailAvailable && !isRegisterSuccess && (
         <div>
           <div className="auth-container">
             <div className="auth-title pre-sign-up">
@@ -253,7 +272,7 @@ React.useEffect(() => {
                     <div className="auth-form-control">
                       <Field
                         name="birthDate"
-                        type="date"
+                        type="text"
                         placeholder="Masukkan tanggal lahirmu"
                         className="auth-form-input"
                       />
@@ -363,7 +382,7 @@ React.useEffect(() => {
         </div>
       )}
 
-      {isEmailAvailable && isRegisterSuccses && (
+      {isEmailAvailable && isRegisterSuccess && (
         <div>
           <div className="auth-container">
             <div className="auth-title pre-sign-up">
@@ -382,7 +401,6 @@ React.useEffect(() => {
               <div className="auth-form">
                 <Formik
                   initialValues={{ code: '' }}
-
                   onSubmit={(values) => {
                     handleEmailCheck(values.code);
                   }}
@@ -420,6 +438,12 @@ React.useEffect(() => {
           </div>
           <div className="auth-bg"></div>
         </div>
+      )}
+
+      {isRegisterSuccess && (
+        <center>
+          Pendaftaran Akun Kamu sudah selesai, kamu akan dialihkan ke halaman utama.
+        </center>
       )}
     </>
   );
