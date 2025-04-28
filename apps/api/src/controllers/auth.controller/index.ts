@@ -85,7 +85,7 @@ export async function registerMemberCheck (
         success: false,
         isVerified:false,
         message: 'Email is not yet verified, please verify email with request new OTP',
-        data: existingMember.email,
+        email: email,
       });
     }
     res.status(200).json({
@@ -143,6 +143,7 @@ export async function sendEmailVerificationCode(
   res: Response,
   next: NextFunction,
 ) {
+  console.log('Received request for send-otp:', req.body);
   res.header('Access-Control-Allow-Origin', '*');
   try {
     const { email, type } = req.body;
@@ -160,22 +161,35 @@ export async function sendEmailVerificationCode(
       email: email,
       code: verificationCode,
     });
+    try {
+      const emailSent = await transporter.sendMail({
+        to: email,
+        subject: `Permintaan Kode OTP Anda pada ${new Date()}`,
+        html: verifyEmailTemplateCompiled,
+      });
 
-    await transporter.sendMail({
-      to: email,
-      subject: `Permintaan Kode OTP Anda pada ${new Date()}`,
-      html: verifyEmailTemplateCompiled,
-    });
+      if(!emailSent|| !emailSent.messageId){
+        throw new Error('Email failed to send');
+      }
 
-    res.status(200).json({
-      success: true,
-      message: 'Email sent successfully',
-      data: {
-        email,
-        type,
-        verificationCode,
-      },
-    });
+      res.status(200).json({
+        success: true,
+        message: `OTP sent to your email successfully.\nPlease check your inbox.`,
+        data: {
+          email,
+          type,
+          verificationCode,
+        },
+      });
+      
+    } catch (emailError:any) {
+      console.error('Email sending error:', emailError);
+      res.status(500).json({
+        success: false,
+        message: 'Failed to send email verification code',
+        error: emailError.message,
+      });
+    }
   } catch (error) {
     next(error);
   }
@@ -244,9 +258,10 @@ export async function verifyNewMember(
         isEmailVerified: false,
       },
     });
+    console.log(member);
     await prisma.member.update({
       where: {
-        id: member?.id,
+        email: member!.email,
       },
       data: {
         isEmailVerified: true,

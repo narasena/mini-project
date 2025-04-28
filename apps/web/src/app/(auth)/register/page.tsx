@@ -18,18 +18,20 @@ export default function RegisterPage() {
   const handleEmailCheck = async (email: string) => {
     try {
       setIsLoading(true);
-      const response = await apiInstance.post('/auth/register-check', email);
+      const response = await apiInstance.post('/auth/register-check', { email: email });
       toast.success(response.data.message);
       setIsEmailAvailable(true);
       setTempEmail(email);
     } catch (error: any) {
       console.error(error);
       if (!error.response.data.isVerified) {
-        setIsEmailVerified(true);
+        toast.error(error.response.data.message);
+        setIsEmailAvailable(false);
         setIsRegisterSuccess(true);
-        setTempEmail(email);
+        setTempEmail(error.response.data.email);
+      }else{
+        toast.error(error.response.data.message);
       }
-      toast.error(error.response.data.message);
     } finally {
       setIsLoading(false);
     }
@@ -40,10 +42,19 @@ export default function RegisterPage() {
       setIsLoading(true);
       const response = await apiInstance.post('/auth/register', {
         email: tempEmail,
-        values,
+        countryPhoneId: values.countryPhoneId,
+        phoneNumber: values.phoneNumber,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        birthDate: values.birthDate,
+        sex: values.sex,
+        termsPrivacyAccepted: values.termsPrivacyAccepted,
+        personalDataConsentAccepted: values.personalDataConsentAccepted,
+        eventPromoAccepted: values.eventPromoAccepted,
         type: 'REGISTRATION',
       });
       toast.success(response.data.message);
+      setIsEmailAvailable(false);
       setIsRegisterSuccess(true);
     } catch (error) {
       console.error(error);
@@ -54,17 +65,37 @@ export default function RegisterPage() {
 
   const handleGenerateCode = async (email: string) => {
     try {
-      const response = await apiInstance.post('/send-otp', email);
-      toast.success(response.data.message);
+      if (!email) {
+        toast.error('Email is required');
+        return;
+      }
+
+      const response = await apiInstance.post('/auth/send-otp', { email , type: 'REGISTRATION' });
+      if (response.data.success) {
+        toast.success(response.data.message);
+      }
     } catch (error: any) {
-      toast.error(error.response.data.message);
+       if (error.response) {
+         // The request was made and the server responded with a status code
+         // that falls out of the range of 2xx
+         toast.error(
+           error.response.data.message || 'Failed to send verification code',
+         );
+       } else if (error.request) {
+         // The request was made but no response was received
+         toast.error('No response from server. Please try again.');
+       } else {
+         // Something happened in setting up the request
+         toast.error('Error sending request. Please try again.');
+       }
+       console.error('Error details:', error);
     }
   };
   const handleMemberRegisterVerifyCode = async (code: string) => {
     try {
       const response = await apiInstance.post('/auth/verify-new-member', {
         email: tempEmail,
-        code,
+        code: code,
         type: 'REGISTRATION',
       });
       toast.success(response.data.message);
@@ -123,7 +154,7 @@ export default function RegisterPage() {
 
   return (
     <>
-      {!isEmailAvailable && (
+      {!isEmailAvailable && !isRegisterSuccess && !isEmailVerified && (
         <div>
           <div className="auth-container">
             <div className="auth-title pre-sign-up">
@@ -382,27 +413,18 @@ export default function RegisterPage() {
         </div>
       )}
 
-      {isEmailAvailable && isRegisterSuccess && (
+      {!isEmailAvailable && isRegisterSuccess && (
         <div>
           <div className="auth-container">
             <div className="auth-title pre-sign-up">
               <h3>Masukkan Kode OTP untuk Verifikasi Registrasi</h3>
-              <label>
-                Generate Kode OTP Baru?
-                <Link href="" onClick={() => handleGenerateCode(tempEmail)}>
-                  <span className="font-bold cursor-pointer !text-[#0049cc]">
-                    {' '}
-                    Kirim
-                  </span>
-                </Link>
-              </label>
             </div>
             <div className="auth-content">
               <div className="auth-form">
                 <Formik
                   initialValues={{ code: '' }}
                   onSubmit={(values) => {
-                    handleEmailCheck(values.code);
+                    handleMemberRegisterVerifyCode(values.code);
                   }}
                 >
                   <Form>
@@ -419,10 +441,24 @@ export default function RegisterPage() {
                       />
                     </div>
                     <ErrorMessage
-                      name="email"
+                      name="code"
                       component="div"
                       className="error-message"
                     />
+                    <label className='block mt-2'><span className='block'>Belum terkirim / kadaluarsa?</span>
+                      Kirim kode baru
+                      <span
+                        onClick={() => {
+                          console.log("email:",tempEmail)
+                          handleGenerateCode(tempEmail)
+                        }}
+                      >
+                        <span className="font-bold cursor-pointer !text-[#0049cc]">
+                          {' '}
+                          disini.
+                        </span>
+                      </span>
+                    </label>
                     <div className="!mb-0 !mt-5 w-full max-w-full">
                       <button
                         type="submit"
@@ -440,9 +476,10 @@ export default function RegisterPage() {
         </div>
       )}
 
-      {isRegisterSuccess && (
+      {isRegisterSuccess && !isEmailAvailable && isEmailVerified && (
         <center>
-          Pendaftaran Akun Kamu sudah selesai, kamu akan dialihkan ke halaman utama.
+          Pendaftaran Akun Kamu sudah selesai, kamu akan dialihkan ke halaman
+          utama.
         </center>
       )}
     </>
