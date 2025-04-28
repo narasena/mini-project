@@ -1,45 +1,62 @@
 'use client';
 import { emailValidationSchema, registerValidationSchema } from '@/features/schemas/auth.schema/authSchema';
+import apiInstance from '@/utils/axiosInstance';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Link from 'next/link';
 import * as React from 'react';
+import { toast } from 'react-toastify';
 
 
 export default function RegisterPage() {
-  const [isEmailVerified, setIsEmailVerified] = React.useState(false);
+  const [isEmailAvailable, setIsEmailAvailable] = React.useState(false);
+  const [tempEmail, setTempEmail] = React.useState('')
   const [isRegisterSuccses, setIsRegisterSucces] = React.useState(false)
+  const [isEmailVerified, setIsEmailVerified] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false);
-  const handleVerifyEmail = async (email: string) => {
+  const handleEmailCheck = async (email: string) => {
     try {
       setIsLoading(true);
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          setIsEmailVerified(true);
-          resolve(true);
-        }, 2500);
-      });
-    } catch (error) {
+      const response = await apiInstance.post('/auth/register-check', email)
+      toast.success(response.data.message)
+      setIsEmailAvailable(true)
+      setTempEmail(email)
+    } catch (error:any) {
       console.error(error);
+      if (!error.response.data.isVerified) {
+        setIsEmailVerified(true)
+        setIsRegisterSucces(true)
+        setTempEmail(email)
+      }
+      toast.error(error.response.data.message)
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleSubmitMember = async (values: any) => {
+  const handleRegisterNewMember = async (values: any) => {
     try {
       setIsLoading(true)
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          setIsRegisterSucces(true)
-          resolve(true)
-        }, 2500)
-      })
+      const response = await apiInstance.post('/auth/register', { email: tempEmail, values, type: "REGISTRATION" })
+      toast.success(response.data.message)
+      setIsRegisterSucces(true)
     } catch (error) {
       console.error(error)
     } finally {
       setIsLoading(false)
     }
   }
+
+  const handleGenerateCode = async (email: string) => {
+  try {
+    const response = await apiInstance.post('/send-otp', email)
+    toast.success(response.data.message)
+  } catch (error:any) {
+    toast.error(error.response.data.message)
+  }
+}
+const <handleMemberRegister></handleMemberRegister>VerifyCode = async(code:string) => {
+  
+}
 
   const handlePostRegister = async () => {
   try {
@@ -61,7 +78,7 @@ React.useEffect(() => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center w-56 h-56 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800/30 dark:border-gray-700">
+      <div className="flex items-center justify-center w-56 h-56 border border-gray-200 rounded-lg bg-gray-50/50 dark:bg-gray-800/30 dark:border-gray-700">
         <div role="status">
           <svg
             aria-hidden="true"
@@ -87,7 +104,7 @@ React.useEffect(() => {
 
   return (
     <>
-      {!isEmailVerified && (
+      {!isEmailAvailable && (
         <div>
           <div className="auth-container">
             <div className="auth-title pre-sign-up">
@@ -108,7 +125,7 @@ React.useEffect(() => {
                   initialValues={{ email: '' }}
                   validationSchema={emailValidationSchema}
                   onSubmit={(values) => {
-                    handleVerifyEmail(values.email);
+                    handleEmailCheck(values.email);
                   }}
                 >
                   <Form>
@@ -145,7 +162,7 @@ React.useEffect(() => {
           <div className="auth-bg"></div>
         </div>
       )}
-      {isEmailVerified && !isRegisterSuccses && (
+      {isEmailAvailable && !isRegisterSuccses && (
         <div>
           <div className="auth-container">
             <div className="auth-title pre-sign-up">
@@ -169,7 +186,7 @@ React.useEffect(() => {
                   }}
                   // validationSchema={registerValidationSchema}
                   onSubmit={(values) => {
-                    handleSubmitMember(values);
+                    handleRegisterNewMember(values);
                   }}
                 >
                   <Form>
@@ -320,7 +337,8 @@ React.useEffect(() => {
                         className=""
                       />
                       <label className="inline-block">
-                        Saya bersedia menerima informasi terkini terkait event dan promosi di Loket.com
+                        Saya bersedia menerima informasi terkini terkait event
+                        dan promosi di Loket.com
                       </label>
                     </div>
                     <ErrorMessage
@@ -345,9 +363,64 @@ React.useEffect(() => {
         </div>
       )}
 
-      {isEmailVerified && isRegisterSuccses && (
-        <div>Pembuatan Profilmu Berhasil, Kamu akan diteruskan ke halaman utama</div>
-    )}
+      {isEmailAvailable && isRegisterSuccses && (
+        <div>
+          <div className="auth-container">
+            <div className="auth-title pre-sign-up">
+              <h3>Masukkan Kode OTP untuk Verifikasi Registrasi</h3>
+              <label>
+                Generate Kode OTP Baru?
+                <Link href="" onClick={() => handleGenerateCode(tempEmail)}>
+                  <span className="font-bold cursor-pointer !text-[#0049cc]">
+                    {' '}
+                    Kirim
+                  </span>
+                </Link>
+              </label>
+            </div>
+            <div className="auth-content">
+              <div className="auth-form">
+                <Formik
+                  initialValues={{ code: '' }}
+
+                  onSubmit={(values) => {
+                    handleEmailCheck(values.code);
+                  }}
+                >
+                  <Form>
+                    <div className="!mb-2.5">
+                      <label className="auth-label block">Kode OTP</label>
+                    </div>
+
+                    <div className="auth-form-control">
+                      <Field
+                        name="code"
+                        type="text"
+                        placeholder=""
+                        className="auth-form-input"
+                      />
+                    </div>
+                    <ErrorMessage
+                      name="email"
+                      component="div"
+                      className="error-message"
+                    />
+                    <div className="!mb-0 !mt-5 w-full max-w-full">
+                      <button
+                        type="submit"
+                        className="w-full max-w-full c-button c-button-primary c-button-1"
+                      >
+                        <span className="">Verifikasi Email</span>
+                      </button>
+                    </div>
+                  </Form>
+                </Formik>
+              </div>
+            </div>
+          </div>
+          <div className="auth-bg"></div>
+        </div>
+      )}
     </>
   );
 }

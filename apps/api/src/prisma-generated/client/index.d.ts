@@ -2300,7 +2300,7 @@ export namespace Prisma {
     phoneNumber: string | null
     firstName: string | null
     lastName: string | null
-    birthDate: Date | null
+    birthDate: string | null
     createdAt: Date | null
     updatedAt: Date | null
     deletedAt: Date | null
@@ -2318,7 +2318,7 @@ export namespace Prisma {
     phoneNumber: string | null
     firstName: string | null
     lastName: string | null
-    birthDate: Date | null
+    birthDate: string | null
     createdAt: Date | null
     updatedAt: Date | null
     deletedAt: Date | null
@@ -2505,7 +2505,7 @@ export namespace Prisma {
     phoneNumber: string
     firstName: string
     lastName: string | null
-    birthDate: Date
+    birthDate: string
     createdAt: Date
     updatedAt: Date
     deletedAt: Date | null
@@ -2638,7 +2638,7 @@ export namespace Prisma {
       phoneNumber: string
       firstName: string
       lastName: string | null
-      birthDate: Date
+      birthDate: string
       createdAt: Date
       updatedAt: Date
       deletedAt: Date | null
@@ -3078,7 +3078,7 @@ export namespace Prisma {
     readonly phoneNumber: FieldRef<"Member", 'String'>
     readonly firstName: FieldRef<"Member", 'String'>
     readonly lastName: FieldRef<"Member", 'String'>
-    readonly birthDate: FieldRef<"Member", 'DateTime'>
+    readonly birthDate: FieldRef<"Member", 'String'>
     readonly createdAt: FieldRef<"Member", 'DateTime'>
     readonly updatedAt: FieldRef<"Member", 'DateTime'>
     readonly deletedAt: FieldRef<"Member", 'DateTime'>
@@ -4979,7 +4979,7 @@ export namespace Prisma {
     phoneNumber?: StringFilter<"Member"> | string
     firstName?: StringFilter<"Member"> | string
     lastName?: StringNullableFilter<"Member"> | string | null
-    birthDate?: DateTimeFilter<"Member"> | Date | string
+    birthDate?: StringFilter<"Member"> | string
     createdAt?: DateTimeFilter<"Member"> | Date | string
     updatedAt?: DateTimeFilter<"Member"> | Date | string
     deletedAt?: DateTimeNullableFilter<"Member"> | Date | string | null
@@ -5022,7 +5022,7 @@ export namespace Prisma {
     countryPhoneId?: IntFilter<"Member"> | number
     firstName?: StringFilter<"Member"> | string
     lastName?: StringNullableFilter<"Member"> | string | null
-    birthDate?: DateTimeFilter<"Member"> | Date | string
+    birthDate?: StringFilter<"Member"> | string
     createdAt?: DateTimeFilter<"Member"> | Date | string
     updatedAt?: DateTimeFilter<"Member"> | Date | string
     deletedAt?: DateTimeNullableFilter<"Member"> | Date | string | null
@@ -5068,7 +5068,7 @@ export namespace Prisma {
     phoneNumber?: StringWithAggregatesFilter<"Member"> | string
     firstName?: StringWithAggregatesFilter<"Member"> | string
     lastName?: StringNullableWithAggregatesFilter<"Member"> | string | null
-    birthDate?: DateTimeWithAggregatesFilter<"Member"> | Date | string
+    birthDate?: StringWithAggregatesFilter<"Member"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Member"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Member"> | Date | string
     deletedAt?: DateTimeNullableWithAggregatesFilter<"Member"> | Date | string | null
@@ -5243,7 +5243,7 @@ export namespace Prisma {
     phoneNumber: string
     firstName: string
     lastName?: string | null
-    birthDate: Date | string
+    birthDate: string
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -5263,7 +5263,7 @@ export namespace Prisma {
     phoneNumber: string
     firstName: string
     lastName?: string | null
-    birthDate: Date | string
+    birthDate: string
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -5281,7 +5281,7 @@ export namespace Prisma {
     phoneNumber?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    birthDate?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -5301,7 +5301,7 @@ export namespace Prisma {
     phoneNumber?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    birthDate?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -5320,7 +5320,7 @@ export namespace Prisma {
     phoneNumber: string
     firstName: string
     lastName?: string | null
-    birthDate: Date | string
+    birthDate: string
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -5337,7 +5337,7 @@ export namespace Prisma {
     phoneNumber?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    birthDate?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -5355,7 +5355,7 @@ export namespace Prisma {
     phoneNumber?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    birthDate?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -6202,7 +6202,7 @@ export namespace Prisma {
     phoneNumber: string
     firstName: string
     lastName?: string | null
-    birthDate: Date | string
+    birthDate: string
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -6220,7 +6220,7 @@ export namespace Prisma {
     phoneNumber: string
     firstName: string
     lastName?: string | null
-    birthDate: Date | string
+    birthDate: string
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -6268,7 +6268,7 @@ export namespace Prisma {
     phoneNumber?: StringFilter<"Member"> | string
     firstName?: StringFilter<"Member"> | string
     lastName?: StringNullableFilter<"Member"> | string | null
-    birthDate?: DateTimeFilter<"Member"> | Date | string
+    birthDate?: StringFilter<"Member"> | string
     createdAt?: DateTimeFilter<"Member"> | Date | string
     updatedAt?: DateTimeFilter<"Member"> | Date | string
     deletedAt?: DateTimeNullableFilter<"Member"> | Date | string | null
@@ -6408,7 +6408,7 @@ export namespace Prisma {
     phoneNumber: string
     firstName: string
     lastName?: string | null
-    birthDate: Date | string
+    birthDate: string
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -6427,7 +6427,7 @@ export namespace Prisma {
     phoneNumber: string
     firstName: string
     lastName?: string | null
-    birthDate: Date | string
+    birthDate: string
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -6460,7 +6460,7 @@ export namespace Prisma {
     phoneNumber?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    birthDate?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -6479,7 +6479,7 @@ export namespace Prisma {
     phoneNumber?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    birthDate?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -6496,7 +6496,7 @@ export namespace Prisma {
     phoneNumber: string
     firstName: string
     lastName?: string | null
-    birthDate: Date | string
+    birthDate: string
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -6513,7 +6513,7 @@ export namespace Prisma {
     phoneNumber?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    birthDate?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -6531,7 +6531,7 @@ export namespace Prisma {
     phoneNumber?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    birthDate?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -6549,7 +6549,7 @@ export namespace Prisma {
     phoneNumber?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: NullableStringFieldUpdateOperationsInput | string | null
-    birthDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    birthDate?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null

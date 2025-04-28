@@ -22,7 +22,9 @@
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.5.0",
+    "react-toastify": "^11.0.5",
     "rifraf": "^2.0.3",
+    "swiper": "^11.2.6",
     "vanilla-calendar-pro": "^3.0.4",
     "yap": "^0.0.2",
     "yup": "^1.6.1"
@@ -34,6 +36,7 @@
     "@types/node": "^22.14.1",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
+    "@types/swiper": "^5.4.3",
     "autoprefixer": "^10.4.21",
     "cypress": "^14.3.1",
     "daisyui": "^5.0.27",

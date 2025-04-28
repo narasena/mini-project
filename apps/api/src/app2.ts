@@ -1,14 +1,18 @@
 import express, { Express, NextFunction, Request, Response } from 'express';
 import { PORT } from './config';
+import authRouter from './routers/auth.router';
 export default async function App() {
-    const app: Express = express();
-
+  const app: Express = express();
+  const cors = require('cors');
+  
+  app.use(cors());
   app.use(express.json());
   app.use('*/storages', express.static('src/public/storages'));
   app.get('/', (req: Request, res:Response) => {
     res.send('<h1>Welcome to Loket API</h1>');
   });
 
+  app.use('/api/auth', authRouter)
   //centralized error handler
 
   interface IError extends Error {
