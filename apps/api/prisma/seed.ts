@@ -1,14 +1,14 @@
 import prisma from '../src/prisma';
-import { COUNTRIES } from './seedData/countries';
+import { countryCodes } from './seedData/countries';
 
 
 class DatabaseSeeder {
   private async seedCountryPhones() {
     console.log('🌱 Seeding country phones...');
-      console.log(`Total countries in data: ${COUNTRIES.length}`);
+      console.log(`Total countries in data: ${countryCodes.length}`);
       
       let successCount = 0
-    for (const country of COUNTRIES) {
+    for (const country of countryCodes) {
       try {
         await prisma.countryPhone.upsert({
           where: { code: country.code },
