@@ -130,16 +130,30 @@ exports.Prisma.CountryPhoneScalarFieldEnum = {
 exports.Prisma.MemberScalarFieldEnum = {
   id: 'id',
   email: 'email',
-  isEmailVerified: 'isEmailVerified',
   countryPhoneId: 'countryPhoneId',
   phoneNumber: 'phoneNumber',
   firstName: 'firstName',
   lastName: 'lastName',
   birthDate: 'birthDate',
-  sex: 'sex',
-  termsPrivacyAccepted: 'termsPrivacyAccepted',
-  personalDataConsentAccepted: 'personalDataConsentAccepted',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
   eventPromoAccepted: 'eventPromoAccepted',
+  personalDataConsentAccepted: 'personalDataConsentAccepted',
+  termsPrivacyAccepted: 'termsPrivacyAccepted',
+  sex: 'sex',
+  isEmailVerified: 'isEmailVerified'
+};
+
+exports.Prisma.VerificationCodeScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  email: 'email',
+  type: 'type',
+  expiredAt: 'expiredAt',
+  isUsed: 'isUsed',
+  attempts: 'attempts',
+  memberId: 'memberId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'
@@ -166,9 +180,15 @@ exports.Sex = exports.$Enums.Sex = {
   PREFER_NOT_TO_SAY: 'PREFER_NOT_TO_SAY'
 };
 
+exports.CodeType = exports.$Enums.CodeType = {
+  REGISTRATION: 'REGISTRATION',
+  LOGIN: 'LOGIN'
+};
+
 exports.Prisma.ModelName = {
   CountryPhone: 'CountryPhone',
-  Member: 'Member'
+  Member: 'Member',
+  VerificationCode: 'VerificationCode'
 };
 
 /**

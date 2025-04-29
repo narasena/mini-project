@@ -14,7 +14,7 @@ import { FaCircleUser } from 'react-icons/fa6';
 export const Header = () => {
   const [token, setToken] = React.useState<string | null>(null);
   const [mobileMenuShown, setMobileMenuShown] = React.useState<boolean>(false);
-  const [isLogin, setIsLogin] = React.useState<boolean>(true);
+  const [isLogin, setIsLogin] = React.useState<boolean>(false);
   const [userMenuShown, setUserMenuShown] = React.useState<boolean>(false);
   const mobileMenuListNoLogin = [
     { title: 'Tentang Loket', link: '/' },
@@ -38,7 +38,7 @@ export const Header = () => {
     setMobileMenuShown(!mobileMenuShown);
   };
   return (
-    <div className="h-screen overflow-hidden">
+    <div className="h-max overflow-hidden">
       <nav className="s-navbar">
         <div className="navbar-bottom">
           <div className="navbar-left">
@@ -176,7 +176,7 @@ export const Header = () => {
       {/* mobile dropdown menu  */}
       <div
         className={
-          'w-full h-screen bg-white p-4' + (mobileMenuShown ? '' : ' hidden')
+          'w-full h-fit bg-white p-4' + (mobileMenuShown ? '' : ' hidden')
         }
       >
         <div className="">

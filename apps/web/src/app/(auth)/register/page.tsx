@@ -1,23 +1,61 @@
 'use client';
-import { emailValidationSchema, registerValidationSchema } from '@/features/schemas/auth.schema/authSchema';
+import {
+  emailValidationSchema,
+  registerValidationSchema,
+} from '@/features/schemas/auth.schema/authSchema';
+import apiInstance from '@/utils/axiosInstance';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Link from 'next/link';
 import * as React from 'react';
-
+import { toast } from 'react-toastify';
 
 export default function RegisterPage() {
+  const [isEmailAvailable, setIsEmailAvailable] = React.useState(false);
+  const [tempEmail, setTempEmail] = React.useState('');
+  const [isRegisterSuccess, setIsRegisterSuccess] = React.useState(false);
   const [isEmailVerified, setIsEmailVerified] = React.useState(false);
-  const [isRegisterSuccses, setIsRegisterSucces] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false);
-  const handleVerifyEmail = async (email: string) => {
+  const handleEmailCheck = async (email: string) => {
     try {
       setIsLoading(true);
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          setIsEmailVerified(true);
-          resolve(true);
-        }, 2500);
+      const response = await apiInstance.post('/auth/register-check', { email: email });
+      toast.success(response.data.message);
+      setIsEmailAvailable(true);
+      setTempEmail(email);
+    } catch (error: any) {
+      console.error(error);
+      if (!error.response.data.isVerified) {
+        toast.error(error.response.data.message);
+        setIsEmailAvailable(false);
+        setIsRegisterSuccess(true);
+        setTempEmail(error.response.data.email);
+      }else{
+        toast.error(error.response.data.message);
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleRegisterNewMember = async (values: any) => {
+    try {
+      setIsLoading(true);
+      const response = await apiInstance.post('/auth/register', {
+        email: tempEmail,
+        countryPhoneId: values.countryPhoneId,
+        phoneNumber: values.phoneNumber,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        birthDate: values.birthDate,
+        sex: values.sex,
+        termsPrivacyAccepted: values.termsPrivacyAccepted,
+        personalDataConsentAccepted: values.personalDataConsentAccepted,
+        eventPromoAccepted: values.eventPromoAccepted,
+        type: 'REGISTRATION',
       });
+      toast.success(response.data.message);
+      setIsEmailAvailable(false);
+      setIsRegisterSuccess(true);
     } catch (error) {
       console.error(error);
     } finally {
@@ -25,61 +63,90 @@ export default function RegisterPage() {
     }
   };
 
-  const handleSubmitMember = async (values: any) => {
+  const handleGenerateCode = async (email: string) => {
     try {
-      setIsLoading(true)
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          setIsRegisterSucces(true)
-          resolve(true)
-        }, 2500)
-      })
-    } catch (error) {
-      console.error(error)
-    } finally {
-      setIsLoading(false)
+      if (!email) {
+        toast.error('Email is required');
+        return;
+      }
+
+      const response = await apiInstance.post('/auth/send-otp', { email , type: 'REGISTRATION' });
+      if (response.data.success) {
+        toast.success(response.data.message);
+      }
+    } catch (error: any) {
+       if (error.response) {
+         // The request was made and the server responded with a status code
+         // that falls out of the range of 2xx
+         toast.error(
+           error.response.data.message || 'Failed to send verification code',
+         );
+       } else if (error.request) {
+         // The request was made but no response was received
+         toast.error('No response from server. Please try again.');
+       } else {
+         // Something happened in setting up the request
+         toast.error('Error sending request. Please try again.');
+       }
+       console.error('Error details:', error);
     }
-  }
+  };
+  const handleMemberRegisterVerifyCode = async (code: string) => {
+    try {
+      const response = await apiInstance.post('/auth/verify-new-member', {
+        email: tempEmail,
+        code: code,
+        type: 'REGISTRATION',
+      });
+      toast.success(response.data.message);
+      setIsEmailVerified(true);
+    } catch (error: any) {
+      toast.error(error.response.data.message);
+    }
+  };
 
   const handlePostRegister = async () => {
-  try {
-    if(isRegisterSuccses) {
-      setTimeout(() => {
-        window.location.href = '/'
-      }, 2500)
+    try {
+      if (isEmailVerified) {
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 2500);
+      }
+    } catch (error) {
+      console.error(error); // Add error logging
     }
-  } catch (error) {
-    console.error(error); // Add error logging
-  }
-}
+  };
 
-React.useEffect(() => {
-  if(isRegisterSuccses) { // Only call when true
-    handlePostRegister();
-  }
-}, [isRegisterSuccses]);
+  React.useEffect(() => {
+    if (isEmailVerified) {
+      // Only call when true
+      handlePostRegister();
+    }
+  }, [isEmailVerified]);
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center w-56 h-56 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-800/30 dark:border-gray-700">
-        <div role="status">
-          <svg
-            aria-hidden="true"
-            className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
-            viewBox="0 0 100 101"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-              fill="currentColor"
-            />
-            <path
-              d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-              fill="currentFill"
-            />
-          </svg>
-          <span className="sr-only">Loading...</span>
+      <div className="flex items-center justify-center min-w-screen min-h-screen bg-white/30">
+        <div className="flex items-center justify-center w-10 h-10 border border-gray-200 rounded-lg bg-gray-50/50 dark:bg-gray-800/30 dark:border-gray-700">
+          <div role="status">
+            <svg
+              aria-hidden="true"
+              className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+              viewBox="0 0 100 101"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                fill="currentColor"
+              />
+              <path
+                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                fill="currentFill"
+              />
+            </svg>
+            <span className="sr-only">Loading...</span>
+          </div>
         </div>
       </div>
     );
@@ -87,7 +154,7 @@ React.useEffect(() => {
 
   return (
     <>
-      {!isEmailVerified && (
+      {!isEmailAvailable && !isRegisterSuccess && !isEmailVerified && (
         <div>
           <div className="auth-container">
             <div className="auth-title pre-sign-up">
@@ -108,7 +175,7 @@ React.useEffect(() => {
                   initialValues={{ email: '' }}
                   validationSchema={emailValidationSchema}
                   onSubmit={(values) => {
-                    handleVerifyEmail(values.email);
+                    handleEmailCheck(values.email);
                   }}
                 >
                   <Form>
@@ -145,7 +212,7 @@ React.useEffect(() => {
           <div className="auth-bg"></div>
         </div>
       )}
-      {isEmailVerified && !isRegisterSuccses && (
+      {isEmailAvailable && !isRegisterSuccess && (
         <div>
           <div className="auth-container">
             <div className="auth-title pre-sign-up">
@@ -169,7 +236,7 @@ React.useEffect(() => {
                   }}
                   // validationSchema={registerValidationSchema}
                   onSubmit={(values) => {
-                    handleSubmitMember(values);
+                    handleRegisterNewMember(values);
                   }}
                 >
                   <Form>
@@ -236,7 +303,7 @@ React.useEffect(() => {
                     <div className="auth-form-control">
                       <Field
                         name="birthDate"
-                        type="date"
+                        type="text"
                         placeholder="Masukkan tanggal lahirmu"
                         className="auth-form-input"
                       />
@@ -320,7 +387,8 @@ React.useEffect(() => {
                         className=""
                       />
                       <label className="inline-block">
-                        Saya bersedia menerima informasi terkini terkait event dan promosi di Loket.com
+                        Saya bersedia menerima informasi terkini terkait event
+                        dan promosi di Loket.com
                       </label>
                     </div>
                     <ErrorMessage
@@ -345,9 +413,75 @@ React.useEffect(() => {
         </div>
       )}
 
-      {isEmailVerified && isRegisterSuccses && (
-        <div>Pembuatan Profilmu Berhasil, Kamu akan diteruskan ke halaman utama</div>
-    )}
+      {!isEmailAvailable && isRegisterSuccess && (
+        <div>
+          <div className="auth-container">
+            <div className="auth-title pre-sign-up">
+              <h3>Masukkan Kode OTP untuk Verifikasi Registrasi</h3>
+            </div>
+            <div className="auth-content">
+              <div className="auth-form">
+                <Formik
+                  initialValues={{ code: '' }}
+                  onSubmit={(values) => {
+                    handleMemberRegisterVerifyCode(values.code);
+                  }}
+                >
+                  <Form>
+                    <div className="!mb-2.5">
+                      <label className="auth-label block">Kode OTP</label>
+                    </div>
+
+                    <div className="auth-form-control">
+                      <Field
+                        name="code"
+                        type="text"
+                        placeholder=""
+                        className="auth-form-input"
+                      />
+                    </div>
+                    <ErrorMessage
+                      name="code"
+                      component="div"
+                      className="error-message"
+                    />
+                    <label className='block mt-2'><span className='block'>Belum terkirim / kadaluarsa?</span>
+                      Kirim kode baru
+                      <span
+                        onClick={() => {
+                          console.log("email:",tempEmail)
+                          handleGenerateCode(tempEmail)
+                        }}
+                      >
+                        <span className="font-bold cursor-pointer !text-[#0049cc]">
+                          {' '}
+                          disini.
+                        </span>
+                      </span>
+                    </label>
+                    <div className="!mb-0 !mt-5 w-full max-w-full">
+                      <button
+                        type="submit"
+                        className="w-full max-w-full c-button c-button-primary c-button-1"
+                      >
+                        <span className="">Verifikasi Email</span>
+                      </button>
+                    </div>
+                  </Form>
+                </Formik>
+              </div>
+            </div>
+          </div>
+          <div className="auth-bg"></div>
+        </div>
+      )}
+
+      {isRegisterSuccess && !isEmailAvailable && isEmailVerified && (
+        <center>
+          Pendaftaran Akun Kamu sudah selesai, kamu akan dialihkan ke halaman
+          utama.
+        </center>
+      )}
     </>
   );
 }

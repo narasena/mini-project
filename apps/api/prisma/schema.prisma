@@ -1,47 +1,47 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
-  output = "../src/prisma-generated/client"
+  output   = "../src/prisma-generated/client"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-  directUrl= env("DIRECT_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
-model CountryPhone{
-  id                Int         @id @default(autoincrement())
-  name              String      @unique
-  code              String      @unique
-  mobileCode        String      
-  members           Member[]
-  createdAt         DateTime    @default(now())
-  updatedAt         DateTime    @updatedAt
-  deletedAt         DateTime?
+model CountryPhone {
+  id         Int       @id @default(autoincrement())
+  name       String    @unique
+  code       String    @unique
+  mobileCode String
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  deletedAt  DateTime?
+  members    Member[]
+  creatorProfile CreatorProfile[]
 
-  @@map ("country_phone")
+  @@map("country_phone")
 }
 
 model Member {
-  id                String        @id @default(uuid())
-  email             String        @unique
-  isEmailVerified   Boolean       @default(false)
-  countryPhoneId    Int  
-  countryPhone      CountryPhone  @relation(fields: [countryPhoneId], references: [id])
-  phoneNumber       String        @unique
-  firstName         String
-  lastName          String?
-  birthDate         String
-  sex               Sex
-  termsPrivacyAccepted Boolean
+  id                          String                    @id @default(uuid())
+  email                       String                    @unique
+  countryPhoneId              Int
+  phoneNumber                 String                    @unique
+  firstName                   String
+  lastName                    String?
+  birthDate                   String
+  createdAt                   DateTime                   @default(now())
+  updatedAt                   DateTime                   @updatedAt
+  deletedAt                   DateTime?
+  eventPromoAccepted          Boolean                    @default(true)
   personalDataConsentAccepted Boolean
-  eventPromoAccepted Boolean      @default(true)
-  createdAt         DateTime      @default(now())
-  updatedAt         DateTime      @updatedAt
-  deletedAt         DateTime?
+  termsPrivacyAccepted        Boolean
+  sex                         Sex
+  isEmailVerified             Boolean                    @default(false)
+  countryPhone                CountryPhone               @relation(fields: [countryPhoneId], references: [id])
+  verificationCodes           VerificationCode[]
+  creatorProfile              CreatorProfile? 
 
   @@map("members")
 }
@@ -51,4 +51,67 @@ enum Sex {
   FEMALE
   OTHER
   PREFER_NOT_TO_SAY
+}
+
+model VerificationCode {
+  id                String        @id @default(uuid())
+  code              String
+  email             String        
+  type              CodeType
+  expiredAt         DateTime
+  isUsed            Boolean       @default(false)
+  attempts          Int           @default(0)
+  memberId          String?       
+  member            Member?       @relation(fields:[memberId], references:[id])           
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  deletedAt         DateTime?
+           
+
+  @@map("verification_code")
+  @@index([email])
+  @@index([code])
+}
+
+enum CodeType {
+  REGISTRATION
+  LOGIN
+}
+
+model CreatorProfile {
+  id                    String          @id @default(cuid())
+  memberId              String          @unique
+  member                Member          @relation(fields:[memberId],references: [id])
+  bannerImgUrl          String?
+  logoImgUrl            String?
+  profileLinkUrl        String?         @unique @default(dbgenerated("concat('', substring(replace(cast(uuid() as char), '-', ''), 1, 8))"))
+  organizerName         String
+  countryPhoneId        Int
+  countryPhone          CountryPhone    @relation(fields:[countryPhoneId],references: [id])
+  creatorPhoneNumber    String?
+  address               String?
+  aboutUsInfo           String?
+  xUserName             String?
+  igUserName            String?
+  fbProfileUrl          String?
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  deletedAt         DateTime?
+  event               Event[]
+
+  @@map("creator_profile")
+}
+
+model Event {
+  id                    Int                   @id @default(autoincrement())
+  creatorId             String        
+  creator               CreatorProfile        @relation(fields:[creatorId],references: [id])
+  eventName             String
+  eventCategoryId       Int
+  eventTopicId          Int
+  organizerName         String?
+  organizerLogoImgUrl   String?
+  eventDate             DateTime
+  eventTime             DateTime
+  eventLocation         String
 }

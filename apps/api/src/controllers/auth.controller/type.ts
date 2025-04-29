@@ -5,7 +5,7 @@ export interface IAuthController {
     phoneNumber: string;
     firstName: string;
     lastName: string;
-    birthDate: Date;
+    birthDate: string;
     sex: string;
     termsPrivacyAccepted: boolean;
     personalDataConsentAccepted: boolean;

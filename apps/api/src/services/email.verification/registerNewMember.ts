@@ -1,0 +1,1 @@
+export async function registerNewMember(email: any, code: any) {
