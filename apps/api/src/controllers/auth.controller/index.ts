@@ -8,6 +8,7 @@ import { increaseAttemptCount } from '@/services/email.verification/attemptIncre
 import { verifyCode } from '@/services/email.verification/verifyVerificationCode';
 import { prisma } from '@/prisma';
 import { Sex } from '@/prisma-generated/client';
+import { IJwtPayload, jwtSign } from '@/utils/jwt/jwt.sign';
 
 export async function registerMember(
   req: Request,
@@ -226,6 +227,19 @@ export async function verifyEmailVerificationCode(
   }
 }
 
+async function createAuthToken(member: any) {
+  const tokenPayload:IJwtPayload = {
+    id: member.id,
+    email: member.email,
+    activeRole: 'BUYER',
+    verification: {
+      isPhoneVerified: member.isPhoneVerified,
+      isProfileDataProvided: member.isProfileDataProvided,
+    }
+  }
+  return jwtSign(tokenPayload);
+}
+
 export async function verifyLogin(
   req: Request,
   res: Response,
@@ -235,6 +249,21 @@ export async function verifyLogin(
   try {
     const { email, code, type } = req.body;
     await verifyEmailVerificationCode(req, res, next);
+
+    const member = await prisma.member.findUnique({
+      where: {
+        email,
+        isEmailVerified: true,
+      },
+    });
+    if (!member) {
+      throw {
+        isExpose: true,
+        status: 400,
+        message: 'Member not found',
+      };
+    }
+
     res.status(200).json({
       success: true,
       message: 'Login verified successfully',
@@ -283,5 +312,18 @@ export async function verifyNewMember(
     });
   } catch (error) {
     next(error);
+  }
+}
+
+export async function sessionLoginMember(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    
+  } catch (error) {
+    next(error);
+    
   }
 }
