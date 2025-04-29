@@ -19,6 +19,7 @@ model CountryPhone {
   deletedAt  DateTime?
   members    Member[]
   creatorProfile CreatorProfile[]
+  events     Event[]
 
   @@map("country_phone")
 }
@@ -122,6 +123,10 @@ model Event {
   ticketStartDate       DateTime
   ticketEndDate         DateTime
   eventCPName           String
+  eventCPEmail          String
+  countryPhoneId        Int
+  contryPhone           CountryPhone          @relation(fields: [countryPhoneId],references: [id])
+  
     
 
 
