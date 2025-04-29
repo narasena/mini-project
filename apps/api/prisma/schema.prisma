@@ -114,4 +114,21 @@ model Event {
   eventDate             DateTime
   eventTime             DateTime
   eventLocation         String
+  ticketType            TicketType
+  ticketName            String
+  ticketQty             Int
+  ticketPrice           Int                   @default(20000)
+  ticketDesc            String
+  ticketStartDate       DateTime
+  ticketEndDate         DateTime
+  eventCPName           String
+    
+
+
+}
+
+enum TicketType {
+  BERBAYAR
+  BAYAR_SESUKAMU
+  GRATIS
 }
