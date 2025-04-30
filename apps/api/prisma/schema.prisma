@@ -20,6 +20,7 @@ model CountryPhone {
   members    Member[]
   creatorProfile CreatorProfile[]
   events     Event[]
+  ticketTransactionDetails TicketTransactionDetail[]
 
   @@map("country_phone")
 }
@@ -43,6 +44,7 @@ model Member {
   countryPhone                CountryPhone               @relation(fields: [countryPhoneId], references: [id])
   verificationCodes           VerificationCode[]
   creatorProfile              CreatorProfile? 
+  ticketTransactions          TicketTransaction[]
 
   @@map("members")
 }
@@ -125,8 +127,8 @@ model Event {
   ticketEndDate         DateTime
   eventCPName           String
   eventCPEmail          String
-  countryPhoneId        Int
-  contryPhone           CountryPhone          @relation(fields: [countryPhoneId],references: [id])
+  eventCountryPhoneId        Int
+  eventCountryPhone           CountryPhone          @relation(fields: [eventCountryPhoneId],references: [id])
   ticketDataFormType    TicketDataFormType
   maxTicketPerTransaction Int
   oneEmailOneTransaction Boolean              @default(false)
@@ -135,6 +137,7 @@ model Event {
   createdAt         DateTime      @default(now())
   updatedAt         DateTime      @updatedAt
   deletedAt         DateTime?
+  ticketTransactions  TicketTransaction[]
       
   @@map("events")
 }
@@ -148,4 +151,35 @@ enum TicketType {
 enum TicketDataFormType {
   NO_ID
   WITH_ID
+}
+
+model TicketTransaction {
+  id                    Int               @id @default(autoincrement())
+  eventId               Int
+  event                 Event             @relation(fields:[eventId],references: [id])
+  memberId              String
+  member                Member            @relation(fields:[memberId],references: [id])
+  ticketCode            String            @unique
+  ticketTransactionDetails  TicketTransactionDetail[]
+
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  deletedAt         DateTime?
+  @@map("ticket_transactions")
+}
+
+model TicketTransactionDetail {
+  id                Int                   @id @default(autoincrement())
+  ticketTransactionId Int
+  ticketTransactions  TicketTransaction   @relation(fields: [ticketTransactionId],references: [id])
+  orderName         String
+  orderCountryPhoneId Int
+  orderCountryPhone   CountryPhone        @relation(fields: [orderCountryPhoneId],references: [id])
+  orderEmail        String
+  orderBirthDate    String
+  orderSex          Sex
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  deletedAt         DateTime?
+  @@map("ticket_transaction_details")
 }
