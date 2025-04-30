@@ -181,7 +181,7 @@ exports.Prisma.EventScalarFieldEnum = {
   id: 'id',
   creatorId: 'creatorId',
   eventName: 'eventName',
-  eventCategoryId: 'eventCategoryId',
+  eventFormatId: 'eventFormatId',
   eventTopicId: 'eventTopicId',
   organizerName: 'organizerName',
   organizerLogoImgUrl: 'organizerLogoImgUrl',
@@ -199,12 +199,51 @@ exports.Prisma.EventScalarFieldEnum = {
   ticketEndDate: 'ticketEndDate',
   eventCPName: 'eventCPName',
   eventCPEmail: 'eventCPEmail',
-  countryPhoneId: 'countryPhoneId',
+  eventCountryPhoneId: 'eventCountryPhoneId',
   ticketDataFormType: 'ticketDataFormType',
   maxTicketPerTransaction: 'maxTicketPerTransaction',
   oneEmailOneTransaction: 'oneEmailOneTransaction',
   ticketDataFormUnique: 'ticketDataFormUnique',
   isDraft: 'isDraft',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.EventFormatScalarFieldEnum = {
+  id: 'id',
+  formatName: 'formatName',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.EventTopicScalarFieldEnum = {
+  id: 'id',
+  topicName: 'topicName',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.TicketTransactionScalarFieldEnum = {
+  id: 'id',
+  eventId: 'eventId',
+  memberId: 'memberId',
+  ticketCode: 'ticketCode',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.TicketTransactionDetailScalarFieldEnum = {
+  id: 'id',
+  ticketTransactionId: 'ticketTransactionId',
+  orderName: 'orderName',
+  orderCountryPhoneId: 'orderCountryPhoneId',
+  orderEmail: 'orderEmail',
+  orderBirthDate: 'orderBirthDate',
+  orderSex: 'orderSex',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'
@@ -252,7 +291,11 @@ exports.Prisma.ModelName = {
   Member: 'Member',
   VerificationCode: 'VerificationCode',
   CreatorProfile: 'CreatorProfile',
-  Event: 'Event'
+  Event: 'Event',
+  EventFormat: 'EventFormat',
+  EventTopic: 'EventTopic',
+  TicketTransaction: 'TicketTransaction',
+  TicketTransactionDetail: 'TicketTransactionDetail'
 };
 
 /**

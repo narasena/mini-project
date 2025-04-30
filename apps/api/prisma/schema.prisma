@@ -109,8 +109,10 @@ model Event {
   creatorId             String        
   creator               CreatorProfile        @relation(fields:[creatorId],references: [id])
   eventName             String
-  eventCategoryId       Int
+  eventFormatId       Int
+  eventFormat           EventFormat           @relation(fields: [eventFormatId],references: [id])
   eventTopicId          Int
+  eventTopic            EventTopic            @relation(fields:[eventTopicId],references:[id])
   organizerName         String?
   organizerLogoImgUrl   String?
   eventDate             DateTime
@@ -151,6 +153,30 @@ enum TicketType {
 enum TicketDataFormType {
   NO_ID
   WITH_ID
+}
+
+model EventFormat {
+  id                  Int             @id @default(autoincrement())
+  formatName        String
+  event             Event[]
+
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  deletedAt         DateTime?
+  @@map("event_formats")
+}
+
+model EventTopic {
+  id                   Int            @id @default(autoincrement())
+  topicName         String
+  event             Event[]
+
+
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  deletedAt         DateTime?
+
+  @@map("event_topics")
 }
 
 model TicketTransaction {

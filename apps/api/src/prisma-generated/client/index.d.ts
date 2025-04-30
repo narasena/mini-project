@@ -38,6 +38,26 @@ export type CreatorProfile = $Result.DefaultSelection<Prisma.$CreatorProfilePayl
  * 
  */
 export type Event = $Result.DefaultSelection<Prisma.$EventPayload>
+/**
+ * Model EventFormat
+ * 
+ */
+export type EventFormat = $Result.DefaultSelection<Prisma.$EventFormatPayload>
+/**
+ * Model EventTopic
+ * 
+ */
+export type EventTopic = $Result.DefaultSelection<Prisma.$EventTopicPayload>
+/**
+ * Model TicketTransaction
+ * 
+ */
+export type TicketTransaction = $Result.DefaultSelection<Prisma.$TicketTransactionPayload>
+/**
+ * Model TicketTransactionDetail
+ * 
+ */
+export type TicketTransactionDetail = $Result.DefaultSelection<Prisma.$TicketTransactionDetailPayload>
 
 /**
  * Enums
@@ -269,6 +289,46 @@ export class PrismaClient<
     * ```
     */
   get event(): Prisma.EventDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.eventFormat`: Exposes CRUD operations for the **EventFormat** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EventFormats
+    * const eventFormats = await prisma.eventFormat.findMany()
+    * ```
+    */
+  get eventFormat(): Prisma.EventFormatDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.eventTopic`: Exposes CRUD operations for the **EventTopic** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EventTopics
+    * const eventTopics = await prisma.eventTopic.findMany()
+    * ```
+    */
+  get eventTopic(): Prisma.EventTopicDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.ticketTransaction`: Exposes CRUD operations for the **TicketTransaction** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TicketTransactions
+    * const ticketTransactions = await prisma.ticketTransaction.findMany()
+    * ```
+    */
+  get ticketTransaction(): Prisma.TicketTransactionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.ticketTransactionDetail`: Exposes CRUD operations for the **TicketTransactionDetail** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TicketTransactionDetails
+    * const ticketTransactionDetails = await prisma.ticketTransactionDetail.findMany()
+    * ```
+    */
+  get ticketTransactionDetail(): Prisma.TicketTransactionDetailDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -713,7 +773,11 @@ export namespace Prisma {
     Member: 'Member',
     VerificationCode: 'VerificationCode',
     CreatorProfile: 'CreatorProfile',
-    Event: 'Event'
+    Event: 'Event',
+    EventFormat: 'EventFormat',
+    EventTopic: 'EventTopic',
+    TicketTransaction: 'TicketTransaction',
+    TicketTransactionDetail: 'TicketTransactionDetail'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -732,7 +796,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "countryPhone" | "member" | "verificationCode" | "creatorProfile" | "event"
+      modelProps: "countryPhone" | "member" | "verificationCode" | "creatorProfile" | "event" | "eventFormat" | "eventTopic" | "ticketTransaction" | "ticketTransactionDetail"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1106,6 +1170,302 @@ export namespace Prisma {
           }
         }
       }
+      EventFormat: {
+        payload: Prisma.$EventFormatPayload<ExtArgs>
+        fields: Prisma.EventFormatFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EventFormatFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventFormatPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EventFormatFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventFormatPayload>
+          }
+          findFirst: {
+            args: Prisma.EventFormatFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventFormatPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EventFormatFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventFormatPayload>
+          }
+          findMany: {
+            args: Prisma.EventFormatFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventFormatPayload>[]
+          }
+          create: {
+            args: Prisma.EventFormatCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventFormatPayload>
+          }
+          createMany: {
+            args: Prisma.EventFormatCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EventFormatCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventFormatPayload>[]
+          }
+          delete: {
+            args: Prisma.EventFormatDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventFormatPayload>
+          }
+          update: {
+            args: Prisma.EventFormatUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventFormatPayload>
+          }
+          deleteMany: {
+            args: Prisma.EventFormatDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EventFormatUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EventFormatUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventFormatPayload>[]
+          }
+          upsert: {
+            args: Prisma.EventFormatUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventFormatPayload>
+          }
+          aggregate: {
+            args: Prisma.EventFormatAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEventFormat>
+          }
+          groupBy: {
+            args: Prisma.EventFormatGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EventFormatGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EventFormatCountArgs<ExtArgs>
+            result: $Utils.Optional<EventFormatCountAggregateOutputType> | number
+          }
+        }
+      }
+      EventTopic: {
+        payload: Prisma.$EventTopicPayload<ExtArgs>
+        fields: Prisma.EventTopicFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EventTopicFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventTopicPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EventTopicFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventTopicPayload>
+          }
+          findFirst: {
+            args: Prisma.EventTopicFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventTopicPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EventTopicFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventTopicPayload>
+          }
+          findMany: {
+            args: Prisma.EventTopicFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventTopicPayload>[]
+          }
+          create: {
+            args: Prisma.EventTopicCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventTopicPayload>
+          }
+          createMany: {
+            args: Prisma.EventTopicCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EventTopicCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventTopicPayload>[]
+          }
+          delete: {
+            args: Prisma.EventTopicDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventTopicPayload>
+          }
+          update: {
+            args: Prisma.EventTopicUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventTopicPayload>
+          }
+          deleteMany: {
+            args: Prisma.EventTopicDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EventTopicUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EventTopicUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventTopicPayload>[]
+          }
+          upsert: {
+            args: Prisma.EventTopicUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EventTopicPayload>
+          }
+          aggregate: {
+            args: Prisma.EventTopicAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEventTopic>
+          }
+          groupBy: {
+            args: Prisma.EventTopicGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EventTopicGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EventTopicCountArgs<ExtArgs>
+            result: $Utils.Optional<EventTopicCountAggregateOutputType> | number
+          }
+        }
+      }
+      TicketTransaction: {
+        payload: Prisma.$TicketTransactionPayload<ExtArgs>
+        fields: Prisma.TicketTransactionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TicketTransactionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketTransactionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TicketTransactionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketTransactionPayload>
+          }
+          findFirst: {
+            args: Prisma.TicketTransactionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketTransactionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TicketTransactionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketTransactionPayload>
+          }
+          findMany: {
+            args: Prisma.TicketTransactionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketTransactionPayload>[]
+          }
+          create: {
+            args: Prisma.TicketTransactionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketTransactionPayload>
+          }
+          createMany: {
+            args: Prisma.TicketTransactionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TicketTransactionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketTransactionPayload>[]
+          }
+          delete: {
+            args: Prisma.TicketTransactionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketTransactionPayload>
+          }
+          update: {
+            args: Prisma.TicketTransactionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketTransactionPayload>
+          }
+          deleteMany: {
+            args: Prisma.TicketTransactionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TicketTransactionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TicketTransactionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketTransactionPayload>[]
+          }
+          upsert: {
+            args: Prisma.TicketTransactionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketTransactionPayload>
+          }
+          aggregate: {
+            args: Prisma.TicketTransactionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTicketTransaction>
+          }
+          groupBy: {
+            args: Prisma.TicketTransactionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TicketTransactionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TicketTransactionCountArgs<ExtArgs>
+            result: $Utils.Optional<TicketTransactionCountAggregateOutputType> | number
+          }
+        }
+      }
+      TicketTransactionDetail: {
+        payload: Prisma.$TicketTransactionDetailPayload<ExtArgs>
+        fields: Prisma.TicketTransactionDetailFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TicketTransactionDetailFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketTransactionDetailPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TicketTransactionDetailFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketTransactionDetailPayload>
+          }
+          findFirst: {
+            args: Prisma.TicketTransactionDetailFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketTransactionDetailPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TicketTransactionDetailFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketTransactionDetailPayload>
+          }
+          findMany: {
+            args: Prisma.TicketTransactionDetailFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketTransactionDetailPayload>[]
+          }
+          create: {
+            args: Prisma.TicketTransactionDetailCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketTransactionDetailPayload>
+          }
+          createMany: {
+            args: Prisma.TicketTransactionDetailCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TicketTransactionDetailCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketTransactionDetailPayload>[]
+          }
+          delete: {
+            args: Prisma.TicketTransactionDetailDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketTransactionDetailPayload>
+          }
+          update: {
+            args: Prisma.TicketTransactionDetailUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketTransactionDetailPayload>
+          }
+          deleteMany: {
+            args: Prisma.TicketTransactionDetailDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TicketTransactionDetailUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TicketTransactionDetailUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketTransactionDetailPayload>[]
+          }
+          upsert: {
+            args: Prisma.TicketTransactionDetailUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TicketTransactionDetailPayload>
+          }
+          aggregate: {
+            args: Prisma.TicketTransactionDetailAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTicketTransactionDetail>
+          }
+          groupBy: {
+            args: Prisma.TicketTransactionDetailGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TicketTransactionDetailGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TicketTransactionDetailCountArgs<ExtArgs>
+            result: $Utils.Optional<TicketTransactionDetailCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1195,6 +1555,10 @@ export namespace Prisma {
     verificationCode?: VerificationCodeOmit
     creatorProfile?: CreatorProfileOmit
     event?: EventOmit
+    eventFormat?: EventFormatOmit
+    eventTopic?: EventTopicOmit
+    ticketTransaction?: TicketTransactionOmit
+    ticketTransactionDetail?: TicketTransactionDetailOmit
   }
 
   /* Types for Logging */
@@ -1292,12 +1656,14 @@ export namespace Prisma {
     members: number
     creatorProfile: number
     events: number
+    ticketTransactionDetails: number
   }
 
   export type CountryPhoneCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     members?: boolean | CountryPhoneCountOutputTypeCountMembersArgs
     creatorProfile?: boolean | CountryPhoneCountOutputTypeCountCreatorProfileArgs
     events?: boolean | CountryPhoneCountOutputTypeCountEventsArgs
+    ticketTransactionDetails?: boolean | CountryPhoneCountOutputTypeCountTicketTransactionDetailsArgs
   }
 
   // Custom InputTypes
@@ -1332,6 +1698,13 @@ export namespace Prisma {
     where?: EventWhereInput
   }
 
+  /**
+   * CountryPhoneCountOutputType without action
+   */
+  export type CountryPhoneCountOutputTypeCountTicketTransactionDetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TicketTransactionDetailWhereInput
+  }
+
 
   /**
    * Count Type MemberCountOutputType
@@ -1339,10 +1712,12 @@ export namespace Prisma {
 
   export type MemberCountOutputType = {
     verificationCodes: number
+    ticketTransactions: number
   }
 
   export type MemberCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     verificationCodes?: boolean | MemberCountOutputTypeCountVerificationCodesArgs
+    ticketTransactions?: boolean | MemberCountOutputTypeCountTicketTransactionsArgs
   }
 
   // Custom InputTypes
@@ -1361,6 +1736,13 @@ export namespace Prisma {
    */
   export type MemberCountOutputTypeCountVerificationCodesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: VerificationCodeWhereInput
+  }
+
+  /**
+   * MemberCountOutputType without action
+   */
+  export type MemberCountOutputTypeCountTicketTransactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TicketTransactionWhereInput
   }
 
 
@@ -1392,6 +1774,130 @@ export namespace Prisma {
    */
   export type CreatorProfileCountOutputTypeCountEventArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EventWhereInput
+  }
+
+
+  /**
+   * Count Type EventCountOutputType
+   */
+
+  export type EventCountOutputType = {
+    ticketTransactions: number
+  }
+
+  export type EventCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ticketTransactions?: boolean | EventCountOutputTypeCountTicketTransactionsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EventCountOutputType without action
+   */
+  export type EventCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventCountOutputType
+     */
+    select?: EventCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EventCountOutputType without action
+   */
+  export type EventCountOutputTypeCountTicketTransactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TicketTransactionWhereInput
+  }
+
+
+  /**
+   * Count Type EventFormatCountOutputType
+   */
+
+  export type EventFormatCountOutputType = {
+    event: number
+  }
+
+  export type EventFormatCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    event?: boolean | EventFormatCountOutputTypeCountEventArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EventFormatCountOutputType without action
+   */
+  export type EventFormatCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventFormatCountOutputType
+     */
+    select?: EventFormatCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EventFormatCountOutputType without action
+   */
+  export type EventFormatCountOutputTypeCountEventArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventWhereInput
+  }
+
+
+  /**
+   * Count Type EventTopicCountOutputType
+   */
+
+  export type EventTopicCountOutputType = {
+    event: number
+  }
+
+  export type EventTopicCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    event?: boolean | EventTopicCountOutputTypeCountEventArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EventTopicCountOutputType without action
+   */
+  export type EventTopicCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventTopicCountOutputType
+     */
+    select?: EventTopicCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EventTopicCountOutputType without action
+   */
+  export type EventTopicCountOutputTypeCountEventArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventWhereInput
+  }
+
+
+  /**
+   * Count Type TicketTransactionCountOutputType
+   */
+
+  export type TicketTransactionCountOutputType = {
+    ticketTransactionDetails: number
+  }
+
+  export type TicketTransactionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ticketTransactionDetails?: boolean | TicketTransactionCountOutputTypeCountTicketTransactionDetailsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TicketTransactionCountOutputType without action
+   */
+  export type TicketTransactionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransactionCountOutputType
+     */
+    select?: TicketTransactionCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TicketTransactionCountOutputType without action
+   */
+  export type TicketTransactionCountOutputTypeCountTicketTransactionDetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TicketTransactionDetailWhereInput
   }
 
 
@@ -1616,6 +2122,7 @@ export namespace Prisma {
     members?: boolean | CountryPhone$membersArgs<ExtArgs>
     creatorProfile?: boolean | CountryPhone$creatorProfileArgs<ExtArgs>
     events?: boolean | CountryPhone$eventsArgs<ExtArgs>
+    ticketTransactionDetails?: boolean | CountryPhone$ticketTransactionDetailsArgs<ExtArgs>
     _count?: boolean | CountryPhoneCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["countryPhone"]>
 
@@ -1654,6 +2161,7 @@ export namespace Prisma {
     members?: boolean | CountryPhone$membersArgs<ExtArgs>
     creatorProfile?: boolean | CountryPhone$creatorProfileArgs<ExtArgs>
     events?: boolean | CountryPhone$eventsArgs<ExtArgs>
+    ticketTransactionDetails?: boolean | CountryPhone$ticketTransactionDetailsArgs<ExtArgs>
     _count?: boolean | CountryPhoneCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CountryPhoneIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1665,6 +2173,7 @@ export namespace Prisma {
       members: Prisma.$MemberPayload<ExtArgs>[]
       creatorProfile: Prisma.$CreatorProfilePayload<ExtArgs>[]
       events: Prisma.$EventPayload<ExtArgs>[]
+      ticketTransactionDetails: Prisma.$TicketTransactionDetailPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2071,6 +2580,7 @@ export namespace Prisma {
     members<T extends CountryPhone$membersArgs<ExtArgs> = {}>(args?: Subset<T, CountryPhone$membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     creatorProfile<T extends CountryPhone$creatorProfileArgs<ExtArgs> = {}>(args?: Subset<T, CountryPhone$creatorProfileArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CreatorProfilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     events<T extends CountryPhone$eventsArgs<ExtArgs> = {}>(args?: Subset<T, CountryPhone$eventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ticketTransactionDetails<T extends CountryPhone$ticketTransactionDetailsArgs<ExtArgs> = {}>(args?: Subset<T, CountryPhone$ticketTransactionDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketTransactionDetailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2567,6 +3077,30 @@ export namespace Prisma {
   }
 
   /**
+   * CountryPhone.ticketTransactionDetails
+   */
+  export type CountryPhone$ticketTransactionDetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransactionDetail
+     */
+    select?: TicketTransactionDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransactionDetail
+     */
+    omit?: TicketTransactionDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionDetailInclude<ExtArgs> | null
+    where?: TicketTransactionDetailWhereInput
+    orderBy?: TicketTransactionDetailOrderByWithRelationInput | TicketTransactionDetailOrderByWithRelationInput[]
+    cursor?: TicketTransactionDetailWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TicketTransactionDetailScalarFieldEnum | TicketTransactionDetailScalarFieldEnum[]
+  }
+
+  /**
    * CountryPhone without action
    */
   export type CountryPhoneDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2866,6 +3400,7 @@ export namespace Prisma {
     countryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
     verificationCodes?: boolean | Member$verificationCodesArgs<ExtArgs>
     creatorProfile?: boolean | Member$creatorProfileArgs<ExtArgs>
+    ticketTransactions?: boolean | Member$ticketTransactionsArgs<ExtArgs>
     _count?: boolean | MemberCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["member"]>
 
@@ -2930,6 +3465,7 @@ export namespace Prisma {
     countryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
     verificationCodes?: boolean | Member$verificationCodesArgs<ExtArgs>
     creatorProfile?: boolean | Member$creatorProfileArgs<ExtArgs>
+    ticketTransactions?: boolean | Member$ticketTransactionsArgs<ExtArgs>
     _count?: boolean | MemberCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MemberIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2945,6 +3481,7 @@ export namespace Prisma {
       countryPhone: Prisma.$CountryPhonePayload<ExtArgs>
       verificationCodes: Prisma.$VerificationCodePayload<ExtArgs>[]
       creatorProfile: Prisma.$CreatorProfilePayload<ExtArgs> | null
+      ticketTransactions: Prisma.$TicketTransactionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3359,6 +3896,7 @@ export namespace Prisma {
     countryPhone<T extends CountryPhoneDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CountryPhoneDefaultArgs<ExtArgs>>): Prisma__CountryPhoneClient<$Result.GetResult<Prisma.$CountryPhonePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     verificationCodes<T extends Member$verificationCodesArgs<ExtArgs> = {}>(args?: Subset<T, Member$verificationCodesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VerificationCodePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     creatorProfile<T extends Member$creatorProfileArgs<ExtArgs> = {}>(args?: Subset<T, Member$creatorProfileArgs<ExtArgs>>): Prisma__CreatorProfileClient<$Result.GetResult<Prisma.$CreatorProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    ticketTransactions<T extends Member$ticketTransactionsArgs<ExtArgs> = {}>(args?: Subset<T, Member$ticketTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3839,6 +4377,30 @@ export namespace Prisma {
      */
     include?: CreatorProfileInclude<ExtArgs> | null
     where?: CreatorProfileWhereInput
+  }
+
+  /**
+   * Member.ticketTransactions
+   */
+  export type Member$ticketTransactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransaction
+     */
+    select?: TicketTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransaction
+     */
+    omit?: TicketTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionInclude<ExtArgs> | null
+    where?: TicketTransactionWhereInput
+    orderBy?: TicketTransactionOrderByWithRelationInput | TicketTransactionOrderByWithRelationInput[]
+    cursor?: TicketTransactionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TicketTransactionScalarFieldEnum | TicketTransactionScalarFieldEnum[]
   }
 
   /**
@@ -6323,21 +6885,21 @@ export namespace Prisma {
 
   export type EventAvgAggregateOutputType = {
     id: number | null
-    eventCategoryId: number | null
+    eventFormatId: number | null
     eventTopicId: number | null
     ticketQty: number | null
     ticketPrice: number | null
-    countryPhoneId: number | null
+    eventCountryPhoneId: number | null
     maxTicketPerTransaction: number | null
   }
 
   export type EventSumAggregateOutputType = {
     id: number | null
-    eventCategoryId: number | null
+    eventFormatId: number | null
     eventTopicId: number | null
     ticketQty: number | null
     ticketPrice: number | null
-    countryPhoneId: number | null
+    eventCountryPhoneId: number | null
     maxTicketPerTransaction: number | null
   }
 
@@ -6345,7 +6907,7 @@ export namespace Prisma {
     id: number | null
     creatorId: string | null
     eventName: string | null
-    eventCategoryId: number | null
+    eventFormatId: number | null
     eventTopicId: number | null
     organizerName: string | null
     organizerLogoImgUrl: string | null
@@ -6363,7 +6925,7 @@ export namespace Prisma {
     ticketEndDate: Date | null
     eventCPName: string | null
     eventCPEmail: string | null
-    countryPhoneId: number | null
+    eventCountryPhoneId: number | null
     ticketDataFormType: $Enums.TicketDataFormType | null
     maxTicketPerTransaction: number | null
     oneEmailOneTransaction: boolean | null
@@ -6378,7 +6940,7 @@ export namespace Prisma {
     id: number | null
     creatorId: string | null
     eventName: string | null
-    eventCategoryId: number | null
+    eventFormatId: number | null
     eventTopicId: number | null
     organizerName: string | null
     organizerLogoImgUrl: string | null
@@ -6396,7 +6958,7 @@ export namespace Prisma {
     ticketEndDate: Date | null
     eventCPName: string | null
     eventCPEmail: string | null
-    countryPhoneId: number | null
+    eventCountryPhoneId: number | null
     ticketDataFormType: $Enums.TicketDataFormType | null
     maxTicketPerTransaction: number | null
     oneEmailOneTransaction: boolean | null
@@ -6411,7 +6973,7 @@ export namespace Prisma {
     id: number
     creatorId: number
     eventName: number
-    eventCategoryId: number
+    eventFormatId: number
     eventTopicId: number
     organizerName: number
     organizerLogoImgUrl: number
@@ -6429,7 +6991,7 @@ export namespace Prisma {
     ticketEndDate: number
     eventCPName: number
     eventCPEmail: number
-    countryPhoneId: number
+    eventCountryPhoneId: number
     ticketDataFormType: number
     maxTicketPerTransaction: number
     oneEmailOneTransaction: number
@@ -6444,21 +7006,21 @@ export namespace Prisma {
 
   export type EventAvgAggregateInputType = {
     id?: true
-    eventCategoryId?: true
+    eventFormatId?: true
     eventTopicId?: true
     ticketQty?: true
     ticketPrice?: true
-    countryPhoneId?: true
+    eventCountryPhoneId?: true
     maxTicketPerTransaction?: true
   }
 
   export type EventSumAggregateInputType = {
     id?: true
-    eventCategoryId?: true
+    eventFormatId?: true
     eventTopicId?: true
     ticketQty?: true
     ticketPrice?: true
-    countryPhoneId?: true
+    eventCountryPhoneId?: true
     maxTicketPerTransaction?: true
   }
 
@@ -6466,7 +7028,7 @@ export namespace Prisma {
     id?: true
     creatorId?: true
     eventName?: true
-    eventCategoryId?: true
+    eventFormatId?: true
     eventTopicId?: true
     organizerName?: true
     organizerLogoImgUrl?: true
@@ -6484,7 +7046,7 @@ export namespace Prisma {
     ticketEndDate?: true
     eventCPName?: true
     eventCPEmail?: true
-    countryPhoneId?: true
+    eventCountryPhoneId?: true
     ticketDataFormType?: true
     maxTicketPerTransaction?: true
     oneEmailOneTransaction?: true
@@ -6499,7 +7061,7 @@ export namespace Prisma {
     id?: true
     creatorId?: true
     eventName?: true
-    eventCategoryId?: true
+    eventFormatId?: true
     eventTopicId?: true
     organizerName?: true
     organizerLogoImgUrl?: true
@@ -6517,7 +7079,7 @@ export namespace Prisma {
     ticketEndDate?: true
     eventCPName?: true
     eventCPEmail?: true
-    countryPhoneId?: true
+    eventCountryPhoneId?: true
     ticketDataFormType?: true
     maxTicketPerTransaction?: true
     oneEmailOneTransaction?: true
@@ -6532,7 +7094,7 @@ export namespace Prisma {
     id?: true
     creatorId?: true
     eventName?: true
-    eventCategoryId?: true
+    eventFormatId?: true
     eventTopicId?: true
     organizerName?: true
     organizerLogoImgUrl?: true
@@ -6550,7 +7112,7 @@ export namespace Prisma {
     ticketEndDate?: true
     eventCPName?: true
     eventCPEmail?: true
-    countryPhoneId?: true
+    eventCountryPhoneId?: true
     ticketDataFormType?: true
     maxTicketPerTransaction?: true
     oneEmailOneTransaction?: true
@@ -6652,7 +7214,7 @@ export namespace Prisma {
     id: number
     creatorId: string
     eventName: string
-    eventCategoryId: number
+    eventFormatId: number
     eventTopicId: number
     organizerName: string | null
     organizerLogoImgUrl: string | null
@@ -6670,7 +7232,7 @@ export namespace Prisma {
     ticketEndDate: Date
     eventCPName: string
     eventCPEmail: string
-    countryPhoneId: number
+    eventCountryPhoneId: number
     ticketDataFormType: $Enums.TicketDataFormType
     maxTicketPerTransaction: number
     oneEmailOneTransaction: boolean
@@ -6704,7 +7266,7 @@ export namespace Prisma {
     id?: boolean
     creatorId?: boolean
     eventName?: boolean
-    eventCategoryId?: boolean
+    eventFormatId?: boolean
     eventTopicId?: boolean
     organizerName?: boolean
     organizerLogoImgUrl?: boolean
@@ -6722,7 +7284,7 @@ export namespace Prisma {
     ticketEndDate?: boolean
     eventCPName?: boolean
     eventCPEmail?: boolean
-    countryPhoneId?: boolean
+    eventCountryPhoneId?: boolean
     ticketDataFormType?: boolean
     maxTicketPerTransaction?: boolean
     oneEmailOneTransaction?: boolean
@@ -6732,14 +7294,18 @@ export namespace Prisma {
     updatedAt?: boolean
     deletedAt?: boolean
     creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
-    contryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+    eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
+    eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
+    eventCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+    ticketTransactions?: boolean | Event$ticketTransactionsArgs<ExtArgs>
+    _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["event"]>
 
   export type EventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     creatorId?: boolean
     eventName?: boolean
-    eventCategoryId?: boolean
+    eventFormatId?: boolean
     eventTopicId?: boolean
     organizerName?: boolean
     organizerLogoImgUrl?: boolean
@@ -6757,7 +7323,7 @@ export namespace Prisma {
     ticketEndDate?: boolean
     eventCPName?: boolean
     eventCPEmail?: boolean
-    countryPhoneId?: boolean
+    eventCountryPhoneId?: boolean
     ticketDataFormType?: boolean
     maxTicketPerTransaction?: boolean
     oneEmailOneTransaction?: boolean
@@ -6767,14 +7333,16 @@ export namespace Prisma {
     updatedAt?: boolean
     deletedAt?: boolean
     creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
-    contryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+    eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
+    eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
+    eventCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["event"]>
 
   export type EventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     creatorId?: boolean
     eventName?: boolean
-    eventCategoryId?: boolean
+    eventFormatId?: boolean
     eventTopicId?: boolean
     organizerName?: boolean
     organizerLogoImgUrl?: boolean
@@ -6792,7 +7360,7 @@ export namespace Prisma {
     ticketEndDate?: boolean
     eventCPName?: boolean
     eventCPEmail?: boolean
-    countryPhoneId?: boolean
+    eventCountryPhoneId?: boolean
     ticketDataFormType?: boolean
     maxTicketPerTransaction?: boolean
     oneEmailOneTransaction?: boolean
@@ -6802,14 +7370,16 @@ export namespace Prisma {
     updatedAt?: boolean
     deletedAt?: boolean
     creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
-    contryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+    eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
+    eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
+    eventCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["event"]>
 
   export type EventSelectScalar = {
     id?: boolean
     creatorId?: boolean
     eventName?: boolean
-    eventCategoryId?: boolean
+    eventFormatId?: boolean
     eventTopicId?: boolean
     organizerName?: boolean
     organizerLogoImgUrl?: boolean
@@ -6827,7 +7397,7 @@ export namespace Prisma {
     ticketEndDate?: boolean
     eventCPName?: boolean
     eventCPEmail?: boolean
-    countryPhoneId?: boolean
+    eventCountryPhoneId?: boolean
     ticketDataFormType?: boolean
     maxTicketPerTransaction?: boolean
     oneEmailOneTransaction?: boolean
@@ -6838,31 +7408,42 @@ export namespace Prisma {
     deletedAt?: boolean
   }
 
-  export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "creatorId" | "eventName" | "eventCategoryId" | "eventTopicId" | "organizerName" | "organizerLogoImgUrl" | "eventDate" | "eventTime" | "eventLocation" | "eventDesc" | "ticketType" | "ticketName" | "ticketQty" | "ticketPrice" | "ticketDesc" | "ticketTermsAndCondition" | "ticketStartDate" | "ticketEndDate" | "eventCPName" | "eventCPEmail" | "countryPhoneId" | "ticketDataFormType" | "maxTicketPerTransaction" | "oneEmailOneTransaction" | "ticketDataFormUnique" | "isDraft" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["event"]>
+  export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "creatorId" | "eventName" | "eventFormatId" | "eventTopicId" | "organizerName" | "organizerLogoImgUrl" | "eventDate" | "eventTime" | "eventLocation" | "eventDesc" | "ticketType" | "ticketName" | "ticketQty" | "ticketPrice" | "ticketDesc" | "ticketTermsAndCondition" | "ticketStartDate" | "ticketEndDate" | "eventCPName" | "eventCPEmail" | "eventCountryPhoneId" | "ticketDataFormType" | "maxTicketPerTransaction" | "oneEmailOneTransaction" | "ticketDataFormUnique" | "isDraft" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["event"]>
   export type EventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
-    contryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+    eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
+    eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
+    eventCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+    ticketTransactions?: boolean | Event$ticketTransactionsArgs<ExtArgs>
+    _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type EventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
-    contryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+    eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
+    eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
+    eventCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
   }
   export type EventIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
-    contryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+    eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
+    eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
+    eventCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
   }
 
   export type $EventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Event"
     objects: {
       creator: Prisma.$CreatorProfilePayload<ExtArgs>
-      contryPhone: Prisma.$CountryPhonePayload<ExtArgs>
+      eventFormat: Prisma.$EventFormatPayload<ExtArgs>
+      eventTopic: Prisma.$EventTopicPayload<ExtArgs>
+      eventCountryPhone: Prisma.$CountryPhonePayload<ExtArgs>
+      ticketTransactions: Prisma.$TicketTransactionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       creatorId: string
       eventName: string
-      eventCategoryId: number
+      eventFormatId: number
       eventTopicId: number
       organizerName: string | null
       organizerLogoImgUrl: string | null
@@ -6880,7 +7461,7 @@ export namespace Prisma {
       ticketEndDate: Date
       eventCPName: string
       eventCPEmail: string
-      countryPhoneId: number
+      eventCountryPhoneId: number
       ticketDataFormType: $Enums.TicketDataFormType
       maxTicketPerTransaction: number
       oneEmailOneTransaction: boolean
@@ -7284,7 +7865,10 @@ export namespace Prisma {
   export interface Prisma__EventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     creator<T extends CreatorProfileDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CreatorProfileDefaultArgs<ExtArgs>>): Prisma__CreatorProfileClient<$Result.GetResult<Prisma.$CreatorProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    contryPhone<T extends CountryPhoneDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CountryPhoneDefaultArgs<ExtArgs>>): Prisma__CountryPhoneClient<$Result.GetResult<Prisma.$CountryPhonePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    eventFormat<T extends EventFormatDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventFormatDefaultArgs<ExtArgs>>): Prisma__EventFormatClient<$Result.GetResult<Prisma.$EventFormatPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    eventTopic<T extends EventTopicDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventTopicDefaultArgs<ExtArgs>>): Prisma__EventTopicClient<$Result.GetResult<Prisma.$EventTopicPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    eventCountryPhone<T extends CountryPhoneDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CountryPhoneDefaultArgs<ExtArgs>>): Prisma__CountryPhoneClient<$Result.GetResult<Prisma.$CountryPhonePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    ticketTransactions<T extends Event$ticketTransactionsArgs<ExtArgs> = {}>(args?: Subset<T, Event$ticketTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7317,7 +7901,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Event", 'Int'>
     readonly creatorId: FieldRef<"Event", 'String'>
     readonly eventName: FieldRef<"Event", 'String'>
-    readonly eventCategoryId: FieldRef<"Event", 'Int'>
+    readonly eventFormatId: FieldRef<"Event", 'Int'>
     readonly eventTopicId: FieldRef<"Event", 'Int'>
     readonly organizerName: FieldRef<"Event", 'String'>
     readonly organizerLogoImgUrl: FieldRef<"Event", 'String'>
@@ -7335,7 +7919,7 @@ export namespace Prisma {
     readonly ticketEndDate: FieldRef<"Event", 'DateTime'>
     readonly eventCPName: FieldRef<"Event", 'String'>
     readonly eventCPEmail: FieldRef<"Event", 'String'>
-    readonly countryPhoneId: FieldRef<"Event", 'Int'>
+    readonly eventCountryPhoneId: FieldRef<"Event", 'Int'>
     readonly ticketDataFormType: FieldRef<"Event", 'TicketDataFormType'>
     readonly maxTicketPerTransaction: FieldRef<"Event", 'Int'>
     readonly oneEmailOneTransaction: FieldRef<"Event", 'Boolean'>
@@ -7740,6 +8324,30 @@ export namespace Prisma {
   }
 
   /**
+   * Event.ticketTransactions
+   */
+  export type Event$ticketTransactionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransaction
+     */
+    select?: TicketTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransaction
+     */
+    omit?: TicketTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionInclude<ExtArgs> | null
+    where?: TicketTransactionWhereInput
+    orderBy?: TicketTransactionOrderByWithRelationInput | TicketTransactionOrderByWithRelationInput[]
+    cursor?: TicketTransactionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TicketTransactionScalarFieldEnum | TicketTransactionScalarFieldEnum[]
+  }
+
+  /**
    * Event without action
    */
   export type EventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7755,6 +8363,4547 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: EventInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EventFormat
+   */
+
+  export type AggregateEventFormat = {
+    _count: EventFormatCountAggregateOutputType | null
+    _avg: EventFormatAvgAggregateOutputType | null
+    _sum: EventFormatSumAggregateOutputType | null
+    _min: EventFormatMinAggregateOutputType | null
+    _max: EventFormatMaxAggregateOutputType | null
+  }
+
+  export type EventFormatAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type EventFormatSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type EventFormatMinAggregateOutputType = {
+    id: number | null
+    formatName: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+  }
+
+  export type EventFormatMaxAggregateOutputType = {
+    id: number | null
+    formatName: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+  }
+
+  export type EventFormatCountAggregateOutputType = {
+    id: number
+    formatName: number
+    createdAt: number
+    updatedAt: number
+    deletedAt: number
+    _all: number
+  }
+
+
+  export type EventFormatAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type EventFormatSumAggregateInputType = {
+    id?: true
+  }
+
+  export type EventFormatMinAggregateInputType = {
+    id?: true
+    formatName?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+  }
+
+  export type EventFormatMaxAggregateInputType = {
+    id?: true
+    formatName?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+  }
+
+  export type EventFormatCountAggregateInputType = {
+    id?: true
+    formatName?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+    _all?: true
+  }
+
+  export type EventFormatAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EventFormat to aggregate.
+     */
+    where?: EventFormatWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventFormats to fetch.
+     */
+    orderBy?: EventFormatOrderByWithRelationInput | EventFormatOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EventFormatWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventFormats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventFormats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EventFormats
+    **/
+    _count?: true | EventFormatCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: EventFormatAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EventFormatSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EventFormatMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EventFormatMaxAggregateInputType
+  }
+
+  export type GetEventFormatAggregateType<T extends EventFormatAggregateArgs> = {
+        [P in keyof T & keyof AggregateEventFormat]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEventFormat[P]>
+      : GetScalarType<T[P], AggregateEventFormat[P]>
+  }
+
+
+
+
+  export type EventFormatGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventFormatWhereInput
+    orderBy?: EventFormatOrderByWithAggregationInput | EventFormatOrderByWithAggregationInput[]
+    by: EventFormatScalarFieldEnum[] | EventFormatScalarFieldEnum
+    having?: EventFormatScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EventFormatCountAggregateInputType | true
+    _avg?: EventFormatAvgAggregateInputType
+    _sum?: EventFormatSumAggregateInputType
+    _min?: EventFormatMinAggregateInputType
+    _max?: EventFormatMaxAggregateInputType
+  }
+
+  export type EventFormatGroupByOutputType = {
+    id: number
+    formatName: string
+    createdAt: Date
+    updatedAt: Date
+    deletedAt: Date | null
+    _count: EventFormatCountAggregateOutputType | null
+    _avg: EventFormatAvgAggregateOutputType | null
+    _sum: EventFormatSumAggregateOutputType | null
+    _min: EventFormatMinAggregateOutputType | null
+    _max: EventFormatMaxAggregateOutputType | null
+  }
+
+  type GetEventFormatGroupByPayload<T extends EventFormatGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EventFormatGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EventFormatGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EventFormatGroupByOutputType[P]>
+            : GetScalarType<T[P], EventFormatGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EventFormatSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    formatName?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    event?: boolean | EventFormat$eventArgs<ExtArgs>
+    _count?: boolean | EventFormatCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["eventFormat"]>
+
+  export type EventFormatSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    formatName?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+  }, ExtArgs["result"]["eventFormat"]>
+
+  export type EventFormatSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    formatName?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+  }, ExtArgs["result"]["eventFormat"]>
+
+  export type EventFormatSelectScalar = {
+    id?: boolean
+    formatName?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+  }
+
+  export type EventFormatOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "formatName" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["eventFormat"]>
+  export type EventFormatInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    event?: boolean | EventFormat$eventArgs<ExtArgs>
+    _count?: boolean | EventFormatCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type EventFormatIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type EventFormatIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $EventFormatPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EventFormat"
+    objects: {
+      event: Prisma.$EventPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      formatName: string
+      createdAt: Date
+      updatedAt: Date
+      deletedAt: Date | null
+    }, ExtArgs["result"]["eventFormat"]>
+    composites: {}
+  }
+
+  type EventFormatGetPayload<S extends boolean | null | undefined | EventFormatDefaultArgs> = $Result.GetResult<Prisma.$EventFormatPayload, S>
+
+  type EventFormatCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EventFormatFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EventFormatCountAggregateInputType | true
+    }
+
+  export interface EventFormatDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EventFormat'], meta: { name: 'EventFormat' } }
+    /**
+     * Find zero or one EventFormat that matches the filter.
+     * @param {EventFormatFindUniqueArgs} args - Arguments to find a EventFormat
+     * @example
+     * // Get one EventFormat
+     * const eventFormat = await prisma.eventFormat.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EventFormatFindUniqueArgs>(args: SelectSubset<T, EventFormatFindUniqueArgs<ExtArgs>>): Prisma__EventFormatClient<$Result.GetResult<Prisma.$EventFormatPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EventFormat that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EventFormatFindUniqueOrThrowArgs} args - Arguments to find a EventFormat
+     * @example
+     * // Get one EventFormat
+     * const eventFormat = await prisma.eventFormat.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EventFormatFindUniqueOrThrowArgs>(args: SelectSubset<T, EventFormatFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EventFormatClient<$Result.GetResult<Prisma.$EventFormatPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EventFormat that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventFormatFindFirstArgs} args - Arguments to find a EventFormat
+     * @example
+     * // Get one EventFormat
+     * const eventFormat = await prisma.eventFormat.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EventFormatFindFirstArgs>(args?: SelectSubset<T, EventFormatFindFirstArgs<ExtArgs>>): Prisma__EventFormatClient<$Result.GetResult<Prisma.$EventFormatPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EventFormat that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventFormatFindFirstOrThrowArgs} args - Arguments to find a EventFormat
+     * @example
+     * // Get one EventFormat
+     * const eventFormat = await prisma.eventFormat.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EventFormatFindFirstOrThrowArgs>(args?: SelectSubset<T, EventFormatFindFirstOrThrowArgs<ExtArgs>>): Prisma__EventFormatClient<$Result.GetResult<Prisma.$EventFormatPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EventFormats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventFormatFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EventFormats
+     * const eventFormats = await prisma.eventFormat.findMany()
+     * 
+     * // Get first 10 EventFormats
+     * const eventFormats = await prisma.eventFormat.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const eventFormatWithIdOnly = await prisma.eventFormat.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EventFormatFindManyArgs>(args?: SelectSubset<T, EventFormatFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventFormatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EventFormat.
+     * @param {EventFormatCreateArgs} args - Arguments to create a EventFormat.
+     * @example
+     * // Create one EventFormat
+     * const EventFormat = await prisma.eventFormat.create({
+     *   data: {
+     *     // ... data to create a EventFormat
+     *   }
+     * })
+     * 
+     */
+    create<T extends EventFormatCreateArgs>(args: SelectSubset<T, EventFormatCreateArgs<ExtArgs>>): Prisma__EventFormatClient<$Result.GetResult<Prisma.$EventFormatPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EventFormats.
+     * @param {EventFormatCreateManyArgs} args - Arguments to create many EventFormats.
+     * @example
+     * // Create many EventFormats
+     * const eventFormat = await prisma.eventFormat.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EventFormatCreateManyArgs>(args?: SelectSubset<T, EventFormatCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EventFormats and returns the data saved in the database.
+     * @param {EventFormatCreateManyAndReturnArgs} args - Arguments to create many EventFormats.
+     * @example
+     * // Create many EventFormats
+     * const eventFormat = await prisma.eventFormat.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EventFormats and only return the `id`
+     * const eventFormatWithIdOnly = await prisma.eventFormat.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EventFormatCreateManyAndReturnArgs>(args?: SelectSubset<T, EventFormatCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventFormatPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EventFormat.
+     * @param {EventFormatDeleteArgs} args - Arguments to delete one EventFormat.
+     * @example
+     * // Delete one EventFormat
+     * const EventFormat = await prisma.eventFormat.delete({
+     *   where: {
+     *     // ... filter to delete one EventFormat
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EventFormatDeleteArgs>(args: SelectSubset<T, EventFormatDeleteArgs<ExtArgs>>): Prisma__EventFormatClient<$Result.GetResult<Prisma.$EventFormatPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EventFormat.
+     * @param {EventFormatUpdateArgs} args - Arguments to update one EventFormat.
+     * @example
+     * // Update one EventFormat
+     * const eventFormat = await prisma.eventFormat.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EventFormatUpdateArgs>(args: SelectSubset<T, EventFormatUpdateArgs<ExtArgs>>): Prisma__EventFormatClient<$Result.GetResult<Prisma.$EventFormatPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EventFormats.
+     * @param {EventFormatDeleteManyArgs} args - Arguments to filter EventFormats to delete.
+     * @example
+     * // Delete a few EventFormats
+     * const { count } = await prisma.eventFormat.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EventFormatDeleteManyArgs>(args?: SelectSubset<T, EventFormatDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EventFormats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventFormatUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EventFormats
+     * const eventFormat = await prisma.eventFormat.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EventFormatUpdateManyArgs>(args: SelectSubset<T, EventFormatUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EventFormats and returns the data updated in the database.
+     * @param {EventFormatUpdateManyAndReturnArgs} args - Arguments to update many EventFormats.
+     * @example
+     * // Update many EventFormats
+     * const eventFormat = await prisma.eventFormat.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EventFormats and only return the `id`
+     * const eventFormatWithIdOnly = await prisma.eventFormat.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EventFormatUpdateManyAndReturnArgs>(args: SelectSubset<T, EventFormatUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventFormatPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EventFormat.
+     * @param {EventFormatUpsertArgs} args - Arguments to update or create a EventFormat.
+     * @example
+     * // Update or create a EventFormat
+     * const eventFormat = await prisma.eventFormat.upsert({
+     *   create: {
+     *     // ... data to create a EventFormat
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EventFormat we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EventFormatUpsertArgs>(args: SelectSubset<T, EventFormatUpsertArgs<ExtArgs>>): Prisma__EventFormatClient<$Result.GetResult<Prisma.$EventFormatPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EventFormats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventFormatCountArgs} args - Arguments to filter EventFormats to count.
+     * @example
+     * // Count the number of EventFormats
+     * const count = await prisma.eventFormat.count({
+     *   where: {
+     *     // ... the filter for the EventFormats we want to count
+     *   }
+     * })
+    **/
+    count<T extends EventFormatCountArgs>(
+      args?: Subset<T, EventFormatCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EventFormatCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EventFormat.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventFormatAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EventFormatAggregateArgs>(args: Subset<T, EventFormatAggregateArgs>): Prisma.PrismaPromise<GetEventFormatAggregateType<T>>
+
+    /**
+     * Group by EventFormat.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventFormatGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EventFormatGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EventFormatGroupByArgs['orderBy'] }
+        : { orderBy?: EventFormatGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EventFormatGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEventFormatGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EventFormat model
+   */
+  readonly fields: EventFormatFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EventFormat.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EventFormatClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    event<T extends EventFormat$eventArgs<ExtArgs> = {}>(args?: Subset<T, EventFormat$eventArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EventFormat model
+   */
+  interface EventFormatFieldRefs {
+    readonly id: FieldRef<"EventFormat", 'Int'>
+    readonly formatName: FieldRef<"EventFormat", 'String'>
+    readonly createdAt: FieldRef<"EventFormat", 'DateTime'>
+    readonly updatedAt: FieldRef<"EventFormat", 'DateTime'>
+    readonly deletedAt: FieldRef<"EventFormat", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EventFormat findUnique
+   */
+  export type EventFormatFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventFormat
+     */
+    select?: EventFormatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventFormat
+     */
+    omit?: EventFormatOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventFormatInclude<ExtArgs> | null
+    /**
+     * Filter, which EventFormat to fetch.
+     */
+    where: EventFormatWhereUniqueInput
+  }
+
+  /**
+   * EventFormat findUniqueOrThrow
+   */
+  export type EventFormatFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventFormat
+     */
+    select?: EventFormatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventFormat
+     */
+    omit?: EventFormatOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventFormatInclude<ExtArgs> | null
+    /**
+     * Filter, which EventFormat to fetch.
+     */
+    where: EventFormatWhereUniqueInput
+  }
+
+  /**
+   * EventFormat findFirst
+   */
+  export type EventFormatFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventFormat
+     */
+    select?: EventFormatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventFormat
+     */
+    omit?: EventFormatOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventFormatInclude<ExtArgs> | null
+    /**
+     * Filter, which EventFormat to fetch.
+     */
+    where?: EventFormatWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventFormats to fetch.
+     */
+    orderBy?: EventFormatOrderByWithRelationInput | EventFormatOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EventFormats.
+     */
+    cursor?: EventFormatWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventFormats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventFormats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EventFormats.
+     */
+    distinct?: EventFormatScalarFieldEnum | EventFormatScalarFieldEnum[]
+  }
+
+  /**
+   * EventFormat findFirstOrThrow
+   */
+  export type EventFormatFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventFormat
+     */
+    select?: EventFormatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventFormat
+     */
+    omit?: EventFormatOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventFormatInclude<ExtArgs> | null
+    /**
+     * Filter, which EventFormat to fetch.
+     */
+    where?: EventFormatWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventFormats to fetch.
+     */
+    orderBy?: EventFormatOrderByWithRelationInput | EventFormatOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EventFormats.
+     */
+    cursor?: EventFormatWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventFormats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventFormats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EventFormats.
+     */
+    distinct?: EventFormatScalarFieldEnum | EventFormatScalarFieldEnum[]
+  }
+
+  /**
+   * EventFormat findMany
+   */
+  export type EventFormatFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventFormat
+     */
+    select?: EventFormatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventFormat
+     */
+    omit?: EventFormatOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventFormatInclude<ExtArgs> | null
+    /**
+     * Filter, which EventFormats to fetch.
+     */
+    where?: EventFormatWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventFormats to fetch.
+     */
+    orderBy?: EventFormatOrderByWithRelationInput | EventFormatOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EventFormats.
+     */
+    cursor?: EventFormatWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventFormats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventFormats.
+     */
+    skip?: number
+    distinct?: EventFormatScalarFieldEnum | EventFormatScalarFieldEnum[]
+  }
+
+  /**
+   * EventFormat create
+   */
+  export type EventFormatCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventFormat
+     */
+    select?: EventFormatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventFormat
+     */
+    omit?: EventFormatOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventFormatInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EventFormat.
+     */
+    data: XOR<EventFormatCreateInput, EventFormatUncheckedCreateInput>
+  }
+
+  /**
+   * EventFormat createMany
+   */
+  export type EventFormatCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EventFormats.
+     */
+    data: EventFormatCreateManyInput | EventFormatCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EventFormat createManyAndReturn
+   */
+  export type EventFormatCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventFormat
+     */
+    select?: EventFormatSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventFormat
+     */
+    omit?: EventFormatOmit<ExtArgs> | null
+    /**
+     * The data used to create many EventFormats.
+     */
+    data: EventFormatCreateManyInput | EventFormatCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EventFormat update
+   */
+  export type EventFormatUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventFormat
+     */
+    select?: EventFormatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventFormat
+     */
+    omit?: EventFormatOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventFormatInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EventFormat.
+     */
+    data: XOR<EventFormatUpdateInput, EventFormatUncheckedUpdateInput>
+    /**
+     * Choose, which EventFormat to update.
+     */
+    where: EventFormatWhereUniqueInput
+  }
+
+  /**
+   * EventFormat updateMany
+   */
+  export type EventFormatUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EventFormats.
+     */
+    data: XOR<EventFormatUpdateManyMutationInput, EventFormatUncheckedUpdateManyInput>
+    /**
+     * Filter which EventFormats to update
+     */
+    where?: EventFormatWhereInput
+    /**
+     * Limit how many EventFormats to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EventFormat updateManyAndReturn
+   */
+  export type EventFormatUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventFormat
+     */
+    select?: EventFormatSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventFormat
+     */
+    omit?: EventFormatOmit<ExtArgs> | null
+    /**
+     * The data used to update EventFormats.
+     */
+    data: XOR<EventFormatUpdateManyMutationInput, EventFormatUncheckedUpdateManyInput>
+    /**
+     * Filter which EventFormats to update
+     */
+    where?: EventFormatWhereInput
+    /**
+     * Limit how many EventFormats to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EventFormat upsert
+   */
+  export type EventFormatUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventFormat
+     */
+    select?: EventFormatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventFormat
+     */
+    omit?: EventFormatOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventFormatInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EventFormat to update in case it exists.
+     */
+    where: EventFormatWhereUniqueInput
+    /**
+     * In case the EventFormat found by the `where` argument doesn't exist, create a new EventFormat with this data.
+     */
+    create: XOR<EventFormatCreateInput, EventFormatUncheckedCreateInput>
+    /**
+     * In case the EventFormat was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EventFormatUpdateInput, EventFormatUncheckedUpdateInput>
+  }
+
+  /**
+   * EventFormat delete
+   */
+  export type EventFormatDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventFormat
+     */
+    select?: EventFormatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventFormat
+     */
+    omit?: EventFormatOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventFormatInclude<ExtArgs> | null
+    /**
+     * Filter which EventFormat to delete.
+     */
+    where: EventFormatWhereUniqueInput
+  }
+
+  /**
+   * EventFormat deleteMany
+   */
+  export type EventFormatDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EventFormats to delete
+     */
+    where?: EventFormatWhereInput
+    /**
+     * Limit how many EventFormats to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EventFormat.event
+   */
+  export type EventFormat$eventArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    where?: EventWhereInput
+    orderBy?: EventOrderByWithRelationInput | EventOrderByWithRelationInput[]
+    cursor?: EventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EventScalarFieldEnum | EventScalarFieldEnum[]
+  }
+
+  /**
+   * EventFormat without action
+   */
+  export type EventFormatDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventFormat
+     */
+    select?: EventFormatSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventFormat
+     */
+    omit?: EventFormatOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventFormatInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EventTopic
+   */
+
+  export type AggregateEventTopic = {
+    _count: EventTopicCountAggregateOutputType | null
+    _avg: EventTopicAvgAggregateOutputType | null
+    _sum: EventTopicSumAggregateOutputType | null
+    _min: EventTopicMinAggregateOutputType | null
+    _max: EventTopicMaxAggregateOutputType | null
+  }
+
+  export type EventTopicAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type EventTopicSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type EventTopicMinAggregateOutputType = {
+    id: number | null
+    topicName: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+  }
+
+  export type EventTopicMaxAggregateOutputType = {
+    id: number | null
+    topicName: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+  }
+
+  export type EventTopicCountAggregateOutputType = {
+    id: number
+    topicName: number
+    createdAt: number
+    updatedAt: number
+    deletedAt: number
+    _all: number
+  }
+
+
+  export type EventTopicAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type EventTopicSumAggregateInputType = {
+    id?: true
+  }
+
+  export type EventTopicMinAggregateInputType = {
+    id?: true
+    topicName?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+  }
+
+  export type EventTopicMaxAggregateInputType = {
+    id?: true
+    topicName?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+  }
+
+  export type EventTopicCountAggregateInputType = {
+    id?: true
+    topicName?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+    _all?: true
+  }
+
+  export type EventTopicAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EventTopic to aggregate.
+     */
+    where?: EventTopicWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventTopics to fetch.
+     */
+    orderBy?: EventTopicOrderByWithRelationInput | EventTopicOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EventTopicWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventTopics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventTopics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EventTopics
+    **/
+    _count?: true | EventTopicCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: EventTopicAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EventTopicSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EventTopicMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EventTopicMaxAggregateInputType
+  }
+
+  export type GetEventTopicAggregateType<T extends EventTopicAggregateArgs> = {
+        [P in keyof T & keyof AggregateEventTopic]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEventTopic[P]>
+      : GetScalarType<T[P], AggregateEventTopic[P]>
+  }
+
+
+
+
+  export type EventTopicGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EventTopicWhereInput
+    orderBy?: EventTopicOrderByWithAggregationInput | EventTopicOrderByWithAggregationInput[]
+    by: EventTopicScalarFieldEnum[] | EventTopicScalarFieldEnum
+    having?: EventTopicScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EventTopicCountAggregateInputType | true
+    _avg?: EventTopicAvgAggregateInputType
+    _sum?: EventTopicSumAggregateInputType
+    _min?: EventTopicMinAggregateInputType
+    _max?: EventTopicMaxAggregateInputType
+  }
+
+  export type EventTopicGroupByOutputType = {
+    id: number
+    topicName: string
+    createdAt: Date
+    updatedAt: Date
+    deletedAt: Date | null
+    _count: EventTopicCountAggregateOutputType | null
+    _avg: EventTopicAvgAggregateOutputType | null
+    _sum: EventTopicSumAggregateOutputType | null
+    _min: EventTopicMinAggregateOutputType | null
+    _max: EventTopicMaxAggregateOutputType | null
+  }
+
+  type GetEventTopicGroupByPayload<T extends EventTopicGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EventTopicGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EventTopicGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EventTopicGroupByOutputType[P]>
+            : GetScalarType<T[P], EventTopicGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EventTopicSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    topicName?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    event?: boolean | EventTopic$eventArgs<ExtArgs>
+    _count?: boolean | EventTopicCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["eventTopic"]>
+
+  export type EventTopicSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    topicName?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+  }, ExtArgs["result"]["eventTopic"]>
+
+  export type EventTopicSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    topicName?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+  }, ExtArgs["result"]["eventTopic"]>
+
+  export type EventTopicSelectScalar = {
+    id?: boolean
+    topicName?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+  }
+
+  export type EventTopicOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "topicName" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["eventTopic"]>
+  export type EventTopicInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    event?: boolean | EventTopic$eventArgs<ExtArgs>
+    _count?: boolean | EventTopicCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type EventTopicIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type EventTopicIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $EventTopicPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EventTopic"
+    objects: {
+      event: Prisma.$EventPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      topicName: string
+      createdAt: Date
+      updatedAt: Date
+      deletedAt: Date | null
+    }, ExtArgs["result"]["eventTopic"]>
+    composites: {}
+  }
+
+  type EventTopicGetPayload<S extends boolean | null | undefined | EventTopicDefaultArgs> = $Result.GetResult<Prisma.$EventTopicPayload, S>
+
+  type EventTopicCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EventTopicFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EventTopicCountAggregateInputType | true
+    }
+
+  export interface EventTopicDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EventTopic'], meta: { name: 'EventTopic' } }
+    /**
+     * Find zero or one EventTopic that matches the filter.
+     * @param {EventTopicFindUniqueArgs} args - Arguments to find a EventTopic
+     * @example
+     * // Get one EventTopic
+     * const eventTopic = await prisma.eventTopic.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EventTopicFindUniqueArgs>(args: SelectSubset<T, EventTopicFindUniqueArgs<ExtArgs>>): Prisma__EventTopicClient<$Result.GetResult<Prisma.$EventTopicPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EventTopic that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EventTopicFindUniqueOrThrowArgs} args - Arguments to find a EventTopic
+     * @example
+     * // Get one EventTopic
+     * const eventTopic = await prisma.eventTopic.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EventTopicFindUniqueOrThrowArgs>(args: SelectSubset<T, EventTopicFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EventTopicClient<$Result.GetResult<Prisma.$EventTopicPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EventTopic that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventTopicFindFirstArgs} args - Arguments to find a EventTopic
+     * @example
+     * // Get one EventTopic
+     * const eventTopic = await prisma.eventTopic.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EventTopicFindFirstArgs>(args?: SelectSubset<T, EventTopicFindFirstArgs<ExtArgs>>): Prisma__EventTopicClient<$Result.GetResult<Prisma.$EventTopicPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EventTopic that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventTopicFindFirstOrThrowArgs} args - Arguments to find a EventTopic
+     * @example
+     * // Get one EventTopic
+     * const eventTopic = await prisma.eventTopic.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EventTopicFindFirstOrThrowArgs>(args?: SelectSubset<T, EventTopicFindFirstOrThrowArgs<ExtArgs>>): Prisma__EventTopicClient<$Result.GetResult<Prisma.$EventTopicPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EventTopics that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventTopicFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EventTopics
+     * const eventTopics = await prisma.eventTopic.findMany()
+     * 
+     * // Get first 10 EventTopics
+     * const eventTopics = await prisma.eventTopic.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const eventTopicWithIdOnly = await prisma.eventTopic.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EventTopicFindManyArgs>(args?: SelectSubset<T, EventTopicFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventTopicPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EventTopic.
+     * @param {EventTopicCreateArgs} args - Arguments to create a EventTopic.
+     * @example
+     * // Create one EventTopic
+     * const EventTopic = await prisma.eventTopic.create({
+     *   data: {
+     *     // ... data to create a EventTopic
+     *   }
+     * })
+     * 
+     */
+    create<T extends EventTopicCreateArgs>(args: SelectSubset<T, EventTopicCreateArgs<ExtArgs>>): Prisma__EventTopicClient<$Result.GetResult<Prisma.$EventTopicPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EventTopics.
+     * @param {EventTopicCreateManyArgs} args - Arguments to create many EventTopics.
+     * @example
+     * // Create many EventTopics
+     * const eventTopic = await prisma.eventTopic.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EventTopicCreateManyArgs>(args?: SelectSubset<T, EventTopicCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EventTopics and returns the data saved in the database.
+     * @param {EventTopicCreateManyAndReturnArgs} args - Arguments to create many EventTopics.
+     * @example
+     * // Create many EventTopics
+     * const eventTopic = await prisma.eventTopic.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EventTopics and only return the `id`
+     * const eventTopicWithIdOnly = await prisma.eventTopic.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EventTopicCreateManyAndReturnArgs>(args?: SelectSubset<T, EventTopicCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventTopicPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EventTopic.
+     * @param {EventTopicDeleteArgs} args - Arguments to delete one EventTopic.
+     * @example
+     * // Delete one EventTopic
+     * const EventTopic = await prisma.eventTopic.delete({
+     *   where: {
+     *     // ... filter to delete one EventTopic
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EventTopicDeleteArgs>(args: SelectSubset<T, EventTopicDeleteArgs<ExtArgs>>): Prisma__EventTopicClient<$Result.GetResult<Prisma.$EventTopicPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EventTopic.
+     * @param {EventTopicUpdateArgs} args - Arguments to update one EventTopic.
+     * @example
+     * // Update one EventTopic
+     * const eventTopic = await prisma.eventTopic.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EventTopicUpdateArgs>(args: SelectSubset<T, EventTopicUpdateArgs<ExtArgs>>): Prisma__EventTopicClient<$Result.GetResult<Prisma.$EventTopicPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EventTopics.
+     * @param {EventTopicDeleteManyArgs} args - Arguments to filter EventTopics to delete.
+     * @example
+     * // Delete a few EventTopics
+     * const { count } = await prisma.eventTopic.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EventTopicDeleteManyArgs>(args?: SelectSubset<T, EventTopicDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EventTopics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventTopicUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EventTopics
+     * const eventTopic = await prisma.eventTopic.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EventTopicUpdateManyArgs>(args: SelectSubset<T, EventTopicUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EventTopics and returns the data updated in the database.
+     * @param {EventTopicUpdateManyAndReturnArgs} args - Arguments to update many EventTopics.
+     * @example
+     * // Update many EventTopics
+     * const eventTopic = await prisma.eventTopic.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EventTopics and only return the `id`
+     * const eventTopicWithIdOnly = await prisma.eventTopic.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EventTopicUpdateManyAndReturnArgs>(args: SelectSubset<T, EventTopicUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventTopicPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EventTopic.
+     * @param {EventTopicUpsertArgs} args - Arguments to update or create a EventTopic.
+     * @example
+     * // Update or create a EventTopic
+     * const eventTopic = await prisma.eventTopic.upsert({
+     *   create: {
+     *     // ... data to create a EventTopic
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EventTopic we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EventTopicUpsertArgs>(args: SelectSubset<T, EventTopicUpsertArgs<ExtArgs>>): Prisma__EventTopicClient<$Result.GetResult<Prisma.$EventTopicPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EventTopics.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventTopicCountArgs} args - Arguments to filter EventTopics to count.
+     * @example
+     * // Count the number of EventTopics
+     * const count = await prisma.eventTopic.count({
+     *   where: {
+     *     // ... the filter for the EventTopics we want to count
+     *   }
+     * })
+    **/
+    count<T extends EventTopicCountArgs>(
+      args?: Subset<T, EventTopicCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EventTopicCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EventTopic.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventTopicAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EventTopicAggregateArgs>(args: Subset<T, EventTopicAggregateArgs>): Prisma.PrismaPromise<GetEventTopicAggregateType<T>>
+
+    /**
+     * Group by EventTopic.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EventTopicGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EventTopicGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EventTopicGroupByArgs['orderBy'] }
+        : { orderBy?: EventTopicGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EventTopicGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEventTopicGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EventTopic model
+   */
+  readonly fields: EventTopicFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EventTopic.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EventTopicClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    event<T extends EventTopic$eventArgs<ExtArgs> = {}>(args?: Subset<T, EventTopic$eventArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EventTopic model
+   */
+  interface EventTopicFieldRefs {
+    readonly id: FieldRef<"EventTopic", 'Int'>
+    readonly topicName: FieldRef<"EventTopic", 'String'>
+    readonly createdAt: FieldRef<"EventTopic", 'DateTime'>
+    readonly updatedAt: FieldRef<"EventTopic", 'DateTime'>
+    readonly deletedAt: FieldRef<"EventTopic", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EventTopic findUnique
+   */
+  export type EventTopicFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventTopic
+     */
+    select?: EventTopicSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventTopic
+     */
+    omit?: EventTopicOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventTopicInclude<ExtArgs> | null
+    /**
+     * Filter, which EventTopic to fetch.
+     */
+    where: EventTopicWhereUniqueInput
+  }
+
+  /**
+   * EventTopic findUniqueOrThrow
+   */
+  export type EventTopicFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventTopic
+     */
+    select?: EventTopicSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventTopic
+     */
+    omit?: EventTopicOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventTopicInclude<ExtArgs> | null
+    /**
+     * Filter, which EventTopic to fetch.
+     */
+    where: EventTopicWhereUniqueInput
+  }
+
+  /**
+   * EventTopic findFirst
+   */
+  export type EventTopicFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventTopic
+     */
+    select?: EventTopicSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventTopic
+     */
+    omit?: EventTopicOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventTopicInclude<ExtArgs> | null
+    /**
+     * Filter, which EventTopic to fetch.
+     */
+    where?: EventTopicWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventTopics to fetch.
+     */
+    orderBy?: EventTopicOrderByWithRelationInput | EventTopicOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EventTopics.
+     */
+    cursor?: EventTopicWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventTopics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventTopics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EventTopics.
+     */
+    distinct?: EventTopicScalarFieldEnum | EventTopicScalarFieldEnum[]
+  }
+
+  /**
+   * EventTopic findFirstOrThrow
+   */
+  export type EventTopicFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventTopic
+     */
+    select?: EventTopicSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventTopic
+     */
+    omit?: EventTopicOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventTopicInclude<ExtArgs> | null
+    /**
+     * Filter, which EventTopic to fetch.
+     */
+    where?: EventTopicWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventTopics to fetch.
+     */
+    orderBy?: EventTopicOrderByWithRelationInput | EventTopicOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EventTopics.
+     */
+    cursor?: EventTopicWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventTopics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventTopics.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EventTopics.
+     */
+    distinct?: EventTopicScalarFieldEnum | EventTopicScalarFieldEnum[]
+  }
+
+  /**
+   * EventTopic findMany
+   */
+  export type EventTopicFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventTopic
+     */
+    select?: EventTopicSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventTopic
+     */
+    omit?: EventTopicOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventTopicInclude<ExtArgs> | null
+    /**
+     * Filter, which EventTopics to fetch.
+     */
+    where?: EventTopicWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EventTopics to fetch.
+     */
+    orderBy?: EventTopicOrderByWithRelationInput | EventTopicOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EventTopics.
+     */
+    cursor?: EventTopicWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EventTopics from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EventTopics.
+     */
+    skip?: number
+    distinct?: EventTopicScalarFieldEnum | EventTopicScalarFieldEnum[]
+  }
+
+  /**
+   * EventTopic create
+   */
+  export type EventTopicCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventTopic
+     */
+    select?: EventTopicSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventTopic
+     */
+    omit?: EventTopicOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventTopicInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EventTopic.
+     */
+    data: XOR<EventTopicCreateInput, EventTopicUncheckedCreateInput>
+  }
+
+  /**
+   * EventTopic createMany
+   */
+  export type EventTopicCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EventTopics.
+     */
+    data: EventTopicCreateManyInput | EventTopicCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EventTopic createManyAndReturn
+   */
+  export type EventTopicCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventTopic
+     */
+    select?: EventTopicSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventTopic
+     */
+    omit?: EventTopicOmit<ExtArgs> | null
+    /**
+     * The data used to create many EventTopics.
+     */
+    data: EventTopicCreateManyInput | EventTopicCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EventTopic update
+   */
+  export type EventTopicUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventTopic
+     */
+    select?: EventTopicSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventTopic
+     */
+    omit?: EventTopicOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventTopicInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EventTopic.
+     */
+    data: XOR<EventTopicUpdateInput, EventTopicUncheckedUpdateInput>
+    /**
+     * Choose, which EventTopic to update.
+     */
+    where: EventTopicWhereUniqueInput
+  }
+
+  /**
+   * EventTopic updateMany
+   */
+  export type EventTopicUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EventTopics.
+     */
+    data: XOR<EventTopicUpdateManyMutationInput, EventTopicUncheckedUpdateManyInput>
+    /**
+     * Filter which EventTopics to update
+     */
+    where?: EventTopicWhereInput
+    /**
+     * Limit how many EventTopics to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EventTopic updateManyAndReturn
+   */
+  export type EventTopicUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventTopic
+     */
+    select?: EventTopicSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventTopic
+     */
+    omit?: EventTopicOmit<ExtArgs> | null
+    /**
+     * The data used to update EventTopics.
+     */
+    data: XOR<EventTopicUpdateManyMutationInput, EventTopicUncheckedUpdateManyInput>
+    /**
+     * Filter which EventTopics to update
+     */
+    where?: EventTopicWhereInput
+    /**
+     * Limit how many EventTopics to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EventTopic upsert
+   */
+  export type EventTopicUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventTopic
+     */
+    select?: EventTopicSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventTopic
+     */
+    omit?: EventTopicOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventTopicInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EventTopic to update in case it exists.
+     */
+    where: EventTopicWhereUniqueInput
+    /**
+     * In case the EventTopic found by the `where` argument doesn't exist, create a new EventTopic with this data.
+     */
+    create: XOR<EventTopicCreateInput, EventTopicUncheckedCreateInput>
+    /**
+     * In case the EventTopic was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EventTopicUpdateInput, EventTopicUncheckedUpdateInput>
+  }
+
+  /**
+   * EventTopic delete
+   */
+  export type EventTopicDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventTopic
+     */
+    select?: EventTopicSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventTopic
+     */
+    omit?: EventTopicOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventTopicInclude<ExtArgs> | null
+    /**
+     * Filter which EventTopic to delete.
+     */
+    where: EventTopicWhereUniqueInput
+  }
+
+  /**
+   * EventTopic deleteMany
+   */
+  export type EventTopicDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EventTopics to delete
+     */
+    where?: EventTopicWhereInput
+    /**
+     * Limit how many EventTopics to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EventTopic.event
+   */
+  export type EventTopic$eventArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Event
+     */
+    select?: EventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Event
+     */
+    omit?: EventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventInclude<ExtArgs> | null
+    where?: EventWhereInput
+    orderBy?: EventOrderByWithRelationInput | EventOrderByWithRelationInput[]
+    cursor?: EventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EventScalarFieldEnum | EventScalarFieldEnum[]
+  }
+
+  /**
+   * EventTopic without action
+   */
+  export type EventTopicDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EventTopic
+     */
+    select?: EventTopicSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EventTopic
+     */
+    omit?: EventTopicOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EventTopicInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TicketTransaction
+   */
+
+  export type AggregateTicketTransaction = {
+    _count: TicketTransactionCountAggregateOutputType | null
+    _avg: TicketTransactionAvgAggregateOutputType | null
+    _sum: TicketTransactionSumAggregateOutputType | null
+    _min: TicketTransactionMinAggregateOutputType | null
+    _max: TicketTransactionMaxAggregateOutputType | null
+  }
+
+  export type TicketTransactionAvgAggregateOutputType = {
+    id: number | null
+    eventId: number | null
+  }
+
+  export type TicketTransactionSumAggregateOutputType = {
+    id: number | null
+    eventId: number | null
+  }
+
+  export type TicketTransactionMinAggregateOutputType = {
+    id: number | null
+    eventId: number | null
+    memberId: string | null
+    ticketCode: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+  }
+
+  export type TicketTransactionMaxAggregateOutputType = {
+    id: number | null
+    eventId: number | null
+    memberId: string | null
+    ticketCode: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+  }
+
+  export type TicketTransactionCountAggregateOutputType = {
+    id: number
+    eventId: number
+    memberId: number
+    ticketCode: number
+    createdAt: number
+    updatedAt: number
+    deletedAt: number
+    _all: number
+  }
+
+
+  export type TicketTransactionAvgAggregateInputType = {
+    id?: true
+    eventId?: true
+  }
+
+  export type TicketTransactionSumAggregateInputType = {
+    id?: true
+    eventId?: true
+  }
+
+  export type TicketTransactionMinAggregateInputType = {
+    id?: true
+    eventId?: true
+    memberId?: true
+    ticketCode?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+  }
+
+  export type TicketTransactionMaxAggregateInputType = {
+    id?: true
+    eventId?: true
+    memberId?: true
+    ticketCode?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+  }
+
+  export type TicketTransactionCountAggregateInputType = {
+    id?: true
+    eventId?: true
+    memberId?: true
+    ticketCode?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+    _all?: true
+  }
+
+  export type TicketTransactionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TicketTransaction to aggregate.
+     */
+    where?: TicketTransactionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TicketTransactions to fetch.
+     */
+    orderBy?: TicketTransactionOrderByWithRelationInput | TicketTransactionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TicketTransactionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TicketTransactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TicketTransactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TicketTransactions
+    **/
+    _count?: true | TicketTransactionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TicketTransactionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TicketTransactionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TicketTransactionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TicketTransactionMaxAggregateInputType
+  }
+
+  export type GetTicketTransactionAggregateType<T extends TicketTransactionAggregateArgs> = {
+        [P in keyof T & keyof AggregateTicketTransaction]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTicketTransaction[P]>
+      : GetScalarType<T[P], AggregateTicketTransaction[P]>
+  }
+
+
+
+
+  export type TicketTransactionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TicketTransactionWhereInput
+    orderBy?: TicketTransactionOrderByWithAggregationInput | TicketTransactionOrderByWithAggregationInput[]
+    by: TicketTransactionScalarFieldEnum[] | TicketTransactionScalarFieldEnum
+    having?: TicketTransactionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TicketTransactionCountAggregateInputType | true
+    _avg?: TicketTransactionAvgAggregateInputType
+    _sum?: TicketTransactionSumAggregateInputType
+    _min?: TicketTransactionMinAggregateInputType
+    _max?: TicketTransactionMaxAggregateInputType
+  }
+
+  export type TicketTransactionGroupByOutputType = {
+    id: number
+    eventId: number
+    memberId: string
+    ticketCode: string
+    createdAt: Date
+    updatedAt: Date
+    deletedAt: Date | null
+    _count: TicketTransactionCountAggregateOutputType | null
+    _avg: TicketTransactionAvgAggregateOutputType | null
+    _sum: TicketTransactionSumAggregateOutputType | null
+    _min: TicketTransactionMinAggregateOutputType | null
+    _max: TicketTransactionMaxAggregateOutputType | null
+  }
+
+  type GetTicketTransactionGroupByPayload<T extends TicketTransactionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TicketTransactionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TicketTransactionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TicketTransactionGroupByOutputType[P]>
+            : GetScalarType<T[P], TicketTransactionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TicketTransactionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    eventId?: boolean
+    memberId?: boolean
+    ticketCode?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    event?: boolean | EventDefaultArgs<ExtArgs>
+    member?: boolean | MemberDefaultArgs<ExtArgs>
+    ticketTransactionDetails?: boolean | TicketTransaction$ticketTransactionDetailsArgs<ExtArgs>
+    _count?: boolean | TicketTransactionCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ticketTransaction"]>
+
+  export type TicketTransactionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    eventId?: boolean
+    memberId?: boolean
+    ticketCode?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    event?: boolean | EventDefaultArgs<ExtArgs>
+    member?: boolean | MemberDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ticketTransaction"]>
+
+  export type TicketTransactionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    eventId?: boolean
+    memberId?: boolean
+    ticketCode?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    event?: boolean | EventDefaultArgs<ExtArgs>
+    member?: boolean | MemberDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ticketTransaction"]>
+
+  export type TicketTransactionSelectScalar = {
+    id?: boolean
+    eventId?: boolean
+    memberId?: boolean
+    ticketCode?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+  }
+
+  export type TicketTransactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "eventId" | "memberId" | "ticketCode" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["ticketTransaction"]>
+  export type TicketTransactionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    event?: boolean | EventDefaultArgs<ExtArgs>
+    member?: boolean | MemberDefaultArgs<ExtArgs>
+    ticketTransactionDetails?: boolean | TicketTransaction$ticketTransactionDetailsArgs<ExtArgs>
+    _count?: boolean | TicketTransactionCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type TicketTransactionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    event?: boolean | EventDefaultArgs<ExtArgs>
+    member?: boolean | MemberDefaultArgs<ExtArgs>
+  }
+  export type TicketTransactionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    event?: boolean | EventDefaultArgs<ExtArgs>
+    member?: boolean | MemberDefaultArgs<ExtArgs>
+  }
+
+  export type $TicketTransactionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TicketTransaction"
+    objects: {
+      event: Prisma.$EventPayload<ExtArgs>
+      member: Prisma.$MemberPayload<ExtArgs>
+      ticketTransactionDetails: Prisma.$TicketTransactionDetailPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      eventId: number
+      memberId: string
+      ticketCode: string
+      createdAt: Date
+      updatedAt: Date
+      deletedAt: Date | null
+    }, ExtArgs["result"]["ticketTransaction"]>
+    composites: {}
+  }
+
+  type TicketTransactionGetPayload<S extends boolean | null | undefined | TicketTransactionDefaultArgs> = $Result.GetResult<Prisma.$TicketTransactionPayload, S>
+
+  type TicketTransactionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TicketTransactionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TicketTransactionCountAggregateInputType | true
+    }
+
+  export interface TicketTransactionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TicketTransaction'], meta: { name: 'TicketTransaction' } }
+    /**
+     * Find zero or one TicketTransaction that matches the filter.
+     * @param {TicketTransactionFindUniqueArgs} args - Arguments to find a TicketTransaction
+     * @example
+     * // Get one TicketTransaction
+     * const ticketTransaction = await prisma.ticketTransaction.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TicketTransactionFindUniqueArgs>(args: SelectSubset<T, TicketTransactionFindUniqueArgs<ExtArgs>>): Prisma__TicketTransactionClient<$Result.GetResult<Prisma.$TicketTransactionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TicketTransaction that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TicketTransactionFindUniqueOrThrowArgs} args - Arguments to find a TicketTransaction
+     * @example
+     * // Get one TicketTransaction
+     * const ticketTransaction = await prisma.ticketTransaction.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TicketTransactionFindUniqueOrThrowArgs>(args: SelectSubset<T, TicketTransactionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TicketTransactionClient<$Result.GetResult<Prisma.$TicketTransactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TicketTransaction that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TicketTransactionFindFirstArgs} args - Arguments to find a TicketTransaction
+     * @example
+     * // Get one TicketTransaction
+     * const ticketTransaction = await prisma.ticketTransaction.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TicketTransactionFindFirstArgs>(args?: SelectSubset<T, TicketTransactionFindFirstArgs<ExtArgs>>): Prisma__TicketTransactionClient<$Result.GetResult<Prisma.$TicketTransactionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TicketTransaction that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TicketTransactionFindFirstOrThrowArgs} args - Arguments to find a TicketTransaction
+     * @example
+     * // Get one TicketTransaction
+     * const ticketTransaction = await prisma.ticketTransaction.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TicketTransactionFindFirstOrThrowArgs>(args?: SelectSubset<T, TicketTransactionFindFirstOrThrowArgs<ExtArgs>>): Prisma__TicketTransactionClient<$Result.GetResult<Prisma.$TicketTransactionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TicketTransactions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TicketTransactionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TicketTransactions
+     * const ticketTransactions = await prisma.ticketTransaction.findMany()
+     * 
+     * // Get first 10 TicketTransactions
+     * const ticketTransactions = await prisma.ticketTransaction.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const ticketTransactionWithIdOnly = await prisma.ticketTransaction.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TicketTransactionFindManyArgs>(args?: SelectSubset<T, TicketTransactionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TicketTransaction.
+     * @param {TicketTransactionCreateArgs} args - Arguments to create a TicketTransaction.
+     * @example
+     * // Create one TicketTransaction
+     * const TicketTransaction = await prisma.ticketTransaction.create({
+     *   data: {
+     *     // ... data to create a TicketTransaction
+     *   }
+     * })
+     * 
+     */
+    create<T extends TicketTransactionCreateArgs>(args: SelectSubset<T, TicketTransactionCreateArgs<ExtArgs>>): Prisma__TicketTransactionClient<$Result.GetResult<Prisma.$TicketTransactionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TicketTransactions.
+     * @param {TicketTransactionCreateManyArgs} args - Arguments to create many TicketTransactions.
+     * @example
+     * // Create many TicketTransactions
+     * const ticketTransaction = await prisma.ticketTransaction.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TicketTransactionCreateManyArgs>(args?: SelectSubset<T, TicketTransactionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TicketTransactions and returns the data saved in the database.
+     * @param {TicketTransactionCreateManyAndReturnArgs} args - Arguments to create many TicketTransactions.
+     * @example
+     * // Create many TicketTransactions
+     * const ticketTransaction = await prisma.ticketTransaction.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TicketTransactions and only return the `id`
+     * const ticketTransactionWithIdOnly = await prisma.ticketTransaction.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TicketTransactionCreateManyAndReturnArgs>(args?: SelectSubset<T, TicketTransactionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketTransactionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TicketTransaction.
+     * @param {TicketTransactionDeleteArgs} args - Arguments to delete one TicketTransaction.
+     * @example
+     * // Delete one TicketTransaction
+     * const TicketTransaction = await prisma.ticketTransaction.delete({
+     *   where: {
+     *     // ... filter to delete one TicketTransaction
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TicketTransactionDeleteArgs>(args: SelectSubset<T, TicketTransactionDeleteArgs<ExtArgs>>): Prisma__TicketTransactionClient<$Result.GetResult<Prisma.$TicketTransactionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TicketTransaction.
+     * @param {TicketTransactionUpdateArgs} args - Arguments to update one TicketTransaction.
+     * @example
+     * // Update one TicketTransaction
+     * const ticketTransaction = await prisma.ticketTransaction.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TicketTransactionUpdateArgs>(args: SelectSubset<T, TicketTransactionUpdateArgs<ExtArgs>>): Prisma__TicketTransactionClient<$Result.GetResult<Prisma.$TicketTransactionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TicketTransactions.
+     * @param {TicketTransactionDeleteManyArgs} args - Arguments to filter TicketTransactions to delete.
+     * @example
+     * // Delete a few TicketTransactions
+     * const { count } = await prisma.ticketTransaction.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TicketTransactionDeleteManyArgs>(args?: SelectSubset<T, TicketTransactionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TicketTransactions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TicketTransactionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TicketTransactions
+     * const ticketTransaction = await prisma.ticketTransaction.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TicketTransactionUpdateManyArgs>(args: SelectSubset<T, TicketTransactionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TicketTransactions and returns the data updated in the database.
+     * @param {TicketTransactionUpdateManyAndReturnArgs} args - Arguments to update many TicketTransactions.
+     * @example
+     * // Update many TicketTransactions
+     * const ticketTransaction = await prisma.ticketTransaction.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TicketTransactions and only return the `id`
+     * const ticketTransactionWithIdOnly = await prisma.ticketTransaction.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TicketTransactionUpdateManyAndReturnArgs>(args: SelectSubset<T, TicketTransactionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketTransactionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TicketTransaction.
+     * @param {TicketTransactionUpsertArgs} args - Arguments to update or create a TicketTransaction.
+     * @example
+     * // Update or create a TicketTransaction
+     * const ticketTransaction = await prisma.ticketTransaction.upsert({
+     *   create: {
+     *     // ... data to create a TicketTransaction
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TicketTransaction we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TicketTransactionUpsertArgs>(args: SelectSubset<T, TicketTransactionUpsertArgs<ExtArgs>>): Prisma__TicketTransactionClient<$Result.GetResult<Prisma.$TicketTransactionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TicketTransactions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TicketTransactionCountArgs} args - Arguments to filter TicketTransactions to count.
+     * @example
+     * // Count the number of TicketTransactions
+     * const count = await prisma.ticketTransaction.count({
+     *   where: {
+     *     // ... the filter for the TicketTransactions we want to count
+     *   }
+     * })
+    **/
+    count<T extends TicketTransactionCountArgs>(
+      args?: Subset<T, TicketTransactionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TicketTransactionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TicketTransaction.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TicketTransactionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TicketTransactionAggregateArgs>(args: Subset<T, TicketTransactionAggregateArgs>): Prisma.PrismaPromise<GetTicketTransactionAggregateType<T>>
+
+    /**
+     * Group by TicketTransaction.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TicketTransactionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TicketTransactionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TicketTransactionGroupByArgs['orderBy'] }
+        : { orderBy?: TicketTransactionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TicketTransactionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTicketTransactionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TicketTransaction model
+   */
+  readonly fields: TicketTransactionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TicketTransaction.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TicketTransactionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    event<T extends EventDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventDefaultArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    member<T extends MemberDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MemberDefaultArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    ticketTransactionDetails<T extends TicketTransaction$ticketTransactionDetailsArgs<ExtArgs> = {}>(args?: Subset<T, TicketTransaction$ticketTransactionDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketTransactionDetailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TicketTransaction model
+   */
+  interface TicketTransactionFieldRefs {
+    readonly id: FieldRef<"TicketTransaction", 'Int'>
+    readonly eventId: FieldRef<"TicketTransaction", 'Int'>
+    readonly memberId: FieldRef<"TicketTransaction", 'String'>
+    readonly ticketCode: FieldRef<"TicketTransaction", 'String'>
+    readonly createdAt: FieldRef<"TicketTransaction", 'DateTime'>
+    readonly updatedAt: FieldRef<"TicketTransaction", 'DateTime'>
+    readonly deletedAt: FieldRef<"TicketTransaction", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TicketTransaction findUnique
+   */
+  export type TicketTransactionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransaction
+     */
+    select?: TicketTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransaction
+     */
+    omit?: TicketTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionInclude<ExtArgs> | null
+    /**
+     * Filter, which TicketTransaction to fetch.
+     */
+    where: TicketTransactionWhereUniqueInput
+  }
+
+  /**
+   * TicketTransaction findUniqueOrThrow
+   */
+  export type TicketTransactionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransaction
+     */
+    select?: TicketTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransaction
+     */
+    omit?: TicketTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionInclude<ExtArgs> | null
+    /**
+     * Filter, which TicketTransaction to fetch.
+     */
+    where: TicketTransactionWhereUniqueInput
+  }
+
+  /**
+   * TicketTransaction findFirst
+   */
+  export type TicketTransactionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransaction
+     */
+    select?: TicketTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransaction
+     */
+    omit?: TicketTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionInclude<ExtArgs> | null
+    /**
+     * Filter, which TicketTransaction to fetch.
+     */
+    where?: TicketTransactionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TicketTransactions to fetch.
+     */
+    orderBy?: TicketTransactionOrderByWithRelationInput | TicketTransactionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TicketTransactions.
+     */
+    cursor?: TicketTransactionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TicketTransactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TicketTransactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TicketTransactions.
+     */
+    distinct?: TicketTransactionScalarFieldEnum | TicketTransactionScalarFieldEnum[]
+  }
+
+  /**
+   * TicketTransaction findFirstOrThrow
+   */
+  export type TicketTransactionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransaction
+     */
+    select?: TicketTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransaction
+     */
+    omit?: TicketTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionInclude<ExtArgs> | null
+    /**
+     * Filter, which TicketTransaction to fetch.
+     */
+    where?: TicketTransactionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TicketTransactions to fetch.
+     */
+    orderBy?: TicketTransactionOrderByWithRelationInput | TicketTransactionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TicketTransactions.
+     */
+    cursor?: TicketTransactionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TicketTransactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TicketTransactions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TicketTransactions.
+     */
+    distinct?: TicketTransactionScalarFieldEnum | TicketTransactionScalarFieldEnum[]
+  }
+
+  /**
+   * TicketTransaction findMany
+   */
+  export type TicketTransactionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransaction
+     */
+    select?: TicketTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransaction
+     */
+    omit?: TicketTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionInclude<ExtArgs> | null
+    /**
+     * Filter, which TicketTransactions to fetch.
+     */
+    where?: TicketTransactionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TicketTransactions to fetch.
+     */
+    orderBy?: TicketTransactionOrderByWithRelationInput | TicketTransactionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TicketTransactions.
+     */
+    cursor?: TicketTransactionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TicketTransactions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TicketTransactions.
+     */
+    skip?: number
+    distinct?: TicketTransactionScalarFieldEnum | TicketTransactionScalarFieldEnum[]
+  }
+
+  /**
+   * TicketTransaction create
+   */
+  export type TicketTransactionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransaction
+     */
+    select?: TicketTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransaction
+     */
+    omit?: TicketTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TicketTransaction.
+     */
+    data: XOR<TicketTransactionCreateInput, TicketTransactionUncheckedCreateInput>
+  }
+
+  /**
+   * TicketTransaction createMany
+   */
+  export type TicketTransactionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TicketTransactions.
+     */
+    data: TicketTransactionCreateManyInput | TicketTransactionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TicketTransaction createManyAndReturn
+   */
+  export type TicketTransactionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransaction
+     */
+    select?: TicketTransactionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransaction
+     */
+    omit?: TicketTransactionOmit<ExtArgs> | null
+    /**
+     * The data used to create many TicketTransactions.
+     */
+    data: TicketTransactionCreateManyInput | TicketTransactionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TicketTransaction update
+   */
+  export type TicketTransactionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransaction
+     */
+    select?: TicketTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransaction
+     */
+    omit?: TicketTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TicketTransaction.
+     */
+    data: XOR<TicketTransactionUpdateInput, TicketTransactionUncheckedUpdateInput>
+    /**
+     * Choose, which TicketTransaction to update.
+     */
+    where: TicketTransactionWhereUniqueInput
+  }
+
+  /**
+   * TicketTransaction updateMany
+   */
+  export type TicketTransactionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TicketTransactions.
+     */
+    data: XOR<TicketTransactionUpdateManyMutationInput, TicketTransactionUncheckedUpdateManyInput>
+    /**
+     * Filter which TicketTransactions to update
+     */
+    where?: TicketTransactionWhereInput
+    /**
+     * Limit how many TicketTransactions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TicketTransaction updateManyAndReturn
+   */
+  export type TicketTransactionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransaction
+     */
+    select?: TicketTransactionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransaction
+     */
+    omit?: TicketTransactionOmit<ExtArgs> | null
+    /**
+     * The data used to update TicketTransactions.
+     */
+    data: XOR<TicketTransactionUpdateManyMutationInput, TicketTransactionUncheckedUpdateManyInput>
+    /**
+     * Filter which TicketTransactions to update
+     */
+    where?: TicketTransactionWhereInput
+    /**
+     * Limit how many TicketTransactions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TicketTransaction upsert
+   */
+  export type TicketTransactionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransaction
+     */
+    select?: TicketTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransaction
+     */
+    omit?: TicketTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TicketTransaction to update in case it exists.
+     */
+    where: TicketTransactionWhereUniqueInput
+    /**
+     * In case the TicketTransaction found by the `where` argument doesn't exist, create a new TicketTransaction with this data.
+     */
+    create: XOR<TicketTransactionCreateInput, TicketTransactionUncheckedCreateInput>
+    /**
+     * In case the TicketTransaction was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TicketTransactionUpdateInput, TicketTransactionUncheckedUpdateInput>
+  }
+
+  /**
+   * TicketTransaction delete
+   */
+  export type TicketTransactionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransaction
+     */
+    select?: TicketTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransaction
+     */
+    omit?: TicketTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionInclude<ExtArgs> | null
+    /**
+     * Filter which TicketTransaction to delete.
+     */
+    where: TicketTransactionWhereUniqueInput
+  }
+
+  /**
+   * TicketTransaction deleteMany
+   */
+  export type TicketTransactionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TicketTransactions to delete
+     */
+    where?: TicketTransactionWhereInput
+    /**
+     * Limit how many TicketTransactions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TicketTransaction.ticketTransactionDetails
+   */
+  export type TicketTransaction$ticketTransactionDetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransactionDetail
+     */
+    select?: TicketTransactionDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransactionDetail
+     */
+    omit?: TicketTransactionDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionDetailInclude<ExtArgs> | null
+    where?: TicketTransactionDetailWhereInput
+    orderBy?: TicketTransactionDetailOrderByWithRelationInput | TicketTransactionDetailOrderByWithRelationInput[]
+    cursor?: TicketTransactionDetailWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TicketTransactionDetailScalarFieldEnum | TicketTransactionDetailScalarFieldEnum[]
+  }
+
+  /**
+   * TicketTransaction without action
+   */
+  export type TicketTransactionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransaction
+     */
+    select?: TicketTransactionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransaction
+     */
+    omit?: TicketTransactionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TicketTransactionDetail
+   */
+
+  export type AggregateTicketTransactionDetail = {
+    _count: TicketTransactionDetailCountAggregateOutputType | null
+    _avg: TicketTransactionDetailAvgAggregateOutputType | null
+    _sum: TicketTransactionDetailSumAggregateOutputType | null
+    _min: TicketTransactionDetailMinAggregateOutputType | null
+    _max: TicketTransactionDetailMaxAggregateOutputType | null
+  }
+
+  export type TicketTransactionDetailAvgAggregateOutputType = {
+    id: number | null
+    ticketTransactionId: number | null
+    orderCountryPhoneId: number | null
+  }
+
+  export type TicketTransactionDetailSumAggregateOutputType = {
+    id: number | null
+    ticketTransactionId: number | null
+    orderCountryPhoneId: number | null
+  }
+
+  export type TicketTransactionDetailMinAggregateOutputType = {
+    id: number | null
+    ticketTransactionId: number | null
+    orderName: string | null
+    orderCountryPhoneId: number | null
+    orderEmail: string | null
+    orderBirthDate: string | null
+    orderSex: $Enums.Sex | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+  }
+
+  export type TicketTransactionDetailMaxAggregateOutputType = {
+    id: number | null
+    ticketTransactionId: number | null
+    orderName: string | null
+    orderCountryPhoneId: number | null
+    orderEmail: string | null
+    orderBirthDate: string | null
+    orderSex: $Enums.Sex | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    deletedAt: Date | null
+  }
+
+  export type TicketTransactionDetailCountAggregateOutputType = {
+    id: number
+    ticketTransactionId: number
+    orderName: number
+    orderCountryPhoneId: number
+    orderEmail: number
+    orderBirthDate: number
+    orderSex: number
+    createdAt: number
+    updatedAt: number
+    deletedAt: number
+    _all: number
+  }
+
+
+  export type TicketTransactionDetailAvgAggregateInputType = {
+    id?: true
+    ticketTransactionId?: true
+    orderCountryPhoneId?: true
+  }
+
+  export type TicketTransactionDetailSumAggregateInputType = {
+    id?: true
+    ticketTransactionId?: true
+    orderCountryPhoneId?: true
+  }
+
+  export type TicketTransactionDetailMinAggregateInputType = {
+    id?: true
+    ticketTransactionId?: true
+    orderName?: true
+    orderCountryPhoneId?: true
+    orderEmail?: true
+    orderBirthDate?: true
+    orderSex?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+  }
+
+  export type TicketTransactionDetailMaxAggregateInputType = {
+    id?: true
+    ticketTransactionId?: true
+    orderName?: true
+    orderCountryPhoneId?: true
+    orderEmail?: true
+    orderBirthDate?: true
+    orderSex?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+  }
+
+  export type TicketTransactionDetailCountAggregateInputType = {
+    id?: true
+    ticketTransactionId?: true
+    orderName?: true
+    orderCountryPhoneId?: true
+    orderEmail?: true
+    orderBirthDate?: true
+    orderSex?: true
+    createdAt?: true
+    updatedAt?: true
+    deletedAt?: true
+    _all?: true
+  }
+
+  export type TicketTransactionDetailAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TicketTransactionDetail to aggregate.
+     */
+    where?: TicketTransactionDetailWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TicketTransactionDetails to fetch.
+     */
+    orderBy?: TicketTransactionDetailOrderByWithRelationInput | TicketTransactionDetailOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TicketTransactionDetailWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TicketTransactionDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TicketTransactionDetails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TicketTransactionDetails
+    **/
+    _count?: true | TicketTransactionDetailCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TicketTransactionDetailAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TicketTransactionDetailSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TicketTransactionDetailMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TicketTransactionDetailMaxAggregateInputType
+  }
+
+  export type GetTicketTransactionDetailAggregateType<T extends TicketTransactionDetailAggregateArgs> = {
+        [P in keyof T & keyof AggregateTicketTransactionDetail]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTicketTransactionDetail[P]>
+      : GetScalarType<T[P], AggregateTicketTransactionDetail[P]>
+  }
+
+
+
+
+  export type TicketTransactionDetailGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TicketTransactionDetailWhereInput
+    orderBy?: TicketTransactionDetailOrderByWithAggregationInput | TicketTransactionDetailOrderByWithAggregationInput[]
+    by: TicketTransactionDetailScalarFieldEnum[] | TicketTransactionDetailScalarFieldEnum
+    having?: TicketTransactionDetailScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TicketTransactionDetailCountAggregateInputType | true
+    _avg?: TicketTransactionDetailAvgAggregateInputType
+    _sum?: TicketTransactionDetailSumAggregateInputType
+    _min?: TicketTransactionDetailMinAggregateInputType
+    _max?: TicketTransactionDetailMaxAggregateInputType
+  }
+
+  export type TicketTransactionDetailGroupByOutputType = {
+    id: number
+    ticketTransactionId: number
+    orderName: string
+    orderCountryPhoneId: number
+    orderEmail: string
+    orderBirthDate: string
+    orderSex: $Enums.Sex
+    createdAt: Date
+    updatedAt: Date
+    deletedAt: Date | null
+    _count: TicketTransactionDetailCountAggregateOutputType | null
+    _avg: TicketTransactionDetailAvgAggregateOutputType | null
+    _sum: TicketTransactionDetailSumAggregateOutputType | null
+    _min: TicketTransactionDetailMinAggregateOutputType | null
+    _max: TicketTransactionDetailMaxAggregateOutputType | null
+  }
+
+  type GetTicketTransactionDetailGroupByPayload<T extends TicketTransactionDetailGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TicketTransactionDetailGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TicketTransactionDetailGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TicketTransactionDetailGroupByOutputType[P]>
+            : GetScalarType<T[P], TicketTransactionDetailGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TicketTransactionDetailSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    ticketTransactionId?: boolean
+    orderName?: boolean
+    orderCountryPhoneId?: boolean
+    orderEmail?: boolean
+    orderBirthDate?: boolean
+    orderSex?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    ticketTransactions?: boolean | TicketTransactionDefaultArgs<ExtArgs>
+    orderCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ticketTransactionDetail"]>
+
+  export type TicketTransactionDetailSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    ticketTransactionId?: boolean
+    orderName?: boolean
+    orderCountryPhoneId?: boolean
+    orderEmail?: boolean
+    orderBirthDate?: boolean
+    orderSex?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    ticketTransactions?: boolean | TicketTransactionDefaultArgs<ExtArgs>
+    orderCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ticketTransactionDetail"]>
+
+  export type TicketTransactionDetailSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    ticketTransactionId?: boolean
+    orderName?: boolean
+    orderCountryPhoneId?: boolean
+    orderEmail?: boolean
+    orderBirthDate?: boolean
+    orderSex?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+    ticketTransactions?: boolean | TicketTransactionDefaultArgs<ExtArgs>
+    orderCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["ticketTransactionDetail"]>
+
+  export type TicketTransactionDetailSelectScalar = {
+    id?: boolean
+    ticketTransactionId?: boolean
+    orderName?: boolean
+    orderCountryPhoneId?: boolean
+    orderEmail?: boolean
+    orderBirthDate?: boolean
+    orderSex?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    deletedAt?: boolean
+  }
+
+  export type TicketTransactionDetailOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "ticketTransactionId" | "orderName" | "orderCountryPhoneId" | "orderEmail" | "orderBirthDate" | "orderSex" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["ticketTransactionDetail"]>
+  export type TicketTransactionDetailInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ticketTransactions?: boolean | TicketTransactionDefaultArgs<ExtArgs>
+    orderCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+  }
+  export type TicketTransactionDetailIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ticketTransactions?: boolean | TicketTransactionDefaultArgs<ExtArgs>
+    orderCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+  }
+  export type TicketTransactionDetailIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ticketTransactions?: boolean | TicketTransactionDefaultArgs<ExtArgs>
+    orderCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+  }
+
+  export type $TicketTransactionDetailPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TicketTransactionDetail"
+    objects: {
+      ticketTransactions: Prisma.$TicketTransactionPayload<ExtArgs>
+      orderCountryPhone: Prisma.$CountryPhonePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      ticketTransactionId: number
+      orderName: string
+      orderCountryPhoneId: number
+      orderEmail: string
+      orderBirthDate: string
+      orderSex: $Enums.Sex
+      createdAt: Date
+      updatedAt: Date
+      deletedAt: Date | null
+    }, ExtArgs["result"]["ticketTransactionDetail"]>
+    composites: {}
+  }
+
+  type TicketTransactionDetailGetPayload<S extends boolean | null | undefined | TicketTransactionDetailDefaultArgs> = $Result.GetResult<Prisma.$TicketTransactionDetailPayload, S>
+
+  type TicketTransactionDetailCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TicketTransactionDetailFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TicketTransactionDetailCountAggregateInputType | true
+    }
+
+  export interface TicketTransactionDetailDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TicketTransactionDetail'], meta: { name: 'TicketTransactionDetail' } }
+    /**
+     * Find zero or one TicketTransactionDetail that matches the filter.
+     * @param {TicketTransactionDetailFindUniqueArgs} args - Arguments to find a TicketTransactionDetail
+     * @example
+     * // Get one TicketTransactionDetail
+     * const ticketTransactionDetail = await prisma.ticketTransactionDetail.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TicketTransactionDetailFindUniqueArgs>(args: SelectSubset<T, TicketTransactionDetailFindUniqueArgs<ExtArgs>>): Prisma__TicketTransactionDetailClient<$Result.GetResult<Prisma.$TicketTransactionDetailPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TicketTransactionDetail that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TicketTransactionDetailFindUniqueOrThrowArgs} args - Arguments to find a TicketTransactionDetail
+     * @example
+     * // Get one TicketTransactionDetail
+     * const ticketTransactionDetail = await prisma.ticketTransactionDetail.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TicketTransactionDetailFindUniqueOrThrowArgs>(args: SelectSubset<T, TicketTransactionDetailFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TicketTransactionDetailClient<$Result.GetResult<Prisma.$TicketTransactionDetailPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TicketTransactionDetail that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TicketTransactionDetailFindFirstArgs} args - Arguments to find a TicketTransactionDetail
+     * @example
+     * // Get one TicketTransactionDetail
+     * const ticketTransactionDetail = await prisma.ticketTransactionDetail.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TicketTransactionDetailFindFirstArgs>(args?: SelectSubset<T, TicketTransactionDetailFindFirstArgs<ExtArgs>>): Prisma__TicketTransactionDetailClient<$Result.GetResult<Prisma.$TicketTransactionDetailPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TicketTransactionDetail that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TicketTransactionDetailFindFirstOrThrowArgs} args - Arguments to find a TicketTransactionDetail
+     * @example
+     * // Get one TicketTransactionDetail
+     * const ticketTransactionDetail = await prisma.ticketTransactionDetail.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TicketTransactionDetailFindFirstOrThrowArgs>(args?: SelectSubset<T, TicketTransactionDetailFindFirstOrThrowArgs<ExtArgs>>): Prisma__TicketTransactionDetailClient<$Result.GetResult<Prisma.$TicketTransactionDetailPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TicketTransactionDetails that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TicketTransactionDetailFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TicketTransactionDetails
+     * const ticketTransactionDetails = await prisma.ticketTransactionDetail.findMany()
+     * 
+     * // Get first 10 TicketTransactionDetails
+     * const ticketTransactionDetails = await prisma.ticketTransactionDetail.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const ticketTransactionDetailWithIdOnly = await prisma.ticketTransactionDetail.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TicketTransactionDetailFindManyArgs>(args?: SelectSubset<T, TicketTransactionDetailFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketTransactionDetailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TicketTransactionDetail.
+     * @param {TicketTransactionDetailCreateArgs} args - Arguments to create a TicketTransactionDetail.
+     * @example
+     * // Create one TicketTransactionDetail
+     * const TicketTransactionDetail = await prisma.ticketTransactionDetail.create({
+     *   data: {
+     *     // ... data to create a TicketTransactionDetail
+     *   }
+     * })
+     * 
+     */
+    create<T extends TicketTransactionDetailCreateArgs>(args: SelectSubset<T, TicketTransactionDetailCreateArgs<ExtArgs>>): Prisma__TicketTransactionDetailClient<$Result.GetResult<Prisma.$TicketTransactionDetailPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TicketTransactionDetails.
+     * @param {TicketTransactionDetailCreateManyArgs} args - Arguments to create many TicketTransactionDetails.
+     * @example
+     * // Create many TicketTransactionDetails
+     * const ticketTransactionDetail = await prisma.ticketTransactionDetail.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TicketTransactionDetailCreateManyArgs>(args?: SelectSubset<T, TicketTransactionDetailCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TicketTransactionDetails and returns the data saved in the database.
+     * @param {TicketTransactionDetailCreateManyAndReturnArgs} args - Arguments to create many TicketTransactionDetails.
+     * @example
+     * // Create many TicketTransactionDetails
+     * const ticketTransactionDetail = await prisma.ticketTransactionDetail.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TicketTransactionDetails and only return the `id`
+     * const ticketTransactionDetailWithIdOnly = await prisma.ticketTransactionDetail.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TicketTransactionDetailCreateManyAndReturnArgs>(args?: SelectSubset<T, TicketTransactionDetailCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketTransactionDetailPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TicketTransactionDetail.
+     * @param {TicketTransactionDetailDeleteArgs} args - Arguments to delete one TicketTransactionDetail.
+     * @example
+     * // Delete one TicketTransactionDetail
+     * const TicketTransactionDetail = await prisma.ticketTransactionDetail.delete({
+     *   where: {
+     *     // ... filter to delete one TicketTransactionDetail
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TicketTransactionDetailDeleteArgs>(args: SelectSubset<T, TicketTransactionDetailDeleteArgs<ExtArgs>>): Prisma__TicketTransactionDetailClient<$Result.GetResult<Prisma.$TicketTransactionDetailPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TicketTransactionDetail.
+     * @param {TicketTransactionDetailUpdateArgs} args - Arguments to update one TicketTransactionDetail.
+     * @example
+     * // Update one TicketTransactionDetail
+     * const ticketTransactionDetail = await prisma.ticketTransactionDetail.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TicketTransactionDetailUpdateArgs>(args: SelectSubset<T, TicketTransactionDetailUpdateArgs<ExtArgs>>): Prisma__TicketTransactionDetailClient<$Result.GetResult<Prisma.$TicketTransactionDetailPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TicketTransactionDetails.
+     * @param {TicketTransactionDetailDeleteManyArgs} args - Arguments to filter TicketTransactionDetails to delete.
+     * @example
+     * // Delete a few TicketTransactionDetails
+     * const { count } = await prisma.ticketTransactionDetail.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TicketTransactionDetailDeleteManyArgs>(args?: SelectSubset<T, TicketTransactionDetailDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TicketTransactionDetails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TicketTransactionDetailUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TicketTransactionDetails
+     * const ticketTransactionDetail = await prisma.ticketTransactionDetail.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TicketTransactionDetailUpdateManyArgs>(args: SelectSubset<T, TicketTransactionDetailUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TicketTransactionDetails and returns the data updated in the database.
+     * @param {TicketTransactionDetailUpdateManyAndReturnArgs} args - Arguments to update many TicketTransactionDetails.
+     * @example
+     * // Update many TicketTransactionDetails
+     * const ticketTransactionDetail = await prisma.ticketTransactionDetail.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TicketTransactionDetails and only return the `id`
+     * const ticketTransactionDetailWithIdOnly = await prisma.ticketTransactionDetail.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TicketTransactionDetailUpdateManyAndReturnArgs>(args: SelectSubset<T, TicketTransactionDetailUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketTransactionDetailPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TicketTransactionDetail.
+     * @param {TicketTransactionDetailUpsertArgs} args - Arguments to update or create a TicketTransactionDetail.
+     * @example
+     * // Update or create a TicketTransactionDetail
+     * const ticketTransactionDetail = await prisma.ticketTransactionDetail.upsert({
+     *   create: {
+     *     // ... data to create a TicketTransactionDetail
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TicketTransactionDetail we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TicketTransactionDetailUpsertArgs>(args: SelectSubset<T, TicketTransactionDetailUpsertArgs<ExtArgs>>): Prisma__TicketTransactionDetailClient<$Result.GetResult<Prisma.$TicketTransactionDetailPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TicketTransactionDetails.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TicketTransactionDetailCountArgs} args - Arguments to filter TicketTransactionDetails to count.
+     * @example
+     * // Count the number of TicketTransactionDetails
+     * const count = await prisma.ticketTransactionDetail.count({
+     *   where: {
+     *     // ... the filter for the TicketTransactionDetails we want to count
+     *   }
+     * })
+    **/
+    count<T extends TicketTransactionDetailCountArgs>(
+      args?: Subset<T, TicketTransactionDetailCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TicketTransactionDetailCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TicketTransactionDetail.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TicketTransactionDetailAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TicketTransactionDetailAggregateArgs>(args: Subset<T, TicketTransactionDetailAggregateArgs>): Prisma.PrismaPromise<GetTicketTransactionDetailAggregateType<T>>
+
+    /**
+     * Group by TicketTransactionDetail.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TicketTransactionDetailGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TicketTransactionDetailGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TicketTransactionDetailGroupByArgs['orderBy'] }
+        : { orderBy?: TicketTransactionDetailGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TicketTransactionDetailGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTicketTransactionDetailGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TicketTransactionDetail model
+   */
+  readonly fields: TicketTransactionDetailFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TicketTransactionDetail.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TicketTransactionDetailClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    ticketTransactions<T extends TicketTransactionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TicketTransactionDefaultArgs<ExtArgs>>): Prisma__TicketTransactionClient<$Result.GetResult<Prisma.$TicketTransactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    orderCountryPhone<T extends CountryPhoneDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CountryPhoneDefaultArgs<ExtArgs>>): Prisma__CountryPhoneClient<$Result.GetResult<Prisma.$CountryPhonePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TicketTransactionDetail model
+   */
+  interface TicketTransactionDetailFieldRefs {
+    readonly id: FieldRef<"TicketTransactionDetail", 'Int'>
+    readonly ticketTransactionId: FieldRef<"TicketTransactionDetail", 'Int'>
+    readonly orderName: FieldRef<"TicketTransactionDetail", 'String'>
+    readonly orderCountryPhoneId: FieldRef<"TicketTransactionDetail", 'Int'>
+    readonly orderEmail: FieldRef<"TicketTransactionDetail", 'String'>
+    readonly orderBirthDate: FieldRef<"TicketTransactionDetail", 'String'>
+    readonly orderSex: FieldRef<"TicketTransactionDetail", 'Sex'>
+    readonly createdAt: FieldRef<"TicketTransactionDetail", 'DateTime'>
+    readonly updatedAt: FieldRef<"TicketTransactionDetail", 'DateTime'>
+    readonly deletedAt: FieldRef<"TicketTransactionDetail", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TicketTransactionDetail findUnique
+   */
+  export type TicketTransactionDetailFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransactionDetail
+     */
+    select?: TicketTransactionDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransactionDetail
+     */
+    omit?: TicketTransactionDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionDetailInclude<ExtArgs> | null
+    /**
+     * Filter, which TicketTransactionDetail to fetch.
+     */
+    where: TicketTransactionDetailWhereUniqueInput
+  }
+
+  /**
+   * TicketTransactionDetail findUniqueOrThrow
+   */
+  export type TicketTransactionDetailFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransactionDetail
+     */
+    select?: TicketTransactionDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransactionDetail
+     */
+    omit?: TicketTransactionDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionDetailInclude<ExtArgs> | null
+    /**
+     * Filter, which TicketTransactionDetail to fetch.
+     */
+    where: TicketTransactionDetailWhereUniqueInput
+  }
+
+  /**
+   * TicketTransactionDetail findFirst
+   */
+  export type TicketTransactionDetailFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransactionDetail
+     */
+    select?: TicketTransactionDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransactionDetail
+     */
+    omit?: TicketTransactionDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionDetailInclude<ExtArgs> | null
+    /**
+     * Filter, which TicketTransactionDetail to fetch.
+     */
+    where?: TicketTransactionDetailWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TicketTransactionDetails to fetch.
+     */
+    orderBy?: TicketTransactionDetailOrderByWithRelationInput | TicketTransactionDetailOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TicketTransactionDetails.
+     */
+    cursor?: TicketTransactionDetailWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TicketTransactionDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TicketTransactionDetails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TicketTransactionDetails.
+     */
+    distinct?: TicketTransactionDetailScalarFieldEnum | TicketTransactionDetailScalarFieldEnum[]
+  }
+
+  /**
+   * TicketTransactionDetail findFirstOrThrow
+   */
+  export type TicketTransactionDetailFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransactionDetail
+     */
+    select?: TicketTransactionDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransactionDetail
+     */
+    omit?: TicketTransactionDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionDetailInclude<ExtArgs> | null
+    /**
+     * Filter, which TicketTransactionDetail to fetch.
+     */
+    where?: TicketTransactionDetailWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TicketTransactionDetails to fetch.
+     */
+    orderBy?: TicketTransactionDetailOrderByWithRelationInput | TicketTransactionDetailOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TicketTransactionDetails.
+     */
+    cursor?: TicketTransactionDetailWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TicketTransactionDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TicketTransactionDetails.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TicketTransactionDetails.
+     */
+    distinct?: TicketTransactionDetailScalarFieldEnum | TicketTransactionDetailScalarFieldEnum[]
+  }
+
+  /**
+   * TicketTransactionDetail findMany
+   */
+  export type TicketTransactionDetailFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransactionDetail
+     */
+    select?: TicketTransactionDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransactionDetail
+     */
+    omit?: TicketTransactionDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionDetailInclude<ExtArgs> | null
+    /**
+     * Filter, which TicketTransactionDetails to fetch.
+     */
+    where?: TicketTransactionDetailWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TicketTransactionDetails to fetch.
+     */
+    orderBy?: TicketTransactionDetailOrderByWithRelationInput | TicketTransactionDetailOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TicketTransactionDetails.
+     */
+    cursor?: TicketTransactionDetailWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TicketTransactionDetails from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TicketTransactionDetails.
+     */
+    skip?: number
+    distinct?: TicketTransactionDetailScalarFieldEnum | TicketTransactionDetailScalarFieldEnum[]
+  }
+
+  /**
+   * TicketTransactionDetail create
+   */
+  export type TicketTransactionDetailCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransactionDetail
+     */
+    select?: TicketTransactionDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransactionDetail
+     */
+    omit?: TicketTransactionDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionDetailInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TicketTransactionDetail.
+     */
+    data: XOR<TicketTransactionDetailCreateInput, TicketTransactionDetailUncheckedCreateInput>
+  }
+
+  /**
+   * TicketTransactionDetail createMany
+   */
+  export type TicketTransactionDetailCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TicketTransactionDetails.
+     */
+    data: TicketTransactionDetailCreateManyInput | TicketTransactionDetailCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TicketTransactionDetail createManyAndReturn
+   */
+  export type TicketTransactionDetailCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransactionDetail
+     */
+    select?: TicketTransactionDetailSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransactionDetail
+     */
+    omit?: TicketTransactionDetailOmit<ExtArgs> | null
+    /**
+     * The data used to create many TicketTransactionDetails.
+     */
+    data: TicketTransactionDetailCreateManyInput | TicketTransactionDetailCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionDetailIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TicketTransactionDetail update
+   */
+  export type TicketTransactionDetailUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransactionDetail
+     */
+    select?: TicketTransactionDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransactionDetail
+     */
+    omit?: TicketTransactionDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionDetailInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TicketTransactionDetail.
+     */
+    data: XOR<TicketTransactionDetailUpdateInput, TicketTransactionDetailUncheckedUpdateInput>
+    /**
+     * Choose, which TicketTransactionDetail to update.
+     */
+    where: TicketTransactionDetailWhereUniqueInput
+  }
+
+  /**
+   * TicketTransactionDetail updateMany
+   */
+  export type TicketTransactionDetailUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TicketTransactionDetails.
+     */
+    data: XOR<TicketTransactionDetailUpdateManyMutationInput, TicketTransactionDetailUncheckedUpdateManyInput>
+    /**
+     * Filter which TicketTransactionDetails to update
+     */
+    where?: TicketTransactionDetailWhereInput
+    /**
+     * Limit how many TicketTransactionDetails to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TicketTransactionDetail updateManyAndReturn
+   */
+  export type TicketTransactionDetailUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransactionDetail
+     */
+    select?: TicketTransactionDetailSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransactionDetail
+     */
+    omit?: TicketTransactionDetailOmit<ExtArgs> | null
+    /**
+     * The data used to update TicketTransactionDetails.
+     */
+    data: XOR<TicketTransactionDetailUpdateManyMutationInput, TicketTransactionDetailUncheckedUpdateManyInput>
+    /**
+     * Filter which TicketTransactionDetails to update
+     */
+    where?: TicketTransactionDetailWhereInput
+    /**
+     * Limit how many TicketTransactionDetails to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionDetailIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TicketTransactionDetail upsert
+   */
+  export type TicketTransactionDetailUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransactionDetail
+     */
+    select?: TicketTransactionDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransactionDetail
+     */
+    omit?: TicketTransactionDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionDetailInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TicketTransactionDetail to update in case it exists.
+     */
+    where: TicketTransactionDetailWhereUniqueInput
+    /**
+     * In case the TicketTransactionDetail found by the `where` argument doesn't exist, create a new TicketTransactionDetail with this data.
+     */
+    create: XOR<TicketTransactionDetailCreateInput, TicketTransactionDetailUncheckedCreateInput>
+    /**
+     * In case the TicketTransactionDetail was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TicketTransactionDetailUpdateInput, TicketTransactionDetailUncheckedUpdateInput>
+  }
+
+  /**
+   * TicketTransactionDetail delete
+   */
+  export type TicketTransactionDetailDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransactionDetail
+     */
+    select?: TicketTransactionDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransactionDetail
+     */
+    omit?: TicketTransactionDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionDetailInclude<ExtArgs> | null
+    /**
+     * Filter which TicketTransactionDetail to delete.
+     */
+    where: TicketTransactionDetailWhereUniqueInput
+  }
+
+  /**
+   * TicketTransactionDetail deleteMany
+   */
+  export type TicketTransactionDetailDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TicketTransactionDetails to delete
+     */
+    where?: TicketTransactionDetailWhereInput
+    /**
+     * Limit how many TicketTransactionDetails to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TicketTransactionDetail without action
+   */
+  export type TicketTransactionDetailDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TicketTransactionDetail
+     */
+    select?: TicketTransactionDetailSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TicketTransactionDetail
+     */
+    omit?: TicketTransactionDetailOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TicketTransactionDetailInclude<ExtArgs> | null
   }
 
 
@@ -7848,7 +12997,7 @@ export namespace Prisma {
     id: 'id',
     creatorId: 'creatorId',
     eventName: 'eventName',
-    eventCategoryId: 'eventCategoryId',
+    eventFormatId: 'eventFormatId',
     eventTopicId: 'eventTopicId',
     organizerName: 'organizerName',
     organizerLogoImgUrl: 'organizerLogoImgUrl',
@@ -7866,7 +13015,7 @@ export namespace Prisma {
     ticketEndDate: 'ticketEndDate',
     eventCPName: 'eventCPName',
     eventCPEmail: 'eventCPEmail',
-    countryPhoneId: 'countryPhoneId',
+    eventCountryPhoneId: 'eventCountryPhoneId',
     ticketDataFormType: 'ticketDataFormType',
     maxTicketPerTransaction: 'maxTicketPerTransaction',
     oneEmailOneTransaction: 'oneEmailOneTransaction',
@@ -7878,6 +13027,57 @@ export namespace Prisma {
   };
 
   export type EventScalarFieldEnum = (typeof EventScalarFieldEnum)[keyof typeof EventScalarFieldEnum]
+
+
+  export const EventFormatScalarFieldEnum: {
+    id: 'id',
+    formatName: 'formatName',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt'
+  };
+
+  export type EventFormatScalarFieldEnum = (typeof EventFormatScalarFieldEnum)[keyof typeof EventFormatScalarFieldEnum]
+
+
+  export const EventTopicScalarFieldEnum: {
+    id: 'id',
+    topicName: 'topicName',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt'
+  };
+
+  export type EventTopicScalarFieldEnum = (typeof EventTopicScalarFieldEnum)[keyof typeof EventTopicScalarFieldEnum]
+
+
+  export const TicketTransactionScalarFieldEnum: {
+    id: 'id',
+    eventId: 'eventId',
+    memberId: 'memberId',
+    ticketCode: 'ticketCode',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt'
+  };
+
+  export type TicketTransactionScalarFieldEnum = (typeof TicketTransactionScalarFieldEnum)[keyof typeof TicketTransactionScalarFieldEnum]
+
+
+  export const TicketTransactionDetailScalarFieldEnum: {
+    id: 'id',
+    ticketTransactionId: 'ticketTransactionId',
+    orderName: 'orderName',
+    orderCountryPhoneId: 'orderCountryPhoneId',
+    orderEmail: 'orderEmail',
+    orderBirthDate: 'orderBirthDate',
+    orderSex: 'orderSex',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    deletedAt: 'deletedAt'
+  };
+
+  export type TicketTransactionDetailScalarFieldEnum = (typeof TicketTransactionDetailScalarFieldEnum)[keyof typeof TicketTransactionDetailScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -8045,6 +13245,7 @@ export namespace Prisma {
     members?: MemberListRelationFilter
     creatorProfile?: CreatorProfileListRelationFilter
     events?: EventListRelationFilter
+    ticketTransactionDetails?: TicketTransactionDetailListRelationFilter
   }
 
   export type CountryPhoneOrderByWithRelationInput = {
@@ -8058,6 +13259,7 @@ export namespace Prisma {
     members?: MemberOrderByRelationAggregateInput
     creatorProfile?: CreatorProfileOrderByRelationAggregateInput
     events?: EventOrderByRelationAggregateInput
+    ticketTransactionDetails?: TicketTransactionDetailOrderByRelationAggregateInput
   }
 
   export type CountryPhoneWhereUniqueInput = Prisma.AtLeast<{
@@ -8074,6 +13276,7 @@ export namespace Prisma {
     members?: MemberListRelationFilter
     creatorProfile?: CreatorProfileListRelationFilter
     events?: EventListRelationFilter
+    ticketTransactionDetails?: TicketTransactionDetailListRelationFilter
   }, "id" | "name" | "code">
 
   export type CountryPhoneOrderByWithAggregationInput = {
@@ -8126,6 +13329,7 @@ export namespace Prisma {
     countryPhone?: XOR<CountryPhoneScalarRelationFilter, CountryPhoneWhereInput>
     verificationCodes?: VerificationCodeListRelationFilter
     creatorProfile?: XOR<CreatorProfileNullableScalarRelationFilter, CreatorProfileWhereInput> | null
+    ticketTransactions?: TicketTransactionListRelationFilter
   }
 
   export type MemberOrderByWithRelationInput = {
@@ -8147,6 +13351,7 @@ export namespace Prisma {
     countryPhone?: CountryPhoneOrderByWithRelationInput
     verificationCodes?: VerificationCodeOrderByRelationAggregateInput
     creatorProfile?: CreatorProfileOrderByWithRelationInput
+    ticketTransactions?: TicketTransactionOrderByRelationAggregateInput
   }
 
   export type MemberWhereUniqueInput = Prisma.AtLeast<{
@@ -8171,6 +13376,7 @@ export namespace Prisma {
     countryPhone?: XOR<CountryPhoneScalarRelationFilter, CountryPhoneWhereInput>
     verificationCodes?: VerificationCodeListRelationFilter
     creatorProfile?: XOR<CreatorProfileNullableScalarRelationFilter, CreatorProfileWhereInput> | null
+    ticketTransactions?: TicketTransactionListRelationFilter
   }, "id" | "email" | "phoneNumber">
 
   export type MemberOrderByWithAggregationInput = {
@@ -8424,7 +13630,7 @@ export namespace Prisma {
     id?: IntFilter<"Event"> | number
     creatorId?: StringFilter<"Event"> | string
     eventName?: StringFilter<"Event"> | string
-    eventCategoryId?: IntFilter<"Event"> | number
+    eventFormatId?: IntFilter<"Event"> | number
     eventTopicId?: IntFilter<"Event"> | number
     organizerName?: StringNullableFilter<"Event"> | string | null
     organizerLogoImgUrl?: StringNullableFilter<"Event"> | string | null
@@ -8442,7 +13648,7 @@ export namespace Prisma {
     ticketEndDate?: DateTimeFilter<"Event"> | Date | string
     eventCPName?: StringFilter<"Event"> | string
     eventCPEmail?: StringFilter<"Event"> | string
-    countryPhoneId?: IntFilter<"Event"> | number
+    eventCountryPhoneId?: IntFilter<"Event"> | number
     ticketDataFormType?: EnumTicketDataFormTypeFilter<"Event"> | $Enums.TicketDataFormType
     maxTicketPerTransaction?: IntFilter<"Event"> | number
     oneEmailOneTransaction?: BoolFilter<"Event"> | boolean
@@ -8452,14 +13658,17 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Event"> | Date | string
     deletedAt?: DateTimeNullableFilter<"Event"> | Date | string | null
     creator?: XOR<CreatorProfileScalarRelationFilter, CreatorProfileWhereInput>
-    contryPhone?: XOR<CountryPhoneScalarRelationFilter, CountryPhoneWhereInput>
+    eventFormat?: XOR<EventFormatScalarRelationFilter, EventFormatWhereInput>
+    eventTopic?: XOR<EventTopicScalarRelationFilter, EventTopicWhereInput>
+    eventCountryPhone?: XOR<CountryPhoneScalarRelationFilter, CountryPhoneWhereInput>
+    ticketTransactions?: TicketTransactionListRelationFilter
   }
 
   export type EventOrderByWithRelationInput = {
     id?: SortOrder
     creatorId?: SortOrder
     eventName?: SortOrder
-    eventCategoryId?: SortOrder
+    eventFormatId?: SortOrder
     eventTopicId?: SortOrder
     organizerName?: SortOrderInput | SortOrder
     organizerLogoImgUrl?: SortOrderInput | SortOrder
@@ -8477,7 +13686,7 @@ export namespace Prisma {
     ticketEndDate?: SortOrder
     eventCPName?: SortOrder
     eventCPEmail?: SortOrder
-    countryPhoneId?: SortOrder
+    eventCountryPhoneId?: SortOrder
     ticketDataFormType?: SortOrder
     maxTicketPerTransaction?: SortOrder
     oneEmailOneTransaction?: SortOrder
@@ -8487,7 +13696,10 @@ export namespace Prisma {
     updatedAt?: SortOrder
     deletedAt?: SortOrderInput | SortOrder
     creator?: CreatorProfileOrderByWithRelationInput
-    contryPhone?: CountryPhoneOrderByWithRelationInput
+    eventFormat?: EventFormatOrderByWithRelationInput
+    eventTopic?: EventTopicOrderByWithRelationInput
+    eventCountryPhone?: CountryPhoneOrderByWithRelationInput
+    ticketTransactions?: TicketTransactionOrderByRelationAggregateInput
   }
 
   export type EventWhereUniqueInput = Prisma.AtLeast<{
@@ -8497,7 +13709,7 @@ export namespace Prisma {
     NOT?: EventWhereInput | EventWhereInput[]
     creatorId?: StringFilter<"Event"> | string
     eventName?: StringFilter<"Event"> | string
-    eventCategoryId?: IntFilter<"Event"> | number
+    eventFormatId?: IntFilter<"Event"> | number
     eventTopicId?: IntFilter<"Event"> | number
     organizerName?: StringNullableFilter<"Event"> | string | null
     organizerLogoImgUrl?: StringNullableFilter<"Event"> | string | null
@@ -8515,7 +13727,7 @@ export namespace Prisma {
     ticketEndDate?: DateTimeFilter<"Event"> | Date | string
     eventCPName?: StringFilter<"Event"> | string
     eventCPEmail?: StringFilter<"Event"> | string
-    countryPhoneId?: IntFilter<"Event"> | number
+    eventCountryPhoneId?: IntFilter<"Event"> | number
     ticketDataFormType?: EnumTicketDataFormTypeFilter<"Event"> | $Enums.TicketDataFormType
     maxTicketPerTransaction?: IntFilter<"Event"> | number
     oneEmailOneTransaction?: BoolFilter<"Event"> | boolean
@@ -8525,14 +13737,17 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Event"> | Date | string
     deletedAt?: DateTimeNullableFilter<"Event"> | Date | string | null
     creator?: XOR<CreatorProfileScalarRelationFilter, CreatorProfileWhereInput>
-    contryPhone?: XOR<CountryPhoneScalarRelationFilter, CountryPhoneWhereInput>
+    eventFormat?: XOR<EventFormatScalarRelationFilter, EventFormatWhereInput>
+    eventTopic?: XOR<EventTopicScalarRelationFilter, EventTopicWhereInput>
+    eventCountryPhone?: XOR<CountryPhoneScalarRelationFilter, CountryPhoneWhereInput>
+    ticketTransactions?: TicketTransactionListRelationFilter
   }, "id">
 
   export type EventOrderByWithAggregationInput = {
     id?: SortOrder
     creatorId?: SortOrder
     eventName?: SortOrder
-    eventCategoryId?: SortOrder
+    eventFormatId?: SortOrder
     eventTopicId?: SortOrder
     organizerName?: SortOrderInput | SortOrder
     organizerLogoImgUrl?: SortOrderInput | SortOrder
@@ -8550,7 +13765,7 @@ export namespace Prisma {
     ticketEndDate?: SortOrder
     eventCPName?: SortOrder
     eventCPEmail?: SortOrder
-    countryPhoneId?: SortOrder
+    eventCountryPhoneId?: SortOrder
     ticketDataFormType?: SortOrder
     maxTicketPerTransaction?: SortOrder
     oneEmailOneTransaction?: SortOrder
@@ -8573,7 +13788,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Event"> | number
     creatorId?: StringWithAggregatesFilter<"Event"> | string
     eventName?: StringWithAggregatesFilter<"Event"> | string
-    eventCategoryId?: IntWithAggregatesFilter<"Event"> | number
+    eventFormatId?: IntWithAggregatesFilter<"Event"> | number
     eventTopicId?: IntWithAggregatesFilter<"Event"> | number
     organizerName?: StringNullableWithAggregatesFilter<"Event"> | string | null
     organizerLogoImgUrl?: StringNullableWithAggregatesFilter<"Event"> | string | null
@@ -8591,7 +13806,7 @@ export namespace Prisma {
     ticketEndDate?: DateTimeWithAggregatesFilter<"Event"> | Date | string
     eventCPName?: StringWithAggregatesFilter<"Event"> | string
     eventCPEmail?: StringWithAggregatesFilter<"Event"> | string
-    countryPhoneId?: IntWithAggregatesFilter<"Event"> | number
+    eventCountryPhoneId?: IntWithAggregatesFilter<"Event"> | number
     ticketDataFormType?: EnumTicketDataFormTypeWithAggregatesFilter<"Event"> | $Enums.TicketDataFormType
     maxTicketPerTransaction?: IntWithAggregatesFilter<"Event"> | number
     oneEmailOneTransaction?: BoolWithAggregatesFilter<"Event"> | boolean
@@ -8600,6 +13815,278 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Event"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Event"> | Date | string
     deletedAt?: DateTimeNullableWithAggregatesFilter<"Event"> | Date | string | null
+  }
+
+  export type EventFormatWhereInput = {
+    AND?: EventFormatWhereInput | EventFormatWhereInput[]
+    OR?: EventFormatWhereInput[]
+    NOT?: EventFormatWhereInput | EventFormatWhereInput[]
+    id?: IntFilter<"EventFormat"> | number
+    formatName?: StringFilter<"EventFormat"> | string
+    createdAt?: DateTimeFilter<"EventFormat"> | Date | string
+    updatedAt?: DateTimeFilter<"EventFormat"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"EventFormat"> | Date | string | null
+    event?: EventListRelationFilter
+  }
+
+  export type EventFormatOrderByWithRelationInput = {
+    id?: SortOrder
+    formatName?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    event?: EventOrderByRelationAggregateInput
+  }
+
+  export type EventFormatWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: EventFormatWhereInput | EventFormatWhereInput[]
+    OR?: EventFormatWhereInput[]
+    NOT?: EventFormatWhereInput | EventFormatWhereInput[]
+    formatName?: StringFilter<"EventFormat"> | string
+    createdAt?: DateTimeFilter<"EventFormat"> | Date | string
+    updatedAt?: DateTimeFilter<"EventFormat"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"EventFormat"> | Date | string | null
+    event?: EventListRelationFilter
+  }, "id">
+
+  export type EventFormatOrderByWithAggregationInput = {
+    id?: SortOrder
+    formatName?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    _count?: EventFormatCountOrderByAggregateInput
+    _avg?: EventFormatAvgOrderByAggregateInput
+    _max?: EventFormatMaxOrderByAggregateInput
+    _min?: EventFormatMinOrderByAggregateInput
+    _sum?: EventFormatSumOrderByAggregateInput
+  }
+
+  export type EventFormatScalarWhereWithAggregatesInput = {
+    AND?: EventFormatScalarWhereWithAggregatesInput | EventFormatScalarWhereWithAggregatesInput[]
+    OR?: EventFormatScalarWhereWithAggregatesInput[]
+    NOT?: EventFormatScalarWhereWithAggregatesInput | EventFormatScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"EventFormat"> | number
+    formatName?: StringWithAggregatesFilter<"EventFormat"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"EventFormat"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"EventFormat"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"EventFormat"> | Date | string | null
+  }
+
+  export type EventTopicWhereInput = {
+    AND?: EventTopicWhereInput | EventTopicWhereInput[]
+    OR?: EventTopicWhereInput[]
+    NOT?: EventTopicWhereInput | EventTopicWhereInput[]
+    id?: IntFilter<"EventTopic"> | number
+    topicName?: StringFilter<"EventTopic"> | string
+    createdAt?: DateTimeFilter<"EventTopic"> | Date | string
+    updatedAt?: DateTimeFilter<"EventTopic"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"EventTopic"> | Date | string | null
+    event?: EventListRelationFilter
+  }
+
+  export type EventTopicOrderByWithRelationInput = {
+    id?: SortOrder
+    topicName?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    event?: EventOrderByRelationAggregateInput
+  }
+
+  export type EventTopicWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: EventTopicWhereInput | EventTopicWhereInput[]
+    OR?: EventTopicWhereInput[]
+    NOT?: EventTopicWhereInput | EventTopicWhereInput[]
+    topicName?: StringFilter<"EventTopic"> | string
+    createdAt?: DateTimeFilter<"EventTopic"> | Date | string
+    updatedAt?: DateTimeFilter<"EventTopic"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"EventTopic"> | Date | string | null
+    event?: EventListRelationFilter
+  }, "id">
+
+  export type EventTopicOrderByWithAggregationInput = {
+    id?: SortOrder
+    topicName?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    _count?: EventTopicCountOrderByAggregateInput
+    _avg?: EventTopicAvgOrderByAggregateInput
+    _max?: EventTopicMaxOrderByAggregateInput
+    _min?: EventTopicMinOrderByAggregateInput
+    _sum?: EventTopicSumOrderByAggregateInput
+  }
+
+  export type EventTopicScalarWhereWithAggregatesInput = {
+    AND?: EventTopicScalarWhereWithAggregatesInput | EventTopicScalarWhereWithAggregatesInput[]
+    OR?: EventTopicScalarWhereWithAggregatesInput[]
+    NOT?: EventTopicScalarWhereWithAggregatesInput | EventTopicScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"EventTopic"> | number
+    topicName?: StringWithAggregatesFilter<"EventTopic"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"EventTopic"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"EventTopic"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"EventTopic"> | Date | string | null
+  }
+
+  export type TicketTransactionWhereInput = {
+    AND?: TicketTransactionWhereInput | TicketTransactionWhereInput[]
+    OR?: TicketTransactionWhereInput[]
+    NOT?: TicketTransactionWhereInput | TicketTransactionWhereInput[]
+    id?: IntFilter<"TicketTransaction"> | number
+    eventId?: IntFilter<"TicketTransaction"> | number
+    memberId?: StringFilter<"TicketTransaction"> | string
+    ticketCode?: StringFilter<"TicketTransaction"> | string
+    createdAt?: DateTimeFilter<"TicketTransaction"> | Date | string
+    updatedAt?: DateTimeFilter<"TicketTransaction"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"TicketTransaction"> | Date | string | null
+    event?: XOR<EventScalarRelationFilter, EventWhereInput>
+    member?: XOR<MemberScalarRelationFilter, MemberWhereInput>
+    ticketTransactionDetails?: TicketTransactionDetailListRelationFilter
+  }
+
+  export type TicketTransactionOrderByWithRelationInput = {
+    id?: SortOrder
+    eventId?: SortOrder
+    memberId?: SortOrder
+    ticketCode?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    event?: EventOrderByWithRelationInput
+    member?: MemberOrderByWithRelationInput
+    ticketTransactionDetails?: TicketTransactionDetailOrderByRelationAggregateInput
+  }
+
+  export type TicketTransactionWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    ticketCode?: string
+    AND?: TicketTransactionWhereInput | TicketTransactionWhereInput[]
+    OR?: TicketTransactionWhereInput[]
+    NOT?: TicketTransactionWhereInput | TicketTransactionWhereInput[]
+    eventId?: IntFilter<"TicketTransaction"> | number
+    memberId?: StringFilter<"TicketTransaction"> | string
+    createdAt?: DateTimeFilter<"TicketTransaction"> | Date | string
+    updatedAt?: DateTimeFilter<"TicketTransaction"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"TicketTransaction"> | Date | string | null
+    event?: XOR<EventScalarRelationFilter, EventWhereInput>
+    member?: XOR<MemberScalarRelationFilter, MemberWhereInput>
+    ticketTransactionDetails?: TicketTransactionDetailListRelationFilter
+  }, "id" | "ticketCode">
+
+  export type TicketTransactionOrderByWithAggregationInput = {
+    id?: SortOrder
+    eventId?: SortOrder
+    memberId?: SortOrder
+    ticketCode?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    _count?: TicketTransactionCountOrderByAggregateInput
+    _avg?: TicketTransactionAvgOrderByAggregateInput
+    _max?: TicketTransactionMaxOrderByAggregateInput
+    _min?: TicketTransactionMinOrderByAggregateInput
+    _sum?: TicketTransactionSumOrderByAggregateInput
+  }
+
+  export type TicketTransactionScalarWhereWithAggregatesInput = {
+    AND?: TicketTransactionScalarWhereWithAggregatesInput | TicketTransactionScalarWhereWithAggregatesInput[]
+    OR?: TicketTransactionScalarWhereWithAggregatesInput[]
+    NOT?: TicketTransactionScalarWhereWithAggregatesInput | TicketTransactionScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"TicketTransaction"> | number
+    eventId?: IntWithAggregatesFilter<"TicketTransaction"> | number
+    memberId?: StringWithAggregatesFilter<"TicketTransaction"> | string
+    ticketCode?: StringWithAggregatesFilter<"TicketTransaction"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"TicketTransaction"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"TicketTransaction"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"TicketTransaction"> | Date | string | null
+  }
+
+  export type TicketTransactionDetailWhereInput = {
+    AND?: TicketTransactionDetailWhereInput | TicketTransactionDetailWhereInput[]
+    OR?: TicketTransactionDetailWhereInput[]
+    NOT?: TicketTransactionDetailWhereInput | TicketTransactionDetailWhereInput[]
+    id?: IntFilter<"TicketTransactionDetail"> | number
+    ticketTransactionId?: IntFilter<"TicketTransactionDetail"> | number
+    orderName?: StringFilter<"TicketTransactionDetail"> | string
+    orderCountryPhoneId?: IntFilter<"TicketTransactionDetail"> | number
+    orderEmail?: StringFilter<"TicketTransactionDetail"> | string
+    orderBirthDate?: StringFilter<"TicketTransactionDetail"> | string
+    orderSex?: EnumSexFilter<"TicketTransactionDetail"> | $Enums.Sex
+    createdAt?: DateTimeFilter<"TicketTransactionDetail"> | Date | string
+    updatedAt?: DateTimeFilter<"TicketTransactionDetail"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"TicketTransactionDetail"> | Date | string | null
+    ticketTransactions?: XOR<TicketTransactionScalarRelationFilter, TicketTransactionWhereInput>
+    orderCountryPhone?: XOR<CountryPhoneScalarRelationFilter, CountryPhoneWhereInput>
+  }
+
+  export type TicketTransactionDetailOrderByWithRelationInput = {
+    id?: SortOrder
+    ticketTransactionId?: SortOrder
+    orderName?: SortOrder
+    orderCountryPhoneId?: SortOrder
+    orderEmail?: SortOrder
+    orderBirthDate?: SortOrder
+    orderSex?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    ticketTransactions?: TicketTransactionOrderByWithRelationInput
+    orderCountryPhone?: CountryPhoneOrderByWithRelationInput
+  }
+
+  export type TicketTransactionDetailWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: TicketTransactionDetailWhereInput | TicketTransactionDetailWhereInput[]
+    OR?: TicketTransactionDetailWhereInput[]
+    NOT?: TicketTransactionDetailWhereInput | TicketTransactionDetailWhereInput[]
+    ticketTransactionId?: IntFilter<"TicketTransactionDetail"> | number
+    orderName?: StringFilter<"TicketTransactionDetail"> | string
+    orderCountryPhoneId?: IntFilter<"TicketTransactionDetail"> | number
+    orderEmail?: StringFilter<"TicketTransactionDetail"> | string
+    orderBirthDate?: StringFilter<"TicketTransactionDetail"> | string
+    orderSex?: EnumSexFilter<"TicketTransactionDetail"> | $Enums.Sex
+    createdAt?: DateTimeFilter<"TicketTransactionDetail"> | Date | string
+    updatedAt?: DateTimeFilter<"TicketTransactionDetail"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"TicketTransactionDetail"> | Date | string | null
+    ticketTransactions?: XOR<TicketTransactionScalarRelationFilter, TicketTransactionWhereInput>
+    orderCountryPhone?: XOR<CountryPhoneScalarRelationFilter, CountryPhoneWhereInput>
+  }, "id">
+
+  export type TicketTransactionDetailOrderByWithAggregationInput = {
+    id?: SortOrder
+    ticketTransactionId?: SortOrder
+    orderName?: SortOrder
+    orderCountryPhoneId?: SortOrder
+    orderEmail?: SortOrder
+    orderBirthDate?: SortOrder
+    orderSex?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrderInput | SortOrder
+    _count?: TicketTransactionDetailCountOrderByAggregateInput
+    _avg?: TicketTransactionDetailAvgOrderByAggregateInput
+    _max?: TicketTransactionDetailMaxOrderByAggregateInput
+    _min?: TicketTransactionDetailMinOrderByAggregateInput
+    _sum?: TicketTransactionDetailSumOrderByAggregateInput
+  }
+
+  export type TicketTransactionDetailScalarWhereWithAggregatesInput = {
+    AND?: TicketTransactionDetailScalarWhereWithAggregatesInput | TicketTransactionDetailScalarWhereWithAggregatesInput[]
+    OR?: TicketTransactionDetailScalarWhereWithAggregatesInput[]
+    NOT?: TicketTransactionDetailScalarWhereWithAggregatesInput | TicketTransactionDetailScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"TicketTransactionDetail"> | number
+    ticketTransactionId?: IntWithAggregatesFilter<"TicketTransactionDetail"> | number
+    orderName?: StringWithAggregatesFilter<"TicketTransactionDetail"> | string
+    orderCountryPhoneId?: IntWithAggregatesFilter<"TicketTransactionDetail"> | number
+    orderEmail?: StringWithAggregatesFilter<"TicketTransactionDetail"> | string
+    orderBirthDate?: StringWithAggregatesFilter<"TicketTransactionDetail"> | string
+    orderSex?: EnumSexWithAggregatesFilter<"TicketTransactionDetail"> | $Enums.Sex
+    createdAt?: DateTimeWithAggregatesFilter<"TicketTransactionDetail"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"TicketTransactionDetail"> | Date | string
+    deletedAt?: DateTimeNullableWithAggregatesFilter<"TicketTransactionDetail"> | Date | string | null
   }
 
   export type CountryPhoneCreateInput = {
@@ -8611,7 +14098,8 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     members?: MemberCreateNestedManyWithoutCountryPhoneInput
     creatorProfile?: CreatorProfileCreateNestedManyWithoutCountryPhoneInput
-    events?: EventCreateNestedManyWithoutContryPhoneInput
+    events?: EventCreateNestedManyWithoutEventCountryPhoneInput
+    ticketTransactionDetails?: TicketTransactionDetailCreateNestedManyWithoutOrderCountryPhoneInput
   }
 
   export type CountryPhoneUncheckedCreateInput = {
@@ -8624,7 +14112,8 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     members?: MemberUncheckedCreateNestedManyWithoutCountryPhoneInput
     creatorProfile?: CreatorProfileUncheckedCreateNestedManyWithoutCountryPhoneInput
-    events?: EventUncheckedCreateNestedManyWithoutContryPhoneInput
+    events?: EventUncheckedCreateNestedManyWithoutEventCountryPhoneInput
+    ticketTransactionDetails?: TicketTransactionDetailUncheckedCreateNestedManyWithoutOrderCountryPhoneInput
   }
 
   export type CountryPhoneUpdateInput = {
@@ -8636,7 +14125,8 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     members?: MemberUpdateManyWithoutCountryPhoneNestedInput
     creatorProfile?: CreatorProfileUpdateManyWithoutCountryPhoneNestedInput
-    events?: EventUpdateManyWithoutContryPhoneNestedInput
+    events?: EventUpdateManyWithoutEventCountryPhoneNestedInput
+    ticketTransactionDetails?: TicketTransactionDetailUpdateManyWithoutOrderCountryPhoneNestedInput
   }
 
   export type CountryPhoneUncheckedUpdateInput = {
@@ -8649,7 +14139,8 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     members?: MemberUncheckedUpdateManyWithoutCountryPhoneNestedInput
     creatorProfile?: CreatorProfileUncheckedUpdateManyWithoutCountryPhoneNestedInput
-    events?: EventUncheckedUpdateManyWithoutContryPhoneNestedInput
+    events?: EventUncheckedUpdateManyWithoutEventCountryPhoneNestedInput
+    ticketTransactionDetails?: TicketTransactionDetailUncheckedUpdateManyWithoutOrderCountryPhoneNestedInput
   }
 
   export type CountryPhoneCreateManyInput = {
@@ -8699,6 +14190,7 @@ export namespace Prisma {
     countryPhone: CountryPhoneCreateNestedOneWithoutMembersInput
     verificationCodes?: VerificationCodeCreateNestedManyWithoutMemberInput
     creatorProfile?: CreatorProfileCreateNestedOneWithoutMemberInput
+    ticketTransactions?: TicketTransactionCreateNestedManyWithoutMemberInput
   }
 
   export type MemberUncheckedCreateInput = {
@@ -8719,6 +14211,7 @@ export namespace Prisma {
     isEmailVerified?: boolean
     verificationCodes?: VerificationCodeUncheckedCreateNestedManyWithoutMemberInput
     creatorProfile?: CreatorProfileUncheckedCreateNestedOneWithoutMemberInput
+    ticketTransactions?: TicketTransactionUncheckedCreateNestedManyWithoutMemberInput
   }
 
   export type MemberUpdateInput = {
@@ -8739,6 +14232,7 @@ export namespace Prisma {
     countryPhone?: CountryPhoneUpdateOneRequiredWithoutMembersNestedInput
     verificationCodes?: VerificationCodeUpdateManyWithoutMemberNestedInput
     creatorProfile?: CreatorProfileUpdateOneWithoutMemberNestedInput
+    ticketTransactions?: TicketTransactionUpdateManyWithoutMemberNestedInput
   }
 
   export type MemberUncheckedUpdateInput = {
@@ -8759,6 +14253,7 @@ export namespace Prisma {
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     verificationCodes?: VerificationCodeUncheckedUpdateManyWithoutMemberNestedInput
     creatorProfile?: CreatorProfileUncheckedUpdateOneWithoutMemberNestedInput
+    ticketTransactions?: TicketTransactionUncheckedUpdateManyWithoutMemberNestedInput
   }
 
   export type MemberCreateManyInput = {
@@ -9041,8 +14536,6 @@ export namespace Prisma {
 
   export type EventCreateInput = {
     eventName: string
-    eventCategoryId: number
-    eventTopicId: number
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
     eventDate: Date | string
@@ -9068,14 +14561,17 @@ export namespace Prisma {
     updatedAt?: Date | string
     deletedAt?: Date | string | null
     creator: CreatorProfileCreateNestedOneWithoutEventInput
-    contryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
+    eventFormat: EventFormatCreateNestedOneWithoutEventInput
+    eventTopic: EventTopicCreateNestedOneWithoutEventInput
+    eventCountryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
+    ticketTransactions?: TicketTransactionCreateNestedManyWithoutEventInput
   }
 
   export type EventUncheckedCreateInput = {
     id?: number
     creatorId: string
     eventName: string
-    eventCategoryId: number
+    eventFormatId: number
     eventTopicId: number
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
@@ -9093,7 +14589,7 @@ export namespace Prisma {
     ticketEndDate: Date | string
     eventCPName: string
     eventCPEmail: string
-    countryPhoneId: number
+    eventCountryPhoneId: number
     ticketDataFormType: $Enums.TicketDataFormType
     maxTicketPerTransaction: number
     oneEmailOneTransaction?: boolean
@@ -9102,12 +14598,11 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
+    ticketTransactions?: TicketTransactionUncheckedCreateNestedManyWithoutEventInput
   }
 
   export type EventUpdateInput = {
     eventName?: StringFieldUpdateOperationsInput | string
-    eventCategoryId?: IntFieldUpdateOperationsInput | number
-    eventTopicId?: IntFieldUpdateOperationsInput | number
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9133,14 +14628,17 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creator?: CreatorProfileUpdateOneRequiredWithoutEventNestedInput
-    contryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
+    eventFormat?: EventFormatUpdateOneRequiredWithoutEventNestedInput
+    eventTopic?: EventTopicUpdateOneRequiredWithoutEventNestedInput
+    eventCountryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
+    ticketTransactions?: TicketTransactionUpdateManyWithoutEventNestedInput
   }
 
   export type EventUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     creatorId?: StringFieldUpdateOperationsInput | string
     eventName?: StringFieldUpdateOperationsInput | string
-    eventCategoryId?: IntFieldUpdateOperationsInput | number
+    eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTopicId?: IntFieldUpdateOperationsInput | number
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9158,7 +14656,7 @@ export namespace Prisma {
     ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
     eventCPName?: StringFieldUpdateOperationsInput | string
     eventCPEmail?: StringFieldUpdateOperationsInput | string
-    countryPhoneId?: IntFieldUpdateOperationsInput | number
+    eventCountryPhoneId?: IntFieldUpdateOperationsInput | number
     ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
     maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
     oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
@@ -9167,13 +14665,14 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ticketTransactions?: TicketTransactionUncheckedUpdateManyWithoutEventNestedInput
   }
 
   export type EventCreateManyInput = {
     id?: number
     creatorId: string
     eventName: string
-    eventCategoryId: number
+    eventFormatId: number
     eventTopicId: number
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
@@ -9191,7 +14690,7 @@ export namespace Prisma {
     ticketEndDate: Date | string
     eventCPName: string
     eventCPEmail: string
-    countryPhoneId: number
+    eventCountryPhoneId: number
     ticketDataFormType: $Enums.TicketDataFormType
     maxTicketPerTransaction: number
     oneEmailOneTransaction?: boolean
@@ -9204,8 +14703,6 @@ export namespace Prisma {
 
   export type EventUpdateManyMutationInput = {
     eventName?: StringFieldUpdateOperationsInput | string
-    eventCategoryId?: IntFieldUpdateOperationsInput | number
-    eventTopicId?: IntFieldUpdateOperationsInput | number
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9236,7 +14733,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     creatorId?: StringFieldUpdateOperationsInput | string
     eventName?: StringFieldUpdateOperationsInput | string
-    eventCategoryId?: IntFieldUpdateOperationsInput | number
+    eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTopicId?: IntFieldUpdateOperationsInput | number
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9254,12 +14751,281 @@ export namespace Prisma {
     ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
     eventCPName?: StringFieldUpdateOperationsInput | string
     eventCPEmail?: StringFieldUpdateOperationsInput | string
-    countryPhoneId?: IntFieldUpdateOperationsInput | number
+    eventCountryPhoneId?: IntFieldUpdateOperationsInput | number
     ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
     maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
     oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
     ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
     isDraft?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type EventFormatCreateInput = {
+    formatName: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    event?: EventCreateNestedManyWithoutEventFormatInput
+  }
+
+  export type EventFormatUncheckedCreateInput = {
+    id?: number
+    formatName: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    event?: EventUncheckedCreateNestedManyWithoutEventFormatInput
+  }
+
+  export type EventFormatUpdateInput = {
+    formatName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    event?: EventUpdateManyWithoutEventFormatNestedInput
+  }
+
+  export type EventFormatUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    formatName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    event?: EventUncheckedUpdateManyWithoutEventFormatNestedInput
+  }
+
+  export type EventFormatCreateManyInput = {
+    id?: number
+    formatName: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type EventFormatUpdateManyMutationInput = {
+    formatName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type EventFormatUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    formatName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type EventTopicCreateInput = {
+    topicName: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    event?: EventCreateNestedManyWithoutEventTopicInput
+  }
+
+  export type EventTopicUncheckedCreateInput = {
+    id?: number
+    topicName: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    event?: EventUncheckedCreateNestedManyWithoutEventTopicInput
+  }
+
+  export type EventTopicUpdateInput = {
+    topicName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    event?: EventUpdateManyWithoutEventTopicNestedInput
+  }
+
+  export type EventTopicUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    topicName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    event?: EventUncheckedUpdateManyWithoutEventTopicNestedInput
+  }
+
+  export type EventTopicCreateManyInput = {
+    id?: number
+    topicName: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type EventTopicUpdateManyMutationInput = {
+    topicName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type EventTopicUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    topicName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type TicketTransactionCreateInput = {
+    ticketCode: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    event: EventCreateNestedOneWithoutTicketTransactionsInput
+    member: MemberCreateNestedOneWithoutTicketTransactionsInput
+    ticketTransactionDetails?: TicketTransactionDetailCreateNestedManyWithoutTicketTransactionsInput
+  }
+
+  export type TicketTransactionUncheckedCreateInput = {
+    id?: number
+    eventId: number
+    memberId: string
+    ticketCode: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    ticketTransactionDetails?: TicketTransactionDetailUncheckedCreateNestedManyWithoutTicketTransactionsInput
+  }
+
+  export type TicketTransactionUpdateInput = {
+    ticketCode?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    event?: EventUpdateOneRequiredWithoutTicketTransactionsNestedInput
+    member?: MemberUpdateOneRequiredWithoutTicketTransactionsNestedInput
+    ticketTransactionDetails?: TicketTransactionDetailUpdateManyWithoutTicketTransactionsNestedInput
+  }
+
+  export type TicketTransactionUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    eventId?: IntFieldUpdateOperationsInput | number
+    memberId?: StringFieldUpdateOperationsInput | string
+    ticketCode?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ticketTransactionDetails?: TicketTransactionDetailUncheckedUpdateManyWithoutTicketTransactionsNestedInput
+  }
+
+  export type TicketTransactionCreateManyInput = {
+    id?: number
+    eventId: number
+    memberId: string
+    ticketCode: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type TicketTransactionUpdateManyMutationInput = {
+    ticketCode?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type TicketTransactionUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    eventId?: IntFieldUpdateOperationsInput | number
+    memberId?: StringFieldUpdateOperationsInput | string
+    ticketCode?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type TicketTransactionDetailCreateInput = {
+    orderName: string
+    orderEmail: string
+    orderBirthDate: string
+    orderSex: $Enums.Sex
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    ticketTransactions: TicketTransactionCreateNestedOneWithoutTicketTransactionDetailsInput
+    orderCountryPhone: CountryPhoneCreateNestedOneWithoutTicketTransactionDetailsInput
+  }
+
+  export type TicketTransactionDetailUncheckedCreateInput = {
+    id?: number
+    ticketTransactionId: number
+    orderName: string
+    orderCountryPhoneId: number
+    orderEmail: string
+    orderBirthDate: string
+    orderSex: $Enums.Sex
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type TicketTransactionDetailUpdateInput = {
+    orderName?: StringFieldUpdateOperationsInput | string
+    orderEmail?: StringFieldUpdateOperationsInput | string
+    orderBirthDate?: StringFieldUpdateOperationsInput | string
+    orderSex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ticketTransactions?: TicketTransactionUpdateOneRequiredWithoutTicketTransactionDetailsNestedInput
+    orderCountryPhone?: CountryPhoneUpdateOneRequiredWithoutTicketTransactionDetailsNestedInput
+  }
+
+  export type TicketTransactionDetailUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    ticketTransactionId?: IntFieldUpdateOperationsInput | number
+    orderName?: StringFieldUpdateOperationsInput | string
+    orderCountryPhoneId?: IntFieldUpdateOperationsInput | number
+    orderEmail?: StringFieldUpdateOperationsInput | string
+    orderBirthDate?: StringFieldUpdateOperationsInput | string
+    orderSex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type TicketTransactionDetailCreateManyInput = {
+    id?: number
+    ticketTransactionId: number
+    orderName: string
+    orderCountryPhoneId: number
+    orderEmail: string
+    orderBirthDate: string
+    orderSex: $Enums.Sex
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type TicketTransactionDetailUpdateManyMutationInput = {
+    orderName?: StringFieldUpdateOperationsInput | string
+    orderEmail?: StringFieldUpdateOperationsInput | string
+    orderBirthDate?: StringFieldUpdateOperationsInput | string
+    orderSex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type TicketTransactionDetailUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    ticketTransactionId?: IntFieldUpdateOperationsInput | number
+    orderName?: StringFieldUpdateOperationsInput | string
+    orderCountryPhoneId?: IntFieldUpdateOperationsInput | number
+    orderEmail?: StringFieldUpdateOperationsInput | string
+    orderBirthDate?: StringFieldUpdateOperationsInput | string
+    orderSex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -9331,6 +15097,12 @@ export namespace Prisma {
     none?: EventWhereInput
   }
 
+  export type TicketTransactionDetailListRelationFilter = {
+    every?: TicketTransactionDetailWhereInput
+    some?: TicketTransactionDetailWhereInput
+    none?: TicketTransactionDetailWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -9345,6 +15117,10 @@ export namespace Prisma {
   }
 
   export type EventOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TicketTransactionDetailOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -9491,7 +15267,17 @@ export namespace Prisma {
     isNot?: CreatorProfileWhereInput | null
   }
 
+  export type TicketTransactionListRelationFilter = {
+    every?: TicketTransactionWhereInput
+    some?: TicketTransactionWhereInput
+    none?: TicketTransactionWhereInput
+  }
+
   export type VerificationCodeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TicketTransactionOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -9756,11 +15542,21 @@ export namespace Prisma {
     isNot?: CreatorProfileWhereInput
   }
 
+  export type EventFormatScalarRelationFilter = {
+    is?: EventFormatWhereInput
+    isNot?: EventFormatWhereInput
+  }
+
+  export type EventTopicScalarRelationFilter = {
+    is?: EventTopicWhereInput
+    isNot?: EventTopicWhereInput
+  }
+
   export type EventCountOrderByAggregateInput = {
     id?: SortOrder
     creatorId?: SortOrder
     eventName?: SortOrder
-    eventCategoryId?: SortOrder
+    eventFormatId?: SortOrder
     eventTopicId?: SortOrder
     organizerName?: SortOrder
     organizerLogoImgUrl?: SortOrder
@@ -9778,7 +15574,7 @@ export namespace Prisma {
     ticketEndDate?: SortOrder
     eventCPName?: SortOrder
     eventCPEmail?: SortOrder
-    countryPhoneId?: SortOrder
+    eventCountryPhoneId?: SortOrder
     ticketDataFormType?: SortOrder
     maxTicketPerTransaction?: SortOrder
     oneEmailOneTransaction?: SortOrder
@@ -9791,11 +15587,11 @@ export namespace Prisma {
 
   export type EventAvgOrderByAggregateInput = {
     id?: SortOrder
-    eventCategoryId?: SortOrder
+    eventFormatId?: SortOrder
     eventTopicId?: SortOrder
     ticketQty?: SortOrder
     ticketPrice?: SortOrder
-    countryPhoneId?: SortOrder
+    eventCountryPhoneId?: SortOrder
     maxTicketPerTransaction?: SortOrder
   }
 
@@ -9803,7 +15599,7 @@ export namespace Prisma {
     id?: SortOrder
     creatorId?: SortOrder
     eventName?: SortOrder
-    eventCategoryId?: SortOrder
+    eventFormatId?: SortOrder
     eventTopicId?: SortOrder
     organizerName?: SortOrder
     organizerLogoImgUrl?: SortOrder
@@ -9821,7 +15617,7 @@ export namespace Prisma {
     ticketEndDate?: SortOrder
     eventCPName?: SortOrder
     eventCPEmail?: SortOrder
-    countryPhoneId?: SortOrder
+    eventCountryPhoneId?: SortOrder
     ticketDataFormType?: SortOrder
     maxTicketPerTransaction?: SortOrder
     oneEmailOneTransaction?: SortOrder
@@ -9836,7 +15632,7 @@ export namespace Prisma {
     id?: SortOrder
     creatorId?: SortOrder
     eventName?: SortOrder
-    eventCategoryId?: SortOrder
+    eventFormatId?: SortOrder
     eventTopicId?: SortOrder
     organizerName?: SortOrder
     organizerLogoImgUrl?: SortOrder
@@ -9854,7 +15650,7 @@ export namespace Prisma {
     ticketEndDate?: SortOrder
     eventCPName?: SortOrder
     eventCPEmail?: SortOrder
-    countryPhoneId?: SortOrder
+    eventCountryPhoneId?: SortOrder
     ticketDataFormType?: SortOrder
     maxTicketPerTransaction?: SortOrder
     oneEmailOneTransaction?: SortOrder
@@ -9867,11 +15663,11 @@ export namespace Prisma {
 
   export type EventSumOrderByAggregateInput = {
     id?: SortOrder
-    eventCategoryId?: SortOrder
+    eventFormatId?: SortOrder
     eventTopicId?: SortOrder
     ticketQty?: SortOrder
     ticketPrice?: SortOrder
-    countryPhoneId?: SortOrder
+    eventCountryPhoneId?: SortOrder
     maxTicketPerTransaction?: SortOrder
   }
 
@@ -9903,6 +15699,171 @@ export namespace Prisma {
     _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
+  export type EventFormatCountOrderByAggregateInput = {
+    id?: SortOrder
+    formatName?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type EventFormatAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type EventFormatMaxOrderByAggregateInput = {
+    id?: SortOrder
+    formatName?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type EventFormatMinOrderByAggregateInput = {
+    id?: SortOrder
+    formatName?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type EventFormatSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type EventTopicCountOrderByAggregateInput = {
+    id?: SortOrder
+    topicName?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type EventTopicAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type EventTopicMaxOrderByAggregateInput = {
+    id?: SortOrder
+    topicName?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type EventTopicMinOrderByAggregateInput = {
+    id?: SortOrder
+    topicName?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type EventTopicSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type EventScalarRelationFilter = {
+    is?: EventWhereInput
+    isNot?: EventWhereInput
+  }
+
+  export type TicketTransactionCountOrderByAggregateInput = {
+    id?: SortOrder
+    eventId?: SortOrder
+    memberId?: SortOrder
+    ticketCode?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type TicketTransactionAvgOrderByAggregateInput = {
+    id?: SortOrder
+    eventId?: SortOrder
+  }
+
+  export type TicketTransactionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    eventId?: SortOrder
+    memberId?: SortOrder
+    ticketCode?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type TicketTransactionMinOrderByAggregateInput = {
+    id?: SortOrder
+    eventId?: SortOrder
+    memberId?: SortOrder
+    ticketCode?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type TicketTransactionSumOrderByAggregateInput = {
+    id?: SortOrder
+    eventId?: SortOrder
+  }
+
+  export type TicketTransactionScalarRelationFilter = {
+    is?: TicketTransactionWhereInput
+    isNot?: TicketTransactionWhereInput
+  }
+
+  export type TicketTransactionDetailCountOrderByAggregateInput = {
+    id?: SortOrder
+    ticketTransactionId?: SortOrder
+    orderName?: SortOrder
+    orderCountryPhoneId?: SortOrder
+    orderEmail?: SortOrder
+    orderBirthDate?: SortOrder
+    orderSex?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type TicketTransactionDetailAvgOrderByAggregateInput = {
+    id?: SortOrder
+    ticketTransactionId?: SortOrder
+    orderCountryPhoneId?: SortOrder
+  }
+
+  export type TicketTransactionDetailMaxOrderByAggregateInput = {
+    id?: SortOrder
+    ticketTransactionId?: SortOrder
+    orderName?: SortOrder
+    orderCountryPhoneId?: SortOrder
+    orderEmail?: SortOrder
+    orderBirthDate?: SortOrder
+    orderSex?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type TicketTransactionDetailMinOrderByAggregateInput = {
+    id?: SortOrder
+    ticketTransactionId?: SortOrder
+    orderName?: SortOrder
+    orderCountryPhoneId?: SortOrder
+    orderEmail?: SortOrder
+    orderBirthDate?: SortOrder
+    orderSex?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    deletedAt?: SortOrder
+  }
+
+  export type TicketTransactionDetailSumOrderByAggregateInput = {
+    id?: SortOrder
+    ticketTransactionId?: SortOrder
+    orderCountryPhoneId?: SortOrder
+  }
+
   export type MemberCreateNestedManyWithoutCountryPhoneInput = {
     create?: XOR<MemberCreateWithoutCountryPhoneInput, MemberUncheckedCreateWithoutCountryPhoneInput> | MemberCreateWithoutCountryPhoneInput[] | MemberUncheckedCreateWithoutCountryPhoneInput[]
     connectOrCreate?: MemberCreateOrConnectWithoutCountryPhoneInput | MemberCreateOrConnectWithoutCountryPhoneInput[]
@@ -9917,11 +15878,18 @@ export namespace Prisma {
     connect?: CreatorProfileWhereUniqueInput | CreatorProfileWhereUniqueInput[]
   }
 
-  export type EventCreateNestedManyWithoutContryPhoneInput = {
-    create?: XOR<EventCreateWithoutContryPhoneInput, EventUncheckedCreateWithoutContryPhoneInput> | EventCreateWithoutContryPhoneInput[] | EventUncheckedCreateWithoutContryPhoneInput[]
-    connectOrCreate?: EventCreateOrConnectWithoutContryPhoneInput | EventCreateOrConnectWithoutContryPhoneInput[]
-    createMany?: EventCreateManyContryPhoneInputEnvelope
+  export type EventCreateNestedManyWithoutEventCountryPhoneInput = {
+    create?: XOR<EventCreateWithoutEventCountryPhoneInput, EventUncheckedCreateWithoutEventCountryPhoneInput> | EventCreateWithoutEventCountryPhoneInput[] | EventUncheckedCreateWithoutEventCountryPhoneInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutEventCountryPhoneInput | EventCreateOrConnectWithoutEventCountryPhoneInput[]
+    createMany?: EventCreateManyEventCountryPhoneInputEnvelope
     connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+  }
+
+  export type TicketTransactionDetailCreateNestedManyWithoutOrderCountryPhoneInput = {
+    create?: XOR<TicketTransactionDetailCreateWithoutOrderCountryPhoneInput, TicketTransactionDetailUncheckedCreateWithoutOrderCountryPhoneInput> | TicketTransactionDetailCreateWithoutOrderCountryPhoneInput[] | TicketTransactionDetailUncheckedCreateWithoutOrderCountryPhoneInput[]
+    connectOrCreate?: TicketTransactionDetailCreateOrConnectWithoutOrderCountryPhoneInput | TicketTransactionDetailCreateOrConnectWithoutOrderCountryPhoneInput[]
+    createMany?: TicketTransactionDetailCreateManyOrderCountryPhoneInputEnvelope
+    connect?: TicketTransactionDetailWhereUniqueInput | TicketTransactionDetailWhereUniqueInput[]
   }
 
   export type MemberUncheckedCreateNestedManyWithoutCountryPhoneInput = {
@@ -9938,11 +15906,18 @@ export namespace Prisma {
     connect?: CreatorProfileWhereUniqueInput | CreatorProfileWhereUniqueInput[]
   }
 
-  export type EventUncheckedCreateNestedManyWithoutContryPhoneInput = {
-    create?: XOR<EventCreateWithoutContryPhoneInput, EventUncheckedCreateWithoutContryPhoneInput> | EventCreateWithoutContryPhoneInput[] | EventUncheckedCreateWithoutContryPhoneInput[]
-    connectOrCreate?: EventCreateOrConnectWithoutContryPhoneInput | EventCreateOrConnectWithoutContryPhoneInput[]
-    createMany?: EventCreateManyContryPhoneInputEnvelope
+  export type EventUncheckedCreateNestedManyWithoutEventCountryPhoneInput = {
+    create?: XOR<EventCreateWithoutEventCountryPhoneInput, EventUncheckedCreateWithoutEventCountryPhoneInput> | EventCreateWithoutEventCountryPhoneInput[] | EventUncheckedCreateWithoutEventCountryPhoneInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutEventCountryPhoneInput | EventCreateOrConnectWithoutEventCountryPhoneInput[]
+    createMany?: EventCreateManyEventCountryPhoneInputEnvelope
     connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+  }
+
+  export type TicketTransactionDetailUncheckedCreateNestedManyWithoutOrderCountryPhoneInput = {
+    create?: XOR<TicketTransactionDetailCreateWithoutOrderCountryPhoneInput, TicketTransactionDetailUncheckedCreateWithoutOrderCountryPhoneInput> | TicketTransactionDetailCreateWithoutOrderCountryPhoneInput[] | TicketTransactionDetailUncheckedCreateWithoutOrderCountryPhoneInput[]
+    connectOrCreate?: TicketTransactionDetailCreateOrConnectWithoutOrderCountryPhoneInput | TicketTransactionDetailCreateOrConnectWithoutOrderCountryPhoneInput[]
+    createMany?: TicketTransactionDetailCreateManyOrderCountryPhoneInputEnvelope
+    connect?: TicketTransactionDetailWhereUniqueInput | TicketTransactionDetailWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -9985,18 +15960,32 @@ export namespace Prisma {
     deleteMany?: CreatorProfileScalarWhereInput | CreatorProfileScalarWhereInput[]
   }
 
-  export type EventUpdateManyWithoutContryPhoneNestedInput = {
-    create?: XOR<EventCreateWithoutContryPhoneInput, EventUncheckedCreateWithoutContryPhoneInput> | EventCreateWithoutContryPhoneInput[] | EventUncheckedCreateWithoutContryPhoneInput[]
-    connectOrCreate?: EventCreateOrConnectWithoutContryPhoneInput | EventCreateOrConnectWithoutContryPhoneInput[]
-    upsert?: EventUpsertWithWhereUniqueWithoutContryPhoneInput | EventUpsertWithWhereUniqueWithoutContryPhoneInput[]
-    createMany?: EventCreateManyContryPhoneInputEnvelope
+  export type EventUpdateManyWithoutEventCountryPhoneNestedInput = {
+    create?: XOR<EventCreateWithoutEventCountryPhoneInput, EventUncheckedCreateWithoutEventCountryPhoneInput> | EventCreateWithoutEventCountryPhoneInput[] | EventUncheckedCreateWithoutEventCountryPhoneInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutEventCountryPhoneInput | EventCreateOrConnectWithoutEventCountryPhoneInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutEventCountryPhoneInput | EventUpsertWithWhereUniqueWithoutEventCountryPhoneInput[]
+    createMany?: EventCreateManyEventCountryPhoneInputEnvelope
     set?: EventWhereUniqueInput | EventWhereUniqueInput[]
     disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
     delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
     connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
-    update?: EventUpdateWithWhereUniqueWithoutContryPhoneInput | EventUpdateWithWhereUniqueWithoutContryPhoneInput[]
-    updateMany?: EventUpdateManyWithWhereWithoutContryPhoneInput | EventUpdateManyWithWhereWithoutContryPhoneInput[]
+    update?: EventUpdateWithWhereUniqueWithoutEventCountryPhoneInput | EventUpdateWithWhereUniqueWithoutEventCountryPhoneInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutEventCountryPhoneInput | EventUpdateManyWithWhereWithoutEventCountryPhoneInput[]
     deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
+  }
+
+  export type TicketTransactionDetailUpdateManyWithoutOrderCountryPhoneNestedInput = {
+    create?: XOR<TicketTransactionDetailCreateWithoutOrderCountryPhoneInput, TicketTransactionDetailUncheckedCreateWithoutOrderCountryPhoneInput> | TicketTransactionDetailCreateWithoutOrderCountryPhoneInput[] | TicketTransactionDetailUncheckedCreateWithoutOrderCountryPhoneInput[]
+    connectOrCreate?: TicketTransactionDetailCreateOrConnectWithoutOrderCountryPhoneInput | TicketTransactionDetailCreateOrConnectWithoutOrderCountryPhoneInput[]
+    upsert?: TicketTransactionDetailUpsertWithWhereUniqueWithoutOrderCountryPhoneInput | TicketTransactionDetailUpsertWithWhereUniqueWithoutOrderCountryPhoneInput[]
+    createMany?: TicketTransactionDetailCreateManyOrderCountryPhoneInputEnvelope
+    set?: TicketTransactionDetailWhereUniqueInput | TicketTransactionDetailWhereUniqueInput[]
+    disconnect?: TicketTransactionDetailWhereUniqueInput | TicketTransactionDetailWhereUniqueInput[]
+    delete?: TicketTransactionDetailWhereUniqueInput | TicketTransactionDetailWhereUniqueInput[]
+    connect?: TicketTransactionDetailWhereUniqueInput | TicketTransactionDetailWhereUniqueInput[]
+    update?: TicketTransactionDetailUpdateWithWhereUniqueWithoutOrderCountryPhoneInput | TicketTransactionDetailUpdateWithWhereUniqueWithoutOrderCountryPhoneInput[]
+    updateMany?: TicketTransactionDetailUpdateManyWithWhereWithoutOrderCountryPhoneInput | TicketTransactionDetailUpdateManyWithWhereWithoutOrderCountryPhoneInput[]
+    deleteMany?: TicketTransactionDetailScalarWhereInput | TicketTransactionDetailScalarWhereInput[]
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -10035,18 +16024,32 @@ export namespace Prisma {
     deleteMany?: CreatorProfileScalarWhereInput | CreatorProfileScalarWhereInput[]
   }
 
-  export type EventUncheckedUpdateManyWithoutContryPhoneNestedInput = {
-    create?: XOR<EventCreateWithoutContryPhoneInput, EventUncheckedCreateWithoutContryPhoneInput> | EventCreateWithoutContryPhoneInput[] | EventUncheckedCreateWithoutContryPhoneInput[]
-    connectOrCreate?: EventCreateOrConnectWithoutContryPhoneInput | EventCreateOrConnectWithoutContryPhoneInput[]
-    upsert?: EventUpsertWithWhereUniqueWithoutContryPhoneInput | EventUpsertWithWhereUniqueWithoutContryPhoneInput[]
-    createMany?: EventCreateManyContryPhoneInputEnvelope
+  export type EventUncheckedUpdateManyWithoutEventCountryPhoneNestedInput = {
+    create?: XOR<EventCreateWithoutEventCountryPhoneInput, EventUncheckedCreateWithoutEventCountryPhoneInput> | EventCreateWithoutEventCountryPhoneInput[] | EventUncheckedCreateWithoutEventCountryPhoneInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutEventCountryPhoneInput | EventCreateOrConnectWithoutEventCountryPhoneInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutEventCountryPhoneInput | EventUpsertWithWhereUniqueWithoutEventCountryPhoneInput[]
+    createMany?: EventCreateManyEventCountryPhoneInputEnvelope
     set?: EventWhereUniqueInput | EventWhereUniqueInput[]
     disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
     delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
     connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
-    update?: EventUpdateWithWhereUniqueWithoutContryPhoneInput | EventUpdateWithWhereUniqueWithoutContryPhoneInput[]
-    updateMany?: EventUpdateManyWithWhereWithoutContryPhoneInput | EventUpdateManyWithWhereWithoutContryPhoneInput[]
+    update?: EventUpdateWithWhereUniqueWithoutEventCountryPhoneInput | EventUpdateWithWhereUniqueWithoutEventCountryPhoneInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutEventCountryPhoneInput | EventUpdateManyWithWhereWithoutEventCountryPhoneInput[]
     deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
+  }
+
+  export type TicketTransactionDetailUncheckedUpdateManyWithoutOrderCountryPhoneNestedInput = {
+    create?: XOR<TicketTransactionDetailCreateWithoutOrderCountryPhoneInput, TicketTransactionDetailUncheckedCreateWithoutOrderCountryPhoneInput> | TicketTransactionDetailCreateWithoutOrderCountryPhoneInput[] | TicketTransactionDetailUncheckedCreateWithoutOrderCountryPhoneInput[]
+    connectOrCreate?: TicketTransactionDetailCreateOrConnectWithoutOrderCountryPhoneInput | TicketTransactionDetailCreateOrConnectWithoutOrderCountryPhoneInput[]
+    upsert?: TicketTransactionDetailUpsertWithWhereUniqueWithoutOrderCountryPhoneInput | TicketTransactionDetailUpsertWithWhereUniqueWithoutOrderCountryPhoneInput[]
+    createMany?: TicketTransactionDetailCreateManyOrderCountryPhoneInputEnvelope
+    set?: TicketTransactionDetailWhereUniqueInput | TicketTransactionDetailWhereUniqueInput[]
+    disconnect?: TicketTransactionDetailWhereUniqueInput | TicketTransactionDetailWhereUniqueInput[]
+    delete?: TicketTransactionDetailWhereUniqueInput | TicketTransactionDetailWhereUniqueInput[]
+    connect?: TicketTransactionDetailWhereUniqueInput | TicketTransactionDetailWhereUniqueInput[]
+    update?: TicketTransactionDetailUpdateWithWhereUniqueWithoutOrderCountryPhoneInput | TicketTransactionDetailUpdateWithWhereUniqueWithoutOrderCountryPhoneInput[]
+    updateMany?: TicketTransactionDetailUpdateManyWithWhereWithoutOrderCountryPhoneInput | TicketTransactionDetailUpdateManyWithWhereWithoutOrderCountryPhoneInput[]
+    deleteMany?: TicketTransactionDetailScalarWhereInput | TicketTransactionDetailScalarWhereInput[]
   }
 
   export type CountryPhoneCreateNestedOneWithoutMembersInput = {
@@ -10068,6 +16071,13 @@ export namespace Prisma {
     connect?: CreatorProfileWhereUniqueInput
   }
 
+  export type TicketTransactionCreateNestedManyWithoutMemberInput = {
+    create?: XOR<TicketTransactionCreateWithoutMemberInput, TicketTransactionUncheckedCreateWithoutMemberInput> | TicketTransactionCreateWithoutMemberInput[] | TicketTransactionUncheckedCreateWithoutMemberInput[]
+    connectOrCreate?: TicketTransactionCreateOrConnectWithoutMemberInput | TicketTransactionCreateOrConnectWithoutMemberInput[]
+    createMany?: TicketTransactionCreateManyMemberInputEnvelope
+    connect?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
+  }
+
   export type VerificationCodeUncheckedCreateNestedManyWithoutMemberInput = {
     create?: XOR<VerificationCodeCreateWithoutMemberInput, VerificationCodeUncheckedCreateWithoutMemberInput> | VerificationCodeCreateWithoutMemberInput[] | VerificationCodeUncheckedCreateWithoutMemberInput[]
     connectOrCreate?: VerificationCodeCreateOrConnectWithoutMemberInput | VerificationCodeCreateOrConnectWithoutMemberInput[]
@@ -10079,6 +16089,13 @@ export namespace Prisma {
     create?: XOR<CreatorProfileCreateWithoutMemberInput, CreatorProfileUncheckedCreateWithoutMemberInput>
     connectOrCreate?: CreatorProfileCreateOrConnectWithoutMemberInput
     connect?: CreatorProfileWhereUniqueInput
+  }
+
+  export type TicketTransactionUncheckedCreateNestedManyWithoutMemberInput = {
+    create?: XOR<TicketTransactionCreateWithoutMemberInput, TicketTransactionUncheckedCreateWithoutMemberInput> | TicketTransactionCreateWithoutMemberInput[] | TicketTransactionUncheckedCreateWithoutMemberInput[]
+    connectOrCreate?: TicketTransactionCreateOrConnectWithoutMemberInput | TicketTransactionCreateOrConnectWithoutMemberInput[]
+    createMany?: TicketTransactionCreateManyMemberInputEnvelope
+    connect?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -10125,6 +16142,20 @@ export namespace Prisma {
     update?: XOR<XOR<CreatorProfileUpdateToOneWithWhereWithoutMemberInput, CreatorProfileUpdateWithoutMemberInput>, CreatorProfileUncheckedUpdateWithoutMemberInput>
   }
 
+  export type TicketTransactionUpdateManyWithoutMemberNestedInput = {
+    create?: XOR<TicketTransactionCreateWithoutMemberInput, TicketTransactionUncheckedCreateWithoutMemberInput> | TicketTransactionCreateWithoutMemberInput[] | TicketTransactionUncheckedCreateWithoutMemberInput[]
+    connectOrCreate?: TicketTransactionCreateOrConnectWithoutMemberInput | TicketTransactionCreateOrConnectWithoutMemberInput[]
+    upsert?: TicketTransactionUpsertWithWhereUniqueWithoutMemberInput | TicketTransactionUpsertWithWhereUniqueWithoutMemberInput[]
+    createMany?: TicketTransactionCreateManyMemberInputEnvelope
+    set?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
+    disconnect?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
+    delete?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
+    connect?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
+    update?: TicketTransactionUpdateWithWhereUniqueWithoutMemberInput | TicketTransactionUpdateWithWhereUniqueWithoutMemberInput[]
+    updateMany?: TicketTransactionUpdateManyWithWhereWithoutMemberInput | TicketTransactionUpdateManyWithWhereWithoutMemberInput[]
+    deleteMany?: TicketTransactionScalarWhereInput | TicketTransactionScalarWhereInput[]
+  }
+
   export type VerificationCodeUncheckedUpdateManyWithoutMemberNestedInput = {
     create?: XOR<VerificationCodeCreateWithoutMemberInput, VerificationCodeUncheckedCreateWithoutMemberInput> | VerificationCodeCreateWithoutMemberInput[] | VerificationCodeUncheckedCreateWithoutMemberInput[]
     connectOrCreate?: VerificationCodeCreateOrConnectWithoutMemberInput | VerificationCodeCreateOrConnectWithoutMemberInput[]
@@ -10147,6 +16178,20 @@ export namespace Prisma {
     delete?: CreatorProfileWhereInput | boolean
     connect?: CreatorProfileWhereUniqueInput
     update?: XOR<XOR<CreatorProfileUpdateToOneWithWhereWithoutMemberInput, CreatorProfileUpdateWithoutMemberInput>, CreatorProfileUncheckedUpdateWithoutMemberInput>
+  }
+
+  export type TicketTransactionUncheckedUpdateManyWithoutMemberNestedInput = {
+    create?: XOR<TicketTransactionCreateWithoutMemberInput, TicketTransactionUncheckedCreateWithoutMemberInput> | TicketTransactionCreateWithoutMemberInput[] | TicketTransactionUncheckedCreateWithoutMemberInput[]
+    connectOrCreate?: TicketTransactionCreateOrConnectWithoutMemberInput | TicketTransactionCreateOrConnectWithoutMemberInput[]
+    upsert?: TicketTransactionUpsertWithWhereUniqueWithoutMemberInput | TicketTransactionUpsertWithWhereUniqueWithoutMemberInput[]
+    createMany?: TicketTransactionCreateManyMemberInputEnvelope
+    set?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
+    disconnect?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
+    delete?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
+    connect?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
+    update?: TicketTransactionUpdateWithWhereUniqueWithoutMemberInput | TicketTransactionUpdateWithWhereUniqueWithoutMemberInput[]
+    updateMany?: TicketTransactionUpdateManyWithWhereWithoutMemberInput | TicketTransactionUpdateManyWithWhereWithoutMemberInput[]
+    deleteMany?: TicketTransactionScalarWhereInput | TicketTransactionScalarWhereInput[]
   }
 
   export type MemberCreateNestedOneWithoutVerificationCodesInput = {
@@ -10245,10 +16290,36 @@ export namespace Prisma {
     connect?: CreatorProfileWhereUniqueInput
   }
 
+  export type EventFormatCreateNestedOneWithoutEventInput = {
+    create?: XOR<EventFormatCreateWithoutEventInput, EventFormatUncheckedCreateWithoutEventInput>
+    connectOrCreate?: EventFormatCreateOrConnectWithoutEventInput
+    connect?: EventFormatWhereUniqueInput
+  }
+
+  export type EventTopicCreateNestedOneWithoutEventInput = {
+    create?: XOR<EventTopicCreateWithoutEventInput, EventTopicUncheckedCreateWithoutEventInput>
+    connectOrCreate?: EventTopicCreateOrConnectWithoutEventInput
+    connect?: EventTopicWhereUniqueInput
+  }
+
   export type CountryPhoneCreateNestedOneWithoutEventsInput = {
     create?: XOR<CountryPhoneCreateWithoutEventsInput, CountryPhoneUncheckedCreateWithoutEventsInput>
     connectOrCreate?: CountryPhoneCreateOrConnectWithoutEventsInput
     connect?: CountryPhoneWhereUniqueInput
+  }
+
+  export type TicketTransactionCreateNestedManyWithoutEventInput = {
+    create?: XOR<TicketTransactionCreateWithoutEventInput, TicketTransactionUncheckedCreateWithoutEventInput> | TicketTransactionCreateWithoutEventInput[] | TicketTransactionUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: TicketTransactionCreateOrConnectWithoutEventInput | TicketTransactionCreateOrConnectWithoutEventInput[]
+    createMany?: TicketTransactionCreateManyEventInputEnvelope
+    connect?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
+  }
+
+  export type TicketTransactionUncheckedCreateNestedManyWithoutEventInput = {
+    create?: XOR<TicketTransactionCreateWithoutEventInput, TicketTransactionUncheckedCreateWithoutEventInput> | TicketTransactionCreateWithoutEventInput[] | TicketTransactionUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: TicketTransactionCreateOrConnectWithoutEventInput | TicketTransactionCreateOrConnectWithoutEventInput[]
+    createMany?: TicketTransactionCreateManyEventInputEnvelope
+    connect?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
   }
 
   export type EnumTicketTypeFieldUpdateOperationsInput = {
@@ -10271,12 +16342,238 @@ export namespace Prisma {
     update?: XOR<XOR<CreatorProfileUpdateToOneWithWhereWithoutEventInput, CreatorProfileUpdateWithoutEventInput>, CreatorProfileUncheckedUpdateWithoutEventInput>
   }
 
+  export type EventFormatUpdateOneRequiredWithoutEventNestedInput = {
+    create?: XOR<EventFormatCreateWithoutEventInput, EventFormatUncheckedCreateWithoutEventInput>
+    connectOrCreate?: EventFormatCreateOrConnectWithoutEventInput
+    upsert?: EventFormatUpsertWithoutEventInput
+    connect?: EventFormatWhereUniqueInput
+    update?: XOR<XOR<EventFormatUpdateToOneWithWhereWithoutEventInput, EventFormatUpdateWithoutEventInput>, EventFormatUncheckedUpdateWithoutEventInput>
+  }
+
+  export type EventTopicUpdateOneRequiredWithoutEventNestedInput = {
+    create?: XOR<EventTopicCreateWithoutEventInput, EventTopicUncheckedCreateWithoutEventInput>
+    connectOrCreate?: EventTopicCreateOrConnectWithoutEventInput
+    upsert?: EventTopicUpsertWithoutEventInput
+    connect?: EventTopicWhereUniqueInput
+    update?: XOR<XOR<EventTopicUpdateToOneWithWhereWithoutEventInput, EventTopicUpdateWithoutEventInput>, EventTopicUncheckedUpdateWithoutEventInput>
+  }
+
   export type CountryPhoneUpdateOneRequiredWithoutEventsNestedInput = {
     create?: XOR<CountryPhoneCreateWithoutEventsInput, CountryPhoneUncheckedCreateWithoutEventsInput>
     connectOrCreate?: CountryPhoneCreateOrConnectWithoutEventsInput
     upsert?: CountryPhoneUpsertWithoutEventsInput
     connect?: CountryPhoneWhereUniqueInput
     update?: XOR<XOR<CountryPhoneUpdateToOneWithWhereWithoutEventsInput, CountryPhoneUpdateWithoutEventsInput>, CountryPhoneUncheckedUpdateWithoutEventsInput>
+  }
+
+  export type TicketTransactionUpdateManyWithoutEventNestedInput = {
+    create?: XOR<TicketTransactionCreateWithoutEventInput, TicketTransactionUncheckedCreateWithoutEventInput> | TicketTransactionCreateWithoutEventInput[] | TicketTransactionUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: TicketTransactionCreateOrConnectWithoutEventInput | TicketTransactionCreateOrConnectWithoutEventInput[]
+    upsert?: TicketTransactionUpsertWithWhereUniqueWithoutEventInput | TicketTransactionUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: TicketTransactionCreateManyEventInputEnvelope
+    set?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
+    disconnect?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
+    delete?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
+    connect?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
+    update?: TicketTransactionUpdateWithWhereUniqueWithoutEventInput | TicketTransactionUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: TicketTransactionUpdateManyWithWhereWithoutEventInput | TicketTransactionUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: TicketTransactionScalarWhereInput | TicketTransactionScalarWhereInput[]
+  }
+
+  export type TicketTransactionUncheckedUpdateManyWithoutEventNestedInput = {
+    create?: XOR<TicketTransactionCreateWithoutEventInput, TicketTransactionUncheckedCreateWithoutEventInput> | TicketTransactionCreateWithoutEventInput[] | TicketTransactionUncheckedCreateWithoutEventInput[]
+    connectOrCreate?: TicketTransactionCreateOrConnectWithoutEventInput | TicketTransactionCreateOrConnectWithoutEventInput[]
+    upsert?: TicketTransactionUpsertWithWhereUniqueWithoutEventInput | TicketTransactionUpsertWithWhereUniqueWithoutEventInput[]
+    createMany?: TicketTransactionCreateManyEventInputEnvelope
+    set?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
+    disconnect?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
+    delete?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
+    connect?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
+    update?: TicketTransactionUpdateWithWhereUniqueWithoutEventInput | TicketTransactionUpdateWithWhereUniqueWithoutEventInput[]
+    updateMany?: TicketTransactionUpdateManyWithWhereWithoutEventInput | TicketTransactionUpdateManyWithWhereWithoutEventInput[]
+    deleteMany?: TicketTransactionScalarWhereInput | TicketTransactionScalarWhereInput[]
+  }
+
+  export type EventCreateNestedManyWithoutEventFormatInput = {
+    create?: XOR<EventCreateWithoutEventFormatInput, EventUncheckedCreateWithoutEventFormatInput> | EventCreateWithoutEventFormatInput[] | EventUncheckedCreateWithoutEventFormatInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutEventFormatInput | EventCreateOrConnectWithoutEventFormatInput[]
+    createMany?: EventCreateManyEventFormatInputEnvelope
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+  }
+
+  export type EventUncheckedCreateNestedManyWithoutEventFormatInput = {
+    create?: XOR<EventCreateWithoutEventFormatInput, EventUncheckedCreateWithoutEventFormatInput> | EventCreateWithoutEventFormatInput[] | EventUncheckedCreateWithoutEventFormatInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutEventFormatInput | EventCreateOrConnectWithoutEventFormatInput[]
+    createMany?: EventCreateManyEventFormatInputEnvelope
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+  }
+
+  export type EventUpdateManyWithoutEventFormatNestedInput = {
+    create?: XOR<EventCreateWithoutEventFormatInput, EventUncheckedCreateWithoutEventFormatInput> | EventCreateWithoutEventFormatInput[] | EventUncheckedCreateWithoutEventFormatInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutEventFormatInput | EventCreateOrConnectWithoutEventFormatInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutEventFormatInput | EventUpsertWithWhereUniqueWithoutEventFormatInput[]
+    createMany?: EventCreateManyEventFormatInputEnvelope
+    set?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    update?: EventUpdateWithWhereUniqueWithoutEventFormatInput | EventUpdateWithWhereUniqueWithoutEventFormatInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutEventFormatInput | EventUpdateManyWithWhereWithoutEventFormatInput[]
+    deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
+  }
+
+  export type EventUncheckedUpdateManyWithoutEventFormatNestedInput = {
+    create?: XOR<EventCreateWithoutEventFormatInput, EventUncheckedCreateWithoutEventFormatInput> | EventCreateWithoutEventFormatInput[] | EventUncheckedCreateWithoutEventFormatInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutEventFormatInput | EventCreateOrConnectWithoutEventFormatInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutEventFormatInput | EventUpsertWithWhereUniqueWithoutEventFormatInput[]
+    createMany?: EventCreateManyEventFormatInputEnvelope
+    set?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    update?: EventUpdateWithWhereUniqueWithoutEventFormatInput | EventUpdateWithWhereUniqueWithoutEventFormatInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutEventFormatInput | EventUpdateManyWithWhereWithoutEventFormatInput[]
+    deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
+  }
+
+  export type EventCreateNestedManyWithoutEventTopicInput = {
+    create?: XOR<EventCreateWithoutEventTopicInput, EventUncheckedCreateWithoutEventTopicInput> | EventCreateWithoutEventTopicInput[] | EventUncheckedCreateWithoutEventTopicInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutEventTopicInput | EventCreateOrConnectWithoutEventTopicInput[]
+    createMany?: EventCreateManyEventTopicInputEnvelope
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+  }
+
+  export type EventUncheckedCreateNestedManyWithoutEventTopicInput = {
+    create?: XOR<EventCreateWithoutEventTopicInput, EventUncheckedCreateWithoutEventTopicInput> | EventCreateWithoutEventTopicInput[] | EventUncheckedCreateWithoutEventTopicInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutEventTopicInput | EventCreateOrConnectWithoutEventTopicInput[]
+    createMany?: EventCreateManyEventTopicInputEnvelope
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+  }
+
+  export type EventUpdateManyWithoutEventTopicNestedInput = {
+    create?: XOR<EventCreateWithoutEventTopicInput, EventUncheckedCreateWithoutEventTopicInput> | EventCreateWithoutEventTopicInput[] | EventUncheckedCreateWithoutEventTopicInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutEventTopicInput | EventCreateOrConnectWithoutEventTopicInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutEventTopicInput | EventUpsertWithWhereUniqueWithoutEventTopicInput[]
+    createMany?: EventCreateManyEventTopicInputEnvelope
+    set?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    update?: EventUpdateWithWhereUniqueWithoutEventTopicInput | EventUpdateWithWhereUniqueWithoutEventTopicInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutEventTopicInput | EventUpdateManyWithWhereWithoutEventTopicInput[]
+    deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
+  }
+
+  export type EventUncheckedUpdateManyWithoutEventTopicNestedInput = {
+    create?: XOR<EventCreateWithoutEventTopicInput, EventUncheckedCreateWithoutEventTopicInput> | EventCreateWithoutEventTopicInput[] | EventUncheckedCreateWithoutEventTopicInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutEventTopicInput | EventCreateOrConnectWithoutEventTopicInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutEventTopicInput | EventUpsertWithWhereUniqueWithoutEventTopicInput[]
+    createMany?: EventCreateManyEventTopicInputEnvelope
+    set?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
+    update?: EventUpdateWithWhereUniqueWithoutEventTopicInput | EventUpdateWithWhereUniqueWithoutEventTopicInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutEventTopicInput | EventUpdateManyWithWhereWithoutEventTopicInput[]
+    deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
+  }
+
+  export type EventCreateNestedOneWithoutTicketTransactionsInput = {
+    create?: XOR<EventCreateWithoutTicketTransactionsInput, EventUncheckedCreateWithoutTicketTransactionsInput>
+    connectOrCreate?: EventCreateOrConnectWithoutTicketTransactionsInput
+    connect?: EventWhereUniqueInput
+  }
+
+  export type MemberCreateNestedOneWithoutTicketTransactionsInput = {
+    create?: XOR<MemberCreateWithoutTicketTransactionsInput, MemberUncheckedCreateWithoutTicketTransactionsInput>
+    connectOrCreate?: MemberCreateOrConnectWithoutTicketTransactionsInput
+    connect?: MemberWhereUniqueInput
+  }
+
+  export type TicketTransactionDetailCreateNestedManyWithoutTicketTransactionsInput = {
+    create?: XOR<TicketTransactionDetailCreateWithoutTicketTransactionsInput, TicketTransactionDetailUncheckedCreateWithoutTicketTransactionsInput> | TicketTransactionDetailCreateWithoutTicketTransactionsInput[] | TicketTransactionDetailUncheckedCreateWithoutTicketTransactionsInput[]
+    connectOrCreate?: TicketTransactionDetailCreateOrConnectWithoutTicketTransactionsInput | TicketTransactionDetailCreateOrConnectWithoutTicketTransactionsInput[]
+    createMany?: TicketTransactionDetailCreateManyTicketTransactionsInputEnvelope
+    connect?: TicketTransactionDetailWhereUniqueInput | TicketTransactionDetailWhereUniqueInput[]
+  }
+
+  export type TicketTransactionDetailUncheckedCreateNestedManyWithoutTicketTransactionsInput = {
+    create?: XOR<TicketTransactionDetailCreateWithoutTicketTransactionsInput, TicketTransactionDetailUncheckedCreateWithoutTicketTransactionsInput> | TicketTransactionDetailCreateWithoutTicketTransactionsInput[] | TicketTransactionDetailUncheckedCreateWithoutTicketTransactionsInput[]
+    connectOrCreate?: TicketTransactionDetailCreateOrConnectWithoutTicketTransactionsInput | TicketTransactionDetailCreateOrConnectWithoutTicketTransactionsInput[]
+    createMany?: TicketTransactionDetailCreateManyTicketTransactionsInputEnvelope
+    connect?: TicketTransactionDetailWhereUniqueInput | TicketTransactionDetailWhereUniqueInput[]
+  }
+
+  export type EventUpdateOneRequiredWithoutTicketTransactionsNestedInput = {
+    create?: XOR<EventCreateWithoutTicketTransactionsInput, EventUncheckedCreateWithoutTicketTransactionsInput>
+    connectOrCreate?: EventCreateOrConnectWithoutTicketTransactionsInput
+    upsert?: EventUpsertWithoutTicketTransactionsInput
+    connect?: EventWhereUniqueInput
+    update?: XOR<XOR<EventUpdateToOneWithWhereWithoutTicketTransactionsInput, EventUpdateWithoutTicketTransactionsInput>, EventUncheckedUpdateWithoutTicketTransactionsInput>
+  }
+
+  export type MemberUpdateOneRequiredWithoutTicketTransactionsNestedInput = {
+    create?: XOR<MemberCreateWithoutTicketTransactionsInput, MemberUncheckedCreateWithoutTicketTransactionsInput>
+    connectOrCreate?: MemberCreateOrConnectWithoutTicketTransactionsInput
+    upsert?: MemberUpsertWithoutTicketTransactionsInput
+    connect?: MemberWhereUniqueInput
+    update?: XOR<XOR<MemberUpdateToOneWithWhereWithoutTicketTransactionsInput, MemberUpdateWithoutTicketTransactionsInput>, MemberUncheckedUpdateWithoutTicketTransactionsInput>
+  }
+
+  export type TicketTransactionDetailUpdateManyWithoutTicketTransactionsNestedInput = {
+    create?: XOR<TicketTransactionDetailCreateWithoutTicketTransactionsInput, TicketTransactionDetailUncheckedCreateWithoutTicketTransactionsInput> | TicketTransactionDetailCreateWithoutTicketTransactionsInput[] | TicketTransactionDetailUncheckedCreateWithoutTicketTransactionsInput[]
+    connectOrCreate?: TicketTransactionDetailCreateOrConnectWithoutTicketTransactionsInput | TicketTransactionDetailCreateOrConnectWithoutTicketTransactionsInput[]
+    upsert?: TicketTransactionDetailUpsertWithWhereUniqueWithoutTicketTransactionsInput | TicketTransactionDetailUpsertWithWhereUniqueWithoutTicketTransactionsInput[]
+    createMany?: TicketTransactionDetailCreateManyTicketTransactionsInputEnvelope
+    set?: TicketTransactionDetailWhereUniqueInput | TicketTransactionDetailWhereUniqueInput[]
+    disconnect?: TicketTransactionDetailWhereUniqueInput | TicketTransactionDetailWhereUniqueInput[]
+    delete?: TicketTransactionDetailWhereUniqueInput | TicketTransactionDetailWhereUniqueInput[]
+    connect?: TicketTransactionDetailWhereUniqueInput | TicketTransactionDetailWhereUniqueInput[]
+    update?: TicketTransactionDetailUpdateWithWhereUniqueWithoutTicketTransactionsInput | TicketTransactionDetailUpdateWithWhereUniqueWithoutTicketTransactionsInput[]
+    updateMany?: TicketTransactionDetailUpdateManyWithWhereWithoutTicketTransactionsInput | TicketTransactionDetailUpdateManyWithWhereWithoutTicketTransactionsInput[]
+    deleteMany?: TicketTransactionDetailScalarWhereInput | TicketTransactionDetailScalarWhereInput[]
+  }
+
+  export type TicketTransactionDetailUncheckedUpdateManyWithoutTicketTransactionsNestedInput = {
+    create?: XOR<TicketTransactionDetailCreateWithoutTicketTransactionsInput, TicketTransactionDetailUncheckedCreateWithoutTicketTransactionsInput> | TicketTransactionDetailCreateWithoutTicketTransactionsInput[] | TicketTransactionDetailUncheckedCreateWithoutTicketTransactionsInput[]
+    connectOrCreate?: TicketTransactionDetailCreateOrConnectWithoutTicketTransactionsInput | TicketTransactionDetailCreateOrConnectWithoutTicketTransactionsInput[]
+    upsert?: TicketTransactionDetailUpsertWithWhereUniqueWithoutTicketTransactionsInput | TicketTransactionDetailUpsertWithWhereUniqueWithoutTicketTransactionsInput[]
+    createMany?: TicketTransactionDetailCreateManyTicketTransactionsInputEnvelope
+    set?: TicketTransactionDetailWhereUniqueInput | TicketTransactionDetailWhereUniqueInput[]
+    disconnect?: TicketTransactionDetailWhereUniqueInput | TicketTransactionDetailWhereUniqueInput[]
+    delete?: TicketTransactionDetailWhereUniqueInput | TicketTransactionDetailWhereUniqueInput[]
+    connect?: TicketTransactionDetailWhereUniqueInput | TicketTransactionDetailWhereUniqueInput[]
+    update?: TicketTransactionDetailUpdateWithWhereUniqueWithoutTicketTransactionsInput | TicketTransactionDetailUpdateWithWhereUniqueWithoutTicketTransactionsInput[]
+    updateMany?: TicketTransactionDetailUpdateManyWithWhereWithoutTicketTransactionsInput | TicketTransactionDetailUpdateManyWithWhereWithoutTicketTransactionsInput[]
+    deleteMany?: TicketTransactionDetailScalarWhereInput | TicketTransactionDetailScalarWhereInput[]
+  }
+
+  export type TicketTransactionCreateNestedOneWithoutTicketTransactionDetailsInput = {
+    create?: XOR<TicketTransactionCreateWithoutTicketTransactionDetailsInput, TicketTransactionUncheckedCreateWithoutTicketTransactionDetailsInput>
+    connectOrCreate?: TicketTransactionCreateOrConnectWithoutTicketTransactionDetailsInput
+    connect?: TicketTransactionWhereUniqueInput
+  }
+
+  export type CountryPhoneCreateNestedOneWithoutTicketTransactionDetailsInput = {
+    create?: XOR<CountryPhoneCreateWithoutTicketTransactionDetailsInput, CountryPhoneUncheckedCreateWithoutTicketTransactionDetailsInput>
+    connectOrCreate?: CountryPhoneCreateOrConnectWithoutTicketTransactionDetailsInput
+    connect?: CountryPhoneWhereUniqueInput
+  }
+
+  export type TicketTransactionUpdateOneRequiredWithoutTicketTransactionDetailsNestedInput = {
+    create?: XOR<TicketTransactionCreateWithoutTicketTransactionDetailsInput, TicketTransactionUncheckedCreateWithoutTicketTransactionDetailsInput>
+    connectOrCreate?: TicketTransactionCreateOrConnectWithoutTicketTransactionDetailsInput
+    upsert?: TicketTransactionUpsertWithoutTicketTransactionDetailsInput
+    connect?: TicketTransactionWhereUniqueInput
+    update?: XOR<XOR<TicketTransactionUpdateToOneWithWhereWithoutTicketTransactionDetailsInput, TicketTransactionUpdateWithoutTicketTransactionDetailsInput>, TicketTransactionUncheckedUpdateWithoutTicketTransactionDetailsInput>
+  }
+
+  export type CountryPhoneUpdateOneRequiredWithoutTicketTransactionDetailsNestedInput = {
+    create?: XOR<CountryPhoneCreateWithoutTicketTransactionDetailsInput, CountryPhoneUncheckedCreateWithoutTicketTransactionDetailsInput>
+    connectOrCreate?: CountryPhoneCreateOrConnectWithoutTicketTransactionDetailsInput
+    upsert?: CountryPhoneUpsertWithoutTicketTransactionDetailsInput
+    connect?: CountryPhoneWhereUniqueInput
+    update?: XOR<XOR<CountryPhoneUpdateToOneWithWhereWithoutTicketTransactionDetailsInput, CountryPhoneUpdateWithoutTicketTransactionDetailsInput>, CountryPhoneUncheckedUpdateWithoutTicketTransactionDetailsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -10551,6 +16848,7 @@ export namespace Prisma {
     isEmailVerified?: boolean
     verificationCodes?: VerificationCodeCreateNestedManyWithoutMemberInput
     creatorProfile?: CreatorProfileCreateNestedOneWithoutMemberInput
+    ticketTransactions?: TicketTransactionCreateNestedManyWithoutMemberInput
   }
 
   export type MemberUncheckedCreateWithoutCountryPhoneInput = {
@@ -10570,6 +16868,7 @@ export namespace Prisma {
     isEmailVerified?: boolean
     verificationCodes?: VerificationCodeUncheckedCreateNestedManyWithoutMemberInput
     creatorProfile?: CreatorProfileUncheckedCreateNestedOneWithoutMemberInput
+    ticketTransactions?: TicketTransactionUncheckedCreateNestedManyWithoutMemberInput
   }
 
   export type MemberCreateOrConnectWithoutCountryPhoneInput = {
@@ -10628,10 +16927,8 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type EventCreateWithoutContryPhoneInput = {
+  export type EventCreateWithoutEventCountryPhoneInput = {
     eventName: string
-    eventCategoryId: number
-    eventTopicId: number
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
     eventDate: Date | string
@@ -10657,13 +16954,16 @@ export namespace Prisma {
     updatedAt?: Date | string
     deletedAt?: Date | string | null
     creator: CreatorProfileCreateNestedOneWithoutEventInput
+    eventFormat: EventFormatCreateNestedOneWithoutEventInput
+    eventTopic: EventTopicCreateNestedOneWithoutEventInput
+    ticketTransactions?: TicketTransactionCreateNestedManyWithoutEventInput
   }
 
-  export type EventUncheckedCreateWithoutContryPhoneInput = {
+  export type EventUncheckedCreateWithoutEventCountryPhoneInput = {
     id?: number
     creatorId: string
     eventName: string
-    eventCategoryId: number
+    eventFormatId: number
     eventTopicId: number
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
@@ -10689,15 +16989,49 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
+    ticketTransactions?: TicketTransactionUncheckedCreateNestedManyWithoutEventInput
   }
 
-  export type EventCreateOrConnectWithoutContryPhoneInput = {
+  export type EventCreateOrConnectWithoutEventCountryPhoneInput = {
     where: EventWhereUniqueInput
-    create: XOR<EventCreateWithoutContryPhoneInput, EventUncheckedCreateWithoutContryPhoneInput>
+    create: XOR<EventCreateWithoutEventCountryPhoneInput, EventUncheckedCreateWithoutEventCountryPhoneInput>
   }
 
-  export type EventCreateManyContryPhoneInputEnvelope = {
-    data: EventCreateManyContryPhoneInput | EventCreateManyContryPhoneInput[]
+  export type EventCreateManyEventCountryPhoneInputEnvelope = {
+    data: EventCreateManyEventCountryPhoneInput | EventCreateManyEventCountryPhoneInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TicketTransactionDetailCreateWithoutOrderCountryPhoneInput = {
+    orderName: string
+    orderEmail: string
+    orderBirthDate: string
+    orderSex: $Enums.Sex
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    ticketTransactions: TicketTransactionCreateNestedOneWithoutTicketTransactionDetailsInput
+  }
+
+  export type TicketTransactionDetailUncheckedCreateWithoutOrderCountryPhoneInput = {
+    id?: number
+    ticketTransactionId: number
+    orderName: string
+    orderEmail: string
+    orderBirthDate: string
+    orderSex: $Enums.Sex
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type TicketTransactionDetailCreateOrConnectWithoutOrderCountryPhoneInput = {
+    where: TicketTransactionDetailWhereUniqueInput
+    create: XOR<TicketTransactionDetailCreateWithoutOrderCountryPhoneInput, TicketTransactionDetailUncheckedCreateWithoutOrderCountryPhoneInput>
+  }
+
+  export type TicketTransactionDetailCreateManyOrderCountryPhoneInputEnvelope = {
+    data: TicketTransactionDetailCreateManyOrderCountryPhoneInput | TicketTransactionDetailCreateManyOrderCountryPhoneInput[]
     skipDuplicates?: boolean
   }
 
@@ -10775,20 +17109,20 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableFilter<"CreatorProfile"> | Date | string | null
   }
 
-  export type EventUpsertWithWhereUniqueWithoutContryPhoneInput = {
+  export type EventUpsertWithWhereUniqueWithoutEventCountryPhoneInput = {
     where: EventWhereUniqueInput
-    update: XOR<EventUpdateWithoutContryPhoneInput, EventUncheckedUpdateWithoutContryPhoneInput>
-    create: XOR<EventCreateWithoutContryPhoneInput, EventUncheckedCreateWithoutContryPhoneInput>
+    update: XOR<EventUpdateWithoutEventCountryPhoneInput, EventUncheckedUpdateWithoutEventCountryPhoneInput>
+    create: XOR<EventCreateWithoutEventCountryPhoneInput, EventUncheckedCreateWithoutEventCountryPhoneInput>
   }
 
-  export type EventUpdateWithWhereUniqueWithoutContryPhoneInput = {
+  export type EventUpdateWithWhereUniqueWithoutEventCountryPhoneInput = {
     where: EventWhereUniqueInput
-    data: XOR<EventUpdateWithoutContryPhoneInput, EventUncheckedUpdateWithoutContryPhoneInput>
+    data: XOR<EventUpdateWithoutEventCountryPhoneInput, EventUncheckedUpdateWithoutEventCountryPhoneInput>
   }
 
-  export type EventUpdateManyWithWhereWithoutContryPhoneInput = {
+  export type EventUpdateManyWithWhereWithoutEventCountryPhoneInput = {
     where: EventScalarWhereInput
-    data: XOR<EventUpdateManyMutationInput, EventUncheckedUpdateManyWithoutContryPhoneInput>
+    data: XOR<EventUpdateManyMutationInput, EventUncheckedUpdateManyWithoutEventCountryPhoneInput>
   }
 
   export type EventScalarWhereInput = {
@@ -10798,7 +17132,7 @@ export namespace Prisma {
     id?: IntFilter<"Event"> | number
     creatorId?: StringFilter<"Event"> | string
     eventName?: StringFilter<"Event"> | string
-    eventCategoryId?: IntFilter<"Event"> | number
+    eventFormatId?: IntFilter<"Event"> | number
     eventTopicId?: IntFilter<"Event"> | number
     organizerName?: StringNullableFilter<"Event"> | string | null
     organizerLogoImgUrl?: StringNullableFilter<"Event"> | string | null
@@ -10816,7 +17150,7 @@ export namespace Prisma {
     ticketEndDate?: DateTimeFilter<"Event"> | Date | string
     eventCPName?: StringFilter<"Event"> | string
     eventCPEmail?: StringFilter<"Event"> | string
-    countryPhoneId?: IntFilter<"Event"> | number
+    eventCountryPhoneId?: IntFilter<"Event"> | number
     ticketDataFormType?: EnumTicketDataFormTypeFilter<"Event"> | $Enums.TicketDataFormType
     maxTicketPerTransaction?: IntFilter<"Event"> | number
     oneEmailOneTransaction?: BoolFilter<"Event"> | boolean
@@ -10827,6 +17161,38 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableFilter<"Event"> | Date | string | null
   }
 
+  export type TicketTransactionDetailUpsertWithWhereUniqueWithoutOrderCountryPhoneInput = {
+    where: TicketTransactionDetailWhereUniqueInput
+    update: XOR<TicketTransactionDetailUpdateWithoutOrderCountryPhoneInput, TicketTransactionDetailUncheckedUpdateWithoutOrderCountryPhoneInput>
+    create: XOR<TicketTransactionDetailCreateWithoutOrderCountryPhoneInput, TicketTransactionDetailUncheckedCreateWithoutOrderCountryPhoneInput>
+  }
+
+  export type TicketTransactionDetailUpdateWithWhereUniqueWithoutOrderCountryPhoneInput = {
+    where: TicketTransactionDetailWhereUniqueInput
+    data: XOR<TicketTransactionDetailUpdateWithoutOrderCountryPhoneInput, TicketTransactionDetailUncheckedUpdateWithoutOrderCountryPhoneInput>
+  }
+
+  export type TicketTransactionDetailUpdateManyWithWhereWithoutOrderCountryPhoneInput = {
+    where: TicketTransactionDetailScalarWhereInput
+    data: XOR<TicketTransactionDetailUpdateManyMutationInput, TicketTransactionDetailUncheckedUpdateManyWithoutOrderCountryPhoneInput>
+  }
+
+  export type TicketTransactionDetailScalarWhereInput = {
+    AND?: TicketTransactionDetailScalarWhereInput | TicketTransactionDetailScalarWhereInput[]
+    OR?: TicketTransactionDetailScalarWhereInput[]
+    NOT?: TicketTransactionDetailScalarWhereInput | TicketTransactionDetailScalarWhereInput[]
+    id?: IntFilter<"TicketTransactionDetail"> | number
+    ticketTransactionId?: IntFilter<"TicketTransactionDetail"> | number
+    orderName?: StringFilter<"TicketTransactionDetail"> | string
+    orderCountryPhoneId?: IntFilter<"TicketTransactionDetail"> | number
+    orderEmail?: StringFilter<"TicketTransactionDetail"> | string
+    orderBirthDate?: StringFilter<"TicketTransactionDetail"> | string
+    orderSex?: EnumSexFilter<"TicketTransactionDetail"> | $Enums.Sex
+    createdAt?: DateTimeFilter<"TicketTransactionDetail"> | Date | string
+    updatedAt?: DateTimeFilter<"TicketTransactionDetail"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"TicketTransactionDetail"> | Date | string | null
+  }
+
   export type CountryPhoneCreateWithoutMembersInput = {
     name: string
     code: string
@@ -10835,7 +17201,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     deletedAt?: Date | string | null
     creatorProfile?: CreatorProfileCreateNestedManyWithoutCountryPhoneInput
-    events?: EventCreateNestedManyWithoutContryPhoneInput
+    events?: EventCreateNestedManyWithoutEventCountryPhoneInput
+    ticketTransactionDetails?: TicketTransactionDetailCreateNestedManyWithoutOrderCountryPhoneInput
   }
 
   export type CountryPhoneUncheckedCreateWithoutMembersInput = {
@@ -10847,7 +17214,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     deletedAt?: Date | string | null
     creatorProfile?: CreatorProfileUncheckedCreateNestedManyWithoutCountryPhoneInput
-    events?: EventUncheckedCreateNestedManyWithoutContryPhoneInput
+    events?: EventUncheckedCreateNestedManyWithoutEventCountryPhoneInput
+    ticketTransactionDetails?: TicketTransactionDetailUncheckedCreateNestedManyWithoutOrderCountryPhoneInput
   }
 
   export type CountryPhoneCreateOrConnectWithoutMembersInput = {
@@ -10932,6 +17300,35 @@ export namespace Prisma {
     create: XOR<CreatorProfileCreateWithoutMemberInput, CreatorProfileUncheckedCreateWithoutMemberInput>
   }
 
+  export type TicketTransactionCreateWithoutMemberInput = {
+    ticketCode: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    event: EventCreateNestedOneWithoutTicketTransactionsInput
+    ticketTransactionDetails?: TicketTransactionDetailCreateNestedManyWithoutTicketTransactionsInput
+  }
+
+  export type TicketTransactionUncheckedCreateWithoutMemberInput = {
+    id?: number
+    eventId: number
+    ticketCode: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    ticketTransactionDetails?: TicketTransactionDetailUncheckedCreateNestedManyWithoutTicketTransactionsInput
+  }
+
+  export type TicketTransactionCreateOrConnectWithoutMemberInput = {
+    where: TicketTransactionWhereUniqueInput
+    create: XOR<TicketTransactionCreateWithoutMemberInput, TicketTransactionUncheckedCreateWithoutMemberInput>
+  }
+
+  export type TicketTransactionCreateManyMemberInputEnvelope = {
+    data: TicketTransactionCreateManyMemberInput | TicketTransactionCreateManyMemberInput[]
+    skipDuplicates?: boolean
+  }
+
   export type CountryPhoneUpsertWithoutMembersInput = {
     update: XOR<CountryPhoneUpdateWithoutMembersInput, CountryPhoneUncheckedUpdateWithoutMembersInput>
     create: XOR<CountryPhoneCreateWithoutMembersInput, CountryPhoneUncheckedCreateWithoutMembersInput>
@@ -10951,7 +17348,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creatorProfile?: CreatorProfileUpdateManyWithoutCountryPhoneNestedInput
-    events?: EventUpdateManyWithoutContryPhoneNestedInput
+    events?: EventUpdateManyWithoutEventCountryPhoneNestedInput
+    ticketTransactionDetails?: TicketTransactionDetailUpdateManyWithoutOrderCountryPhoneNestedInput
   }
 
   export type CountryPhoneUncheckedUpdateWithoutMembersInput = {
@@ -10963,7 +17361,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creatorProfile?: CreatorProfileUncheckedUpdateManyWithoutCountryPhoneNestedInput
-    events?: EventUncheckedUpdateManyWithoutContryPhoneNestedInput
+    events?: EventUncheckedUpdateManyWithoutEventCountryPhoneNestedInput
+    ticketTransactionDetails?: TicketTransactionDetailUncheckedUpdateManyWithoutOrderCountryPhoneNestedInput
   }
 
   export type VerificationCodeUpsertWithWhereUniqueWithoutMemberInput = {
@@ -11046,6 +17445,35 @@ export namespace Prisma {
     event?: EventUncheckedUpdateManyWithoutCreatorNestedInput
   }
 
+  export type TicketTransactionUpsertWithWhereUniqueWithoutMemberInput = {
+    where: TicketTransactionWhereUniqueInput
+    update: XOR<TicketTransactionUpdateWithoutMemberInput, TicketTransactionUncheckedUpdateWithoutMemberInput>
+    create: XOR<TicketTransactionCreateWithoutMemberInput, TicketTransactionUncheckedCreateWithoutMemberInput>
+  }
+
+  export type TicketTransactionUpdateWithWhereUniqueWithoutMemberInput = {
+    where: TicketTransactionWhereUniqueInput
+    data: XOR<TicketTransactionUpdateWithoutMemberInput, TicketTransactionUncheckedUpdateWithoutMemberInput>
+  }
+
+  export type TicketTransactionUpdateManyWithWhereWithoutMemberInput = {
+    where: TicketTransactionScalarWhereInput
+    data: XOR<TicketTransactionUpdateManyMutationInput, TicketTransactionUncheckedUpdateManyWithoutMemberInput>
+  }
+
+  export type TicketTransactionScalarWhereInput = {
+    AND?: TicketTransactionScalarWhereInput | TicketTransactionScalarWhereInput[]
+    OR?: TicketTransactionScalarWhereInput[]
+    NOT?: TicketTransactionScalarWhereInput | TicketTransactionScalarWhereInput[]
+    id?: IntFilter<"TicketTransaction"> | number
+    eventId?: IntFilter<"TicketTransaction"> | number
+    memberId?: StringFilter<"TicketTransaction"> | string
+    ticketCode?: StringFilter<"TicketTransaction"> | string
+    createdAt?: DateTimeFilter<"TicketTransaction"> | Date | string
+    updatedAt?: DateTimeFilter<"TicketTransaction"> | Date | string
+    deletedAt?: DateTimeNullableFilter<"TicketTransaction"> | Date | string | null
+  }
+
   export type MemberCreateWithoutVerificationCodesInput = {
     id?: string
     email: string
@@ -11063,6 +17491,7 @@ export namespace Prisma {
     isEmailVerified?: boolean
     countryPhone: CountryPhoneCreateNestedOneWithoutMembersInput
     creatorProfile?: CreatorProfileCreateNestedOneWithoutMemberInput
+    ticketTransactions?: TicketTransactionCreateNestedManyWithoutMemberInput
   }
 
   export type MemberUncheckedCreateWithoutVerificationCodesInput = {
@@ -11082,6 +17511,7 @@ export namespace Prisma {
     sex: $Enums.Sex
     isEmailVerified?: boolean
     creatorProfile?: CreatorProfileUncheckedCreateNestedOneWithoutMemberInput
+    ticketTransactions?: TicketTransactionUncheckedCreateNestedManyWithoutMemberInput
   }
 
   export type MemberCreateOrConnectWithoutVerificationCodesInput = {
@@ -11117,6 +17547,7 @@ export namespace Prisma {
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     countryPhone?: CountryPhoneUpdateOneRequiredWithoutMembersNestedInput
     creatorProfile?: CreatorProfileUpdateOneWithoutMemberNestedInput
+    ticketTransactions?: TicketTransactionUpdateManyWithoutMemberNestedInput
   }
 
   export type MemberUncheckedUpdateWithoutVerificationCodesInput = {
@@ -11136,6 +17567,7 @@ export namespace Prisma {
     sex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     creatorProfile?: CreatorProfileUncheckedUpdateOneWithoutMemberNestedInput
+    ticketTransactions?: TicketTransactionUncheckedUpdateManyWithoutMemberNestedInput
   }
 
   export type MemberCreateWithoutCreatorProfileInput = {
@@ -11155,6 +17587,7 @@ export namespace Prisma {
     isEmailVerified?: boolean
     countryPhone: CountryPhoneCreateNestedOneWithoutMembersInput
     verificationCodes?: VerificationCodeCreateNestedManyWithoutMemberInput
+    ticketTransactions?: TicketTransactionCreateNestedManyWithoutMemberInput
   }
 
   export type MemberUncheckedCreateWithoutCreatorProfileInput = {
@@ -11174,6 +17607,7 @@ export namespace Prisma {
     sex: $Enums.Sex
     isEmailVerified?: boolean
     verificationCodes?: VerificationCodeUncheckedCreateNestedManyWithoutMemberInput
+    ticketTransactions?: TicketTransactionUncheckedCreateNestedManyWithoutMemberInput
   }
 
   export type MemberCreateOrConnectWithoutCreatorProfileInput = {
@@ -11189,7 +17623,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     deletedAt?: Date | string | null
     members?: MemberCreateNestedManyWithoutCountryPhoneInput
-    events?: EventCreateNestedManyWithoutContryPhoneInput
+    events?: EventCreateNestedManyWithoutEventCountryPhoneInput
+    ticketTransactionDetails?: TicketTransactionDetailCreateNestedManyWithoutOrderCountryPhoneInput
   }
 
   export type CountryPhoneUncheckedCreateWithoutCreatorProfileInput = {
@@ -11201,7 +17636,8 @@ export namespace Prisma {
     updatedAt?: Date | string
     deletedAt?: Date | string | null
     members?: MemberUncheckedCreateNestedManyWithoutCountryPhoneInput
-    events?: EventUncheckedCreateNestedManyWithoutContryPhoneInput
+    events?: EventUncheckedCreateNestedManyWithoutEventCountryPhoneInput
+    ticketTransactionDetails?: TicketTransactionDetailUncheckedCreateNestedManyWithoutOrderCountryPhoneInput
   }
 
   export type CountryPhoneCreateOrConnectWithoutCreatorProfileInput = {
@@ -11211,8 +17647,6 @@ export namespace Prisma {
 
   export type EventCreateWithoutCreatorInput = {
     eventName: string
-    eventCategoryId: number
-    eventTopicId: number
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
     eventDate: Date | string
@@ -11237,13 +17671,16 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
-    contryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
+    eventFormat: EventFormatCreateNestedOneWithoutEventInput
+    eventTopic: EventTopicCreateNestedOneWithoutEventInput
+    eventCountryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
+    ticketTransactions?: TicketTransactionCreateNestedManyWithoutEventInput
   }
 
   export type EventUncheckedCreateWithoutCreatorInput = {
     id?: number
     eventName: string
-    eventCategoryId: number
+    eventFormatId: number
     eventTopicId: number
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
@@ -11261,7 +17698,7 @@ export namespace Prisma {
     ticketEndDate: Date | string
     eventCPName: string
     eventCPEmail: string
-    countryPhoneId: number
+    eventCountryPhoneId: number
     ticketDataFormType: $Enums.TicketDataFormType
     maxTicketPerTransaction: number
     oneEmailOneTransaction?: boolean
@@ -11270,6 +17707,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
+    ticketTransactions?: TicketTransactionUncheckedCreateNestedManyWithoutEventInput
   }
 
   export type EventCreateOrConnectWithoutCreatorInput = {
@@ -11310,6 +17748,7 @@ export namespace Prisma {
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     countryPhone?: CountryPhoneUpdateOneRequiredWithoutMembersNestedInput
     verificationCodes?: VerificationCodeUpdateManyWithoutMemberNestedInput
+    ticketTransactions?: TicketTransactionUpdateManyWithoutMemberNestedInput
   }
 
   export type MemberUncheckedUpdateWithoutCreatorProfileInput = {
@@ -11329,6 +17768,7 @@ export namespace Prisma {
     sex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     verificationCodes?: VerificationCodeUncheckedUpdateManyWithoutMemberNestedInput
+    ticketTransactions?: TicketTransactionUncheckedUpdateManyWithoutMemberNestedInput
   }
 
   export type CountryPhoneUpsertWithoutCreatorProfileInput = {
@@ -11350,7 +17790,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     members?: MemberUpdateManyWithoutCountryPhoneNestedInput
-    events?: EventUpdateManyWithoutContryPhoneNestedInput
+    events?: EventUpdateManyWithoutEventCountryPhoneNestedInput
+    ticketTransactionDetails?: TicketTransactionDetailUpdateManyWithoutOrderCountryPhoneNestedInput
   }
 
   export type CountryPhoneUncheckedUpdateWithoutCreatorProfileInput = {
@@ -11362,7 +17803,8 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     members?: MemberUncheckedUpdateManyWithoutCountryPhoneNestedInput
-    events?: EventUncheckedUpdateManyWithoutContryPhoneNestedInput
+    events?: EventUncheckedUpdateManyWithoutEventCountryPhoneNestedInput
+    ticketTransactionDetails?: TicketTransactionDetailUncheckedUpdateManyWithoutOrderCountryPhoneNestedInput
   }
 
   export type EventUpsertWithWhereUniqueWithoutCreatorInput = {
@@ -11422,6 +17864,46 @@ export namespace Prisma {
     create: XOR<CreatorProfileCreateWithoutEventInput, CreatorProfileUncheckedCreateWithoutEventInput>
   }
 
+  export type EventFormatCreateWithoutEventInput = {
+    formatName: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type EventFormatUncheckedCreateWithoutEventInput = {
+    id?: number
+    formatName: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type EventFormatCreateOrConnectWithoutEventInput = {
+    where: EventFormatWhereUniqueInput
+    create: XOR<EventFormatCreateWithoutEventInput, EventFormatUncheckedCreateWithoutEventInput>
+  }
+
+  export type EventTopicCreateWithoutEventInput = {
+    topicName: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type EventTopicUncheckedCreateWithoutEventInput = {
+    id?: number
+    topicName: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type EventTopicCreateOrConnectWithoutEventInput = {
+    where: EventTopicWhereUniqueInput
+    create: XOR<EventTopicCreateWithoutEventInput, EventTopicUncheckedCreateWithoutEventInput>
+  }
+
   export type CountryPhoneCreateWithoutEventsInput = {
     name: string
     code: string
@@ -11431,6 +17913,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     members?: MemberCreateNestedManyWithoutCountryPhoneInput
     creatorProfile?: CreatorProfileCreateNestedManyWithoutCountryPhoneInput
+    ticketTransactionDetails?: TicketTransactionDetailCreateNestedManyWithoutOrderCountryPhoneInput
   }
 
   export type CountryPhoneUncheckedCreateWithoutEventsInput = {
@@ -11443,11 +17926,41 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     members?: MemberUncheckedCreateNestedManyWithoutCountryPhoneInput
     creatorProfile?: CreatorProfileUncheckedCreateNestedManyWithoutCountryPhoneInput
+    ticketTransactionDetails?: TicketTransactionDetailUncheckedCreateNestedManyWithoutOrderCountryPhoneInput
   }
 
   export type CountryPhoneCreateOrConnectWithoutEventsInput = {
     where: CountryPhoneWhereUniqueInput
     create: XOR<CountryPhoneCreateWithoutEventsInput, CountryPhoneUncheckedCreateWithoutEventsInput>
+  }
+
+  export type TicketTransactionCreateWithoutEventInput = {
+    ticketCode: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    member: MemberCreateNestedOneWithoutTicketTransactionsInput
+    ticketTransactionDetails?: TicketTransactionDetailCreateNestedManyWithoutTicketTransactionsInput
+  }
+
+  export type TicketTransactionUncheckedCreateWithoutEventInput = {
+    id?: number
+    memberId: string
+    ticketCode: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    ticketTransactionDetails?: TicketTransactionDetailUncheckedCreateNestedManyWithoutTicketTransactionsInput
+  }
+
+  export type TicketTransactionCreateOrConnectWithoutEventInput = {
+    where: TicketTransactionWhereUniqueInput
+    create: XOR<TicketTransactionCreateWithoutEventInput, TicketTransactionUncheckedCreateWithoutEventInput>
+  }
+
+  export type TicketTransactionCreateManyEventInputEnvelope = {
+    data: TicketTransactionCreateManyEventInput | TicketTransactionCreateManyEventInput[]
+    skipDuplicates?: boolean
   }
 
   export type CreatorProfileUpsertWithoutEventInput = {
@@ -11497,6 +18010,58 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type EventFormatUpsertWithoutEventInput = {
+    update: XOR<EventFormatUpdateWithoutEventInput, EventFormatUncheckedUpdateWithoutEventInput>
+    create: XOR<EventFormatCreateWithoutEventInput, EventFormatUncheckedCreateWithoutEventInput>
+    where?: EventFormatWhereInput
+  }
+
+  export type EventFormatUpdateToOneWithWhereWithoutEventInput = {
+    where?: EventFormatWhereInput
+    data: XOR<EventFormatUpdateWithoutEventInput, EventFormatUncheckedUpdateWithoutEventInput>
+  }
+
+  export type EventFormatUpdateWithoutEventInput = {
+    formatName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type EventFormatUncheckedUpdateWithoutEventInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    formatName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type EventTopicUpsertWithoutEventInput = {
+    update: XOR<EventTopicUpdateWithoutEventInput, EventTopicUncheckedUpdateWithoutEventInput>
+    create: XOR<EventTopicCreateWithoutEventInput, EventTopicUncheckedCreateWithoutEventInput>
+    where?: EventTopicWhereInput
+  }
+
+  export type EventTopicUpdateToOneWithWhereWithoutEventInput = {
+    where?: EventTopicWhereInput
+    data: XOR<EventTopicUpdateWithoutEventInput, EventTopicUncheckedUpdateWithoutEventInput>
+  }
+
+  export type EventTopicUpdateWithoutEventInput = {
+    topicName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type EventTopicUncheckedUpdateWithoutEventInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    topicName?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type CountryPhoneUpsertWithoutEventsInput = {
     update: XOR<CountryPhoneUpdateWithoutEventsInput, CountryPhoneUncheckedUpdateWithoutEventsInput>
     create: XOR<CountryPhoneCreateWithoutEventsInput, CountryPhoneUncheckedCreateWithoutEventsInput>
@@ -11517,6 +18082,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     members?: MemberUpdateManyWithoutCountryPhoneNestedInput
     creatorProfile?: CreatorProfileUpdateManyWithoutCountryPhoneNestedInput
+    ticketTransactionDetails?: TicketTransactionDetailUpdateManyWithoutOrderCountryPhoneNestedInput
   }
 
   export type CountryPhoneUncheckedUpdateWithoutEventsInput = {
@@ -11529,6 +18095,616 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     members?: MemberUncheckedUpdateManyWithoutCountryPhoneNestedInput
     creatorProfile?: CreatorProfileUncheckedUpdateManyWithoutCountryPhoneNestedInput
+    ticketTransactionDetails?: TicketTransactionDetailUncheckedUpdateManyWithoutOrderCountryPhoneNestedInput
+  }
+
+  export type TicketTransactionUpsertWithWhereUniqueWithoutEventInput = {
+    where: TicketTransactionWhereUniqueInput
+    update: XOR<TicketTransactionUpdateWithoutEventInput, TicketTransactionUncheckedUpdateWithoutEventInput>
+    create: XOR<TicketTransactionCreateWithoutEventInput, TicketTransactionUncheckedCreateWithoutEventInput>
+  }
+
+  export type TicketTransactionUpdateWithWhereUniqueWithoutEventInput = {
+    where: TicketTransactionWhereUniqueInput
+    data: XOR<TicketTransactionUpdateWithoutEventInput, TicketTransactionUncheckedUpdateWithoutEventInput>
+  }
+
+  export type TicketTransactionUpdateManyWithWhereWithoutEventInput = {
+    where: TicketTransactionScalarWhereInput
+    data: XOR<TicketTransactionUpdateManyMutationInput, TicketTransactionUncheckedUpdateManyWithoutEventInput>
+  }
+
+  export type EventCreateWithoutEventFormatInput = {
+    eventName: string
+    organizerName?: string | null
+    organizerLogoImgUrl?: string | null
+    eventDate: Date | string
+    eventTime: Date | string
+    eventLocation: string
+    eventDesc?: string | null
+    ticketType: $Enums.TicketType
+    ticketName: string
+    ticketQty: number
+    ticketPrice?: number
+    ticketDesc?: string | null
+    ticketTermsAndCondition: string
+    ticketStartDate: Date | string
+    ticketEndDate: Date | string
+    eventCPName: string
+    eventCPEmail: string
+    ticketDataFormType: $Enums.TicketDataFormType
+    maxTicketPerTransaction: number
+    oneEmailOneTransaction?: boolean
+    ticketDataFormUnique?: boolean
+    isDraft?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    creator: CreatorProfileCreateNestedOneWithoutEventInput
+    eventTopic: EventTopicCreateNestedOneWithoutEventInput
+    eventCountryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
+    ticketTransactions?: TicketTransactionCreateNestedManyWithoutEventInput
+  }
+
+  export type EventUncheckedCreateWithoutEventFormatInput = {
+    id?: number
+    creatorId: string
+    eventName: string
+    eventTopicId: number
+    organizerName?: string | null
+    organizerLogoImgUrl?: string | null
+    eventDate: Date | string
+    eventTime: Date | string
+    eventLocation: string
+    eventDesc?: string | null
+    ticketType: $Enums.TicketType
+    ticketName: string
+    ticketQty: number
+    ticketPrice?: number
+    ticketDesc?: string | null
+    ticketTermsAndCondition: string
+    ticketStartDate: Date | string
+    ticketEndDate: Date | string
+    eventCPName: string
+    eventCPEmail: string
+    eventCountryPhoneId: number
+    ticketDataFormType: $Enums.TicketDataFormType
+    maxTicketPerTransaction: number
+    oneEmailOneTransaction?: boolean
+    ticketDataFormUnique?: boolean
+    isDraft?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    ticketTransactions?: TicketTransactionUncheckedCreateNestedManyWithoutEventInput
+  }
+
+  export type EventCreateOrConnectWithoutEventFormatInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutEventFormatInput, EventUncheckedCreateWithoutEventFormatInput>
+  }
+
+  export type EventCreateManyEventFormatInputEnvelope = {
+    data: EventCreateManyEventFormatInput | EventCreateManyEventFormatInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EventUpsertWithWhereUniqueWithoutEventFormatInput = {
+    where: EventWhereUniqueInput
+    update: XOR<EventUpdateWithoutEventFormatInput, EventUncheckedUpdateWithoutEventFormatInput>
+    create: XOR<EventCreateWithoutEventFormatInput, EventUncheckedCreateWithoutEventFormatInput>
+  }
+
+  export type EventUpdateWithWhereUniqueWithoutEventFormatInput = {
+    where: EventWhereUniqueInput
+    data: XOR<EventUpdateWithoutEventFormatInput, EventUncheckedUpdateWithoutEventFormatInput>
+  }
+
+  export type EventUpdateManyWithWhereWithoutEventFormatInput = {
+    where: EventScalarWhereInput
+    data: XOR<EventUpdateManyMutationInput, EventUncheckedUpdateManyWithoutEventFormatInput>
+  }
+
+  export type EventCreateWithoutEventTopicInput = {
+    eventName: string
+    organizerName?: string | null
+    organizerLogoImgUrl?: string | null
+    eventDate: Date | string
+    eventTime: Date | string
+    eventLocation: string
+    eventDesc?: string | null
+    ticketType: $Enums.TicketType
+    ticketName: string
+    ticketQty: number
+    ticketPrice?: number
+    ticketDesc?: string | null
+    ticketTermsAndCondition: string
+    ticketStartDate: Date | string
+    ticketEndDate: Date | string
+    eventCPName: string
+    eventCPEmail: string
+    ticketDataFormType: $Enums.TicketDataFormType
+    maxTicketPerTransaction: number
+    oneEmailOneTransaction?: boolean
+    ticketDataFormUnique?: boolean
+    isDraft?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    creator: CreatorProfileCreateNestedOneWithoutEventInput
+    eventFormat: EventFormatCreateNestedOneWithoutEventInput
+    eventCountryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
+    ticketTransactions?: TicketTransactionCreateNestedManyWithoutEventInput
+  }
+
+  export type EventUncheckedCreateWithoutEventTopicInput = {
+    id?: number
+    creatorId: string
+    eventName: string
+    eventFormatId: number
+    organizerName?: string | null
+    organizerLogoImgUrl?: string | null
+    eventDate: Date | string
+    eventTime: Date | string
+    eventLocation: string
+    eventDesc?: string | null
+    ticketType: $Enums.TicketType
+    ticketName: string
+    ticketQty: number
+    ticketPrice?: number
+    ticketDesc?: string | null
+    ticketTermsAndCondition: string
+    ticketStartDate: Date | string
+    ticketEndDate: Date | string
+    eventCPName: string
+    eventCPEmail: string
+    eventCountryPhoneId: number
+    ticketDataFormType: $Enums.TicketDataFormType
+    maxTicketPerTransaction: number
+    oneEmailOneTransaction?: boolean
+    ticketDataFormUnique?: boolean
+    isDraft?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    ticketTransactions?: TicketTransactionUncheckedCreateNestedManyWithoutEventInput
+  }
+
+  export type EventCreateOrConnectWithoutEventTopicInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutEventTopicInput, EventUncheckedCreateWithoutEventTopicInput>
+  }
+
+  export type EventCreateManyEventTopicInputEnvelope = {
+    data: EventCreateManyEventTopicInput | EventCreateManyEventTopicInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EventUpsertWithWhereUniqueWithoutEventTopicInput = {
+    where: EventWhereUniqueInput
+    update: XOR<EventUpdateWithoutEventTopicInput, EventUncheckedUpdateWithoutEventTopicInput>
+    create: XOR<EventCreateWithoutEventTopicInput, EventUncheckedCreateWithoutEventTopicInput>
+  }
+
+  export type EventUpdateWithWhereUniqueWithoutEventTopicInput = {
+    where: EventWhereUniqueInput
+    data: XOR<EventUpdateWithoutEventTopicInput, EventUncheckedUpdateWithoutEventTopicInput>
+  }
+
+  export type EventUpdateManyWithWhereWithoutEventTopicInput = {
+    where: EventScalarWhereInput
+    data: XOR<EventUpdateManyMutationInput, EventUncheckedUpdateManyWithoutEventTopicInput>
+  }
+
+  export type EventCreateWithoutTicketTransactionsInput = {
+    eventName: string
+    organizerName?: string | null
+    organizerLogoImgUrl?: string | null
+    eventDate: Date | string
+    eventTime: Date | string
+    eventLocation: string
+    eventDesc?: string | null
+    ticketType: $Enums.TicketType
+    ticketName: string
+    ticketQty: number
+    ticketPrice?: number
+    ticketDesc?: string | null
+    ticketTermsAndCondition: string
+    ticketStartDate: Date | string
+    ticketEndDate: Date | string
+    eventCPName: string
+    eventCPEmail: string
+    ticketDataFormType: $Enums.TicketDataFormType
+    maxTicketPerTransaction: number
+    oneEmailOneTransaction?: boolean
+    ticketDataFormUnique?: boolean
+    isDraft?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    creator: CreatorProfileCreateNestedOneWithoutEventInput
+    eventFormat: EventFormatCreateNestedOneWithoutEventInput
+    eventTopic: EventTopicCreateNestedOneWithoutEventInput
+    eventCountryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
+  }
+
+  export type EventUncheckedCreateWithoutTicketTransactionsInput = {
+    id?: number
+    creatorId: string
+    eventName: string
+    eventFormatId: number
+    eventTopicId: number
+    organizerName?: string | null
+    organizerLogoImgUrl?: string | null
+    eventDate: Date | string
+    eventTime: Date | string
+    eventLocation: string
+    eventDesc?: string | null
+    ticketType: $Enums.TicketType
+    ticketName: string
+    ticketQty: number
+    ticketPrice?: number
+    ticketDesc?: string | null
+    ticketTermsAndCondition: string
+    ticketStartDate: Date | string
+    ticketEndDate: Date | string
+    eventCPName: string
+    eventCPEmail: string
+    eventCountryPhoneId: number
+    ticketDataFormType: $Enums.TicketDataFormType
+    maxTicketPerTransaction: number
+    oneEmailOneTransaction?: boolean
+    ticketDataFormUnique?: boolean
+    isDraft?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type EventCreateOrConnectWithoutTicketTransactionsInput = {
+    where: EventWhereUniqueInput
+    create: XOR<EventCreateWithoutTicketTransactionsInput, EventUncheckedCreateWithoutTicketTransactionsInput>
+  }
+
+  export type MemberCreateWithoutTicketTransactionsInput = {
+    id?: string
+    email: string
+    phoneNumber: string
+    firstName: string
+    lastName?: string | null
+    birthDate: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    eventPromoAccepted?: boolean
+    personalDataConsentAccepted: boolean
+    termsPrivacyAccepted: boolean
+    sex: $Enums.Sex
+    isEmailVerified?: boolean
+    countryPhone: CountryPhoneCreateNestedOneWithoutMembersInput
+    verificationCodes?: VerificationCodeCreateNestedManyWithoutMemberInput
+    creatorProfile?: CreatorProfileCreateNestedOneWithoutMemberInput
+  }
+
+  export type MemberUncheckedCreateWithoutTicketTransactionsInput = {
+    id?: string
+    email: string
+    countryPhoneId: number
+    phoneNumber: string
+    firstName: string
+    lastName?: string | null
+    birthDate: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    eventPromoAccepted?: boolean
+    personalDataConsentAccepted: boolean
+    termsPrivacyAccepted: boolean
+    sex: $Enums.Sex
+    isEmailVerified?: boolean
+    verificationCodes?: VerificationCodeUncheckedCreateNestedManyWithoutMemberInput
+    creatorProfile?: CreatorProfileUncheckedCreateNestedOneWithoutMemberInput
+  }
+
+  export type MemberCreateOrConnectWithoutTicketTransactionsInput = {
+    where: MemberWhereUniqueInput
+    create: XOR<MemberCreateWithoutTicketTransactionsInput, MemberUncheckedCreateWithoutTicketTransactionsInput>
+  }
+
+  export type TicketTransactionDetailCreateWithoutTicketTransactionsInput = {
+    orderName: string
+    orderEmail: string
+    orderBirthDate: string
+    orderSex: $Enums.Sex
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    orderCountryPhone: CountryPhoneCreateNestedOneWithoutTicketTransactionDetailsInput
+  }
+
+  export type TicketTransactionDetailUncheckedCreateWithoutTicketTransactionsInput = {
+    id?: number
+    orderName: string
+    orderCountryPhoneId: number
+    orderEmail: string
+    orderBirthDate: string
+    orderSex: $Enums.Sex
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type TicketTransactionDetailCreateOrConnectWithoutTicketTransactionsInput = {
+    where: TicketTransactionDetailWhereUniqueInput
+    create: XOR<TicketTransactionDetailCreateWithoutTicketTransactionsInput, TicketTransactionDetailUncheckedCreateWithoutTicketTransactionsInput>
+  }
+
+  export type TicketTransactionDetailCreateManyTicketTransactionsInputEnvelope = {
+    data: TicketTransactionDetailCreateManyTicketTransactionsInput | TicketTransactionDetailCreateManyTicketTransactionsInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EventUpsertWithoutTicketTransactionsInput = {
+    update: XOR<EventUpdateWithoutTicketTransactionsInput, EventUncheckedUpdateWithoutTicketTransactionsInput>
+    create: XOR<EventCreateWithoutTicketTransactionsInput, EventUncheckedCreateWithoutTicketTransactionsInput>
+    where?: EventWhereInput
+  }
+
+  export type EventUpdateToOneWithWhereWithoutTicketTransactionsInput = {
+    where?: EventWhereInput
+    data: XOR<EventUpdateWithoutTicketTransactionsInput, EventUncheckedUpdateWithoutTicketTransactionsInput>
+  }
+
+  export type EventUpdateWithoutTicketTransactionsInput = {
+    eventName?: StringFieldUpdateOperationsInput | string
+    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventLocation?: StringFieldUpdateOperationsInput | string
+    eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
+    ticketName?: StringFieldUpdateOperationsInput | string
+    ticketQty?: IntFieldUpdateOperationsInput | number
+    ticketPrice?: IntFieldUpdateOperationsInput | number
+    ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventCPName?: StringFieldUpdateOperationsInput | string
+    eventCPEmail?: StringFieldUpdateOperationsInput | string
+    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
+    oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
+    ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
+    isDraft?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    creator?: CreatorProfileUpdateOneRequiredWithoutEventNestedInput
+    eventFormat?: EventFormatUpdateOneRequiredWithoutEventNestedInput
+    eventTopic?: EventTopicUpdateOneRequiredWithoutEventNestedInput
+    eventCountryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutTicketTransactionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    creatorId?: StringFieldUpdateOperationsInput | string
+    eventName?: StringFieldUpdateOperationsInput | string
+    eventFormatId?: IntFieldUpdateOperationsInput | number
+    eventTopicId?: IntFieldUpdateOperationsInput | number
+    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventLocation?: StringFieldUpdateOperationsInput | string
+    eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
+    ticketName?: StringFieldUpdateOperationsInput | string
+    ticketQty?: IntFieldUpdateOperationsInput | number
+    ticketPrice?: IntFieldUpdateOperationsInput | number
+    ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventCPName?: StringFieldUpdateOperationsInput | string
+    eventCPEmail?: StringFieldUpdateOperationsInput | string
+    eventCountryPhoneId?: IntFieldUpdateOperationsInput | number
+    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
+    oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
+    ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
+    isDraft?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type MemberUpsertWithoutTicketTransactionsInput = {
+    update: XOR<MemberUpdateWithoutTicketTransactionsInput, MemberUncheckedUpdateWithoutTicketTransactionsInput>
+    create: XOR<MemberCreateWithoutTicketTransactionsInput, MemberUncheckedCreateWithoutTicketTransactionsInput>
+    where?: MemberWhereInput
+  }
+
+  export type MemberUpdateToOneWithWhereWithoutTicketTransactionsInput = {
+    where?: MemberWhereInput
+    data: XOR<MemberUpdateWithoutTicketTransactionsInput, MemberUncheckedUpdateWithoutTicketTransactionsInput>
+  }
+
+  export type MemberUpdateWithoutTicketTransactionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    eventPromoAccepted?: BoolFieldUpdateOperationsInput | boolean
+    personalDataConsentAccepted?: BoolFieldUpdateOperationsInput | boolean
+    termsPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
+    sex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    countryPhone?: CountryPhoneUpdateOneRequiredWithoutMembersNestedInput
+    verificationCodes?: VerificationCodeUpdateManyWithoutMemberNestedInput
+    creatorProfile?: CreatorProfileUpdateOneWithoutMemberNestedInput
+  }
+
+  export type MemberUncheckedUpdateWithoutTicketTransactionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    countryPhoneId?: IntFieldUpdateOperationsInput | number
+    phoneNumber?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    birthDate?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    eventPromoAccepted?: BoolFieldUpdateOperationsInput | boolean
+    personalDataConsentAccepted?: BoolFieldUpdateOperationsInput | boolean
+    termsPrivacyAccepted?: BoolFieldUpdateOperationsInput | boolean
+    sex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
+    isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCodes?: VerificationCodeUncheckedUpdateManyWithoutMemberNestedInput
+    creatorProfile?: CreatorProfileUncheckedUpdateOneWithoutMemberNestedInput
+  }
+
+  export type TicketTransactionDetailUpsertWithWhereUniqueWithoutTicketTransactionsInput = {
+    where: TicketTransactionDetailWhereUniqueInput
+    update: XOR<TicketTransactionDetailUpdateWithoutTicketTransactionsInput, TicketTransactionDetailUncheckedUpdateWithoutTicketTransactionsInput>
+    create: XOR<TicketTransactionDetailCreateWithoutTicketTransactionsInput, TicketTransactionDetailUncheckedCreateWithoutTicketTransactionsInput>
+  }
+
+  export type TicketTransactionDetailUpdateWithWhereUniqueWithoutTicketTransactionsInput = {
+    where: TicketTransactionDetailWhereUniqueInput
+    data: XOR<TicketTransactionDetailUpdateWithoutTicketTransactionsInput, TicketTransactionDetailUncheckedUpdateWithoutTicketTransactionsInput>
+  }
+
+  export type TicketTransactionDetailUpdateManyWithWhereWithoutTicketTransactionsInput = {
+    where: TicketTransactionDetailScalarWhereInput
+    data: XOR<TicketTransactionDetailUpdateManyMutationInput, TicketTransactionDetailUncheckedUpdateManyWithoutTicketTransactionsInput>
+  }
+
+  export type TicketTransactionCreateWithoutTicketTransactionDetailsInput = {
+    ticketCode: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    event: EventCreateNestedOneWithoutTicketTransactionsInput
+    member: MemberCreateNestedOneWithoutTicketTransactionsInput
+  }
+
+  export type TicketTransactionUncheckedCreateWithoutTicketTransactionDetailsInput = {
+    id?: number
+    eventId: number
+    memberId: string
+    ticketCode: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type TicketTransactionCreateOrConnectWithoutTicketTransactionDetailsInput = {
+    where: TicketTransactionWhereUniqueInput
+    create: XOR<TicketTransactionCreateWithoutTicketTransactionDetailsInput, TicketTransactionUncheckedCreateWithoutTicketTransactionDetailsInput>
+  }
+
+  export type CountryPhoneCreateWithoutTicketTransactionDetailsInput = {
+    name: string
+    code: string
+    mobileCode: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    members?: MemberCreateNestedManyWithoutCountryPhoneInput
+    creatorProfile?: CreatorProfileCreateNestedManyWithoutCountryPhoneInput
+    events?: EventCreateNestedManyWithoutEventCountryPhoneInput
+  }
+
+  export type CountryPhoneUncheckedCreateWithoutTicketTransactionDetailsInput = {
+    id?: number
+    name: string
+    code: string
+    mobileCode: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+    members?: MemberUncheckedCreateNestedManyWithoutCountryPhoneInput
+    creatorProfile?: CreatorProfileUncheckedCreateNestedManyWithoutCountryPhoneInput
+    events?: EventUncheckedCreateNestedManyWithoutEventCountryPhoneInput
+  }
+
+  export type CountryPhoneCreateOrConnectWithoutTicketTransactionDetailsInput = {
+    where: CountryPhoneWhereUniqueInput
+    create: XOR<CountryPhoneCreateWithoutTicketTransactionDetailsInput, CountryPhoneUncheckedCreateWithoutTicketTransactionDetailsInput>
+  }
+
+  export type TicketTransactionUpsertWithoutTicketTransactionDetailsInput = {
+    update: XOR<TicketTransactionUpdateWithoutTicketTransactionDetailsInput, TicketTransactionUncheckedUpdateWithoutTicketTransactionDetailsInput>
+    create: XOR<TicketTransactionCreateWithoutTicketTransactionDetailsInput, TicketTransactionUncheckedCreateWithoutTicketTransactionDetailsInput>
+    where?: TicketTransactionWhereInput
+  }
+
+  export type TicketTransactionUpdateToOneWithWhereWithoutTicketTransactionDetailsInput = {
+    where?: TicketTransactionWhereInput
+    data: XOR<TicketTransactionUpdateWithoutTicketTransactionDetailsInput, TicketTransactionUncheckedUpdateWithoutTicketTransactionDetailsInput>
+  }
+
+  export type TicketTransactionUpdateWithoutTicketTransactionDetailsInput = {
+    ticketCode?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    event?: EventUpdateOneRequiredWithoutTicketTransactionsNestedInput
+    member?: MemberUpdateOneRequiredWithoutTicketTransactionsNestedInput
+  }
+
+  export type TicketTransactionUncheckedUpdateWithoutTicketTransactionDetailsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    eventId?: IntFieldUpdateOperationsInput | number
+    memberId?: StringFieldUpdateOperationsInput | string
+    ticketCode?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type CountryPhoneUpsertWithoutTicketTransactionDetailsInput = {
+    update: XOR<CountryPhoneUpdateWithoutTicketTransactionDetailsInput, CountryPhoneUncheckedUpdateWithoutTicketTransactionDetailsInput>
+    create: XOR<CountryPhoneCreateWithoutTicketTransactionDetailsInput, CountryPhoneUncheckedCreateWithoutTicketTransactionDetailsInput>
+    where?: CountryPhoneWhereInput
+  }
+
+  export type CountryPhoneUpdateToOneWithWhereWithoutTicketTransactionDetailsInput = {
+    where?: CountryPhoneWhereInput
+    data: XOR<CountryPhoneUpdateWithoutTicketTransactionDetailsInput, CountryPhoneUncheckedUpdateWithoutTicketTransactionDetailsInput>
+  }
+
+  export type CountryPhoneUpdateWithoutTicketTransactionDetailsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    mobileCode?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    members?: MemberUpdateManyWithoutCountryPhoneNestedInput
+    creatorProfile?: CreatorProfileUpdateManyWithoutCountryPhoneNestedInput
+    events?: EventUpdateManyWithoutEventCountryPhoneNestedInput
+  }
+
+  export type CountryPhoneUncheckedUpdateWithoutTicketTransactionDetailsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    code?: StringFieldUpdateOperationsInput | string
+    mobileCode?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    members?: MemberUncheckedUpdateManyWithoutCountryPhoneNestedInput
+    creatorProfile?: CreatorProfileUncheckedUpdateManyWithoutCountryPhoneNestedInput
+    events?: EventUncheckedUpdateManyWithoutEventCountryPhoneNestedInput
   }
 
   export type MemberCreateManyCountryPhoneInput = {
@@ -11565,11 +18741,11 @@ export namespace Prisma {
     deletedAt?: Date | string | null
   }
 
-  export type EventCreateManyContryPhoneInput = {
+  export type EventCreateManyEventCountryPhoneInput = {
     id?: number
     creatorId: string
     eventName: string
-    eventCategoryId: number
+    eventFormatId: number
     eventTopicId: number
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
@@ -11597,6 +18773,18 @@ export namespace Prisma {
     deletedAt?: Date | string | null
   }
 
+  export type TicketTransactionDetailCreateManyOrderCountryPhoneInput = {
+    id?: number
+    ticketTransactionId: number
+    orderName: string
+    orderEmail: string
+    orderBirthDate: string
+    orderSex: $Enums.Sex
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
   export type MemberUpdateWithoutCountryPhoneInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -11614,6 +18802,7 @@ export namespace Prisma {
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     verificationCodes?: VerificationCodeUpdateManyWithoutMemberNestedInput
     creatorProfile?: CreatorProfileUpdateOneWithoutMemberNestedInput
+    ticketTransactions?: TicketTransactionUpdateManyWithoutMemberNestedInput
   }
 
   export type MemberUncheckedUpdateWithoutCountryPhoneInput = {
@@ -11633,6 +18822,7 @@ export namespace Prisma {
     isEmailVerified?: BoolFieldUpdateOperationsInput | boolean
     verificationCodes?: VerificationCodeUncheckedUpdateManyWithoutMemberNestedInput
     creatorProfile?: CreatorProfileUncheckedUpdateOneWithoutMemberNestedInput
+    ticketTransactions?: TicketTransactionUncheckedUpdateManyWithoutMemberNestedInput
   }
 
   export type MemberUncheckedUpdateManyWithoutCountryPhoneInput = {
@@ -11705,10 +18895,8 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type EventUpdateWithoutContryPhoneInput = {
+  export type EventUpdateWithoutEventCountryPhoneInput = {
     eventName?: StringFieldUpdateOperationsInput | string
-    eventCategoryId?: IntFieldUpdateOperationsInput | number
-    eventTopicId?: IntFieldUpdateOperationsInput | number
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11734,13 +18922,49 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creator?: CreatorProfileUpdateOneRequiredWithoutEventNestedInput
+    eventFormat?: EventFormatUpdateOneRequiredWithoutEventNestedInput
+    eventTopic?: EventTopicUpdateOneRequiredWithoutEventNestedInput
+    ticketTransactions?: TicketTransactionUpdateManyWithoutEventNestedInput
   }
 
-  export type EventUncheckedUpdateWithoutContryPhoneInput = {
+  export type EventUncheckedUpdateWithoutEventCountryPhoneInput = {
     id?: IntFieldUpdateOperationsInput | number
     creatorId?: StringFieldUpdateOperationsInput | string
     eventName?: StringFieldUpdateOperationsInput | string
-    eventCategoryId?: IntFieldUpdateOperationsInput | number
+    eventFormatId?: IntFieldUpdateOperationsInput | number
+    eventTopicId?: IntFieldUpdateOperationsInput | number
+    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventLocation?: StringFieldUpdateOperationsInput | string
+    eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
+    ticketName?: StringFieldUpdateOperationsInput | string
+    ticketQty?: IntFieldUpdateOperationsInput | number
+    ticketPrice?: IntFieldUpdateOperationsInput | number
+    ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventCPName?: StringFieldUpdateOperationsInput | string
+    eventCPEmail?: StringFieldUpdateOperationsInput | string
+    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
+    oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
+    ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
+    isDraft?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ticketTransactions?: TicketTransactionUncheckedUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateManyWithoutEventCountryPhoneInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    creatorId?: StringFieldUpdateOperationsInput | string
+    eventName?: StringFieldUpdateOperationsInput | string
+    eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTopicId?: IntFieldUpdateOperationsInput | number
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11768,33 +18992,36 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type EventUncheckedUpdateManyWithoutContryPhoneInput = {
+  export type TicketTransactionDetailUpdateWithoutOrderCountryPhoneInput = {
+    orderName?: StringFieldUpdateOperationsInput | string
+    orderEmail?: StringFieldUpdateOperationsInput | string
+    orderBirthDate?: StringFieldUpdateOperationsInput | string
+    orderSex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ticketTransactions?: TicketTransactionUpdateOneRequiredWithoutTicketTransactionDetailsNestedInput
+  }
+
+  export type TicketTransactionDetailUncheckedUpdateWithoutOrderCountryPhoneInput = {
     id?: IntFieldUpdateOperationsInput | number
-    creatorId?: StringFieldUpdateOperationsInput | string
-    eventName?: StringFieldUpdateOperationsInput | string
-    eventCategoryId?: IntFieldUpdateOperationsInput | number
-    eventTopicId?: IntFieldUpdateOperationsInput | number
-    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
-    organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    eventLocation?: StringFieldUpdateOperationsInput | string
-    eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
-    ticketName?: StringFieldUpdateOperationsInput | string
-    ticketQty?: IntFieldUpdateOperationsInput | number
-    ticketPrice?: IntFieldUpdateOperationsInput | number
-    ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
-    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    eventCPName?: StringFieldUpdateOperationsInput | string
-    eventCPEmail?: StringFieldUpdateOperationsInput | string
-    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
-    maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
-    oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
-    ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
-    isDraft?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    ticketTransactionId?: IntFieldUpdateOperationsInput | number
+    orderName?: StringFieldUpdateOperationsInput | string
+    orderEmail?: StringFieldUpdateOperationsInput | string
+    orderBirthDate?: StringFieldUpdateOperationsInput | string
+    orderSex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type TicketTransactionDetailUncheckedUpdateManyWithoutOrderCountryPhoneInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    ticketTransactionId?: IntFieldUpdateOperationsInput | number
+    orderName?: StringFieldUpdateOperationsInput | string
+    orderEmail?: StringFieldUpdateOperationsInput | string
+    orderBirthDate?: StringFieldUpdateOperationsInput | string
+    orderSex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -11808,6 +19035,15 @@ export namespace Prisma {
     expiredAt: Date | string
     isUsed?: boolean
     attempts?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type TicketTransactionCreateManyMemberInput = {
+    id?: number
+    eventId: number
+    ticketCode: string
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -11852,10 +19088,38 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type TicketTransactionUpdateWithoutMemberInput = {
+    ticketCode?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    event?: EventUpdateOneRequiredWithoutTicketTransactionsNestedInput
+    ticketTransactionDetails?: TicketTransactionDetailUpdateManyWithoutTicketTransactionsNestedInput
+  }
+
+  export type TicketTransactionUncheckedUpdateWithoutMemberInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    eventId?: IntFieldUpdateOperationsInput | number
+    ticketCode?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ticketTransactionDetails?: TicketTransactionDetailUncheckedUpdateManyWithoutTicketTransactionsNestedInput
+  }
+
+  export type TicketTransactionUncheckedUpdateManyWithoutMemberInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    eventId?: IntFieldUpdateOperationsInput | number
+    ticketCode?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type EventCreateManyCreatorInput = {
     id?: number
     eventName: string
-    eventCategoryId: number
+    eventFormatId: number
     eventTopicId: number
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
@@ -11873,7 +19137,7 @@ export namespace Prisma {
     ticketEndDate: Date | string
     eventCPName: string
     eventCPEmail: string
-    countryPhoneId: number
+    eventCountryPhoneId: number
     ticketDataFormType: $Enums.TicketDataFormType
     maxTicketPerTransaction: number
     oneEmailOneTransaction?: boolean
@@ -11886,8 +19150,6 @@ export namespace Prisma {
 
   export type EventUpdateWithoutCreatorInput = {
     eventName?: StringFieldUpdateOperationsInput | string
-    eventCategoryId?: IntFieldUpdateOperationsInput | number
-    eventTopicId?: IntFieldUpdateOperationsInput | number
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11912,13 +19174,16 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    contryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
+    eventFormat?: EventFormatUpdateOneRequiredWithoutEventNestedInput
+    eventTopic?: EventTopicUpdateOneRequiredWithoutEventNestedInput
+    eventCountryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
+    ticketTransactions?: TicketTransactionUpdateManyWithoutEventNestedInput
   }
 
   export type EventUncheckedUpdateWithoutCreatorInput = {
     id?: IntFieldUpdateOperationsInput | number
     eventName?: StringFieldUpdateOperationsInput | string
-    eventCategoryId?: IntFieldUpdateOperationsInput | number
+    eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTopicId?: IntFieldUpdateOperationsInput | number
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11936,7 +19201,40 @@ export namespace Prisma {
     ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
     eventCPName?: StringFieldUpdateOperationsInput | string
     eventCPEmail?: StringFieldUpdateOperationsInput | string
-    countryPhoneId?: IntFieldUpdateOperationsInput | number
+    eventCountryPhoneId?: IntFieldUpdateOperationsInput | number
+    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
+    oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
+    ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
+    isDraft?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ticketTransactions?: TicketTransactionUncheckedUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateManyWithoutCreatorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    eventName?: StringFieldUpdateOperationsInput | string
+    eventFormatId?: IntFieldUpdateOperationsInput | number
+    eventTopicId?: IntFieldUpdateOperationsInput | number
+    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventLocation?: StringFieldUpdateOperationsInput | string
+    eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
+    ticketName?: StringFieldUpdateOperationsInput | string
+    ticketQty?: IntFieldUpdateOperationsInput | number
+    ticketPrice?: IntFieldUpdateOperationsInput | number
+    ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventCPName?: StringFieldUpdateOperationsInput | string
+    eventCPEmail?: StringFieldUpdateOperationsInput | string
+    eventCountryPhoneId?: IntFieldUpdateOperationsInput | number
     ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
     maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
     oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
@@ -11947,10 +19245,111 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type EventUncheckedUpdateManyWithoutCreatorInput = {
+  export type TicketTransactionCreateManyEventInput = {
+    id?: number
+    memberId: string
+    ticketCode: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type TicketTransactionUpdateWithoutEventInput = {
+    ticketCode?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    member?: MemberUpdateOneRequiredWithoutTicketTransactionsNestedInput
+    ticketTransactionDetails?: TicketTransactionDetailUpdateManyWithoutTicketTransactionsNestedInput
+  }
+
+  export type TicketTransactionUncheckedUpdateWithoutEventInput = {
     id?: IntFieldUpdateOperationsInput | number
+    memberId?: StringFieldUpdateOperationsInput | string
+    ticketCode?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ticketTransactionDetails?: TicketTransactionDetailUncheckedUpdateManyWithoutTicketTransactionsNestedInput
+  }
+
+  export type TicketTransactionUncheckedUpdateManyWithoutEventInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    memberId?: StringFieldUpdateOperationsInput | string
+    ticketCode?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type EventCreateManyEventFormatInput = {
+    id?: number
+    creatorId: string
+    eventName: string
+    eventTopicId: number
+    organizerName?: string | null
+    organizerLogoImgUrl?: string | null
+    eventDate: Date | string
+    eventTime: Date | string
+    eventLocation: string
+    eventDesc?: string | null
+    ticketType: $Enums.TicketType
+    ticketName: string
+    ticketQty: number
+    ticketPrice?: number
+    ticketDesc?: string | null
+    ticketTermsAndCondition: string
+    ticketStartDate: Date | string
+    ticketEndDate: Date | string
+    eventCPName: string
+    eventCPEmail: string
+    eventCountryPhoneId: number
+    ticketDataFormType: $Enums.TicketDataFormType
+    maxTicketPerTransaction: number
+    oneEmailOneTransaction?: boolean
+    ticketDataFormUnique?: boolean
+    isDraft?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type EventUpdateWithoutEventFormatInput = {
     eventName?: StringFieldUpdateOperationsInput | string
-    eventCategoryId?: IntFieldUpdateOperationsInput | number
+    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventLocation?: StringFieldUpdateOperationsInput | string
+    eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
+    ticketName?: StringFieldUpdateOperationsInput | string
+    ticketQty?: IntFieldUpdateOperationsInput | number
+    ticketPrice?: IntFieldUpdateOperationsInput | number
+    ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventCPName?: StringFieldUpdateOperationsInput | string
+    eventCPEmail?: StringFieldUpdateOperationsInput | string
+    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
+    oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
+    ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
+    isDraft?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    creator?: CreatorProfileUpdateOneRequiredWithoutEventNestedInput
+    eventTopic?: EventTopicUpdateOneRequiredWithoutEventNestedInput
+    eventCountryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
+    ticketTransactions?: TicketTransactionUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutEventFormatInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    creatorId?: StringFieldUpdateOperationsInput | string
+    eventName?: StringFieldUpdateOperationsInput | string
     eventTopicId?: IntFieldUpdateOperationsInput | number
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
@@ -11968,12 +19367,221 @@ export namespace Prisma {
     ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
     eventCPName?: StringFieldUpdateOperationsInput | string
     eventCPEmail?: StringFieldUpdateOperationsInput | string
-    countryPhoneId?: IntFieldUpdateOperationsInput | number
+    eventCountryPhoneId?: IntFieldUpdateOperationsInput | number
     ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
     maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
     oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
     ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
     isDraft?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ticketTransactions?: TicketTransactionUncheckedUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateManyWithoutEventFormatInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    creatorId?: StringFieldUpdateOperationsInput | string
+    eventName?: StringFieldUpdateOperationsInput | string
+    eventTopicId?: IntFieldUpdateOperationsInput | number
+    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventLocation?: StringFieldUpdateOperationsInput | string
+    eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
+    ticketName?: StringFieldUpdateOperationsInput | string
+    ticketQty?: IntFieldUpdateOperationsInput | number
+    ticketPrice?: IntFieldUpdateOperationsInput | number
+    ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventCPName?: StringFieldUpdateOperationsInput | string
+    eventCPEmail?: StringFieldUpdateOperationsInput | string
+    eventCountryPhoneId?: IntFieldUpdateOperationsInput | number
+    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
+    oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
+    ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
+    isDraft?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type EventCreateManyEventTopicInput = {
+    id?: number
+    creatorId: string
+    eventName: string
+    eventFormatId: number
+    organizerName?: string | null
+    organizerLogoImgUrl?: string | null
+    eventDate: Date | string
+    eventTime: Date | string
+    eventLocation: string
+    eventDesc?: string | null
+    ticketType: $Enums.TicketType
+    ticketName: string
+    ticketQty: number
+    ticketPrice?: number
+    ticketDesc?: string | null
+    ticketTermsAndCondition: string
+    ticketStartDate: Date | string
+    ticketEndDate: Date | string
+    eventCPName: string
+    eventCPEmail: string
+    eventCountryPhoneId: number
+    ticketDataFormType: $Enums.TicketDataFormType
+    maxTicketPerTransaction: number
+    oneEmailOneTransaction?: boolean
+    ticketDataFormUnique?: boolean
+    isDraft?: boolean | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type EventUpdateWithoutEventTopicInput = {
+    eventName?: StringFieldUpdateOperationsInput | string
+    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventLocation?: StringFieldUpdateOperationsInput | string
+    eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
+    ticketName?: StringFieldUpdateOperationsInput | string
+    ticketQty?: IntFieldUpdateOperationsInput | number
+    ticketPrice?: IntFieldUpdateOperationsInput | number
+    ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventCPName?: StringFieldUpdateOperationsInput | string
+    eventCPEmail?: StringFieldUpdateOperationsInput | string
+    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
+    oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
+    ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
+    isDraft?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    creator?: CreatorProfileUpdateOneRequiredWithoutEventNestedInput
+    eventFormat?: EventFormatUpdateOneRequiredWithoutEventNestedInput
+    eventCountryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
+    ticketTransactions?: TicketTransactionUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateWithoutEventTopicInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    creatorId?: StringFieldUpdateOperationsInput | string
+    eventName?: StringFieldUpdateOperationsInput | string
+    eventFormatId?: IntFieldUpdateOperationsInput | number
+    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventLocation?: StringFieldUpdateOperationsInput | string
+    eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
+    ticketName?: StringFieldUpdateOperationsInput | string
+    ticketQty?: IntFieldUpdateOperationsInput | number
+    ticketPrice?: IntFieldUpdateOperationsInput | number
+    ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventCPName?: StringFieldUpdateOperationsInput | string
+    eventCPEmail?: StringFieldUpdateOperationsInput | string
+    eventCountryPhoneId?: IntFieldUpdateOperationsInput | number
+    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
+    oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
+    ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
+    isDraft?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ticketTransactions?: TicketTransactionUncheckedUpdateManyWithoutEventNestedInput
+  }
+
+  export type EventUncheckedUpdateManyWithoutEventTopicInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    creatorId?: StringFieldUpdateOperationsInput | string
+    eventName?: StringFieldUpdateOperationsInput | string
+    eventFormatId?: IntFieldUpdateOperationsInput | number
+    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventLocation?: StringFieldUpdateOperationsInput | string
+    eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
+    ticketName?: StringFieldUpdateOperationsInput | string
+    ticketQty?: IntFieldUpdateOperationsInput | number
+    ticketPrice?: IntFieldUpdateOperationsInput | number
+    ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
+    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    eventCPName?: StringFieldUpdateOperationsInput | string
+    eventCPEmail?: StringFieldUpdateOperationsInput | string
+    eventCountryPhoneId?: IntFieldUpdateOperationsInput | number
+    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
+    oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
+    ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
+    isDraft?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type TicketTransactionDetailCreateManyTicketTransactionsInput = {
+    id?: number
+    orderName: string
+    orderCountryPhoneId: number
+    orderEmail: string
+    orderBirthDate: string
+    orderSex: $Enums.Sex
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    deletedAt?: Date | string | null
+  }
+
+  export type TicketTransactionDetailUpdateWithoutTicketTransactionsInput = {
+    orderName?: StringFieldUpdateOperationsInput | string
+    orderEmail?: StringFieldUpdateOperationsInput | string
+    orderBirthDate?: StringFieldUpdateOperationsInput | string
+    orderSex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    orderCountryPhone?: CountryPhoneUpdateOneRequiredWithoutTicketTransactionDetailsNestedInput
+  }
+
+  export type TicketTransactionDetailUncheckedUpdateWithoutTicketTransactionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    orderName?: StringFieldUpdateOperationsInput | string
+    orderCountryPhoneId?: IntFieldUpdateOperationsInput | number
+    orderEmail?: StringFieldUpdateOperationsInput | string
+    orderBirthDate?: StringFieldUpdateOperationsInput | string
+    orderSex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type TicketTransactionDetailUncheckedUpdateManyWithoutTicketTransactionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    orderName?: StringFieldUpdateOperationsInput | string
+    orderCountryPhoneId?: IntFieldUpdateOperationsInput | number
+    orderEmail?: StringFieldUpdateOperationsInput | string
+    orderBirthDate?: StringFieldUpdateOperationsInput | string
+    orderSex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null

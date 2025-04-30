@@ -10,39 +10,41 @@ datasource db {
 }
 
 model CountryPhone {
-  id             Int              @id @default(autoincrement())
-  name           String           @unique
-  code           String           @unique
-  mobileCode     String
-  createdAt      DateTime         @default(now())
-  updatedAt      DateTime         @updatedAt
-  deletedAt      DateTime?
-  members        Member[]
-  creatorProfile CreatorProfile[]
-  events         Event[]
+  id                       Int                       @id @default(autoincrement())
+  name                     String                    @unique
+  code                     String                    @unique
+  mobileCode               String
+  createdAt                DateTime                  @default(now())
+  updatedAt                DateTime                  @updatedAt
+  deletedAt                DateTime?
+  members                  Member[]
+  creatorProfile           CreatorProfile[]
+  events                   Event[]
+  ticketTransactionDetails TicketTransactionDetail[]
 
   @@map("country_phone")
 }
 
 model Member {
-  id                          String             @id @default(uuid())
-  email                       String             @unique
+  id                          String              @id @default(uuid())
+  email                       String              @unique
   countryPhoneId              Int
-  phoneNumber                 String             @unique
+  phoneNumber                 String              @unique
   firstName                   String
   lastName                    String?
   birthDate                   String
-  createdAt                   DateTime           @default(now())
-  updatedAt                   DateTime           @updatedAt
+  createdAt                   DateTime            @default(now())
+  updatedAt                   DateTime            @updatedAt
   deletedAt                   DateTime?
-  eventPromoAccepted          Boolean            @default(true)
+  eventPromoAccepted          Boolean             @default(true)
   personalDataConsentAccepted Boolean
   termsPrivacyAccepted        Boolean
   sex                         Sex
-  isEmailVerified             Boolean            @default(false)
-  countryPhone                CountryPhone       @relation(fields: [countryPhoneId], references: [id])
+  isEmailVerified             Boolean             @default(false)
+  countryPhone                CountryPhone        @relation(fields: [countryPhoneId], references: [id])
   verificationCodes           VerificationCode[]
   creatorProfile              CreatorProfile?
+  ticketTransactions          TicketTransaction[]
 
   @@map("members")
 }
@@ -102,12 +104,14 @@ model CreatorProfile {
 }
 
 model Event {
-  id                      Int                @id @default(autoincrement())
+  id                      Int                 @id @default(autoincrement())
   creatorId               String
-  creator                 CreatorProfile     @relation(fields: [creatorId], references: [id])
+  creator                 CreatorProfile      @relation(fields: [creatorId], references: [id])
   eventName               String
-  eventCategoryId         Int
+  eventFormatId           Int
+  eventFormat             EventFormat         @relation(fields: [eventFormatId], references: [id])
   eventTopicId            Int
+  eventTopic              EventTopic          @relation(fields: [eventTopicId], references: [id])
   organizerName           String?
   organizerLogoImgUrl     String?
   eventDate               DateTime
@@ -117,23 +121,24 @@ model Event {
   ticketType              TicketType
   ticketName              String
   ticketQty               Int
-  ticketPrice             Int                @default(20000)
+  ticketPrice             Int                 @default(20000)
   ticketDesc              String?
   ticketTermsAndCondition String
   ticketStartDate         DateTime
   ticketEndDate           DateTime
   eventCPName             String
   eventCPEmail            String
-  countryPhoneId          Int
-  contryPhone             CountryPhone       @relation(fields: [countryPhoneId], references: [id])
+  eventCountryPhoneId     Int
+  eventCountryPhone       CountryPhone        @relation(fields: [eventCountryPhoneId], references: [id])
   ticketDataFormType      TicketDataFormType
   maxTicketPerTransaction Int
-  oneEmailOneTransaction  Boolean            @default(false)
-  ticketDataFormUnique    Boolean            @default(false)
-  isDraft                 Boolean?           @default(false)
-  createdAt               DateTime           @default(now())
-  updatedAt               DateTime           @updatedAt
+  oneEmailOneTransaction  Boolean             @default(false)
+  ticketDataFormUnique    Boolean             @default(false)
+  isDraft                 Boolean?            @default(false)
+  createdAt               DateTime            @default(now())
+  updatedAt               DateTime            @updatedAt
   deletedAt               DateTime?
+  ticketTransactions      TicketTransaction[]
 
   @@map("events")
 }
@@ -147,4 +152,61 @@ enum TicketType {
 enum TicketDataFormType {
   NO_ID
   WITH_ID
+}
+
+model EventFormat {
+  id         Int     @id @default(autoincrement())
+  formatName String
+  event      Event[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@map("event_formats")
+}
+
+model EventTopic {
+  id        Int     @id @default(autoincrement())
+  topicName String
+  event     Event[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@map("event_topics")
+}
+
+model TicketTransaction {
+  id                       Int                       @id @default(autoincrement())
+  eventId                  Int
+  event                    Event                     @relation(fields: [eventId], references: [id])
+  memberId                 String
+  member                   Member                    @relation(fields: [memberId], references: [id])
+  ticketCode               String                    @unique
+  ticketTransactionDetails TicketTransactionDetail[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  @@map("ticket_transactions")
+}
+
+model TicketTransactionDetail {
+  id                  Int               @id @default(autoincrement())
+  ticketTransactionId Int
+  ticketTransactions  TicketTransaction @relation(fields: [ticketTransactionId], references: [id])
+  orderName           String
+  orderCountryPhoneId Int
+  orderCountryPhone   CountryPhone      @relation(fields: [orderCountryPhoneId], references: [id])
+  orderEmail          String
+  orderBirthDate      String
+  orderSex            Sex
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+  deletedAt           DateTime?
+
+  @@map("ticket_transaction_details")
 }
