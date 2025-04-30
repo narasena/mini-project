@@ -184,6 +184,15 @@
   .ticket-label::after{
     @apply content-[''] w-2.5 h-[5px] absolute bottom-[-2px] left-[-6px] border border-b-0 border-[#dbdfe7] bg-white rounded-[75px_75px_0_0]
   }
+  .c-input-radio{
+    @apply size-5 overflow-hidden -mt-1 inline-block border border-[#bfbfbf]
+  }
+  .c-input-radio:checked{
+    @apply bg-[#0049cc]
+  }
+  .c-input-radio:{
+    @apply bg-white
+  }
 }
 
 @layer utilities {
