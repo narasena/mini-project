@@ -159,6 +159,57 @@ exports.Prisma.VerificationCodeScalarFieldEnum = {
   deletedAt: 'deletedAt'
 };
 
+exports.Prisma.CreatorProfileScalarFieldEnum = {
+  id: 'id',
+  memberId: 'memberId',
+  bannerImgUrl: 'bannerImgUrl',
+  logoImgUrl: 'logoImgUrl',
+  profileLinkUrl: 'profileLinkUrl',
+  countryPhoneId: 'countryPhoneId',
+  creatorPhoneNumber: 'creatorPhoneNumber',
+  address: 'address',
+  aboutUsInfo: 'aboutUsInfo',
+  xUserName: 'xUserName',
+  igUserName: 'igUserName',
+  fbProfileUrl: 'fbProfileUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.EventScalarFieldEnum = {
+  id: 'id',
+  creatorId: 'creatorId',
+  eventName: 'eventName',
+  eventCategoryId: 'eventCategoryId',
+  eventTopicId: 'eventTopicId',
+  organizerName: 'organizerName',
+  organizerLogoImgUrl: 'organizerLogoImgUrl',
+  eventDate: 'eventDate',
+  eventTime: 'eventTime',
+  eventLocation: 'eventLocation',
+  eventDesc: 'eventDesc',
+  ticketType: 'ticketType',
+  ticketName: 'ticketName',
+  ticketQty: 'ticketQty',
+  ticketPrice: 'ticketPrice',
+  ticketDesc: 'ticketDesc',
+  ticketTermsAndCondition: 'ticketTermsAndCondition',
+  ticketStartDate: 'ticketStartDate',
+  ticketEndDate: 'ticketEndDate',
+  eventCPName: 'eventCPName',
+  eventCPEmail: 'eventCPEmail',
+  countryPhoneId: 'countryPhoneId',
+  ticketDataFormType: 'ticketDataFormType',
+  maxTicketPerTransaction: 'maxTicketPerTransaction',
+  oneEmailOneTransaction: 'oneEmailOneTransaction',
+  ticketDataFormUnique: 'ticketDataFormUnique',
+  isDraft: 'isDraft',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -185,10 +236,23 @@ exports.CodeType = exports.$Enums.CodeType = {
   LOGIN: 'LOGIN'
 };
 
+exports.TicketType = exports.$Enums.TicketType = {
+  BERBAYAR: 'BERBAYAR',
+  BAYAR_SESUKAMU: 'BAYAR_SESUKAMU',
+  GRATIS: 'GRATIS'
+};
+
+exports.TicketDataFormType = exports.$Enums.TicketDataFormType = {
+  NO_ID: 'NO_ID',
+  WITH_ID: 'WITH_ID'
+};
+
 exports.Prisma.ModelName = {
   CountryPhone: 'CountryPhone',
   Member: 'Member',
-  VerificationCode: 'VerificationCode'
+  VerificationCode: 'VerificationCode',
+  CreatorProfile: 'CreatorProfile',
+  Event: 'Event'
 };
 
 /**

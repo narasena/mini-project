@@ -10,14 +10,16 @@ datasource db {
 }
 
 model CountryPhone {
-  id         Int       @id @default(autoincrement())
-  name       String    @unique
-  code       String    @unique
-  mobileCode String
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
-  deletedAt  DateTime?
-  members    Member[]
+  id             Int              @id @default(autoincrement())
+  name           String           @unique
+  code           String           @unique
+  mobileCode     String
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  deletedAt      DateTime?
+  members        Member[]
+  creatorProfile CreatorProfile[]
+  events         Event[]
 
   @@map("country_phone")
 }
@@ -40,6 +42,7 @@ model Member {
   isEmailVerified             Boolean            @default(false)
   countryPhone                CountryPhone       @relation(fields: [countryPhoneId], references: [id])
   verificationCodes           VerificationCode[]
+  creatorProfile              CreatorProfile?
 
   @@map("members")
 }
@@ -73,4 +76,75 @@ model VerificationCode {
 enum CodeType {
   REGISTRATION
   LOGIN
+}
+
+model CreatorProfile {
+  id                 String       @id @default(cuid())
+  memberId           String       @unique
+  member             Member       @relation(fields: [memberId], references: [id])
+  bannerImgUrl       String?
+  logoImgUrl         String?
+  profileLinkUrl     String       @unique
+  countryPhoneId     Int
+  countryPhone       CountryPhone @relation(fields: [countryPhoneId], references: [id])
+  creatorPhoneNumber String?
+  address            String?
+  aboutUsInfo        String?
+  xUserName          String?
+  igUserName         String?
+  fbProfileUrl       String?
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+  deletedAt          DateTime?
+  event              Event[]
+
+  @@map("creator_profile")
+}
+
+model Event {
+  id                      Int                @id @default(autoincrement())
+  creatorId               String
+  creator                 CreatorProfile     @relation(fields: [creatorId], references: [id])
+  eventName               String
+  eventCategoryId         Int
+  eventTopicId            Int
+  organizerName           String?
+  organizerLogoImgUrl     String?
+  eventDate               DateTime
+  eventTime               DateTime
+  eventLocation           String
+  eventDesc               String?
+  ticketType              TicketType
+  ticketName              String
+  ticketQty               Int
+  ticketPrice             Int                @default(20000)
+  ticketDesc              String?
+  ticketTermsAndCondition String
+  ticketStartDate         DateTime
+  ticketEndDate           DateTime
+  eventCPName             String
+  eventCPEmail            String
+  countryPhoneId          Int
+  contryPhone             CountryPhone       @relation(fields: [countryPhoneId], references: [id])
+  ticketDataFormType      TicketDataFormType
+  maxTicketPerTransaction Int
+  oneEmailOneTransaction  Boolean            @default(false)
+  ticketDataFormUnique    Boolean            @default(false)
+  isDraft                 Boolean?           @default(false)
+  createdAt               DateTime           @default(now())
+  updatedAt               DateTime           @updatedAt
+  deletedAt               DateTime?
+
+  @@map("events")
+}
+
+enum TicketType {
+  BERBAYAR
+  BAYAR_SESUKAMU
+  GRATIS
+}
+
+enum TicketDataFormType {
+  NO_ID
+  WITH_ID
 }

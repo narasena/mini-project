@@ -1,4 +1,4 @@
-import prisma from '../src/prisma';
+import { prisma } from '../src/prisma';
 import { countryCodes } from './seedData/countries';
 
 
