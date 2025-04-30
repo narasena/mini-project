@@ -85,8 +85,7 @@ model CreatorProfile {
   member                Member          @relation(fields:[memberId],references: [id])
   bannerImgUrl          String?
   logoImgUrl            String?
-  profileLinkUrl        String?         @unique @default(dbgenerated("concat('', substring(replace(cast(uuid() as char), '-', ''), 1, 8))"))
-  organizerName         String
+  profileLinkUrl        String         @unique
   countryPhoneId        Int
   countryPhone          CountryPhone    @relation(fields:[countryPhoneId],references: [id])
   creatorPhoneNumber    String?
@@ -115,25 +114,36 @@ model Event {
   eventDate             DateTime
   eventTime             DateTime
   eventLocation         String
+  eventDesc             String?
   ticketType            TicketType
   ticketName            String
   ticketQty             Int
   ticketPrice           Int                   @default(20000)
-  ticketDesc            String
+  ticketDesc            String?
+  ticketTermsAndCondition String
   ticketStartDate       DateTime
   ticketEndDate         DateTime
   eventCPName           String
   eventCPEmail          String
   countryPhoneId        Int
   contryPhone           CountryPhone          @relation(fields: [countryPhoneId],references: [id])
+  ticketDataFormType    TicketDataFormType
+  maxTicketPerTransaction Int
+  oneEmailOneTransaction Boolean              @default(false)
+  ticketDataFormUnique   Boolean              @default(false)
+  isDraft               Boolean?              @default(false)
   
     
-
-
+  @@map("events")
 }
 
 enum TicketType {
   BERBAYAR
   BAYAR_SESUKAMU
   GRATIS
+}
+
+enum TicketDataFormType {
+  NO_ID
+  WITH_ID
 }
