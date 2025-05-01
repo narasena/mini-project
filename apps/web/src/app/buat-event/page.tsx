@@ -12,16 +12,97 @@ import { IoLocationSharp } from 'react-icons/io5';
 import { CiCirclePlus } from 'react-icons/ci';
 import { IoIosArrowDown } from 'react-icons/io';
 import { countryCodes } from '../../../../api/prisma/seedData/countries';
-import { eventFormats, eventTopics } from '../../../../api/prisma/seedData/eventType';
+import {
+  eventFormats,
+  eventTopics,
+} from '../../../../api/prisma/seedData/eventType';
 import { IoIosInformationCircle } from 'react-icons/io';
 import { AiOutlineClose } from 'react-icons/ai';
+
+type TMainTabKeys = 'eventDateTime' | 'eventForms' | 'ticketForms';
+type TSubTabKeys = 'first' | 'second';
+type TTabTitle = string;
+
+interface IActiveTabState {
+  mainTab: TMainTabKeys;
+  subTab: TSubTabKeys;
+  tabTitle: TTabTitle;
+}
+
 export default function CreateEventPage() {
+  // const createEventTabs = {
+  //   eventDateTime:{first: {tag:'date',text:'Tanggal Event'}, second: {tag:'time',text:'Waktu Event'}},
+  //   eventForms: {first: {tag:'category',text:'Kategori Event'}, second: {tag:'desc',text:'Deskripsi Event'}},
+  //   ticketForms: {first: {tag:'detail',text:'Detail Tiket'}, second: {tag:'date',text:'Tanggal Penjualan'}},
+  // }
+  const createEventTabs = {
+    eventDateTime: {
+      first: 'Tanggal Event',
+      second: 'Waktu Event',
+    },
+    eventForms: {
+      first: 'Kategori Event',
+      second: 'Deskripsi Event',
+    },
+    ticketForms: {
+      first: 'Detail Tiket',
+      second: 'Tanggal Penjualan',
+    },
+  };
+  const [activeTabs, setActiveTabs] = React.useState<IActiveTabState>({
+    mainTab: 'eventForms',
+    subTab: 'first',
+    tabTitle: 'Tanggal Event',
+  });
+  const handleTabChange = (mainTab: TMainTabKeys, subTab: TSubTabKeys) => {
+    setActiveTabs({
+      mainTab,
+      subTab,
+      tabTitle: createEventTabs[mainTab][subTab],
+    });
+  };
+
+  const TabsTitleComponent = ({
+    mainTab,
+    subTab,
+  }: {
+    mainTab: TMainTabKeys;
+    subTab: TSubTabKeys;
+  }): JSX.Element => {
+    const title = createEventTabs[mainTab][subTab];
+    const isActive =
+      activeTabs.mainTab === mainTab && activeTabs.subTab === subTab;
+    return (
+      <div
+        onClick={() => handleTabChange(mainTab, subTab)}
+        className={
+          `relative pb-4 cursor-pointer tracking-[0.3px] flex-1 text-center ` +
+          `border-b-[#e8e8e8] font-medium leading-6 ${
+            isActive ? ' text-[#151416] active' : ' text-[#8e919b]'
+          }`
+        }
+      >
+        {title}
+      </div>
+    );
+  };
+
   const [activeTab, setActiveTab] = React.useState<'category' | 'desc'>(
     'category',
   );
   const [ticketMaxOpen, setTicketMaxOpen] = React.useState(true);
   const [ticketPurchasedMax, setTicketPurchasedMax] = React.useState<number>(3);
   const ticketType = ['Berbayar', 'Bayar Sesukamu', 'Gratis'];
+  const [activeTicketTab, setActiveTicketTab] = React.useState<
+    'detail' | 'date'
+  >('detail');
+  const tickeTabStyles = {
+    active: ' active text-[#151416]',
+    inactive: ' text-[#8e919b]',
+  };
+  const handleTicketTabClick = (tab: 'detail' | 'date') => {
+    setActiveTicketTab(tab);
+  };
   const handleSelectMaxTicket = (e: any) => {
     e.preventDefault();
     setTicketMaxOpen(!ticketMaxOpen);
@@ -238,9 +319,11 @@ export default function CreateEventPage() {
                             <div>
                               <div className="event-date date-time-button cursor-pointer mb-5 text-[#adb6c9]">
                                 <IoLocationSharp className="text-base md:text-xl inline-block align-middle mr-1.5" />
-                                <span className="text-sm md:text-base">
-                                  Pilih Lokasi
-                                </span>
+                                <input
+                                  type="text"
+                                  placeholder="Lokasi*"
+                                  className="text-sm md:text-base outline-none border-b border-[#e8e8e8]"
+                                />
                               </div>
                             </div>
                           </div>
@@ -253,28 +336,8 @@ export default function CreateEventPage() {
               <div className="create-event-container-2 xl:mb-[70px] mb-10 max-w-[900px] lg:px-10 sm:px-[30px] mx-auto box-content">
                 <div className="create-event-tabs-nav w-full max-w-full border-b border-[#d8d8d8]">
                   <div className="tabs-nav relative flex uppercase">
-                    <div
-                      onClick={() => handleTabClick('category')}
-                      className={
-                        'relative pb-4 cursor-pointer tracking-[0.3px] flex-1 text-center border-b-[#e8e8e8] font-medium leading-6' +
-                        (activeTab === 'category'
-                          ? tabStyles.active
-                          : tabStyles.inactive)
-                      }
-                    >
-                      Kategori Tiket
-                    </div>
-                    <div
-                      onClick={() => handleTabClick('desc')}
-                      className={
-                        'relative pb-4 cursor-pointer tracking-[0.3px] flex-1 text-center border-b-[#e8e8e8] font-medium leading-6' +
-                        (activeTab === 'desc'
-                          ? tabStyles.active
-                          : tabStyles.inactive)
-                      }
-                    >
-                      Deskripsi Event
-                    </div>
+                    <TabsTitleComponent mainTab="eventForms" subTab="first" />
+                    <TabsTitleComponent mainTab="eventForms" subTab="second" />
                   </div>
                 </div>
                 <div className="create-event-content mt-8">
@@ -596,7 +659,114 @@ export default function CreateEventPage() {
         </div>
         <div className="full-loading"></div>
       </div>
-      <div className="event-category-modal flex lg:px-10 sm:p-[50px_30px] fixed top-0 left-0 right-0 bottom-0 bg-black/60 w-full h-full z-[999] overflow-auto">
+      <div className="event-daterange-picker-modal flex lg:px-10 sm:p-[50px_30px] fixed top-0 left-0 right-0 bottom-0 bg-black/60 w-full h-full z-[999] overflow-auto">
+        <div className="event-category-modal-dialog !m-auto p-[30px] relative w-[450px] bg-white">
+          <button className="absolute top-[10px] right-[10px]">
+            <AiOutlineClose className="text-[#9f9f9f] text-xl" />
+          </button>
+          <div className="flex flex-wrap">
+            <div className="w-full max-w-full">
+              <div className="tabs-nav relative !max-w-[520px] flex border-b border-[#dbdfe7]">
+                <TabsTitleComponent mainTab="eventDateTime" subTab="first" />
+                <TabsTitleComponent mainTab="eventDateTime" subTab="second" />
+              </div>
+              {activeTicketTab === 'detail' && (
+                <div className="form-stacked mt-8">
+                  <div className="mb-5">
+                    <div className="mb-2.5 relative">
+                      <label className="text-sm font-medium text-[#595959] capitalize">
+                        Tanggal Mulai
+                        <em className="text-[#f0506e]">*</em>
+                      </label>
+                    </div>
+                    <div className="w-full max-w-full">
+                      <div className="form-control w-full max-w-full">
+                        <div className="form-control-input">
+                          <input
+                            type="date"
+                            placeholder="Maksimal 50 karakter"
+                            className="c-input"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="my-5">
+                    <div className="mb-2.5 relative">
+                      <label className="text-sm font-medium text-[#595959] capitalize">
+                        Tanggal Berakhir
+                        <em className="text-[#f0506e]">*</em>
+                      </label>
+                    </div>
+                    <div className="w-full max-w-full">
+                      <div className="form-control w-full max-w-full">
+                        <div className="form-control-input">
+                          <input
+                            type="date"
+                            placeholder=""
+                            className="c-input"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div></div>
+                </div>
+              )}
+              {activeTicketTab === 'date' && (
+                <div className="form-stacked mt-8 flex w-full max-w-full justify-between">
+                  <div className="my-5">
+                    <div className="mb-2.5 relative">
+                      <label className="text-sm font-medium text-[#595959] capitalize">
+                        Mulai Dari
+                        <em className="text-[#f0506e]">*</em>
+                      </label>
+                    </div>
+                    <div className="w-full max-w-full">
+                      <div className="form-control w-full max-w-full">
+                        <div className="form-control-input">
+                          <input
+                            type="time"
+                            placeholder=""
+                            className="c-input"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="my-5">
+                    <div className="mb-2.5 relative">
+                      <label className="text-sm font-medium text-[#595959] capitalize">
+                        Sampai
+                        <em className="text-[#f0506e]">*</em>
+                      </label>
+                    </div>
+                    <div className="w-full max-w-full">
+                      <div className="form-control w-full max-w-full">
+                        <div className="form-control-input">
+                          <input
+                            type="time"
+                            placeholder=""
+                            className="c-input"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div></div>
+                </div>
+              )}
+            </div>
+            <div className="w-full max-w-full mt-[30px]">
+              <button className="w-full max-w-full c-button c-button-primary">
+                <span>Simpan</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="event-category-modal hidden flex lg:px-10 sm:p-[50px_30px] fixed top-0 left-0 right-0 bottom-0 bg-black/60 w-full h-full z-[999] overflow-auto">
         <div className="event-category-modal-dialog !m-auto p-[30px] relative w-[600px] bg-white">
           <button className="absolute top-[10px] right-[10px]">
             <AiOutlineClose className="text-[#9f9f9f] text-xl" />
@@ -730,7 +900,157 @@ export default function CreateEventPage() {
               </div>
             </div>
             <div className="w-full max-w-full mt-[30px]">
-              <button className='w-full max-w-full c-button c-button-primary'><span>Simpan</span></button>
+              <button className="w-full max-w-full c-button c-button-primary">
+                <span>Simpan</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="ticket-daterange-picker-modal hidden flex lg:px-10 sm:p-[50px_30px] fixed top-0 left-0 right-0 bottom-0 bg-black/60 w-full h-full z-[999] overflow-auto">
+        <div className="event-category-modal-dialog !m-auto p-[30px] relative w-[600px] bg-white">
+          <button className="absolute top-[10px] right-[10px]">
+            <AiOutlineClose className="text-[#9f9f9f] text-xl" />
+          </button>
+          <div className="flex flex-wrap">
+            <div className="w-full max-w-full">
+              <div className="tabs-nav relative !max-w-[520px] flex border-b border-[#dbdfe7]">
+                <TabsTitleComponent mainTab="ticketForms" subTab="first" />
+                <TabsTitleComponent mainTab="ticketForms" subTab="second" />
+              </div>
+              {activeTicketTab === 'detail' && (
+                <div className="form-stacked mt-8">
+                  <div className="mb-5">
+                    <div className="mb-2.5 relative">
+                      <label className="text-sm font-medium text-[#595959] capitalize">
+                        Nama Tiket
+                        <em className="text-[#f0506e]">*</em>
+                      </label>
+                    </div>
+                    <div className="w-full max-w-full">
+                      <div className="form-control w-full max-w-full">
+                        <div className="form-control-input">
+                          <input
+                            type="text"
+                            placeholder="Maksimal 50 karakter"
+                            className="c-input"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="my-5">
+                    <div className="mb-2.5 relative">
+                      <label className="text-sm font-medium text-[#595959] capitalize">
+                        Jumlah Tiket
+                        <em className="text-[#f0506e]">*</em>
+                      </label>
+                    </div>
+                    <div className="w-full max-w-full">
+                      <div className="form-control w-full max-w-full">
+                        <div className="form-control-input">
+                          <input
+                            type="number"
+                            placeholder=""
+                            className="c-input"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="my-5">
+                    <div className="mb-2.5 relative">
+                      <label className="text-sm font-medium text-[#595959] capitalize">
+                        Harga
+                        <em className="text-[#f0506e]">*</em>
+                      </label>
+                    </div>
+                    <div className="w-full max-w-full">
+                      <div className="form-control w-full max-w-full">
+                        <div className="form-control-input">
+                          <input
+                            type="number"
+                            placeholder=""
+                            className="c-input"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="my-5">
+                    <div className="mb-2.5 relative">
+                      <label className="text-sm font-medium text-[#595959] capitalize">
+                        Deskripsi Tiket
+                        <em className="text-[#f0506e]">*</em>
+                      </label>
+                    </div>
+                    <div className="w-full max-w-full">
+                      <div className="form-control w-full max-w-full">
+                        <div className="form-control-input">
+                          <textarea
+                            name=""
+                            id=""
+                            className="border border-[#d8d8d8] min-h-[70px] rounded-sm p-2.5 w-full outline-none"
+                          ></textarea>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div></div>
+                </div>
+              )}
+              {activeTicketTab === 'date' && (
+                <div className="form-stacked mt-8">
+                  <div className="mb-5">
+                    <div className="mb-2.5 relative">
+                      <label className="text-sm font-medium text-[#595959] capitalize">
+                        Tanggal Mulai
+                        <em className="text-[#f0506e]">*</em>
+                      </label>
+                    </div>
+                    <div className="w-full max-w-full">
+                      <div className="form-control w-full max-w-full">
+                        <div className="form-control-input">
+                          <input
+                            type="text"
+                            placeholder=""
+                            className="c-input"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="my-5">
+                    <div className="mb-2.5 relative">
+                      <label className="text-sm font-medium text-[#595959] capitalize">
+                        Tanggal Berakhir
+                        <em className="text-[#f0506e]">*</em>
+                      </label>
+                    </div>
+                    <div className="w-full max-w-full">
+                      <div className="form-control w-full max-w-full">
+                        <div className="form-control-input">
+                          <input
+                            type="number"
+                            placeholder=""
+                            className="c-input"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <span className="mt-[15px] ml-[15px] font-light text-sm leading-[1.5]">{`Tanggal maksimal penjualan bergantung pada tanggal berakhirnya event.`}</span>
+                    </div>
+                  </div>
+
+                  <div></div>
+                </div>
+              )}
+            </div>
+            <div className="w-full max-w-full mt-[30px]">
+              <button className="w-full max-w-full c-button c-button-primary">
+                <span>Simpan</span>
+              </button>
             </div>
           </div>
         </div>
