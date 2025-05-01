@@ -18,10 +18,13 @@ import {
 } from '../../../../api/prisma/seedData/eventType';
 import { IoIosInformationCircle } from 'react-icons/io';
 import { AiOutlineClose } from 'react-icons/ai';
+import { Formik } from 'formik';
+
 
 type TMainTabKeys = 'eventDateTime' | 'eventForms' | 'ticketForms';
 type TSubTabKeys = 'first' | 'second';
 type TTabTitle = string;
+type TOpenModal = 'eventDateTime' | 'eventCategories' | 'ticketForms' | null;
 
 interface IActiveTabState {
   mainTab: TMainTabKeys;
@@ -30,11 +33,6 @@ interface IActiveTabState {
 }
 
 export default function CreateEventPage() {
-  // const createEventTabs = {
-  //   eventDateTime:{first: {tag:'date',text:'Tanggal Event'}, second: {tag:'time',text:'Waktu Event'}},
-  //   eventForms: {first: {tag:'category',text:'Kategori Event'}, second: {tag:'desc',text:'Deskripsi Event'}},
-  //   ticketForms: {first: {tag:'detail',text:'Detail Tiket'}, second: {tag:'date',text:'Tanggal Penjualan'}},
-  // }
   const createEventTabs = {
     eventDateTime: {
       first: 'Tanggal Event',
@@ -86,23 +84,53 @@ export default function CreateEventPage() {
       </div>
     );
   };
+  const [modalOpen, setModalOpen] = React.useState(false);
+  const [openModalType, setOpenModalType] = React.useState<TOpenModal>(null);
+  const handleModalOpen = (modal: TOpenModal) => {
+    // close modal
+    if (modal === null) {
+      setModalOpen(false);
+      setOpenModalType(null);
+      setActiveTabs({
+        mainTab: 'eventForms',
+        subTab: 'first',
+        tabTitle: createEventTabs.eventForms.first,
+      });
+      return;
+    }
 
-  const [activeTab, setActiveTab] = React.useState<'category' | 'desc'>(
-    'category',
-  );
+    // open modal
+    setOpenModalType(modal);
+    setModalOpen(true);
+
+    const validMainTabs = ['eventDateTime', 'ticketForms'] as TMainTabKeys[];
+    if (validMainTabs.includes(modal as TMainTabKeys)) {
+      setActiveTabs({
+        mainTab: modal as TMainTabKeys,
+        subTab: 'first',
+        tabTitle: createEventTabs[modal as TMainTabKeys]['first'],
+      });
+    }
+  };
+  const CloseModalButton = (): JSX.Element => {
+    return (
+      <button
+        className="absolute top-[10px] right-[10px]"
+        onClick={() => handleModalOpen(null)}
+      >
+        <AiOutlineClose className="text-[#9f9f9f] text-xl" />
+      </button>
+    );
+  };
+  const [eventCategories, setEventCategories] = React.useState({
+    format: '',
+    topic: '',
+    tags: ''
+  });
   const [ticketMaxOpen, setTicketMaxOpen] = React.useState(true);
   const [ticketPurchasedMax, setTicketPurchasedMax] = React.useState<number>(3);
   const ticketType = ['Berbayar', 'Bayar Sesukamu', 'Gratis'];
-  const [activeTicketTab, setActiveTicketTab] = React.useState<
-    'detail' | 'date'
-  >('detail');
-  const tickeTabStyles = {
-    active: ' active text-[#151416]',
-    inactive: ' text-[#8e919b]',
-  };
-  const handleTicketTabClick = (tab: 'detail' | 'date') => {
-    setActiveTicketTab(tab);
-  };
+  
   const handleSelectMaxTicket = (e: any) => {
     e.preventDefault();
     setTicketMaxOpen(!ticketMaxOpen);
@@ -131,15 +159,9 @@ export default function CreateEventPage() {
     { id: 'gender', formTitle: 'Jenis Kelamin', checkStatus: true },
   ];
   const ticketPerPurchaseMax = [1, 2, 3, 4, 5];
-  const tabStyles = {
-    active: ' active text-[#151416]',
-    inactive: ' text-[#8e919b]',
-  };
-  const handleTabClick = (tab: 'category' | 'desc') => {
-    setActiveTab(tab);
-  };
+  
   return (
-    <>
+    <Formik initialValues={initialValues} onSubmit={onSubmit}>
       <div className="relative">
         <div className="header-nav-top absolute top-0 left-0 right-0 z-10 bg-white box-shadow-small">
           <div className="bg-white s-container lg:px-10 sm:px-[30px] px-[15px] box-content max-w-[1200px] mx-auto ">
@@ -239,12 +261,28 @@ export default function CreateEventPage() {
                           <div className="w-full max-w-full pl-[15px]">
                             <div className="mt-[5px] w-full max-w-full ">
                               <div className="form-control">
-                                <div className="category-wrapper border-b border-[#d8d8d8] mb-[5px] cursor-pointer pb-2.5 text-[0.9375rem] !text-[#0049cc]">
-                                  <span>Konser</span>
-                                  <span className="dotdot mx-[5px] inline-block w-2 h-2 rounded-full bg-[#d5d5d5]"></span>
-                                  <span>Anak, Keluarga</span>
+                                <div
+                                  onClick={() => {
+                                    handleModalOpen('eventCategories');
+                                  }}
+                                  className="category-wrapper border-b border-[#d8d8d8] mb-[5px] cursor-pointer pb-2.5 text-[0.9375rem] !text-[#0049cc]"
+                                >
+                                  <span>{eventCategories.format}</span>
+                                  <span
+                                    className={`${eventCategories.topic !== '' && eventCategories.format !== '' ? 'inline-block' : 'hidden'} dotdot mx-[5px] w-2 h-2 rounded-full bg-[#d5d5d5]`}
+                                  ></span>
+                                  <span>{eventCategories.topic}</span>
                                   <span className="ml-1 inline-block leading-1 align-[-0.125em]">
-                                    <BiSolidEdit />
+                                    {eventCategories.topic !== '' &&
+                                      eventCategories.format !== '' && (
+                                        <BiSolidEdit />
+                                      )}
+                                    {eventCategories.topic === '' &&
+                                      eventCategories.format === '' && (
+                                        <span className="!text-[#adb6c9]">
+                                          {'Pilih Kategori *'}
+                                        </span>
+                                      )}
                                   </span>
                                 </div>
                               </div>
@@ -299,13 +337,23 @@ export default function CreateEventPage() {
                             <div>
                               <div className="event-date date-time-button cursor-pointer mb-5 text-[#adb6c9]">
                                 <IoCalendar className="text-base md:text-xl inline-block align-middle mr-1.5" />
-                                <span className="text-sm md:text-base">
+                                <span
+                                  className="text-sm md:text-base"
+                                  onClick={() =>
+                                    handleModalOpen('eventDateTime')
+                                  }
+                                >
                                   Pilih Tanggal
                                 </span>
                               </div>
                               <div className="event-time date-time-button cursor-pointer mb-5 text-[#adb6c9]">
                                 <IoTime className="text-base md:text-xl inline-block align-middle mr-1.5" />
-                                <span className="text-sm md:text-base">
+                                <span
+                                  className="text-sm md:text-base"
+                                  onClick={() =>
+                                    handleModalOpen('eventDateTime')
+                                  }
+                                >
                                   Pilih Waktu
                                 </span>
                               </div>
@@ -347,7 +395,11 @@ export default function CreateEventPage() {
                         <div className="flex-middle-center ">
                           <div className="md:grid md:grid-cols-[repeat(3,1fr)] grid-cols-[repeat(1,1fr)] gap-[15px] w-full max-w-full">
                             {ticketType.map((item, index) => (
-                              <div className="w-full max-w-full" key={index}>
+                              <div
+                                className="w-full max-w-full"
+                                key={index}
+                                onClick={() => handleModalOpen('ticketForms')}
+                              >
                                 <button className="ticket-category-button">
                                   <div className="flex">
                                     <div className="barcode w-[53px] max-w-full flex-middle-center py-4 overflow-hidden border-r border-[#d8dfe7]">
@@ -659,118 +711,11 @@ export default function CreateEventPage() {
         </div>
         <div className="full-loading"></div>
       </div>
-      <div className="event-daterange-picker-modal flex lg:px-10 sm:p-[50px_30px] fixed top-0 left-0 right-0 bottom-0 bg-black/60 w-full h-full z-[999] overflow-auto">
-        <div className="event-category-modal-dialog !m-auto p-[30px] relative w-[450px] bg-white">
-          <button className="absolute top-[10px] right-[10px]">
-            <AiOutlineClose className="text-[#9f9f9f] text-xl" />
-          </button>
-          <div className="flex flex-wrap">
-            <div className="w-full max-w-full">
-              <div className="tabs-nav relative !max-w-[520px] flex border-b border-[#dbdfe7]">
-                <TabsTitleComponent mainTab="eventDateTime" subTab="first" />
-                <TabsTitleComponent mainTab="eventDateTime" subTab="second" />
-              </div>
-              {activeTicketTab === 'detail' && (
-                <div className="form-stacked mt-8">
-                  <div className="mb-5">
-                    <div className="mb-2.5 relative">
-                      <label className="text-sm font-medium text-[#595959] capitalize">
-                        Tanggal Mulai
-                        <em className="text-[#f0506e]">*</em>
-                      </label>
-                    </div>
-                    <div className="w-full max-w-full">
-                      <div className="form-control w-full max-w-full">
-                        <div className="form-control-input">
-                          <input
-                            type="date"
-                            placeholder="Maksimal 50 karakter"
-                            className="c-input"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="my-5">
-                    <div className="mb-2.5 relative">
-                      <label className="text-sm font-medium text-[#595959] capitalize">
-                        Tanggal Berakhir
-                        <em className="text-[#f0506e]">*</em>
-                      </label>
-                    </div>
-                    <div className="w-full max-w-full">
-                      <div className="form-control w-full max-w-full">
-                        <div className="form-control-input">
-                          <input
-                            type="date"
-                            placeholder=""
-                            className="c-input"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div></div>
-                </div>
-              )}
-              {activeTicketTab === 'date' && (
-                <div className="form-stacked mt-8 flex w-full max-w-full justify-between">
-                  <div className="my-5">
-                    <div className="mb-2.5 relative">
-                      <label className="text-sm font-medium text-[#595959] capitalize">
-                        Mulai Dari
-                        <em className="text-[#f0506e]">*</em>
-                      </label>
-                    </div>
-                    <div className="w-full max-w-full">
-                      <div className="form-control w-full max-w-full">
-                        <div className="form-control-input">
-                          <input
-                            type="time"
-                            placeholder=""
-                            className="c-input"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="my-5">
-                    <div className="mb-2.5 relative">
-                      <label className="text-sm font-medium text-[#595959] capitalize">
-                        Sampai
-                        <em className="text-[#f0506e]">*</em>
-                      </label>
-                    </div>
-                    <div className="w-full max-w-full">
-                      <div className="form-control w-full max-w-full">
-                        <div className="form-control-input">
-                          <input
-                            type="time"
-                            placeholder=""
-                            className="c-input"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div></div>
-                </div>
-              )}
-            </div>
-            <div className="w-full max-w-full mt-[30px]">
-              <button className="w-full max-w-full c-button c-button-primary">
-                <span>Simpan</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="event-category-modal hidden flex lg:px-10 sm:p-[50px_30px] fixed top-0 left-0 right-0 bottom-0 bg-black/60 w-full h-full z-[999] overflow-auto">
+      <div
+        className={`${modalOpen && openModalType === 'eventCategories' ? '' : 'hidden '}event-category-modal flex lg:px-10 sm:p-[50px_30px] fixed top-0 left-0 right-0 bottom-0 bg-black/60 w-full h-full z-[999] overflow-auto`}
+      >
         <div className="event-category-modal-dialog !m-auto p-[30px] relative w-[600px] bg-white">
-          <button className="absolute top-[10px] right-[10px]">
-            <AiOutlineClose className="text-[#9f9f9f] text-xl" />
-          </button>
+          <CloseModalButton />
           <div className="flex flex-wrap">
             <div className="w-full max-w-full">
               <div className="form-stacked">
@@ -784,7 +729,15 @@ export default function CreateEventPage() {
                   <div className="w-full max-w-full">
                     <div className="form-control w-full max-w-full">
                       <div className="form-control-input">
-                        <select className="c-input">
+                        <select
+                          className="c-input"
+                          onChange={(e) =>
+                            setEventCategories({
+                              ...eventCategories,
+                              format: e.target.value,
+                            })
+                          }
+                        >
                           <option value="">Pilih Format Event</option>
                           {eventFormats.map((format, index) => (
                             <option key={index} value={format}>
@@ -806,7 +759,15 @@ export default function CreateEventPage() {
                   <div className="w-full max-w-full">
                     <div className="form-control w-full max-w-full">
                       <div className="form-control-input">
-                        <select className="c-input">
+                        <select
+                          className="c-input"
+                          onChange={(e) =>
+                            setEventCategories({
+                              ...eventCategories,
+                              topic: e.target.value,
+                            })
+                          }
+                        >
                           <option value="">Pilih Format Event</option>
                           {eventTopics.map((format, index) => (
                             <option key={index} value={format}>
@@ -907,18 +868,126 @@ export default function CreateEventPage() {
           </div>
         </div>
       </div>
-      <div className="ticket-daterange-picker-modal hidden flex lg:px-10 sm:p-[50px_30px] fixed top-0 left-0 right-0 bottom-0 bg-black/60 w-full h-full z-[999] overflow-auto">
+      <div
+        className={`${modalOpen && openModalType === 'eventDateTime' ? '' : 'hidden '}event-daterange-picker-modal flex lg:px-10 sm:p-[50px_30px] fixed top-0 left-0 right-0 bottom-0 bg-black/60 w-full h-full z-[999] overflow-auto`}
+      >
+        <div className="event-category-modal-dialog !m-auto p-[30px] relative w-[450px] bg-white">
+          <CloseModalButton />
+          <div className="flex flex-wrap">
+            <div className="w-full max-w-full">
+              <div className="tabs-nav relative !max-w-[520px] flex border-b border-[#dbdfe7]">
+                <TabsTitleComponent mainTab="eventDateTime" subTab="first" />
+                <TabsTitleComponent mainTab="eventDateTime" subTab="second" />
+              </div>
+              {activeTabs.subTab === 'first' && (
+                <div className="form-stacked mt-8">
+                  <div className="mb-5">
+                    <div className="mb-2.5 relative">
+                      <label className="text-sm font-medium text-[#595959] capitalize">
+                        Tanggal Mulai
+                        <em className="text-[#f0506e]">*</em>
+                      </label>
+                    </div>
+                    <div className="w-full max-w-full">
+                      <div className="form-control w-full max-w-full">
+                        <div className="form-control-input">
+                          <input
+                            type="date"
+                            placeholder="Maksimal 50 karakter"
+                            className="c-input"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="my-5">
+                    <div className="mb-2.5 relative">
+                      <label className="text-sm font-medium text-[#595959] capitalize">
+                        Tanggal Berakhir
+                        <em className="text-[#f0506e]">*</em>
+                      </label>
+                    </div>
+                    <div className="w-full max-w-full">
+                      <div className="form-control w-full max-w-full">
+                        <div className="form-control-input">
+                          <input
+                            type="date"
+                            placeholder=""
+                            className="c-input"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div></div>
+                </div>
+              )}
+              {activeTabs.subTab === 'second' && (
+                <div className="form-stacked mt-8 flex w-full max-w-full justify-between">
+                  <div className="my-5">
+                    <div className="mb-2.5 relative">
+                      <label className="text-sm font-medium text-[#595959] capitalize">
+                        Mulai Dari
+                        <em className="text-[#f0506e]">*</em>
+                      </label>
+                    </div>
+                    <div className="w-full max-w-full">
+                      <div className="form-control w-full max-w-full">
+                        <div className="form-control-input">
+                          <input
+                            type="time"
+                            placeholder=""
+                            className="c-input"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="my-5">
+                    <div className="mb-2.5 relative">
+                      <label className="text-sm font-medium text-[#595959] capitalize">
+                        Sampai
+                        <em className="text-[#f0506e]">*</em>
+                      </label>
+                    </div>
+                    <div className="w-full max-w-full">
+                      <div className="form-control w-full max-w-full">
+                        <div className="form-control-input">
+                          <input
+                            type="time"
+                            placeholder=""
+                            className="c-input"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div></div>
+                </div>
+              )}
+            </div>
+            <div className="w-full max-w-full mt-[30px]">
+              <button className="w-full max-w-full c-button c-button-primary">
+                <span>Simpan</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className={`${modalOpen && openModalType === 'ticketForms' ? '' : 'hidden '}ticket-daterange-picker-modal flex lg:px-10 sm:p-[50px_30px] fixed top-0 left-0 right-0 bottom-0 bg-black/60 w-full h-full z-[999] overflow-auto`}
+      >
         <div className="event-category-modal-dialog !m-auto p-[30px] relative w-[600px] bg-white">
-          <button className="absolute top-[10px] right-[10px]">
-            <AiOutlineClose className="text-[#9f9f9f] text-xl" />
-          </button>
+          <CloseModalButton />
           <div className="flex flex-wrap">
             <div className="w-full max-w-full">
               <div className="tabs-nav relative !max-w-[520px] flex border-b border-[#dbdfe7]">
                 <TabsTitleComponent mainTab="ticketForms" subTab="first" />
                 <TabsTitleComponent mainTab="ticketForms" subTab="second" />
               </div>
-              {activeTicketTab === 'detail' && (
+              {activeTabs.subTab === 'first' && (
                 <div className="form-stacked mt-8">
                   <div className="mb-5">
                     <div className="mb-2.5 relative">
@@ -999,7 +1068,7 @@ export default function CreateEventPage() {
                   <div></div>
                 </div>
               )}
-              {activeTicketTab === 'date' && (
+              {activeTabs.subTab === 'second' && (
                 <div className="form-stacked mt-8">
                   <div className="mb-5">
                     <div className="mb-2.5 relative">
@@ -1055,6 +1124,6 @@ export default function CreateEventPage() {
           </div>
         </div>
       </div>
-    </>
+    </Formik>
   );
 }
