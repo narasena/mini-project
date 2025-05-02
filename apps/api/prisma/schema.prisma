@@ -88,8 +88,8 @@ model CreatorProfile {
   bannerImgUrl          String?
   logoImgUrl            String?
   profileLinkUrl        String         @unique
-  countryPhoneId        Int
-  countryPhone          CountryPhone    @relation(fields:[countryPhoneId],references: [id])
+  countryPhoneId        Int?
+  countryPhone          CountryPhone?    @relation(fields:[countryPhoneId],references: [id])
   creatorPhoneNumber    String?
   address               String?
   aboutUsInfo           String?
@@ -113,10 +113,15 @@ model Event {
   eventFormat           EventFormat           @relation(fields: [eventFormatId],references: [id])
   eventTopicId          Int
   eventTopic            EventTopic            @relation(fields:[eventTopicId],references:[id])
+  eventTag             String
+  isPrivateEvent        Boolean               @default(false)
   organizerName         String?
   organizerLogoImgUrl   String?
-  eventDate             DateTime
-  eventTime             DateTime
+  bannerImgUrl          String?
+  eventStartDate        String
+  eventEndDate          String
+ eventStartTime         String
+  eventEndTime          String
   eventLocation         String
   eventDesc             String?
   ticketType            TicketType
@@ -125,14 +130,15 @@ model Event {
   ticketPrice           Int                   @default(20000)
   ticketDesc            String?
   ticketTermsAndCondition String
-  ticketStartDate       DateTime
-  ticketEndDate         DateTime
+  ticketStartDate       String
+  ticketEndDate         String
   eventCPName           String
   eventCPEmail          String
-  eventCountryPhoneId        Int
-  eventCountryPhone           CountryPhone          @relation(fields: [eventCountryPhoneId],references: [id])
-  ticketDataFormType    TicketDataFormType
-  maxTicketPerTransaction Int
+  eventCPCountryPhoneId        Int
+  eventCPCountryPhone           CountryPhone          @relation(fields: [eventCPCountryPhoneId],references: [id])
+  eventCPPhone          String
+  idCardStatus    TicketIDCard    @default(NO_ID)
+  maxTicketPerTransaction Int                 
   oneEmailOneTransaction Boolean              @default(false)
   ticketDataFormUnique   Boolean              @default(false)
   isDraft               Boolean?              @default(false) 
@@ -150,7 +156,7 @@ enum TicketType {
   GRATIS
 }
 
-enum TicketDataFormType {
+enum TicketIDCard {
   NO_ID
   WITH_ID
 }

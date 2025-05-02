@@ -183,10 +183,15 @@ exports.Prisma.EventScalarFieldEnum = {
   eventName: 'eventName',
   eventFormatId: 'eventFormatId',
   eventTopicId: 'eventTopicId',
+  eventTag: 'eventTag',
+  isPrivateEvent: 'isPrivateEvent',
   organizerName: 'organizerName',
   organizerLogoImgUrl: 'organizerLogoImgUrl',
-  eventDate: 'eventDate',
-  eventTime: 'eventTime',
+  bannerImgUrl: 'bannerImgUrl',
+  eventStartDate: 'eventStartDate',
+  eventEndDate: 'eventEndDate',
+  eventStartTime: 'eventStartTime',
+  eventEndTime: 'eventEndTime',
   eventLocation: 'eventLocation',
   eventDesc: 'eventDesc',
   ticketType: 'ticketType',
@@ -199,8 +204,9 @@ exports.Prisma.EventScalarFieldEnum = {
   ticketEndDate: 'ticketEndDate',
   eventCPName: 'eventCPName',
   eventCPEmail: 'eventCPEmail',
-  eventCountryPhoneId: 'eventCountryPhoneId',
-  ticketDataFormType: 'ticketDataFormType',
+  eventCPCountryPhoneId: 'eventCPCountryPhoneId',
+  eventCPPhone: 'eventCPPhone',
+  idCardStatus: 'idCardStatus',
   maxTicketPerTransaction: 'maxTicketPerTransaction',
   oneEmailOneTransaction: 'oneEmailOneTransaction',
   ticketDataFormUnique: 'ticketDataFormUnique',
@@ -281,7 +287,7 @@ exports.TicketType = exports.$Enums.TicketType = {
   GRATIS: 'GRATIS'
 };
 
-exports.TicketDataFormType = exports.$Enums.TicketDataFormType = {
+exports.TicketIDCard = exports.$Enums.TicketIDCard = {
   NO_ID: 'NO_ID',
   WITH_ID: 'WITH_ID'
 };

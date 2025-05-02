@@ -90,12 +90,12 @@ export const TicketType: {
 export type TicketType = (typeof TicketType)[keyof typeof TicketType]
 
 
-export const TicketDataFormType: {
+export const TicketIDCard: {
   NO_ID: 'NO_ID',
   WITH_ID: 'WITH_ID'
 };
 
-export type TicketDataFormType = (typeof TicketDataFormType)[keyof typeof TicketDataFormType]
+export type TicketIDCard = (typeof TicketIDCard)[keyof typeof TicketIDCard]
 
 }
 
@@ -111,9 +111,9 @@ export type TicketType = $Enums.TicketType
 
 export const TicketType: typeof $Enums.TicketType
 
-export type TicketDataFormType = $Enums.TicketDataFormType
+export type TicketIDCard = $Enums.TicketIDCard
 
-export const TicketDataFormType: typeof $Enums.TicketDataFormType
+export const TicketIDCard: typeof $Enums.TicketIDCard
 
 /**
  * ##  Prisma Client ʲˢ
@@ -5842,7 +5842,7 @@ export namespace Prisma {
     bannerImgUrl: string | null
     logoImgUrl: string | null
     profileLinkUrl: string
-    countryPhoneId: number
+    countryPhoneId: number | null
     creatorPhoneNumber: string | null
     address: string | null
     aboutUsInfo: string | null
@@ -5890,7 +5890,7 @@ export namespace Prisma {
     updatedAt?: boolean
     deletedAt?: boolean
     member?: boolean | MemberDefaultArgs<ExtArgs>
-    countryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+    countryPhone?: boolean | CreatorProfile$countryPhoneArgs<ExtArgs>
     event?: boolean | CreatorProfile$eventArgs<ExtArgs>
     _count?: boolean | CreatorProfileCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["creatorProfile"]>
@@ -5912,7 +5912,7 @@ export namespace Prisma {
     updatedAt?: boolean
     deletedAt?: boolean
     member?: boolean | MemberDefaultArgs<ExtArgs>
-    countryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+    countryPhone?: boolean | CreatorProfile$countryPhoneArgs<ExtArgs>
   }, ExtArgs["result"]["creatorProfile"]>
 
   export type CreatorProfileSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5932,7 +5932,7 @@ export namespace Prisma {
     updatedAt?: boolean
     deletedAt?: boolean
     member?: boolean | MemberDefaultArgs<ExtArgs>
-    countryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+    countryPhone?: boolean | CreatorProfile$countryPhoneArgs<ExtArgs>
   }, ExtArgs["result"]["creatorProfile"]>
 
   export type CreatorProfileSelectScalar = {
@@ -5956,24 +5956,24 @@ export namespace Prisma {
   export type CreatorProfileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "memberId" | "bannerImgUrl" | "logoImgUrl" | "profileLinkUrl" | "countryPhoneId" | "creatorPhoneNumber" | "address" | "aboutUsInfo" | "xUserName" | "igUserName" | "fbProfileUrl" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["creatorProfile"]>
   export type CreatorProfileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     member?: boolean | MemberDefaultArgs<ExtArgs>
-    countryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+    countryPhone?: boolean | CreatorProfile$countryPhoneArgs<ExtArgs>
     event?: boolean | CreatorProfile$eventArgs<ExtArgs>
     _count?: boolean | CreatorProfileCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CreatorProfileIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     member?: boolean | MemberDefaultArgs<ExtArgs>
-    countryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+    countryPhone?: boolean | CreatorProfile$countryPhoneArgs<ExtArgs>
   }
   export type CreatorProfileIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     member?: boolean | MemberDefaultArgs<ExtArgs>
-    countryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+    countryPhone?: boolean | CreatorProfile$countryPhoneArgs<ExtArgs>
   }
 
   export type $CreatorProfilePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "CreatorProfile"
     objects: {
       member: Prisma.$MemberPayload<ExtArgs>
-      countryPhone: Prisma.$CountryPhonePayload<ExtArgs>
+      countryPhone: Prisma.$CountryPhonePayload<ExtArgs> | null
       event: Prisma.$EventPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -5982,7 +5982,7 @@ export namespace Prisma {
       bannerImgUrl: string | null
       logoImgUrl: string | null
       profileLinkUrl: string
-      countryPhoneId: number
+      countryPhoneId: number | null
       creatorPhoneNumber: string | null
       address: string | null
       aboutUsInfo: string | null
@@ -6387,7 +6387,7 @@ export namespace Prisma {
   export interface Prisma__CreatorProfileClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     member<T extends MemberDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MemberDefaultArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    countryPhone<T extends CountryPhoneDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CountryPhoneDefaultArgs<ExtArgs>>): Prisma__CountryPhoneClient<$Result.GetResult<Prisma.$CountryPhonePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    countryPhone<T extends CreatorProfile$countryPhoneArgs<ExtArgs> = {}>(args?: Subset<T, CreatorProfile$countryPhoneArgs<ExtArgs>>): Prisma__CountryPhoneClient<$Result.GetResult<Prisma.$CountryPhonePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     event<T extends CreatorProfile$eventArgs<ExtArgs> = {}>(args?: Subset<T, CreatorProfile$eventArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -6829,6 +6829,25 @@ export namespace Prisma {
   }
 
   /**
+   * CreatorProfile.countryPhone
+   */
+  export type CreatorProfile$countryPhoneArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CountryPhone
+     */
+    select?: CountryPhoneSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CountryPhone
+     */
+    omit?: CountryPhoneOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CountryPhoneInclude<ExtArgs> | null
+    where?: CountryPhoneWhereInput
+  }
+
+  /**
    * CreatorProfile.event
    */
   export type CreatorProfile$eventArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6889,7 +6908,7 @@ export namespace Prisma {
     eventTopicId: number | null
     ticketQty: number | null
     ticketPrice: number | null
-    eventCountryPhoneId: number | null
+    eventCPCountryPhoneId: number | null
     maxTicketPerTransaction: number | null
   }
 
@@ -6899,7 +6918,7 @@ export namespace Prisma {
     eventTopicId: number | null
     ticketQty: number | null
     ticketPrice: number | null
-    eventCountryPhoneId: number | null
+    eventCPCountryPhoneId: number | null
     maxTicketPerTransaction: number | null
   }
 
@@ -6909,10 +6928,15 @@ export namespace Prisma {
     eventName: string | null
     eventFormatId: number | null
     eventTopicId: number | null
+    eventTag: string | null
+    isPrivateEvent: boolean | null
     organizerName: string | null
     organizerLogoImgUrl: string | null
-    eventDate: Date | null
-    eventTime: Date | null
+    bannerImgUrl: string | null
+    eventStartDate: string | null
+    eventEndDate: string | null
+    eventStartTime: string | null
+    eventEndTime: string | null
     eventLocation: string | null
     eventDesc: string | null
     ticketType: $Enums.TicketType | null
@@ -6921,12 +6945,13 @@ export namespace Prisma {
     ticketPrice: number | null
     ticketDesc: string | null
     ticketTermsAndCondition: string | null
-    ticketStartDate: Date | null
-    ticketEndDate: Date | null
+    ticketStartDate: string | null
+    ticketEndDate: string | null
     eventCPName: string | null
     eventCPEmail: string | null
-    eventCountryPhoneId: number | null
-    ticketDataFormType: $Enums.TicketDataFormType | null
+    eventCPCountryPhoneId: number | null
+    eventCPPhone: string | null
+    idCardStatus: $Enums.TicketIDCard | null
     maxTicketPerTransaction: number | null
     oneEmailOneTransaction: boolean | null
     ticketDataFormUnique: boolean | null
@@ -6942,10 +6967,15 @@ export namespace Prisma {
     eventName: string | null
     eventFormatId: number | null
     eventTopicId: number | null
+    eventTag: string | null
+    isPrivateEvent: boolean | null
     organizerName: string | null
     organizerLogoImgUrl: string | null
-    eventDate: Date | null
-    eventTime: Date | null
+    bannerImgUrl: string | null
+    eventStartDate: string | null
+    eventEndDate: string | null
+    eventStartTime: string | null
+    eventEndTime: string | null
     eventLocation: string | null
     eventDesc: string | null
     ticketType: $Enums.TicketType | null
@@ -6954,12 +6984,13 @@ export namespace Prisma {
     ticketPrice: number | null
     ticketDesc: string | null
     ticketTermsAndCondition: string | null
-    ticketStartDate: Date | null
-    ticketEndDate: Date | null
+    ticketStartDate: string | null
+    ticketEndDate: string | null
     eventCPName: string | null
     eventCPEmail: string | null
-    eventCountryPhoneId: number | null
-    ticketDataFormType: $Enums.TicketDataFormType | null
+    eventCPCountryPhoneId: number | null
+    eventCPPhone: string | null
+    idCardStatus: $Enums.TicketIDCard | null
     maxTicketPerTransaction: number | null
     oneEmailOneTransaction: boolean | null
     ticketDataFormUnique: boolean | null
@@ -6975,10 +7006,15 @@ export namespace Prisma {
     eventName: number
     eventFormatId: number
     eventTopicId: number
+    eventTag: number
+    isPrivateEvent: number
     organizerName: number
     organizerLogoImgUrl: number
-    eventDate: number
-    eventTime: number
+    bannerImgUrl: number
+    eventStartDate: number
+    eventEndDate: number
+    eventStartTime: number
+    eventEndTime: number
     eventLocation: number
     eventDesc: number
     ticketType: number
@@ -6991,8 +7027,9 @@ export namespace Prisma {
     ticketEndDate: number
     eventCPName: number
     eventCPEmail: number
-    eventCountryPhoneId: number
-    ticketDataFormType: number
+    eventCPCountryPhoneId: number
+    eventCPPhone: number
+    idCardStatus: number
     maxTicketPerTransaction: number
     oneEmailOneTransaction: number
     ticketDataFormUnique: number
@@ -7010,7 +7047,7 @@ export namespace Prisma {
     eventTopicId?: true
     ticketQty?: true
     ticketPrice?: true
-    eventCountryPhoneId?: true
+    eventCPCountryPhoneId?: true
     maxTicketPerTransaction?: true
   }
 
@@ -7020,7 +7057,7 @@ export namespace Prisma {
     eventTopicId?: true
     ticketQty?: true
     ticketPrice?: true
-    eventCountryPhoneId?: true
+    eventCPCountryPhoneId?: true
     maxTicketPerTransaction?: true
   }
 
@@ -7030,10 +7067,15 @@ export namespace Prisma {
     eventName?: true
     eventFormatId?: true
     eventTopicId?: true
+    eventTag?: true
+    isPrivateEvent?: true
     organizerName?: true
     organizerLogoImgUrl?: true
-    eventDate?: true
-    eventTime?: true
+    bannerImgUrl?: true
+    eventStartDate?: true
+    eventEndDate?: true
+    eventStartTime?: true
+    eventEndTime?: true
     eventLocation?: true
     eventDesc?: true
     ticketType?: true
@@ -7046,8 +7088,9 @@ export namespace Prisma {
     ticketEndDate?: true
     eventCPName?: true
     eventCPEmail?: true
-    eventCountryPhoneId?: true
-    ticketDataFormType?: true
+    eventCPCountryPhoneId?: true
+    eventCPPhone?: true
+    idCardStatus?: true
     maxTicketPerTransaction?: true
     oneEmailOneTransaction?: true
     ticketDataFormUnique?: true
@@ -7063,10 +7106,15 @@ export namespace Prisma {
     eventName?: true
     eventFormatId?: true
     eventTopicId?: true
+    eventTag?: true
+    isPrivateEvent?: true
     organizerName?: true
     organizerLogoImgUrl?: true
-    eventDate?: true
-    eventTime?: true
+    bannerImgUrl?: true
+    eventStartDate?: true
+    eventEndDate?: true
+    eventStartTime?: true
+    eventEndTime?: true
     eventLocation?: true
     eventDesc?: true
     ticketType?: true
@@ -7079,8 +7127,9 @@ export namespace Prisma {
     ticketEndDate?: true
     eventCPName?: true
     eventCPEmail?: true
-    eventCountryPhoneId?: true
-    ticketDataFormType?: true
+    eventCPCountryPhoneId?: true
+    eventCPPhone?: true
+    idCardStatus?: true
     maxTicketPerTransaction?: true
     oneEmailOneTransaction?: true
     ticketDataFormUnique?: true
@@ -7096,10 +7145,15 @@ export namespace Prisma {
     eventName?: true
     eventFormatId?: true
     eventTopicId?: true
+    eventTag?: true
+    isPrivateEvent?: true
     organizerName?: true
     organizerLogoImgUrl?: true
-    eventDate?: true
-    eventTime?: true
+    bannerImgUrl?: true
+    eventStartDate?: true
+    eventEndDate?: true
+    eventStartTime?: true
+    eventEndTime?: true
     eventLocation?: true
     eventDesc?: true
     ticketType?: true
@@ -7112,8 +7166,9 @@ export namespace Prisma {
     ticketEndDate?: true
     eventCPName?: true
     eventCPEmail?: true
-    eventCountryPhoneId?: true
-    ticketDataFormType?: true
+    eventCPCountryPhoneId?: true
+    eventCPPhone?: true
+    idCardStatus?: true
     maxTicketPerTransaction?: true
     oneEmailOneTransaction?: true
     ticketDataFormUnique?: true
@@ -7216,10 +7271,15 @@ export namespace Prisma {
     eventName: string
     eventFormatId: number
     eventTopicId: number
+    eventTag: string
+    isPrivateEvent: boolean
     organizerName: string | null
     organizerLogoImgUrl: string | null
-    eventDate: Date
-    eventTime: Date
+    bannerImgUrl: string | null
+    eventStartDate: string
+    eventEndDate: string
+    eventStartTime: string
+    eventEndTime: string
     eventLocation: string
     eventDesc: string | null
     ticketType: $Enums.TicketType
@@ -7228,12 +7288,13 @@ export namespace Prisma {
     ticketPrice: number
     ticketDesc: string | null
     ticketTermsAndCondition: string
-    ticketStartDate: Date
-    ticketEndDate: Date
+    ticketStartDate: string
+    ticketEndDate: string
     eventCPName: string
     eventCPEmail: string
-    eventCountryPhoneId: number
-    ticketDataFormType: $Enums.TicketDataFormType
+    eventCPCountryPhoneId: number
+    eventCPPhone: string
+    idCardStatus: $Enums.TicketIDCard
     maxTicketPerTransaction: number
     oneEmailOneTransaction: boolean
     ticketDataFormUnique: boolean
@@ -7268,10 +7329,15 @@ export namespace Prisma {
     eventName?: boolean
     eventFormatId?: boolean
     eventTopicId?: boolean
+    eventTag?: boolean
+    isPrivateEvent?: boolean
     organizerName?: boolean
     organizerLogoImgUrl?: boolean
-    eventDate?: boolean
-    eventTime?: boolean
+    bannerImgUrl?: boolean
+    eventStartDate?: boolean
+    eventEndDate?: boolean
+    eventStartTime?: boolean
+    eventEndTime?: boolean
     eventLocation?: boolean
     eventDesc?: boolean
     ticketType?: boolean
@@ -7284,8 +7350,9 @@ export namespace Prisma {
     ticketEndDate?: boolean
     eventCPName?: boolean
     eventCPEmail?: boolean
-    eventCountryPhoneId?: boolean
-    ticketDataFormType?: boolean
+    eventCPCountryPhoneId?: boolean
+    eventCPPhone?: boolean
+    idCardStatus?: boolean
     maxTicketPerTransaction?: boolean
     oneEmailOneTransaction?: boolean
     ticketDataFormUnique?: boolean
@@ -7296,7 +7363,7 @@ export namespace Prisma {
     creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
     eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
     eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
-    eventCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+    eventCPCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
     ticketTransactions?: boolean | Event$ticketTransactionsArgs<ExtArgs>
     _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["event"]>
@@ -7307,10 +7374,15 @@ export namespace Prisma {
     eventName?: boolean
     eventFormatId?: boolean
     eventTopicId?: boolean
+    eventTag?: boolean
+    isPrivateEvent?: boolean
     organizerName?: boolean
     organizerLogoImgUrl?: boolean
-    eventDate?: boolean
-    eventTime?: boolean
+    bannerImgUrl?: boolean
+    eventStartDate?: boolean
+    eventEndDate?: boolean
+    eventStartTime?: boolean
+    eventEndTime?: boolean
     eventLocation?: boolean
     eventDesc?: boolean
     ticketType?: boolean
@@ -7323,8 +7395,9 @@ export namespace Prisma {
     ticketEndDate?: boolean
     eventCPName?: boolean
     eventCPEmail?: boolean
-    eventCountryPhoneId?: boolean
-    ticketDataFormType?: boolean
+    eventCPCountryPhoneId?: boolean
+    eventCPPhone?: boolean
+    idCardStatus?: boolean
     maxTicketPerTransaction?: boolean
     oneEmailOneTransaction?: boolean
     ticketDataFormUnique?: boolean
@@ -7335,7 +7408,7 @@ export namespace Prisma {
     creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
     eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
     eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
-    eventCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+    eventCPCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["event"]>
 
   export type EventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -7344,10 +7417,15 @@ export namespace Prisma {
     eventName?: boolean
     eventFormatId?: boolean
     eventTopicId?: boolean
+    eventTag?: boolean
+    isPrivateEvent?: boolean
     organizerName?: boolean
     organizerLogoImgUrl?: boolean
-    eventDate?: boolean
-    eventTime?: boolean
+    bannerImgUrl?: boolean
+    eventStartDate?: boolean
+    eventEndDate?: boolean
+    eventStartTime?: boolean
+    eventEndTime?: boolean
     eventLocation?: boolean
     eventDesc?: boolean
     ticketType?: boolean
@@ -7360,8 +7438,9 @@ export namespace Prisma {
     ticketEndDate?: boolean
     eventCPName?: boolean
     eventCPEmail?: boolean
-    eventCountryPhoneId?: boolean
-    ticketDataFormType?: boolean
+    eventCPCountryPhoneId?: boolean
+    eventCPPhone?: boolean
+    idCardStatus?: boolean
     maxTicketPerTransaction?: boolean
     oneEmailOneTransaction?: boolean
     ticketDataFormUnique?: boolean
@@ -7372,7 +7451,7 @@ export namespace Prisma {
     creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
     eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
     eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
-    eventCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+    eventCPCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["event"]>
 
   export type EventSelectScalar = {
@@ -7381,10 +7460,15 @@ export namespace Prisma {
     eventName?: boolean
     eventFormatId?: boolean
     eventTopicId?: boolean
+    eventTag?: boolean
+    isPrivateEvent?: boolean
     organizerName?: boolean
     organizerLogoImgUrl?: boolean
-    eventDate?: boolean
-    eventTime?: boolean
+    bannerImgUrl?: boolean
+    eventStartDate?: boolean
+    eventEndDate?: boolean
+    eventStartTime?: boolean
+    eventEndTime?: boolean
     eventLocation?: boolean
     eventDesc?: boolean
     ticketType?: boolean
@@ -7397,8 +7481,9 @@ export namespace Prisma {
     ticketEndDate?: boolean
     eventCPName?: boolean
     eventCPEmail?: boolean
-    eventCountryPhoneId?: boolean
-    ticketDataFormType?: boolean
+    eventCPCountryPhoneId?: boolean
+    eventCPPhone?: boolean
+    idCardStatus?: boolean
     maxTicketPerTransaction?: boolean
     oneEmailOneTransaction?: boolean
     ticketDataFormUnique?: boolean
@@ -7408,12 +7493,12 @@ export namespace Prisma {
     deletedAt?: boolean
   }
 
-  export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "creatorId" | "eventName" | "eventFormatId" | "eventTopicId" | "organizerName" | "organizerLogoImgUrl" | "eventDate" | "eventTime" | "eventLocation" | "eventDesc" | "ticketType" | "ticketName" | "ticketQty" | "ticketPrice" | "ticketDesc" | "ticketTermsAndCondition" | "ticketStartDate" | "ticketEndDate" | "eventCPName" | "eventCPEmail" | "eventCountryPhoneId" | "ticketDataFormType" | "maxTicketPerTransaction" | "oneEmailOneTransaction" | "ticketDataFormUnique" | "isDraft" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["event"]>
+  export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "creatorId" | "eventName" | "eventFormatId" | "eventTopicId" | "eventTag" | "isPrivateEvent" | "organizerName" | "organizerLogoImgUrl" | "bannerImgUrl" | "eventStartDate" | "eventEndDate" | "eventStartTime" | "eventEndTime" | "eventLocation" | "eventDesc" | "ticketType" | "ticketName" | "ticketQty" | "ticketPrice" | "ticketDesc" | "ticketTermsAndCondition" | "ticketStartDate" | "ticketEndDate" | "eventCPName" | "eventCPEmail" | "eventCPCountryPhoneId" | "eventCPPhone" | "idCardStatus" | "maxTicketPerTransaction" | "oneEmailOneTransaction" | "ticketDataFormUnique" | "isDraft" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["event"]>
   export type EventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
     eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
     eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
-    eventCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+    eventCPCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
     ticketTransactions?: boolean | Event$ticketTransactionsArgs<ExtArgs>
     _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -7421,13 +7506,13 @@ export namespace Prisma {
     creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
     eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
     eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
-    eventCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+    eventCPCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
   }
   export type EventIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
     eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
     eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
-    eventCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
+    eventCPCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
   }
 
   export type $EventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7436,7 +7521,7 @@ export namespace Prisma {
       creator: Prisma.$CreatorProfilePayload<ExtArgs>
       eventFormat: Prisma.$EventFormatPayload<ExtArgs>
       eventTopic: Prisma.$EventTopicPayload<ExtArgs>
-      eventCountryPhone: Prisma.$CountryPhonePayload<ExtArgs>
+      eventCPCountryPhone: Prisma.$CountryPhonePayload<ExtArgs>
       ticketTransactions: Prisma.$TicketTransactionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -7445,10 +7530,15 @@ export namespace Prisma {
       eventName: string
       eventFormatId: number
       eventTopicId: number
+      eventTag: string
+      isPrivateEvent: boolean
       organizerName: string | null
       organizerLogoImgUrl: string | null
-      eventDate: Date
-      eventTime: Date
+      bannerImgUrl: string | null
+      eventStartDate: string
+      eventEndDate: string
+      eventStartTime: string
+      eventEndTime: string
       eventLocation: string
       eventDesc: string | null
       ticketType: $Enums.TicketType
@@ -7457,12 +7547,13 @@ export namespace Prisma {
       ticketPrice: number
       ticketDesc: string | null
       ticketTermsAndCondition: string
-      ticketStartDate: Date
-      ticketEndDate: Date
+      ticketStartDate: string
+      ticketEndDate: string
       eventCPName: string
       eventCPEmail: string
-      eventCountryPhoneId: number
-      ticketDataFormType: $Enums.TicketDataFormType
+      eventCPCountryPhoneId: number
+      eventCPPhone: string
+      idCardStatus: $Enums.TicketIDCard
       maxTicketPerTransaction: number
       oneEmailOneTransaction: boolean
       ticketDataFormUnique: boolean
@@ -7867,7 +7958,7 @@ export namespace Prisma {
     creator<T extends CreatorProfileDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CreatorProfileDefaultArgs<ExtArgs>>): Prisma__CreatorProfileClient<$Result.GetResult<Prisma.$CreatorProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     eventFormat<T extends EventFormatDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventFormatDefaultArgs<ExtArgs>>): Prisma__EventFormatClient<$Result.GetResult<Prisma.$EventFormatPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     eventTopic<T extends EventTopicDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventTopicDefaultArgs<ExtArgs>>): Prisma__EventTopicClient<$Result.GetResult<Prisma.$EventTopicPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    eventCountryPhone<T extends CountryPhoneDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CountryPhoneDefaultArgs<ExtArgs>>): Prisma__CountryPhoneClient<$Result.GetResult<Prisma.$CountryPhonePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    eventCPCountryPhone<T extends CountryPhoneDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CountryPhoneDefaultArgs<ExtArgs>>): Prisma__CountryPhoneClient<$Result.GetResult<Prisma.$CountryPhonePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     ticketTransactions<T extends Event$ticketTransactionsArgs<ExtArgs> = {}>(args?: Subset<T, Event$ticketTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -7903,10 +7994,15 @@ export namespace Prisma {
     readonly eventName: FieldRef<"Event", 'String'>
     readonly eventFormatId: FieldRef<"Event", 'Int'>
     readonly eventTopicId: FieldRef<"Event", 'Int'>
+    readonly eventTag: FieldRef<"Event", 'String'>
+    readonly isPrivateEvent: FieldRef<"Event", 'Boolean'>
     readonly organizerName: FieldRef<"Event", 'String'>
     readonly organizerLogoImgUrl: FieldRef<"Event", 'String'>
-    readonly eventDate: FieldRef<"Event", 'DateTime'>
-    readonly eventTime: FieldRef<"Event", 'DateTime'>
+    readonly bannerImgUrl: FieldRef<"Event", 'String'>
+    readonly eventStartDate: FieldRef<"Event", 'String'>
+    readonly eventEndDate: FieldRef<"Event", 'String'>
+    readonly eventStartTime: FieldRef<"Event", 'String'>
+    readonly eventEndTime: FieldRef<"Event", 'String'>
     readonly eventLocation: FieldRef<"Event", 'String'>
     readonly eventDesc: FieldRef<"Event", 'String'>
     readonly ticketType: FieldRef<"Event", 'TicketType'>
@@ -7915,12 +8011,13 @@ export namespace Prisma {
     readonly ticketPrice: FieldRef<"Event", 'Int'>
     readonly ticketDesc: FieldRef<"Event", 'String'>
     readonly ticketTermsAndCondition: FieldRef<"Event", 'String'>
-    readonly ticketStartDate: FieldRef<"Event", 'DateTime'>
-    readonly ticketEndDate: FieldRef<"Event", 'DateTime'>
+    readonly ticketStartDate: FieldRef<"Event", 'String'>
+    readonly ticketEndDate: FieldRef<"Event", 'String'>
     readonly eventCPName: FieldRef<"Event", 'String'>
     readonly eventCPEmail: FieldRef<"Event", 'String'>
-    readonly eventCountryPhoneId: FieldRef<"Event", 'Int'>
-    readonly ticketDataFormType: FieldRef<"Event", 'TicketDataFormType'>
+    readonly eventCPCountryPhoneId: FieldRef<"Event", 'Int'>
+    readonly eventCPPhone: FieldRef<"Event", 'String'>
+    readonly idCardStatus: FieldRef<"Event", 'TicketIDCard'>
     readonly maxTicketPerTransaction: FieldRef<"Event", 'Int'>
     readonly oneEmailOneTransaction: FieldRef<"Event", 'Boolean'>
     readonly ticketDataFormUnique: FieldRef<"Event", 'Boolean'>
@@ -12999,10 +13096,15 @@ export namespace Prisma {
     eventName: 'eventName',
     eventFormatId: 'eventFormatId',
     eventTopicId: 'eventTopicId',
+    eventTag: 'eventTag',
+    isPrivateEvent: 'isPrivateEvent',
     organizerName: 'organizerName',
     organizerLogoImgUrl: 'organizerLogoImgUrl',
-    eventDate: 'eventDate',
-    eventTime: 'eventTime',
+    bannerImgUrl: 'bannerImgUrl',
+    eventStartDate: 'eventStartDate',
+    eventEndDate: 'eventEndDate',
+    eventStartTime: 'eventStartTime',
+    eventEndTime: 'eventEndTime',
     eventLocation: 'eventLocation',
     eventDesc: 'eventDesc',
     ticketType: 'ticketType',
@@ -13015,8 +13117,9 @@ export namespace Prisma {
     ticketEndDate: 'ticketEndDate',
     eventCPName: 'eventCPName',
     eventCPEmail: 'eventCPEmail',
-    eventCountryPhoneId: 'eventCountryPhoneId',
-    ticketDataFormType: 'ticketDataFormType',
+    eventCPCountryPhoneId: 'eventCPCountryPhoneId',
+    eventCPPhone: 'eventCPPhone',
+    idCardStatus: 'idCardStatus',
     maxTicketPerTransaction: 'maxTicketPerTransaction',
     oneEmailOneTransaction: 'oneEmailOneTransaction',
     ticketDataFormUnique: 'ticketDataFormUnique',
@@ -13201,16 +13304,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'TicketDataFormType'
+   * Reference to a field of type 'TicketIDCard'
    */
-  export type EnumTicketDataFormTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TicketDataFormType'>
+  export type EnumTicketIDCardFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TicketIDCard'>
     
 
 
   /**
-   * Reference to a field of type 'TicketDataFormType[]'
+   * Reference to a field of type 'TicketIDCard[]'
    */
-  export type ListEnumTicketDataFormTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TicketDataFormType[]'>
+  export type ListEnumTicketIDCardFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TicketIDCard[]'>
     
 
 
@@ -13519,7 +13622,7 @@ export namespace Prisma {
     bannerImgUrl?: StringNullableFilter<"CreatorProfile"> | string | null
     logoImgUrl?: StringNullableFilter<"CreatorProfile"> | string | null
     profileLinkUrl?: StringFilter<"CreatorProfile"> | string
-    countryPhoneId?: IntFilter<"CreatorProfile"> | number
+    countryPhoneId?: IntNullableFilter<"CreatorProfile"> | number | null
     creatorPhoneNumber?: StringNullableFilter<"CreatorProfile"> | string | null
     address?: StringNullableFilter<"CreatorProfile"> | string | null
     aboutUsInfo?: StringNullableFilter<"CreatorProfile"> | string | null
@@ -13530,7 +13633,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"CreatorProfile"> | Date | string
     deletedAt?: DateTimeNullableFilter<"CreatorProfile"> | Date | string | null
     member?: XOR<MemberScalarRelationFilter, MemberWhereInput>
-    countryPhone?: XOR<CountryPhoneScalarRelationFilter, CountryPhoneWhereInput>
+    countryPhone?: XOR<CountryPhoneNullableScalarRelationFilter, CountryPhoneWhereInput> | null
     event?: EventListRelationFilter
   }
 
@@ -13540,7 +13643,7 @@ export namespace Prisma {
     bannerImgUrl?: SortOrderInput | SortOrder
     logoImgUrl?: SortOrderInput | SortOrder
     profileLinkUrl?: SortOrder
-    countryPhoneId?: SortOrder
+    countryPhoneId?: SortOrderInput | SortOrder
     creatorPhoneNumber?: SortOrderInput | SortOrder
     address?: SortOrderInput | SortOrder
     aboutUsInfo?: SortOrderInput | SortOrder
@@ -13564,7 +13667,7 @@ export namespace Prisma {
     NOT?: CreatorProfileWhereInput | CreatorProfileWhereInput[]
     bannerImgUrl?: StringNullableFilter<"CreatorProfile"> | string | null
     logoImgUrl?: StringNullableFilter<"CreatorProfile"> | string | null
-    countryPhoneId?: IntFilter<"CreatorProfile"> | number
+    countryPhoneId?: IntNullableFilter<"CreatorProfile"> | number | null
     creatorPhoneNumber?: StringNullableFilter<"CreatorProfile"> | string | null
     address?: StringNullableFilter<"CreatorProfile"> | string | null
     aboutUsInfo?: StringNullableFilter<"CreatorProfile"> | string | null
@@ -13575,7 +13678,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"CreatorProfile"> | Date | string
     deletedAt?: DateTimeNullableFilter<"CreatorProfile"> | Date | string | null
     member?: XOR<MemberScalarRelationFilter, MemberWhereInput>
-    countryPhone?: XOR<CountryPhoneScalarRelationFilter, CountryPhoneWhereInput>
+    countryPhone?: XOR<CountryPhoneNullableScalarRelationFilter, CountryPhoneWhereInput> | null
     event?: EventListRelationFilter
   }, "id" | "memberId" | "profileLinkUrl">
 
@@ -13585,7 +13688,7 @@ export namespace Prisma {
     bannerImgUrl?: SortOrderInput | SortOrder
     logoImgUrl?: SortOrderInput | SortOrder
     profileLinkUrl?: SortOrder
-    countryPhoneId?: SortOrder
+    countryPhoneId?: SortOrderInput | SortOrder
     creatorPhoneNumber?: SortOrderInput | SortOrder
     address?: SortOrderInput | SortOrder
     aboutUsInfo?: SortOrderInput | SortOrder
@@ -13611,7 +13714,7 @@ export namespace Prisma {
     bannerImgUrl?: StringNullableWithAggregatesFilter<"CreatorProfile"> | string | null
     logoImgUrl?: StringNullableWithAggregatesFilter<"CreatorProfile"> | string | null
     profileLinkUrl?: StringWithAggregatesFilter<"CreatorProfile"> | string
-    countryPhoneId?: IntWithAggregatesFilter<"CreatorProfile"> | number
+    countryPhoneId?: IntNullableWithAggregatesFilter<"CreatorProfile"> | number | null
     creatorPhoneNumber?: StringNullableWithAggregatesFilter<"CreatorProfile"> | string | null
     address?: StringNullableWithAggregatesFilter<"CreatorProfile"> | string | null
     aboutUsInfo?: StringNullableWithAggregatesFilter<"CreatorProfile"> | string | null
@@ -13632,10 +13735,15 @@ export namespace Prisma {
     eventName?: StringFilter<"Event"> | string
     eventFormatId?: IntFilter<"Event"> | number
     eventTopicId?: IntFilter<"Event"> | number
+    eventTag?: StringFilter<"Event"> | string
+    isPrivateEvent?: BoolFilter<"Event"> | boolean
     organizerName?: StringNullableFilter<"Event"> | string | null
     organizerLogoImgUrl?: StringNullableFilter<"Event"> | string | null
-    eventDate?: DateTimeFilter<"Event"> | Date | string
-    eventTime?: DateTimeFilter<"Event"> | Date | string
+    bannerImgUrl?: StringNullableFilter<"Event"> | string | null
+    eventStartDate?: StringFilter<"Event"> | string
+    eventEndDate?: StringFilter<"Event"> | string
+    eventStartTime?: StringFilter<"Event"> | string
+    eventEndTime?: StringFilter<"Event"> | string
     eventLocation?: StringFilter<"Event"> | string
     eventDesc?: StringNullableFilter<"Event"> | string | null
     ticketType?: EnumTicketTypeFilter<"Event"> | $Enums.TicketType
@@ -13644,12 +13752,13 @@ export namespace Prisma {
     ticketPrice?: IntFilter<"Event"> | number
     ticketDesc?: StringNullableFilter<"Event"> | string | null
     ticketTermsAndCondition?: StringFilter<"Event"> | string
-    ticketStartDate?: DateTimeFilter<"Event"> | Date | string
-    ticketEndDate?: DateTimeFilter<"Event"> | Date | string
+    ticketStartDate?: StringFilter<"Event"> | string
+    ticketEndDate?: StringFilter<"Event"> | string
     eventCPName?: StringFilter<"Event"> | string
     eventCPEmail?: StringFilter<"Event"> | string
-    eventCountryPhoneId?: IntFilter<"Event"> | number
-    ticketDataFormType?: EnumTicketDataFormTypeFilter<"Event"> | $Enums.TicketDataFormType
+    eventCPCountryPhoneId?: IntFilter<"Event"> | number
+    eventCPPhone?: StringFilter<"Event"> | string
+    idCardStatus?: EnumTicketIDCardFilter<"Event"> | $Enums.TicketIDCard
     maxTicketPerTransaction?: IntFilter<"Event"> | number
     oneEmailOneTransaction?: BoolFilter<"Event"> | boolean
     ticketDataFormUnique?: BoolFilter<"Event"> | boolean
@@ -13660,7 +13769,7 @@ export namespace Prisma {
     creator?: XOR<CreatorProfileScalarRelationFilter, CreatorProfileWhereInput>
     eventFormat?: XOR<EventFormatScalarRelationFilter, EventFormatWhereInput>
     eventTopic?: XOR<EventTopicScalarRelationFilter, EventTopicWhereInput>
-    eventCountryPhone?: XOR<CountryPhoneScalarRelationFilter, CountryPhoneWhereInput>
+    eventCPCountryPhone?: XOR<CountryPhoneScalarRelationFilter, CountryPhoneWhereInput>
     ticketTransactions?: TicketTransactionListRelationFilter
   }
 
@@ -13670,10 +13779,15 @@ export namespace Prisma {
     eventName?: SortOrder
     eventFormatId?: SortOrder
     eventTopicId?: SortOrder
+    eventTag?: SortOrder
+    isPrivateEvent?: SortOrder
     organizerName?: SortOrderInput | SortOrder
     organizerLogoImgUrl?: SortOrderInput | SortOrder
-    eventDate?: SortOrder
-    eventTime?: SortOrder
+    bannerImgUrl?: SortOrderInput | SortOrder
+    eventStartDate?: SortOrder
+    eventEndDate?: SortOrder
+    eventStartTime?: SortOrder
+    eventEndTime?: SortOrder
     eventLocation?: SortOrder
     eventDesc?: SortOrderInput | SortOrder
     ticketType?: SortOrder
@@ -13686,8 +13800,9 @@ export namespace Prisma {
     ticketEndDate?: SortOrder
     eventCPName?: SortOrder
     eventCPEmail?: SortOrder
-    eventCountryPhoneId?: SortOrder
-    ticketDataFormType?: SortOrder
+    eventCPCountryPhoneId?: SortOrder
+    eventCPPhone?: SortOrder
+    idCardStatus?: SortOrder
     maxTicketPerTransaction?: SortOrder
     oneEmailOneTransaction?: SortOrder
     ticketDataFormUnique?: SortOrder
@@ -13698,7 +13813,7 @@ export namespace Prisma {
     creator?: CreatorProfileOrderByWithRelationInput
     eventFormat?: EventFormatOrderByWithRelationInput
     eventTopic?: EventTopicOrderByWithRelationInput
-    eventCountryPhone?: CountryPhoneOrderByWithRelationInput
+    eventCPCountryPhone?: CountryPhoneOrderByWithRelationInput
     ticketTransactions?: TicketTransactionOrderByRelationAggregateInput
   }
 
@@ -13711,10 +13826,15 @@ export namespace Prisma {
     eventName?: StringFilter<"Event"> | string
     eventFormatId?: IntFilter<"Event"> | number
     eventTopicId?: IntFilter<"Event"> | number
+    eventTag?: StringFilter<"Event"> | string
+    isPrivateEvent?: BoolFilter<"Event"> | boolean
     organizerName?: StringNullableFilter<"Event"> | string | null
     organizerLogoImgUrl?: StringNullableFilter<"Event"> | string | null
-    eventDate?: DateTimeFilter<"Event"> | Date | string
-    eventTime?: DateTimeFilter<"Event"> | Date | string
+    bannerImgUrl?: StringNullableFilter<"Event"> | string | null
+    eventStartDate?: StringFilter<"Event"> | string
+    eventEndDate?: StringFilter<"Event"> | string
+    eventStartTime?: StringFilter<"Event"> | string
+    eventEndTime?: StringFilter<"Event"> | string
     eventLocation?: StringFilter<"Event"> | string
     eventDesc?: StringNullableFilter<"Event"> | string | null
     ticketType?: EnumTicketTypeFilter<"Event"> | $Enums.TicketType
@@ -13723,12 +13843,13 @@ export namespace Prisma {
     ticketPrice?: IntFilter<"Event"> | number
     ticketDesc?: StringNullableFilter<"Event"> | string | null
     ticketTermsAndCondition?: StringFilter<"Event"> | string
-    ticketStartDate?: DateTimeFilter<"Event"> | Date | string
-    ticketEndDate?: DateTimeFilter<"Event"> | Date | string
+    ticketStartDate?: StringFilter<"Event"> | string
+    ticketEndDate?: StringFilter<"Event"> | string
     eventCPName?: StringFilter<"Event"> | string
     eventCPEmail?: StringFilter<"Event"> | string
-    eventCountryPhoneId?: IntFilter<"Event"> | number
-    ticketDataFormType?: EnumTicketDataFormTypeFilter<"Event"> | $Enums.TicketDataFormType
+    eventCPCountryPhoneId?: IntFilter<"Event"> | number
+    eventCPPhone?: StringFilter<"Event"> | string
+    idCardStatus?: EnumTicketIDCardFilter<"Event"> | $Enums.TicketIDCard
     maxTicketPerTransaction?: IntFilter<"Event"> | number
     oneEmailOneTransaction?: BoolFilter<"Event"> | boolean
     ticketDataFormUnique?: BoolFilter<"Event"> | boolean
@@ -13739,7 +13860,7 @@ export namespace Prisma {
     creator?: XOR<CreatorProfileScalarRelationFilter, CreatorProfileWhereInput>
     eventFormat?: XOR<EventFormatScalarRelationFilter, EventFormatWhereInput>
     eventTopic?: XOR<EventTopicScalarRelationFilter, EventTopicWhereInput>
-    eventCountryPhone?: XOR<CountryPhoneScalarRelationFilter, CountryPhoneWhereInput>
+    eventCPCountryPhone?: XOR<CountryPhoneScalarRelationFilter, CountryPhoneWhereInput>
     ticketTransactions?: TicketTransactionListRelationFilter
   }, "id">
 
@@ -13749,10 +13870,15 @@ export namespace Prisma {
     eventName?: SortOrder
     eventFormatId?: SortOrder
     eventTopicId?: SortOrder
+    eventTag?: SortOrder
+    isPrivateEvent?: SortOrder
     organizerName?: SortOrderInput | SortOrder
     organizerLogoImgUrl?: SortOrderInput | SortOrder
-    eventDate?: SortOrder
-    eventTime?: SortOrder
+    bannerImgUrl?: SortOrderInput | SortOrder
+    eventStartDate?: SortOrder
+    eventEndDate?: SortOrder
+    eventStartTime?: SortOrder
+    eventEndTime?: SortOrder
     eventLocation?: SortOrder
     eventDesc?: SortOrderInput | SortOrder
     ticketType?: SortOrder
@@ -13765,8 +13891,9 @@ export namespace Prisma {
     ticketEndDate?: SortOrder
     eventCPName?: SortOrder
     eventCPEmail?: SortOrder
-    eventCountryPhoneId?: SortOrder
-    ticketDataFormType?: SortOrder
+    eventCPCountryPhoneId?: SortOrder
+    eventCPPhone?: SortOrder
+    idCardStatus?: SortOrder
     maxTicketPerTransaction?: SortOrder
     oneEmailOneTransaction?: SortOrder
     ticketDataFormUnique?: SortOrder
@@ -13790,10 +13917,15 @@ export namespace Prisma {
     eventName?: StringWithAggregatesFilter<"Event"> | string
     eventFormatId?: IntWithAggregatesFilter<"Event"> | number
     eventTopicId?: IntWithAggregatesFilter<"Event"> | number
+    eventTag?: StringWithAggregatesFilter<"Event"> | string
+    isPrivateEvent?: BoolWithAggregatesFilter<"Event"> | boolean
     organizerName?: StringNullableWithAggregatesFilter<"Event"> | string | null
     organizerLogoImgUrl?: StringNullableWithAggregatesFilter<"Event"> | string | null
-    eventDate?: DateTimeWithAggregatesFilter<"Event"> | Date | string
-    eventTime?: DateTimeWithAggregatesFilter<"Event"> | Date | string
+    bannerImgUrl?: StringNullableWithAggregatesFilter<"Event"> | string | null
+    eventStartDate?: StringWithAggregatesFilter<"Event"> | string
+    eventEndDate?: StringWithAggregatesFilter<"Event"> | string
+    eventStartTime?: StringWithAggregatesFilter<"Event"> | string
+    eventEndTime?: StringWithAggregatesFilter<"Event"> | string
     eventLocation?: StringWithAggregatesFilter<"Event"> | string
     eventDesc?: StringNullableWithAggregatesFilter<"Event"> | string | null
     ticketType?: EnumTicketTypeWithAggregatesFilter<"Event"> | $Enums.TicketType
@@ -13802,12 +13934,13 @@ export namespace Prisma {
     ticketPrice?: IntWithAggregatesFilter<"Event"> | number
     ticketDesc?: StringNullableWithAggregatesFilter<"Event"> | string | null
     ticketTermsAndCondition?: StringWithAggregatesFilter<"Event"> | string
-    ticketStartDate?: DateTimeWithAggregatesFilter<"Event"> | Date | string
-    ticketEndDate?: DateTimeWithAggregatesFilter<"Event"> | Date | string
+    ticketStartDate?: StringWithAggregatesFilter<"Event"> | string
+    ticketEndDate?: StringWithAggregatesFilter<"Event"> | string
     eventCPName?: StringWithAggregatesFilter<"Event"> | string
     eventCPEmail?: StringWithAggregatesFilter<"Event"> | string
-    eventCountryPhoneId?: IntWithAggregatesFilter<"Event"> | number
-    ticketDataFormType?: EnumTicketDataFormTypeWithAggregatesFilter<"Event"> | $Enums.TicketDataFormType
+    eventCPCountryPhoneId?: IntWithAggregatesFilter<"Event"> | number
+    eventCPPhone?: StringWithAggregatesFilter<"Event"> | string
+    idCardStatus?: EnumTicketIDCardWithAggregatesFilter<"Event"> | $Enums.TicketIDCard
     maxTicketPerTransaction?: IntWithAggregatesFilter<"Event"> | number
     oneEmailOneTransaction?: BoolWithAggregatesFilter<"Event"> | boolean
     ticketDataFormUnique?: BoolWithAggregatesFilter<"Event"> | boolean
@@ -14098,7 +14231,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     members?: MemberCreateNestedManyWithoutCountryPhoneInput
     creatorProfile?: CreatorProfileCreateNestedManyWithoutCountryPhoneInput
-    events?: EventCreateNestedManyWithoutEventCountryPhoneInput
+    events?: EventCreateNestedManyWithoutEventCPCountryPhoneInput
     ticketTransactionDetails?: TicketTransactionDetailCreateNestedManyWithoutOrderCountryPhoneInput
   }
 
@@ -14112,7 +14245,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     members?: MemberUncheckedCreateNestedManyWithoutCountryPhoneInput
     creatorProfile?: CreatorProfileUncheckedCreateNestedManyWithoutCountryPhoneInput
-    events?: EventUncheckedCreateNestedManyWithoutEventCountryPhoneInput
+    events?: EventUncheckedCreateNestedManyWithoutEventCPCountryPhoneInput
     ticketTransactionDetails?: TicketTransactionDetailUncheckedCreateNestedManyWithoutOrderCountryPhoneInput
   }
 
@@ -14125,7 +14258,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     members?: MemberUpdateManyWithoutCountryPhoneNestedInput
     creatorProfile?: CreatorProfileUpdateManyWithoutCountryPhoneNestedInput
-    events?: EventUpdateManyWithoutEventCountryPhoneNestedInput
+    events?: EventUpdateManyWithoutEventCPCountryPhoneNestedInput
     ticketTransactionDetails?: TicketTransactionDetailUpdateManyWithoutOrderCountryPhoneNestedInput
   }
 
@@ -14139,7 +14272,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     members?: MemberUncheckedUpdateManyWithoutCountryPhoneNestedInput
     creatorProfile?: CreatorProfileUncheckedUpdateManyWithoutCountryPhoneNestedInput
-    events?: EventUncheckedUpdateManyWithoutEventCountryPhoneNestedInput
+    events?: EventUncheckedUpdateManyWithoutEventCPCountryPhoneNestedInput
     ticketTransactionDetails?: TicketTransactionDetailUncheckedUpdateManyWithoutOrderCountryPhoneNestedInput
   }
 
@@ -14421,7 +14554,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     deletedAt?: Date | string | null
     member: MemberCreateNestedOneWithoutCreatorProfileInput
-    countryPhone: CountryPhoneCreateNestedOneWithoutCreatorProfileInput
+    countryPhone?: CountryPhoneCreateNestedOneWithoutCreatorProfileInput
     event?: EventCreateNestedManyWithoutCreatorInput
   }
 
@@ -14431,7 +14564,7 @@ export namespace Prisma {
     bannerImgUrl?: string | null
     logoImgUrl?: string | null
     profileLinkUrl: string
-    countryPhoneId: number
+    countryPhoneId?: number | null
     creatorPhoneNumber?: string | null
     address?: string | null
     aboutUsInfo?: string | null
@@ -14459,7 +14592,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     member?: MemberUpdateOneRequiredWithoutCreatorProfileNestedInput
-    countryPhone?: CountryPhoneUpdateOneRequiredWithoutCreatorProfileNestedInput
+    countryPhone?: CountryPhoneUpdateOneWithoutCreatorProfileNestedInput
     event?: EventUpdateManyWithoutCreatorNestedInput
   }
 
@@ -14469,7 +14602,7 @@ export namespace Prisma {
     bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     logoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     profileLinkUrl?: StringFieldUpdateOperationsInput | string
-    countryPhoneId?: IntFieldUpdateOperationsInput | number
+    countryPhoneId?: NullableIntFieldUpdateOperationsInput | number | null
     creatorPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     aboutUsInfo?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14488,7 +14621,7 @@ export namespace Prisma {
     bannerImgUrl?: string | null
     logoImgUrl?: string | null
     profileLinkUrl: string
-    countryPhoneId: number
+    countryPhoneId?: number | null
     creatorPhoneNumber?: string | null
     address?: string | null
     aboutUsInfo?: string | null
@@ -14522,7 +14655,7 @@ export namespace Prisma {
     bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     logoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     profileLinkUrl?: StringFieldUpdateOperationsInput | string
-    countryPhoneId?: IntFieldUpdateOperationsInput | number
+    countryPhoneId?: NullableIntFieldUpdateOperationsInput | number | null
     creatorPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     aboutUsInfo?: NullableStringFieldUpdateOperationsInput | string | null
@@ -14536,10 +14669,15 @@ export namespace Prisma {
 
   export type EventCreateInput = {
     eventName: string
+    eventTag: string
+    isPrivateEvent?: boolean
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
-    eventDate: Date | string
-    eventTime: Date | string
+    bannerImgUrl?: string | null
+    eventStartDate: string
+    eventEndDate: string
+    eventStartTime: string
+    eventEndTime: string
     eventLocation: string
     eventDesc?: string | null
     ticketType: $Enums.TicketType
@@ -14548,11 +14686,12 @@ export namespace Prisma {
     ticketPrice?: number
     ticketDesc?: string | null
     ticketTermsAndCondition: string
-    ticketStartDate: Date | string
-    ticketEndDate: Date | string
+    ticketStartDate: string
+    ticketEndDate: string
     eventCPName: string
     eventCPEmail: string
-    ticketDataFormType: $Enums.TicketDataFormType
+    eventCPPhone: string
+    idCardStatus?: $Enums.TicketIDCard
     maxTicketPerTransaction: number
     oneEmailOneTransaction?: boolean
     ticketDataFormUnique?: boolean
@@ -14563,7 +14702,7 @@ export namespace Prisma {
     creator: CreatorProfileCreateNestedOneWithoutEventInput
     eventFormat: EventFormatCreateNestedOneWithoutEventInput
     eventTopic: EventTopicCreateNestedOneWithoutEventInput
-    eventCountryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
+    eventCPCountryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
     ticketTransactions?: TicketTransactionCreateNestedManyWithoutEventInput
   }
 
@@ -14573,10 +14712,15 @@ export namespace Prisma {
     eventName: string
     eventFormatId: number
     eventTopicId: number
+    eventTag: string
+    isPrivateEvent?: boolean
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
-    eventDate: Date | string
-    eventTime: Date | string
+    bannerImgUrl?: string | null
+    eventStartDate: string
+    eventEndDate: string
+    eventStartTime: string
+    eventEndTime: string
     eventLocation: string
     eventDesc?: string | null
     ticketType: $Enums.TicketType
@@ -14585,12 +14729,13 @@ export namespace Prisma {
     ticketPrice?: number
     ticketDesc?: string | null
     ticketTermsAndCondition: string
-    ticketStartDate: Date | string
-    ticketEndDate: Date | string
+    ticketStartDate: string
+    ticketEndDate: string
     eventCPName: string
     eventCPEmail: string
-    eventCountryPhoneId: number
-    ticketDataFormType: $Enums.TicketDataFormType
+    eventCPCountryPhoneId: number
+    eventCPPhone: string
+    idCardStatus?: $Enums.TicketIDCard
     maxTicketPerTransaction: number
     oneEmailOneTransaction?: boolean
     ticketDataFormUnique?: boolean
@@ -14603,10 +14748,15 @@ export namespace Prisma {
 
   export type EventUpdateInput = {
     eventName?: StringFieldUpdateOperationsInput | string
+    eventTag?: StringFieldUpdateOperationsInput | string
+    isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventStartDate?: StringFieldUpdateOperationsInput | string
+    eventEndDate?: StringFieldUpdateOperationsInput | string
+    eventStartTime?: StringFieldUpdateOperationsInput | string
+    eventEndTime?: StringFieldUpdateOperationsInput | string
     eventLocation?: StringFieldUpdateOperationsInput | string
     eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
@@ -14615,11 +14765,12 @@ export namespace Prisma {
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
-    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketStartDate?: StringFieldUpdateOperationsInput | string
+    ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
     eventCPEmail?: StringFieldUpdateOperationsInput | string
-    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    eventCPPhone?: StringFieldUpdateOperationsInput | string
+    idCardStatus?: EnumTicketIDCardFieldUpdateOperationsInput | $Enums.TicketIDCard
     maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
     oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
     ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
@@ -14630,7 +14781,7 @@ export namespace Prisma {
     creator?: CreatorProfileUpdateOneRequiredWithoutEventNestedInput
     eventFormat?: EventFormatUpdateOneRequiredWithoutEventNestedInput
     eventTopic?: EventTopicUpdateOneRequiredWithoutEventNestedInput
-    eventCountryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
+    eventCPCountryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
     ticketTransactions?: TicketTransactionUpdateManyWithoutEventNestedInput
   }
 
@@ -14640,10 +14791,15 @@ export namespace Prisma {
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTopicId?: IntFieldUpdateOperationsInput | number
+    eventTag?: StringFieldUpdateOperationsInput | string
+    isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventStartDate?: StringFieldUpdateOperationsInput | string
+    eventEndDate?: StringFieldUpdateOperationsInput | string
+    eventStartTime?: StringFieldUpdateOperationsInput | string
+    eventEndTime?: StringFieldUpdateOperationsInput | string
     eventLocation?: StringFieldUpdateOperationsInput | string
     eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
@@ -14652,12 +14808,13 @@ export namespace Prisma {
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
-    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketStartDate?: StringFieldUpdateOperationsInput | string
+    ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
     eventCPEmail?: StringFieldUpdateOperationsInput | string
-    eventCountryPhoneId?: IntFieldUpdateOperationsInput | number
-    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    eventCPCountryPhoneId?: IntFieldUpdateOperationsInput | number
+    eventCPPhone?: StringFieldUpdateOperationsInput | string
+    idCardStatus?: EnumTicketIDCardFieldUpdateOperationsInput | $Enums.TicketIDCard
     maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
     oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
     ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
@@ -14674,10 +14831,15 @@ export namespace Prisma {
     eventName: string
     eventFormatId: number
     eventTopicId: number
+    eventTag: string
+    isPrivateEvent?: boolean
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
-    eventDate: Date | string
-    eventTime: Date | string
+    bannerImgUrl?: string | null
+    eventStartDate: string
+    eventEndDate: string
+    eventStartTime: string
+    eventEndTime: string
     eventLocation: string
     eventDesc?: string | null
     ticketType: $Enums.TicketType
@@ -14686,12 +14848,13 @@ export namespace Prisma {
     ticketPrice?: number
     ticketDesc?: string | null
     ticketTermsAndCondition: string
-    ticketStartDate: Date | string
-    ticketEndDate: Date | string
+    ticketStartDate: string
+    ticketEndDate: string
     eventCPName: string
     eventCPEmail: string
-    eventCountryPhoneId: number
-    ticketDataFormType: $Enums.TicketDataFormType
+    eventCPCountryPhoneId: number
+    eventCPPhone: string
+    idCardStatus?: $Enums.TicketIDCard
     maxTicketPerTransaction: number
     oneEmailOneTransaction?: boolean
     ticketDataFormUnique?: boolean
@@ -14703,10 +14866,15 @@ export namespace Prisma {
 
   export type EventUpdateManyMutationInput = {
     eventName?: StringFieldUpdateOperationsInput | string
+    eventTag?: StringFieldUpdateOperationsInput | string
+    isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventStartDate?: StringFieldUpdateOperationsInput | string
+    eventEndDate?: StringFieldUpdateOperationsInput | string
+    eventStartTime?: StringFieldUpdateOperationsInput | string
+    eventEndTime?: StringFieldUpdateOperationsInput | string
     eventLocation?: StringFieldUpdateOperationsInput | string
     eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
@@ -14715,11 +14883,12 @@ export namespace Prisma {
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
-    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketStartDate?: StringFieldUpdateOperationsInput | string
+    ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
     eventCPEmail?: StringFieldUpdateOperationsInput | string
-    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    eventCPPhone?: StringFieldUpdateOperationsInput | string
+    idCardStatus?: EnumTicketIDCardFieldUpdateOperationsInput | $Enums.TicketIDCard
     maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
     oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
     ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
@@ -14735,10 +14904,15 @@ export namespace Prisma {
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTopicId?: IntFieldUpdateOperationsInput | number
+    eventTag?: StringFieldUpdateOperationsInput | string
+    isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventStartDate?: StringFieldUpdateOperationsInput | string
+    eventEndDate?: StringFieldUpdateOperationsInput | string
+    eventStartTime?: StringFieldUpdateOperationsInput | string
+    eventEndTime?: StringFieldUpdateOperationsInput | string
     eventLocation?: StringFieldUpdateOperationsInput | string
     eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
@@ -14747,12 +14921,13 @@ export namespace Prisma {
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
-    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketStartDate?: StringFieldUpdateOperationsInput | string
+    ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
     eventCPEmail?: StringFieldUpdateOperationsInput | string
-    eventCountryPhoneId?: IntFieldUpdateOperationsInput | number
-    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    eventCPCountryPhoneId?: IntFieldUpdateOperationsInput | number
+    eventCPPhone?: StringFieldUpdateOperationsInput | string
+    idCardStatus?: EnumTicketIDCardFieldUpdateOperationsInput | $Enums.TicketIDCard
     maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
     oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
     ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
@@ -15451,9 +15626,25 @@ export namespace Prisma {
     _max?: NestedEnumCodeTypeFilter<$PrismaModel>
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type MemberScalarRelationFilter = {
     is?: MemberWhereInput
     isNot?: MemberWhereInput
+  }
+
+  export type CountryPhoneNullableScalarRelationFilter = {
+    is?: CountryPhoneWhereInput | null
+    isNot?: CountryPhoneWhereInput | null
   }
 
   export type CreatorProfileCountOrderByAggregateInput = {
@@ -15518,6 +15709,22 @@ export namespace Prisma {
     countryPhoneId?: SortOrder
   }
 
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
   export type EnumTicketTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.TicketType | EnumTicketTypeFieldRefInput<$PrismaModel>
     in?: $Enums.TicketType[] | ListEnumTicketTypeFieldRefInput<$PrismaModel>
@@ -15525,11 +15732,11 @@ export namespace Prisma {
     not?: NestedEnumTicketTypeFilter<$PrismaModel> | $Enums.TicketType
   }
 
-  export type EnumTicketDataFormTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.TicketDataFormType | EnumTicketDataFormTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.TicketDataFormType[] | ListEnumTicketDataFormTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TicketDataFormType[] | ListEnumTicketDataFormTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumTicketDataFormTypeFilter<$PrismaModel> | $Enums.TicketDataFormType
+  export type EnumTicketIDCardFilter<$PrismaModel = never> = {
+    equals?: $Enums.TicketIDCard | EnumTicketIDCardFieldRefInput<$PrismaModel>
+    in?: $Enums.TicketIDCard[] | ListEnumTicketIDCardFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TicketIDCard[] | ListEnumTicketIDCardFieldRefInput<$PrismaModel>
+    not?: NestedEnumTicketIDCardFilter<$PrismaModel> | $Enums.TicketIDCard
   }
 
   export type BoolNullableFilter<$PrismaModel = never> = {
@@ -15558,10 +15765,15 @@ export namespace Prisma {
     eventName?: SortOrder
     eventFormatId?: SortOrder
     eventTopicId?: SortOrder
+    eventTag?: SortOrder
+    isPrivateEvent?: SortOrder
     organizerName?: SortOrder
     organizerLogoImgUrl?: SortOrder
-    eventDate?: SortOrder
-    eventTime?: SortOrder
+    bannerImgUrl?: SortOrder
+    eventStartDate?: SortOrder
+    eventEndDate?: SortOrder
+    eventStartTime?: SortOrder
+    eventEndTime?: SortOrder
     eventLocation?: SortOrder
     eventDesc?: SortOrder
     ticketType?: SortOrder
@@ -15574,8 +15786,9 @@ export namespace Prisma {
     ticketEndDate?: SortOrder
     eventCPName?: SortOrder
     eventCPEmail?: SortOrder
-    eventCountryPhoneId?: SortOrder
-    ticketDataFormType?: SortOrder
+    eventCPCountryPhoneId?: SortOrder
+    eventCPPhone?: SortOrder
+    idCardStatus?: SortOrder
     maxTicketPerTransaction?: SortOrder
     oneEmailOneTransaction?: SortOrder
     ticketDataFormUnique?: SortOrder
@@ -15591,7 +15804,7 @@ export namespace Prisma {
     eventTopicId?: SortOrder
     ticketQty?: SortOrder
     ticketPrice?: SortOrder
-    eventCountryPhoneId?: SortOrder
+    eventCPCountryPhoneId?: SortOrder
     maxTicketPerTransaction?: SortOrder
   }
 
@@ -15601,10 +15814,15 @@ export namespace Prisma {
     eventName?: SortOrder
     eventFormatId?: SortOrder
     eventTopicId?: SortOrder
+    eventTag?: SortOrder
+    isPrivateEvent?: SortOrder
     organizerName?: SortOrder
     organizerLogoImgUrl?: SortOrder
-    eventDate?: SortOrder
-    eventTime?: SortOrder
+    bannerImgUrl?: SortOrder
+    eventStartDate?: SortOrder
+    eventEndDate?: SortOrder
+    eventStartTime?: SortOrder
+    eventEndTime?: SortOrder
     eventLocation?: SortOrder
     eventDesc?: SortOrder
     ticketType?: SortOrder
@@ -15617,8 +15835,9 @@ export namespace Prisma {
     ticketEndDate?: SortOrder
     eventCPName?: SortOrder
     eventCPEmail?: SortOrder
-    eventCountryPhoneId?: SortOrder
-    ticketDataFormType?: SortOrder
+    eventCPCountryPhoneId?: SortOrder
+    eventCPPhone?: SortOrder
+    idCardStatus?: SortOrder
     maxTicketPerTransaction?: SortOrder
     oneEmailOneTransaction?: SortOrder
     ticketDataFormUnique?: SortOrder
@@ -15634,10 +15853,15 @@ export namespace Prisma {
     eventName?: SortOrder
     eventFormatId?: SortOrder
     eventTopicId?: SortOrder
+    eventTag?: SortOrder
+    isPrivateEvent?: SortOrder
     organizerName?: SortOrder
     organizerLogoImgUrl?: SortOrder
-    eventDate?: SortOrder
-    eventTime?: SortOrder
+    bannerImgUrl?: SortOrder
+    eventStartDate?: SortOrder
+    eventEndDate?: SortOrder
+    eventStartTime?: SortOrder
+    eventEndTime?: SortOrder
     eventLocation?: SortOrder
     eventDesc?: SortOrder
     ticketType?: SortOrder
@@ -15650,8 +15874,9 @@ export namespace Prisma {
     ticketEndDate?: SortOrder
     eventCPName?: SortOrder
     eventCPEmail?: SortOrder
-    eventCountryPhoneId?: SortOrder
-    ticketDataFormType?: SortOrder
+    eventCPCountryPhoneId?: SortOrder
+    eventCPPhone?: SortOrder
+    idCardStatus?: SortOrder
     maxTicketPerTransaction?: SortOrder
     oneEmailOneTransaction?: SortOrder
     ticketDataFormUnique?: SortOrder
@@ -15667,7 +15892,7 @@ export namespace Prisma {
     eventTopicId?: SortOrder
     ticketQty?: SortOrder
     ticketPrice?: SortOrder
-    eventCountryPhoneId?: SortOrder
+    eventCPCountryPhoneId?: SortOrder
     maxTicketPerTransaction?: SortOrder
   }
 
@@ -15681,14 +15906,14 @@ export namespace Prisma {
     _max?: NestedEnumTicketTypeFilter<$PrismaModel>
   }
 
-  export type EnumTicketDataFormTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TicketDataFormType | EnumTicketDataFormTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.TicketDataFormType[] | ListEnumTicketDataFormTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TicketDataFormType[] | ListEnumTicketDataFormTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumTicketDataFormTypeWithAggregatesFilter<$PrismaModel> | $Enums.TicketDataFormType
+  export type EnumTicketIDCardWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TicketIDCard | EnumTicketIDCardFieldRefInput<$PrismaModel>
+    in?: $Enums.TicketIDCard[] | ListEnumTicketIDCardFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TicketIDCard[] | ListEnumTicketIDCardFieldRefInput<$PrismaModel>
+    not?: NestedEnumTicketIDCardWithAggregatesFilter<$PrismaModel> | $Enums.TicketIDCard
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTicketDataFormTypeFilter<$PrismaModel>
-    _max?: NestedEnumTicketDataFormTypeFilter<$PrismaModel>
+    _min?: NestedEnumTicketIDCardFilter<$PrismaModel>
+    _max?: NestedEnumTicketIDCardFilter<$PrismaModel>
   }
 
   export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -15878,10 +16103,10 @@ export namespace Prisma {
     connect?: CreatorProfileWhereUniqueInput | CreatorProfileWhereUniqueInput[]
   }
 
-  export type EventCreateNestedManyWithoutEventCountryPhoneInput = {
-    create?: XOR<EventCreateWithoutEventCountryPhoneInput, EventUncheckedCreateWithoutEventCountryPhoneInput> | EventCreateWithoutEventCountryPhoneInput[] | EventUncheckedCreateWithoutEventCountryPhoneInput[]
-    connectOrCreate?: EventCreateOrConnectWithoutEventCountryPhoneInput | EventCreateOrConnectWithoutEventCountryPhoneInput[]
-    createMany?: EventCreateManyEventCountryPhoneInputEnvelope
+  export type EventCreateNestedManyWithoutEventCPCountryPhoneInput = {
+    create?: XOR<EventCreateWithoutEventCPCountryPhoneInput, EventUncheckedCreateWithoutEventCPCountryPhoneInput> | EventCreateWithoutEventCPCountryPhoneInput[] | EventUncheckedCreateWithoutEventCPCountryPhoneInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutEventCPCountryPhoneInput | EventCreateOrConnectWithoutEventCPCountryPhoneInput[]
+    createMany?: EventCreateManyEventCPCountryPhoneInputEnvelope
     connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
   }
 
@@ -15906,10 +16131,10 @@ export namespace Prisma {
     connect?: CreatorProfileWhereUniqueInput | CreatorProfileWhereUniqueInput[]
   }
 
-  export type EventUncheckedCreateNestedManyWithoutEventCountryPhoneInput = {
-    create?: XOR<EventCreateWithoutEventCountryPhoneInput, EventUncheckedCreateWithoutEventCountryPhoneInput> | EventCreateWithoutEventCountryPhoneInput[] | EventUncheckedCreateWithoutEventCountryPhoneInput[]
-    connectOrCreate?: EventCreateOrConnectWithoutEventCountryPhoneInput | EventCreateOrConnectWithoutEventCountryPhoneInput[]
-    createMany?: EventCreateManyEventCountryPhoneInputEnvelope
+  export type EventUncheckedCreateNestedManyWithoutEventCPCountryPhoneInput = {
+    create?: XOR<EventCreateWithoutEventCPCountryPhoneInput, EventUncheckedCreateWithoutEventCPCountryPhoneInput> | EventCreateWithoutEventCPCountryPhoneInput[] | EventUncheckedCreateWithoutEventCPCountryPhoneInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutEventCPCountryPhoneInput | EventCreateOrConnectWithoutEventCPCountryPhoneInput[]
+    createMany?: EventCreateManyEventCPCountryPhoneInputEnvelope
     connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
   }
 
@@ -15960,17 +16185,17 @@ export namespace Prisma {
     deleteMany?: CreatorProfileScalarWhereInput | CreatorProfileScalarWhereInput[]
   }
 
-  export type EventUpdateManyWithoutEventCountryPhoneNestedInput = {
-    create?: XOR<EventCreateWithoutEventCountryPhoneInput, EventUncheckedCreateWithoutEventCountryPhoneInput> | EventCreateWithoutEventCountryPhoneInput[] | EventUncheckedCreateWithoutEventCountryPhoneInput[]
-    connectOrCreate?: EventCreateOrConnectWithoutEventCountryPhoneInput | EventCreateOrConnectWithoutEventCountryPhoneInput[]
-    upsert?: EventUpsertWithWhereUniqueWithoutEventCountryPhoneInput | EventUpsertWithWhereUniqueWithoutEventCountryPhoneInput[]
-    createMany?: EventCreateManyEventCountryPhoneInputEnvelope
+  export type EventUpdateManyWithoutEventCPCountryPhoneNestedInput = {
+    create?: XOR<EventCreateWithoutEventCPCountryPhoneInput, EventUncheckedCreateWithoutEventCPCountryPhoneInput> | EventCreateWithoutEventCPCountryPhoneInput[] | EventUncheckedCreateWithoutEventCPCountryPhoneInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutEventCPCountryPhoneInput | EventCreateOrConnectWithoutEventCPCountryPhoneInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutEventCPCountryPhoneInput | EventUpsertWithWhereUniqueWithoutEventCPCountryPhoneInput[]
+    createMany?: EventCreateManyEventCPCountryPhoneInputEnvelope
     set?: EventWhereUniqueInput | EventWhereUniqueInput[]
     disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
     delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
     connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
-    update?: EventUpdateWithWhereUniqueWithoutEventCountryPhoneInput | EventUpdateWithWhereUniqueWithoutEventCountryPhoneInput[]
-    updateMany?: EventUpdateManyWithWhereWithoutEventCountryPhoneInput | EventUpdateManyWithWhereWithoutEventCountryPhoneInput[]
+    update?: EventUpdateWithWhereUniqueWithoutEventCPCountryPhoneInput | EventUpdateWithWhereUniqueWithoutEventCPCountryPhoneInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutEventCPCountryPhoneInput | EventUpdateManyWithWhereWithoutEventCPCountryPhoneInput[]
     deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
   }
 
@@ -16024,17 +16249,17 @@ export namespace Prisma {
     deleteMany?: CreatorProfileScalarWhereInput | CreatorProfileScalarWhereInput[]
   }
 
-  export type EventUncheckedUpdateManyWithoutEventCountryPhoneNestedInput = {
-    create?: XOR<EventCreateWithoutEventCountryPhoneInput, EventUncheckedCreateWithoutEventCountryPhoneInput> | EventCreateWithoutEventCountryPhoneInput[] | EventUncheckedCreateWithoutEventCountryPhoneInput[]
-    connectOrCreate?: EventCreateOrConnectWithoutEventCountryPhoneInput | EventCreateOrConnectWithoutEventCountryPhoneInput[]
-    upsert?: EventUpsertWithWhereUniqueWithoutEventCountryPhoneInput | EventUpsertWithWhereUniqueWithoutEventCountryPhoneInput[]
-    createMany?: EventCreateManyEventCountryPhoneInputEnvelope
+  export type EventUncheckedUpdateManyWithoutEventCPCountryPhoneNestedInput = {
+    create?: XOR<EventCreateWithoutEventCPCountryPhoneInput, EventUncheckedCreateWithoutEventCPCountryPhoneInput> | EventCreateWithoutEventCPCountryPhoneInput[] | EventUncheckedCreateWithoutEventCPCountryPhoneInput[]
+    connectOrCreate?: EventCreateOrConnectWithoutEventCPCountryPhoneInput | EventCreateOrConnectWithoutEventCPCountryPhoneInput[]
+    upsert?: EventUpsertWithWhereUniqueWithoutEventCPCountryPhoneInput | EventUpsertWithWhereUniqueWithoutEventCPCountryPhoneInput[]
+    createMany?: EventCreateManyEventCPCountryPhoneInputEnvelope
     set?: EventWhereUniqueInput | EventWhereUniqueInput[]
     disconnect?: EventWhereUniqueInput | EventWhereUniqueInput[]
     delete?: EventWhereUniqueInput | EventWhereUniqueInput[]
     connect?: EventWhereUniqueInput | EventWhereUniqueInput[]
-    update?: EventUpdateWithWhereUniqueWithoutEventCountryPhoneInput | EventUpdateWithWhereUniqueWithoutEventCountryPhoneInput[]
-    updateMany?: EventUpdateManyWithWhereWithoutEventCountryPhoneInput | EventUpdateManyWithWhereWithoutEventCountryPhoneInput[]
+    update?: EventUpdateWithWhereUniqueWithoutEventCPCountryPhoneInput | EventUpdateWithWhereUniqueWithoutEventCPCountryPhoneInput[]
+    updateMany?: EventUpdateManyWithWhereWithoutEventCPCountryPhoneInput | EventUpdateManyWithWhereWithoutEventCPCountryPhoneInput[]
     deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
   }
 
@@ -16248,10 +16473,12 @@ export namespace Prisma {
     update?: XOR<XOR<MemberUpdateToOneWithWhereWithoutCreatorProfileInput, MemberUpdateWithoutCreatorProfileInput>, MemberUncheckedUpdateWithoutCreatorProfileInput>
   }
 
-  export type CountryPhoneUpdateOneRequiredWithoutCreatorProfileNestedInput = {
+  export type CountryPhoneUpdateOneWithoutCreatorProfileNestedInput = {
     create?: XOR<CountryPhoneCreateWithoutCreatorProfileInput, CountryPhoneUncheckedCreateWithoutCreatorProfileInput>
     connectOrCreate?: CountryPhoneCreateOrConnectWithoutCreatorProfileInput
     upsert?: CountryPhoneUpsertWithoutCreatorProfileInput
+    disconnect?: CountryPhoneWhereInput | boolean
+    delete?: CountryPhoneWhereInput | boolean
     connect?: CountryPhoneWhereUniqueInput
     update?: XOR<XOR<CountryPhoneUpdateToOneWithWhereWithoutCreatorProfileInput, CountryPhoneUpdateWithoutCreatorProfileInput>, CountryPhoneUncheckedUpdateWithoutCreatorProfileInput>
   }
@@ -16268,6 +16495,14 @@ export namespace Prisma {
     update?: EventUpdateWithWhereUniqueWithoutCreatorInput | EventUpdateWithWhereUniqueWithoutCreatorInput[]
     updateMany?: EventUpdateManyWithWhereWithoutCreatorInput | EventUpdateManyWithWhereWithoutCreatorInput[]
     deleteMany?: EventScalarWhereInput | EventScalarWhereInput[]
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type EventUncheckedUpdateManyWithoutCreatorNestedInput = {
@@ -16326,8 +16561,8 @@ export namespace Prisma {
     set?: $Enums.TicketType
   }
 
-  export type EnumTicketDataFormTypeFieldUpdateOperationsInput = {
-    set?: $Enums.TicketDataFormType
+  export type EnumTicketIDCardFieldUpdateOperationsInput = {
+    set?: $Enums.TicketIDCard
   }
 
   export type NullableBoolFieldUpdateOperationsInput = {
@@ -16784,6 +17019,33 @@ export namespace Prisma {
     _max?: NestedEnumCodeTypeFilter<$PrismaModel>
   }
 
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedEnumTicketTypeFilter<$PrismaModel = never> = {
     equals?: $Enums.TicketType | EnumTicketTypeFieldRefInput<$PrismaModel>
     in?: $Enums.TicketType[] | ListEnumTicketTypeFieldRefInput<$PrismaModel>
@@ -16791,11 +17053,11 @@ export namespace Prisma {
     not?: NestedEnumTicketTypeFilter<$PrismaModel> | $Enums.TicketType
   }
 
-  export type NestedEnumTicketDataFormTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.TicketDataFormType | EnumTicketDataFormTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.TicketDataFormType[] | ListEnumTicketDataFormTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TicketDataFormType[] | ListEnumTicketDataFormTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumTicketDataFormTypeFilter<$PrismaModel> | $Enums.TicketDataFormType
+  export type NestedEnumTicketIDCardFilter<$PrismaModel = never> = {
+    equals?: $Enums.TicketIDCard | EnumTicketIDCardFieldRefInput<$PrismaModel>
+    in?: $Enums.TicketIDCard[] | ListEnumTicketIDCardFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TicketIDCard[] | ListEnumTicketIDCardFieldRefInput<$PrismaModel>
+    not?: NestedEnumTicketIDCardFilter<$PrismaModel> | $Enums.TicketIDCard
   }
 
   export type NestedBoolNullableFilter<$PrismaModel = never> = {
@@ -16813,14 +17075,14 @@ export namespace Prisma {
     _max?: NestedEnumTicketTypeFilter<$PrismaModel>
   }
 
-  export type NestedEnumTicketDataFormTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TicketDataFormType | EnumTicketDataFormTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.TicketDataFormType[] | ListEnumTicketDataFormTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.TicketDataFormType[] | ListEnumTicketDataFormTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumTicketDataFormTypeWithAggregatesFilter<$PrismaModel> | $Enums.TicketDataFormType
+  export type NestedEnumTicketIDCardWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TicketIDCard | EnumTicketIDCardFieldRefInput<$PrismaModel>
+    in?: $Enums.TicketIDCard[] | ListEnumTicketIDCardFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TicketIDCard[] | ListEnumTicketIDCardFieldRefInput<$PrismaModel>
+    not?: NestedEnumTicketIDCardWithAggregatesFilter<$PrismaModel> | $Enums.TicketIDCard
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTicketDataFormTypeFilter<$PrismaModel>
-    _max?: NestedEnumTicketDataFormTypeFilter<$PrismaModel>
+    _min?: NestedEnumTicketIDCardFilter<$PrismaModel>
+    _max?: NestedEnumTicketIDCardFilter<$PrismaModel>
   }
 
   export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -16927,12 +17189,17 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type EventCreateWithoutEventCountryPhoneInput = {
+  export type EventCreateWithoutEventCPCountryPhoneInput = {
     eventName: string
+    eventTag: string
+    isPrivateEvent?: boolean
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
-    eventDate: Date | string
-    eventTime: Date | string
+    bannerImgUrl?: string | null
+    eventStartDate: string
+    eventEndDate: string
+    eventStartTime: string
+    eventEndTime: string
     eventLocation: string
     eventDesc?: string | null
     ticketType: $Enums.TicketType
@@ -16941,11 +17208,12 @@ export namespace Prisma {
     ticketPrice?: number
     ticketDesc?: string | null
     ticketTermsAndCondition: string
-    ticketStartDate: Date | string
-    ticketEndDate: Date | string
+    ticketStartDate: string
+    ticketEndDate: string
     eventCPName: string
     eventCPEmail: string
-    ticketDataFormType: $Enums.TicketDataFormType
+    eventCPPhone: string
+    idCardStatus?: $Enums.TicketIDCard
     maxTicketPerTransaction: number
     oneEmailOneTransaction?: boolean
     ticketDataFormUnique?: boolean
@@ -16959,16 +17227,21 @@ export namespace Prisma {
     ticketTransactions?: TicketTransactionCreateNestedManyWithoutEventInput
   }
 
-  export type EventUncheckedCreateWithoutEventCountryPhoneInput = {
+  export type EventUncheckedCreateWithoutEventCPCountryPhoneInput = {
     id?: number
     creatorId: string
     eventName: string
     eventFormatId: number
     eventTopicId: number
+    eventTag: string
+    isPrivateEvent?: boolean
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
-    eventDate: Date | string
-    eventTime: Date | string
+    bannerImgUrl?: string | null
+    eventStartDate: string
+    eventEndDate: string
+    eventStartTime: string
+    eventEndTime: string
     eventLocation: string
     eventDesc?: string | null
     ticketType: $Enums.TicketType
@@ -16977,11 +17250,12 @@ export namespace Prisma {
     ticketPrice?: number
     ticketDesc?: string | null
     ticketTermsAndCondition: string
-    ticketStartDate: Date | string
-    ticketEndDate: Date | string
+    ticketStartDate: string
+    ticketEndDate: string
     eventCPName: string
     eventCPEmail: string
-    ticketDataFormType: $Enums.TicketDataFormType
+    eventCPPhone: string
+    idCardStatus?: $Enums.TicketIDCard
     maxTicketPerTransaction: number
     oneEmailOneTransaction?: boolean
     ticketDataFormUnique?: boolean
@@ -16992,13 +17266,13 @@ export namespace Prisma {
     ticketTransactions?: TicketTransactionUncheckedCreateNestedManyWithoutEventInput
   }
 
-  export type EventCreateOrConnectWithoutEventCountryPhoneInput = {
+  export type EventCreateOrConnectWithoutEventCPCountryPhoneInput = {
     where: EventWhereUniqueInput
-    create: XOR<EventCreateWithoutEventCountryPhoneInput, EventUncheckedCreateWithoutEventCountryPhoneInput>
+    create: XOR<EventCreateWithoutEventCPCountryPhoneInput, EventUncheckedCreateWithoutEventCPCountryPhoneInput>
   }
 
-  export type EventCreateManyEventCountryPhoneInputEnvelope = {
-    data: EventCreateManyEventCountryPhoneInput | EventCreateManyEventCountryPhoneInput[]
+  export type EventCreateManyEventCPCountryPhoneInputEnvelope = {
+    data: EventCreateManyEventCPCountryPhoneInput | EventCreateManyEventCPCountryPhoneInput[]
     skipDuplicates?: boolean
   }
 
@@ -17097,7 +17371,7 @@ export namespace Prisma {
     bannerImgUrl?: StringNullableFilter<"CreatorProfile"> | string | null
     logoImgUrl?: StringNullableFilter<"CreatorProfile"> | string | null
     profileLinkUrl?: StringFilter<"CreatorProfile"> | string
-    countryPhoneId?: IntFilter<"CreatorProfile"> | number
+    countryPhoneId?: IntNullableFilter<"CreatorProfile"> | number | null
     creatorPhoneNumber?: StringNullableFilter<"CreatorProfile"> | string | null
     address?: StringNullableFilter<"CreatorProfile"> | string | null
     aboutUsInfo?: StringNullableFilter<"CreatorProfile"> | string | null
@@ -17109,20 +17383,20 @@ export namespace Prisma {
     deletedAt?: DateTimeNullableFilter<"CreatorProfile"> | Date | string | null
   }
 
-  export type EventUpsertWithWhereUniqueWithoutEventCountryPhoneInput = {
+  export type EventUpsertWithWhereUniqueWithoutEventCPCountryPhoneInput = {
     where: EventWhereUniqueInput
-    update: XOR<EventUpdateWithoutEventCountryPhoneInput, EventUncheckedUpdateWithoutEventCountryPhoneInput>
-    create: XOR<EventCreateWithoutEventCountryPhoneInput, EventUncheckedCreateWithoutEventCountryPhoneInput>
+    update: XOR<EventUpdateWithoutEventCPCountryPhoneInput, EventUncheckedUpdateWithoutEventCPCountryPhoneInput>
+    create: XOR<EventCreateWithoutEventCPCountryPhoneInput, EventUncheckedCreateWithoutEventCPCountryPhoneInput>
   }
 
-  export type EventUpdateWithWhereUniqueWithoutEventCountryPhoneInput = {
+  export type EventUpdateWithWhereUniqueWithoutEventCPCountryPhoneInput = {
     where: EventWhereUniqueInput
-    data: XOR<EventUpdateWithoutEventCountryPhoneInput, EventUncheckedUpdateWithoutEventCountryPhoneInput>
+    data: XOR<EventUpdateWithoutEventCPCountryPhoneInput, EventUncheckedUpdateWithoutEventCPCountryPhoneInput>
   }
 
-  export type EventUpdateManyWithWhereWithoutEventCountryPhoneInput = {
+  export type EventUpdateManyWithWhereWithoutEventCPCountryPhoneInput = {
     where: EventScalarWhereInput
-    data: XOR<EventUpdateManyMutationInput, EventUncheckedUpdateManyWithoutEventCountryPhoneInput>
+    data: XOR<EventUpdateManyMutationInput, EventUncheckedUpdateManyWithoutEventCPCountryPhoneInput>
   }
 
   export type EventScalarWhereInput = {
@@ -17134,10 +17408,15 @@ export namespace Prisma {
     eventName?: StringFilter<"Event"> | string
     eventFormatId?: IntFilter<"Event"> | number
     eventTopicId?: IntFilter<"Event"> | number
+    eventTag?: StringFilter<"Event"> | string
+    isPrivateEvent?: BoolFilter<"Event"> | boolean
     organizerName?: StringNullableFilter<"Event"> | string | null
     organizerLogoImgUrl?: StringNullableFilter<"Event"> | string | null
-    eventDate?: DateTimeFilter<"Event"> | Date | string
-    eventTime?: DateTimeFilter<"Event"> | Date | string
+    bannerImgUrl?: StringNullableFilter<"Event"> | string | null
+    eventStartDate?: StringFilter<"Event"> | string
+    eventEndDate?: StringFilter<"Event"> | string
+    eventStartTime?: StringFilter<"Event"> | string
+    eventEndTime?: StringFilter<"Event"> | string
     eventLocation?: StringFilter<"Event"> | string
     eventDesc?: StringNullableFilter<"Event"> | string | null
     ticketType?: EnumTicketTypeFilter<"Event"> | $Enums.TicketType
@@ -17146,12 +17425,13 @@ export namespace Prisma {
     ticketPrice?: IntFilter<"Event"> | number
     ticketDesc?: StringNullableFilter<"Event"> | string | null
     ticketTermsAndCondition?: StringFilter<"Event"> | string
-    ticketStartDate?: DateTimeFilter<"Event"> | Date | string
-    ticketEndDate?: DateTimeFilter<"Event"> | Date | string
+    ticketStartDate?: StringFilter<"Event"> | string
+    ticketEndDate?: StringFilter<"Event"> | string
     eventCPName?: StringFilter<"Event"> | string
     eventCPEmail?: StringFilter<"Event"> | string
-    eventCountryPhoneId?: IntFilter<"Event"> | number
-    ticketDataFormType?: EnumTicketDataFormTypeFilter<"Event"> | $Enums.TicketDataFormType
+    eventCPCountryPhoneId?: IntFilter<"Event"> | number
+    eventCPPhone?: StringFilter<"Event"> | string
+    idCardStatus?: EnumTicketIDCardFilter<"Event"> | $Enums.TicketIDCard
     maxTicketPerTransaction?: IntFilter<"Event"> | number
     oneEmailOneTransaction?: BoolFilter<"Event"> | boolean
     ticketDataFormUnique?: BoolFilter<"Event"> | boolean
@@ -17201,7 +17481,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     deletedAt?: Date | string | null
     creatorProfile?: CreatorProfileCreateNestedManyWithoutCountryPhoneInput
-    events?: EventCreateNestedManyWithoutEventCountryPhoneInput
+    events?: EventCreateNestedManyWithoutEventCPCountryPhoneInput
     ticketTransactionDetails?: TicketTransactionDetailCreateNestedManyWithoutOrderCountryPhoneInput
   }
 
@@ -17214,7 +17494,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     deletedAt?: Date | string | null
     creatorProfile?: CreatorProfileUncheckedCreateNestedManyWithoutCountryPhoneInput
-    events?: EventUncheckedCreateNestedManyWithoutEventCountryPhoneInput
+    events?: EventUncheckedCreateNestedManyWithoutEventCPCountryPhoneInput
     ticketTransactionDetails?: TicketTransactionDetailUncheckedCreateNestedManyWithoutOrderCountryPhoneInput
   }
 
@@ -17273,7 +17553,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
-    countryPhone: CountryPhoneCreateNestedOneWithoutCreatorProfileInput
+    countryPhone?: CountryPhoneCreateNestedOneWithoutCreatorProfileInput
     event?: EventCreateNestedManyWithoutCreatorInput
   }
 
@@ -17282,7 +17562,7 @@ export namespace Prisma {
     bannerImgUrl?: string | null
     logoImgUrl?: string | null
     profileLinkUrl: string
-    countryPhoneId: number
+    countryPhoneId?: number | null
     creatorPhoneNumber?: string | null
     address?: string | null
     aboutUsInfo?: string | null
@@ -17348,7 +17628,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creatorProfile?: CreatorProfileUpdateManyWithoutCountryPhoneNestedInput
-    events?: EventUpdateManyWithoutEventCountryPhoneNestedInput
+    events?: EventUpdateManyWithoutEventCPCountryPhoneNestedInput
     ticketTransactionDetails?: TicketTransactionDetailUpdateManyWithoutOrderCountryPhoneNestedInput
   }
 
@@ -17361,7 +17641,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creatorProfile?: CreatorProfileUncheckedUpdateManyWithoutCountryPhoneNestedInput
-    events?: EventUncheckedUpdateManyWithoutEventCountryPhoneNestedInput
+    events?: EventUncheckedUpdateManyWithoutEventCPCountryPhoneNestedInput
     ticketTransactionDetails?: TicketTransactionDetailUncheckedUpdateManyWithoutOrderCountryPhoneNestedInput
   }
 
@@ -17423,7 +17703,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    countryPhone?: CountryPhoneUpdateOneRequiredWithoutCreatorProfileNestedInput
+    countryPhone?: CountryPhoneUpdateOneWithoutCreatorProfileNestedInput
     event?: EventUpdateManyWithoutCreatorNestedInput
   }
 
@@ -17432,7 +17712,7 @@ export namespace Prisma {
     bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     logoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     profileLinkUrl?: StringFieldUpdateOperationsInput | string
-    countryPhoneId?: IntFieldUpdateOperationsInput | number
+    countryPhoneId?: NullableIntFieldUpdateOperationsInput | number | null
     creatorPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     aboutUsInfo?: NullableStringFieldUpdateOperationsInput | string | null
@@ -17623,7 +17903,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     deletedAt?: Date | string | null
     members?: MemberCreateNestedManyWithoutCountryPhoneInput
-    events?: EventCreateNestedManyWithoutEventCountryPhoneInput
+    events?: EventCreateNestedManyWithoutEventCPCountryPhoneInput
     ticketTransactionDetails?: TicketTransactionDetailCreateNestedManyWithoutOrderCountryPhoneInput
   }
 
@@ -17636,7 +17916,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     deletedAt?: Date | string | null
     members?: MemberUncheckedCreateNestedManyWithoutCountryPhoneInput
-    events?: EventUncheckedCreateNestedManyWithoutEventCountryPhoneInput
+    events?: EventUncheckedCreateNestedManyWithoutEventCPCountryPhoneInput
     ticketTransactionDetails?: TicketTransactionDetailUncheckedCreateNestedManyWithoutOrderCountryPhoneInput
   }
 
@@ -17647,10 +17927,15 @@ export namespace Prisma {
 
   export type EventCreateWithoutCreatorInput = {
     eventName: string
+    eventTag: string
+    isPrivateEvent?: boolean
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
-    eventDate: Date | string
-    eventTime: Date | string
+    bannerImgUrl?: string | null
+    eventStartDate: string
+    eventEndDate: string
+    eventStartTime: string
+    eventEndTime: string
     eventLocation: string
     eventDesc?: string | null
     ticketType: $Enums.TicketType
@@ -17659,11 +17944,12 @@ export namespace Prisma {
     ticketPrice?: number
     ticketDesc?: string | null
     ticketTermsAndCondition: string
-    ticketStartDate: Date | string
-    ticketEndDate: Date | string
+    ticketStartDate: string
+    ticketEndDate: string
     eventCPName: string
     eventCPEmail: string
-    ticketDataFormType: $Enums.TicketDataFormType
+    eventCPPhone: string
+    idCardStatus?: $Enums.TicketIDCard
     maxTicketPerTransaction: number
     oneEmailOneTransaction?: boolean
     ticketDataFormUnique?: boolean
@@ -17673,7 +17959,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     eventFormat: EventFormatCreateNestedOneWithoutEventInput
     eventTopic: EventTopicCreateNestedOneWithoutEventInput
-    eventCountryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
+    eventCPCountryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
     ticketTransactions?: TicketTransactionCreateNestedManyWithoutEventInput
   }
 
@@ -17682,10 +17968,15 @@ export namespace Prisma {
     eventName: string
     eventFormatId: number
     eventTopicId: number
+    eventTag: string
+    isPrivateEvent?: boolean
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
-    eventDate: Date | string
-    eventTime: Date | string
+    bannerImgUrl?: string | null
+    eventStartDate: string
+    eventEndDate: string
+    eventStartTime: string
+    eventEndTime: string
     eventLocation: string
     eventDesc?: string | null
     ticketType: $Enums.TicketType
@@ -17694,12 +17985,13 @@ export namespace Prisma {
     ticketPrice?: number
     ticketDesc?: string | null
     ticketTermsAndCondition: string
-    ticketStartDate: Date | string
-    ticketEndDate: Date | string
+    ticketStartDate: string
+    ticketEndDate: string
     eventCPName: string
     eventCPEmail: string
-    eventCountryPhoneId: number
-    ticketDataFormType: $Enums.TicketDataFormType
+    eventCPCountryPhoneId: number
+    eventCPPhone: string
+    idCardStatus?: $Enums.TicketIDCard
     maxTicketPerTransaction: number
     oneEmailOneTransaction?: boolean
     ticketDataFormUnique?: boolean
@@ -17790,7 +18082,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     members?: MemberUpdateManyWithoutCountryPhoneNestedInput
-    events?: EventUpdateManyWithoutEventCountryPhoneNestedInput
+    events?: EventUpdateManyWithoutEventCPCountryPhoneNestedInput
     ticketTransactionDetails?: TicketTransactionDetailUpdateManyWithoutOrderCountryPhoneNestedInput
   }
 
@@ -17803,7 +18095,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     members?: MemberUncheckedUpdateManyWithoutCountryPhoneNestedInput
-    events?: EventUncheckedUpdateManyWithoutEventCountryPhoneNestedInput
+    events?: EventUncheckedUpdateManyWithoutEventCPCountryPhoneNestedInput
     ticketTransactionDetails?: TicketTransactionDetailUncheckedUpdateManyWithoutOrderCountryPhoneNestedInput
   }
 
@@ -17838,7 +18130,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     deletedAt?: Date | string | null
     member: MemberCreateNestedOneWithoutCreatorProfileInput
-    countryPhone: CountryPhoneCreateNestedOneWithoutCreatorProfileInput
+    countryPhone?: CountryPhoneCreateNestedOneWithoutCreatorProfileInput
   }
 
   export type CreatorProfileUncheckedCreateWithoutEventInput = {
@@ -17847,7 +18139,7 @@ export namespace Prisma {
     bannerImgUrl?: string | null
     logoImgUrl?: string | null
     profileLinkUrl: string
-    countryPhoneId: number
+    countryPhoneId?: number | null
     creatorPhoneNumber?: string | null
     address?: string | null
     aboutUsInfo?: string | null
@@ -17989,7 +18281,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     member?: MemberUpdateOneRequiredWithoutCreatorProfileNestedInput
-    countryPhone?: CountryPhoneUpdateOneRequiredWithoutCreatorProfileNestedInput
+    countryPhone?: CountryPhoneUpdateOneWithoutCreatorProfileNestedInput
   }
 
   export type CreatorProfileUncheckedUpdateWithoutEventInput = {
@@ -17998,7 +18290,7 @@ export namespace Prisma {
     bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     logoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     profileLinkUrl?: StringFieldUpdateOperationsInput | string
-    countryPhoneId?: IntFieldUpdateOperationsInput | number
+    countryPhoneId?: NullableIntFieldUpdateOperationsInput | number | null
     creatorPhoneNumber?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
     aboutUsInfo?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18116,10 +18408,15 @@ export namespace Prisma {
 
   export type EventCreateWithoutEventFormatInput = {
     eventName: string
+    eventTag: string
+    isPrivateEvent?: boolean
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
-    eventDate: Date | string
-    eventTime: Date | string
+    bannerImgUrl?: string | null
+    eventStartDate: string
+    eventEndDate: string
+    eventStartTime: string
+    eventEndTime: string
     eventLocation: string
     eventDesc?: string | null
     ticketType: $Enums.TicketType
@@ -18128,11 +18425,12 @@ export namespace Prisma {
     ticketPrice?: number
     ticketDesc?: string | null
     ticketTermsAndCondition: string
-    ticketStartDate: Date | string
-    ticketEndDate: Date | string
+    ticketStartDate: string
+    ticketEndDate: string
     eventCPName: string
     eventCPEmail: string
-    ticketDataFormType: $Enums.TicketDataFormType
+    eventCPPhone: string
+    idCardStatus?: $Enums.TicketIDCard
     maxTicketPerTransaction: number
     oneEmailOneTransaction?: boolean
     ticketDataFormUnique?: boolean
@@ -18142,7 +18440,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     creator: CreatorProfileCreateNestedOneWithoutEventInput
     eventTopic: EventTopicCreateNestedOneWithoutEventInput
-    eventCountryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
+    eventCPCountryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
     ticketTransactions?: TicketTransactionCreateNestedManyWithoutEventInput
   }
 
@@ -18151,10 +18449,15 @@ export namespace Prisma {
     creatorId: string
     eventName: string
     eventTopicId: number
+    eventTag: string
+    isPrivateEvent?: boolean
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
-    eventDate: Date | string
-    eventTime: Date | string
+    bannerImgUrl?: string | null
+    eventStartDate: string
+    eventEndDate: string
+    eventStartTime: string
+    eventEndTime: string
     eventLocation: string
     eventDesc?: string | null
     ticketType: $Enums.TicketType
@@ -18163,12 +18466,13 @@ export namespace Prisma {
     ticketPrice?: number
     ticketDesc?: string | null
     ticketTermsAndCondition: string
-    ticketStartDate: Date | string
-    ticketEndDate: Date | string
+    ticketStartDate: string
+    ticketEndDate: string
     eventCPName: string
     eventCPEmail: string
-    eventCountryPhoneId: number
-    ticketDataFormType: $Enums.TicketDataFormType
+    eventCPCountryPhoneId: number
+    eventCPPhone: string
+    idCardStatus?: $Enums.TicketIDCard
     maxTicketPerTransaction: number
     oneEmailOneTransaction?: boolean
     ticketDataFormUnique?: boolean
@@ -18207,10 +18511,15 @@ export namespace Prisma {
 
   export type EventCreateWithoutEventTopicInput = {
     eventName: string
+    eventTag: string
+    isPrivateEvent?: boolean
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
-    eventDate: Date | string
-    eventTime: Date | string
+    bannerImgUrl?: string | null
+    eventStartDate: string
+    eventEndDate: string
+    eventStartTime: string
+    eventEndTime: string
     eventLocation: string
     eventDesc?: string | null
     ticketType: $Enums.TicketType
@@ -18219,11 +18528,12 @@ export namespace Prisma {
     ticketPrice?: number
     ticketDesc?: string | null
     ticketTermsAndCondition: string
-    ticketStartDate: Date | string
-    ticketEndDate: Date | string
+    ticketStartDate: string
+    ticketEndDate: string
     eventCPName: string
     eventCPEmail: string
-    ticketDataFormType: $Enums.TicketDataFormType
+    eventCPPhone: string
+    idCardStatus?: $Enums.TicketIDCard
     maxTicketPerTransaction: number
     oneEmailOneTransaction?: boolean
     ticketDataFormUnique?: boolean
@@ -18233,7 +18543,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     creator: CreatorProfileCreateNestedOneWithoutEventInput
     eventFormat: EventFormatCreateNestedOneWithoutEventInput
-    eventCountryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
+    eventCPCountryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
     ticketTransactions?: TicketTransactionCreateNestedManyWithoutEventInput
   }
 
@@ -18242,10 +18552,15 @@ export namespace Prisma {
     creatorId: string
     eventName: string
     eventFormatId: number
+    eventTag: string
+    isPrivateEvent?: boolean
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
-    eventDate: Date | string
-    eventTime: Date | string
+    bannerImgUrl?: string | null
+    eventStartDate: string
+    eventEndDate: string
+    eventStartTime: string
+    eventEndTime: string
     eventLocation: string
     eventDesc?: string | null
     ticketType: $Enums.TicketType
@@ -18254,12 +18569,13 @@ export namespace Prisma {
     ticketPrice?: number
     ticketDesc?: string | null
     ticketTermsAndCondition: string
-    ticketStartDate: Date | string
-    ticketEndDate: Date | string
+    ticketStartDate: string
+    ticketEndDate: string
     eventCPName: string
     eventCPEmail: string
-    eventCountryPhoneId: number
-    ticketDataFormType: $Enums.TicketDataFormType
+    eventCPCountryPhoneId: number
+    eventCPPhone: string
+    idCardStatus?: $Enums.TicketIDCard
     maxTicketPerTransaction: number
     oneEmailOneTransaction?: boolean
     ticketDataFormUnique?: boolean
@@ -18298,10 +18614,15 @@ export namespace Prisma {
 
   export type EventCreateWithoutTicketTransactionsInput = {
     eventName: string
+    eventTag: string
+    isPrivateEvent?: boolean
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
-    eventDate: Date | string
-    eventTime: Date | string
+    bannerImgUrl?: string | null
+    eventStartDate: string
+    eventEndDate: string
+    eventStartTime: string
+    eventEndTime: string
     eventLocation: string
     eventDesc?: string | null
     ticketType: $Enums.TicketType
@@ -18310,11 +18631,12 @@ export namespace Prisma {
     ticketPrice?: number
     ticketDesc?: string | null
     ticketTermsAndCondition: string
-    ticketStartDate: Date | string
-    ticketEndDate: Date | string
+    ticketStartDate: string
+    ticketEndDate: string
     eventCPName: string
     eventCPEmail: string
-    ticketDataFormType: $Enums.TicketDataFormType
+    eventCPPhone: string
+    idCardStatus?: $Enums.TicketIDCard
     maxTicketPerTransaction: number
     oneEmailOneTransaction?: boolean
     ticketDataFormUnique?: boolean
@@ -18325,7 +18647,7 @@ export namespace Prisma {
     creator: CreatorProfileCreateNestedOneWithoutEventInput
     eventFormat: EventFormatCreateNestedOneWithoutEventInput
     eventTopic: EventTopicCreateNestedOneWithoutEventInput
-    eventCountryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
+    eventCPCountryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
   }
 
   export type EventUncheckedCreateWithoutTicketTransactionsInput = {
@@ -18334,10 +18656,15 @@ export namespace Prisma {
     eventName: string
     eventFormatId: number
     eventTopicId: number
+    eventTag: string
+    isPrivateEvent?: boolean
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
-    eventDate: Date | string
-    eventTime: Date | string
+    bannerImgUrl?: string | null
+    eventStartDate: string
+    eventEndDate: string
+    eventStartTime: string
+    eventEndTime: string
     eventLocation: string
     eventDesc?: string | null
     ticketType: $Enums.TicketType
@@ -18346,12 +18673,13 @@ export namespace Prisma {
     ticketPrice?: number
     ticketDesc?: string | null
     ticketTermsAndCondition: string
-    ticketStartDate: Date | string
-    ticketEndDate: Date | string
+    ticketStartDate: string
+    ticketEndDate: string
     eventCPName: string
     eventCPEmail: string
-    eventCountryPhoneId: number
-    ticketDataFormType: $Enums.TicketDataFormType
+    eventCPCountryPhoneId: number
+    eventCPPhone: string
+    idCardStatus?: $Enums.TicketIDCard
     maxTicketPerTransaction: number
     oneEmailOneTransaction?: boolean
     ticketDataFormUnique?: boolean
@@ -18457,10 +18785,15 @@ export namespace Prisma {
 
   export type EventUpdateWithoutTicketTransactionsInput = {
     eventName?: StringFieldUpdateOperationsInput | string
+    eventTag?: StringFieldUpdateOperationsInput | string
+    isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventStartDate?: StringFieldUpdateOperationsInput | string
+    eventEndDate?: StringFieldUpdateOperationsInput | string
+    eventStartTime?: StringFieldUpdateOperationsInput | string
+    eventEndTime?: StringFieldUpdateOperationsInput | string
     eventLocation?: StringFieldUpdateOperationsInput | string
     eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
@@ -18469,11 +18802,12 @@ export namespace Prisma {
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
-    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketStartDate?: StringFieldUpdateOperationsInput | string
+    ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
     eventCPEmail?: StringFieldUpdateOperationsInput | string
-    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    eventCPPhone?: StringFieldUpdateOperationsInput | string
+    idCardStatus?: EnumTicketIDCardFieldUpdateOperationsInput | $Enums.TicketIDCard
     maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
     oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
     ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
@@ -18484,7 +18818,7 @@ export namespace Prisma {
     creator?: CreatorProfileUpdateOneRequiredWithoutEventNestedInput
     eventFormat?: EventFormatUpdateOneRequiredWithoutEventNestedInput
     eventTopic?: EventTopicUpdateOneRequiredWithoutEventNestedInput
-    eventCountryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
+    eventCPCountryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
   }
 
   export type EventUncheckedUpdateWithoutTicketTransactionsInput = {
@@ -18493,10 +18827,15 @@ export namespace Prisma {
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTopicId?: IntFieldUpdateOperationsInput | number
+    eventTag?: StringFieldUpdateOperationsInput | string
+    isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventStartDate?: StringFieldUpdateOperationsInput | string
+    eventEndDate?: StringFieldUpdateOperationsInput | string
+    eventStartTime?: StringFieldUpdateOperationsInput | string
+    eventEndTime?: StringFieldUpdateOperationsInput | string
     eventLocation?: StringFieldUpdateOperationsInput | string
     eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
@@ -18505,12 +18844,13 @@ export namespace Prisma {
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
-    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketStartDate?: StringFieldUpdateOperationsInput | string
+    ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
     eventCPEmail?: StringFieldUpdateOperationsInput | string
-    eventCountryPhoneId?: IntFieldUpdateOperationsInput | number
-    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    eventCPCountryPhoneId?: IntFieldUpdateOperationsInput | number
+    eventCPPhone?: StringFieldUpdateOperationsInput | string
+    idCardStatus?: EnumTicketIDCardFieldUpdateOperationsInput | $Enums.TicketIDCard
     maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
     oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
     ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
@@ -18620,7 +18960,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     members?: MemberCreateNestedManyWithoutCountryPhoneInput
     creatorProfile?: CreatorProfileCreateNestedManyWithoutCountryPhoneInput
-    events?: EventCreateNestedManyWithoutEventCountryPhoneInput
+    events?: EventCreateNestedManyWithoutEventCPCountryPhoneInput
   }
 
   export type CountryPhoneUncheckedCreateWithoutTicketTransactionDetailsInput = {
@@ -18633,7 +18973,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     members?: MemberUncheckedCreateNestedManyWithoutCountryPhoneInput
     creatorProfile?: CreatorProfileUncheckedCreateNestedManyWithoutCountryPhoneInput
-    events?: EventUncheckedCreateNestedManyWithoutEventCountryPhoneInput
+    events?: EventUncheckedCreateNestedManyWithoutEventCPCountryPhoneInput
   }
 
   export type CountryPhoneCreateOrConnectWithoutTicketTransactionDetailsInput = {
@@ -18691,7 +19031,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     members?: MemberUpdateManyWithoutCountryPhoneNestedInput
     creatorProfile?: CreatorProfileUpdateManyWithoutCountryPhoneNestedInput
-    events?: EventUpdateManyWithoutEventCountryPhoneNestedInput
+    events?: EventUpdateManyWithoutEventCPCountryPhoneNestedInput
   }
 
   export type CountryPhoneUncheckedUpdateWithoutTicketTransactionDetailsInput = {
@@ -18704,7 +19044,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     members?: MemberUncheckedUpdateManyWithoutCountryPhoneNestedInput
     creatorProfile?: CreatorProfileUncheckedUpdateManyWithoutCountryPhoneNestedInput
-    events?: EventUncheckedUpdateManyWithoutEventCountryPhoneNestedInput
+    events?: EventUncheckedUpdateManyWithoutEventCPCountryPhoneNestedInput
   }
 
   export type MemberCreateManyCountryPhoneInput = {
@@ -18741,16 +19081,21 @@ export namespace Prisma {
     deletedAt?: Date | string | null
   }
 
-  export type EventCreateManyEventCountryPhoneInput = {
+  export type EventCreateManyEventCPCountryPhoneInput = {
     id?: number
     creatorId: string
     eventName: string
     eventFormatId: number
     eventTopicId: number
+    eventTag: string
+    isPrivateEvent?: boolean
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
-    eventDate: Date | string
-    eventTime: Date | string
+    bannerImgUrl?: string | null
+    eventStartDate: string
+    eventEndDate: string
+    eventStartTime: string
+    eventEndTime: string
     eventLocation: string
     eventDesc?: string | null
     ticketType: $Enums.TicketType
@@ -18759,11 +19104,12 @@ export namespace Prisma {
     ticketPrice?: number
     ticketDesc?: string | null
     ticketTermsAndCondition: string
-    ticketStartDate: Date | string
-    ticketEndDate: Date | string
+    ticketStartDate: string
+    ticketEndDate: string
     eventCPName: string
     eventCPEmail: string
-    ticketDataFormType: $Enums.TicketDataFormType
+    eventCPPhone: string
+    idCardStatus?: $Enums.TicketIDCard
     maxTicketPerTransaction: number
     oneEmailOneTransaction?: boolean
     ticketDataFormUnique?: boolean
@@ -18895,12 +19241,17 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type EventUpdateWithoutEventCountryPhoneInput = {
+  export type EventUpdateWithoutEventCPCountryPhoneInput = {
     eventName?: StringFieldUpdateOperationsInput | string
+    eventTag?: StringFieldUpdateOperationsInput | string
+    isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventStartDate?: StringFieldUpdateOperationsInput | string
+    eventEndDate?: StringFieldUpdateOperationsInput | string
+    eventStartTime?: StringFieldUpdateOperationsInput | string
+    eventEndTime?: StringFieldUpdateOperationsInput | string
     eventLocation?: StringFieldUpdateOperationsInput | string
     eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
@@ -18909,11 +19260,12 @@ export namespace Prisma {
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
-    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketStartDate?: StringFieldUpdateOperationsInput | string
+    ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
     eventCPEmail?: StringFieldUpdateOperationsInput | string
-    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    eventCPPhone?: StringFieldUpdateOperationsInput | string
+    idCardStatus?: EnumTicketIDCardFieldUpdateOperationsInput | $Enums.TicketIDCard
     maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
     oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
     ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
@@ -18927,16 +19279,21 @@ export namespace Prisma {
     ticketTransactions?: TicketTransactionUpdateManyWithoutEventNestedInput
   }
 
-  export type EventUncheckedUpdateWithoutEventCountryPhoneInput = {
+  export type EventUncheckedUpdateWithoutEventCPCountryPhoneInput = {
     id?: IntFieldUpdateOperationsInput | number
     creatorId?: StringFieldUpdateOperationsInput | string
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTopicId?: IntFieldUpdateOperationsInput | number
+    eventTag?: StringFieldUpdateOperationsInput | string
+    isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventStartDate?: StringFieldUpdateOperationsInput | string
+    eventEndDate?: StringFieldUpdateOperationsInput | string
+    eventStartTime?: StringFieldUpdateOperationsInput | string
+    eventEndTime?: StringFieldUpdateOperationsInput | string
     eventLocation?: StringFieldUpdateOperationsInput | string
     eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
@@ -18945,11 +19302,12 @@ export namespace Prisma {
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
-    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketStartDate?: StringFieldUpdateOperationsInput | string
+    ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
     eventCPEmail?: StringFieldUpdateOperationsInput | string
-    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    eventCPPhone?: StringFieldUpdateOperationsInput | string
+    idCardStatus?: EnumTicketIDCardFieldUpdateOperationsInput | $Enums.TicketIDCard
     maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
     oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
     ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
@@ -18960,16 +19318,21 @@ export namespace Prisma {
     ticketTransactions?: TicketTransactionUncheckedUpdateManyWithoutEventNestedInput
   }
 
-  export type EventUncheckedUpdateManyWithoutEventCountryPhoneInput = {
+  export type EventUncheckedUpdateManyWithoutEventCPCountryPhoneInput = {
     id?: IntFieldUpdateOperationsInput | number
     creatorId?: StringFieldUpdateOperationsInput | string
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTopicId?: IntFieldUpdateOperationsInput | number
+    eventTag?: StringFieldUpdateOperationsInput | string
+    isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventStartDate?: StringFieldUpdateOperationsInput | string
+    eventEndDate?: StringFieldUpdateOperationsInput | string
+    eventStartTime?: StringFieldUpdateOperationsInput | string
+    eventEndTime?: StringFieldUpdateOperationsInput | string
     eventLocation?: StringFieldUpdateOperationsInput | string
     eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
@@ -18978,11 +19341,12 @@ export namespace Prisma {
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
-    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketStartDate?: StringFieldUpdateOperationsInput | string
+    ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
     eventCPEmail?: StringFieldUpdateOperationsInput | string
-    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    eventCPPhone?: StringFieldUpdateOperationsInput | string
+    idCardStatus?: EnumTicketIDCardFieldUpdateOperationsInput | $Enums.TicketIDCard
     maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
     oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
     ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
@@ -19121,10 +19485,15 @@ export namespace Prisma {
     eventName: string
     eventFormatId: number
     eventTopicId: number
+    eventTag: string
+    isPrivateEvent?: boolean
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
-    eventDate: Date | string
-    eventTime: Date | string
+    bannerImgUrl?: string | null
+    eventStartDate: string
+    eventEndDate: string
+    eventStartTime: string
+    eventEndTime: string
     eventLocation: string
     eventDesc?: string | null
     ticketType: $Enums.TicketType
@@ -19133,12 +19502,13 @@ export namespace Prisma {
     ticketPrice?: number
     ticketDesc?: string | null
     ticketTermsAndCondition: string
-    ticketStartDate: Date | string
-    ticketEndDate: Date | string
+    ticketStartDate: string
+    ticketEndDate: string
     eventCPName: string
     eventCPEmail: string
-    eventCountryPhoneId: number
-    ticketDataFormType: $Enums.TicketDataFormType
+    eventCPCountryPhoneId: number
+    eventCPPhone: string
+    idCardStatus?: $Enums.TicketIDCard
     maxTicketPerTransaction: number
     oneEmailOneTransaction?: boolean
     ticketDataFormUnique?: boolean
@@ -19150,10 +19520,15 @@ export namespace Prisma {
 
   export type EventUpdateWithoutCreatorInput = {
     eventName?: StringFieldUpdateOperationsInput | string
+    eventTag?: StringFieldUpdateOperationsInput | string
+    isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventStartDate?: StringFieldUpdateOperationsInput | string
+    eventEndDate?: StringFieldUpdateOperationsInput | string
+    eventStartTime?: StringFieldUpdateOperationsInput | string
+    eventEndTime?: StringFieldUpdateOperationsInput | string
     eventLocation?: StringFieldUpdateOperationsInput | string
     eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
@@ -19162,11 +19537,12 @@ export namespace Prisma {
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
-    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketStartDate?: StringFieldUpdateOperationsInput | string
+    ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
     eventCPEmail?: StringFieldUpdateOperationsInput | string
-    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    eventCPPhone?: StringFieldUpdateOperationsInput | string
+    idCardStatus?: EnumTicketIDCardFieldUpdateOperationsInput | $Enums.TicketIDCard
     maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
     oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
     ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
@@ -19176,7 +19552,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     eventFormat?: EventFormatUpdateOneRequiredWithoutEventNestedInput
     eventTopic?: EventTopicUpdateOneRequiredWithoutEventNestedInput
-    eventCountryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
+    eventCPCountryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
     ticketTransactions?: TicketTransactionUpdateManyWithoutEventNestedInput
   }
 
@@ -19185,10 +19561,15 @@ export namespace Prisma {
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTopicId?: IntFieldUpdateOperationsInput | number
+    eventTag?: StringFieldUpdateOperationsInput | string
+    isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventStartDate?: StringFieldUpdateOperationsInput | string
+    eventEndDate?: StringFieldUpdateOperationsInput | string
+    eventStartTime?: StringFieldUpdateOperationsInput | string
+    eventEndTime?: StringFieldUpdateOperationsInput | string
     eventLocation?: StringFieldUpdateOperationsInput | string
     eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
@@ -19197,12 +19578,13 @@ export namespace Prisma {
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
-    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketStartDate?: StringFieldUpdateOperationsInput | string
+    ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
     eventCPEmail?: StringFieldUpdateOperationsInput | string
-    eventCountryPhoneId?: IntFieldUpdateOperationsInput | number
-    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    eventCPCountryPhoneId?: IntFieldUpdateOperationsInput | number
+    eventCPPhone?: StringFieldUpdateOperationsInput | string
+    idCardStatus?: EnumTicketIDCardFieldUpdateOperationsInput | $Enums.TicketIDCard
     maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
     oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
     ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
@@ -19218,10 +19600,15 @@ export namespace Prisma {
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTopicId?: IntFieldUpdateOperationsInput | number
+    eventTag?: StringFieldUpdateOperationsInput | string
+    isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventStartDate?: StringFieldUpdateOperationsInput | string
+    eventEndDate?: StringFieldUpdateOperationsInput | string
+    eventStartTime?: StringFieldUpdateOperationsInput | string
+    eventEndTime?: StringFieldUpdateOperationsInput | string
     eventLocation?: StringFieldUpdateOperationsInput | string
     eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
@@ -19230,12 +19617,13 @@ export namespace Prisma {
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
-    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketStartDate?: StringFieldUpdateOperationsInput | string
+    ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
     eventCPEmail?: StringFieldUpdateOperationsInput | string
-    eventCountryPhoneId?: IntFieldUpdateOperationsInput | number
-    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    eventCPCountryPhoneId?: IntFieldUpdateOperationsInput | number
+    eventCPPhone?: StringFieldUpdateOperationsInput | string
+    idCardStatus?: EnumTicketIDCardFieldUpdateOperationsInput | $Enums.TicketIDCard
     maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
     oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
     ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
@@ -19287,10 +19675,15 @@ export namespace Prisma {
     creatorId: string
     eventName: string
     eventTopicId: number
+    eventTag: string
+    isPrivateEvent?: boolean
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
-    eventDate: Date | string
-    eventTime: Date | string
+    bannerImgUrl?: string | null
+    eventStartDate: string
+    eventEndDate: string
+    eventStartTime: string
+    eventEndTime: string
     eventLocation: string
     eventDesc?: string | null
     ticketType: $Enums.TicketType
@@ -19299,12 +19692,13 @@ export namespace Prisma {
     ticketPrice?: number
     ticketDesc?: string | null
     ticketTermsAndCondition: string
-    ticketStartDate: Date | string
-    ticketEndDate: Date | string
+    ticketStartDate: string
+    ticketEndDate: string
     eventCPName: string
     eventCPEmail: string
-    eventCountryPhoneId: number
-    ticketDataFormType: $Enums.TicketDataFormType
+    eventCPCountryPhoneId: number
+    eventCPPhone: string
+    idCardStatus?: $Enums.TicketIDCard
     maxTicketPerTransaction: number
     oneEmailOneTransaction?: boolean
     ticketDataFormUnique?: boolean
@@ -19316,10 +19710,15 @@ export namespace Prisma {
 
   export type EventUpdateWithoutEventFormatInput = {
     eventName?: StringFieldUpdateOperationsInput | string
+    eventTag?: StringFieldUpdateOperationsInput | string
+    isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventStartDate?: StringFieldUpdateOperationsInput | string
+    eventEndDate?: StringFieldUpdateOperationsInput | string
+    eventStartTime?: StringFieldUpdateOperationsInput | string
+    eventEndTime?: StringFieldUpdateOperationsInput | string
     eventLocation?: StringFieldUpdateOperationsInput | string
     eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
@@ -19328,11 +19727,12 @@ export namespace Prisma {
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
-    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketStartDate?: StringFieldUpdateOperationsInput | string
+    ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
     eventCPEmail?: StringFieldUpdateOperationsInput | string
-    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    eventCPPhone?: StringFieldUpdateOperationsInput | string
+    idCardStatus?: EnumTicketIDCardFieldUpdateOperationsInput | $Enums.TicketIDCard
     maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
     oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
     ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
@@ -19342,7 +19742,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creator?: CreatorProfileUpdateOneRequiredWithoutEventNestedInput
     eventTopic?: EventTopicUpdateOneRequiredWithoutEventNestedInput
-    eventCountryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
+    eventCPCountryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
     ticketTransactions?: TicketTransactionUpdateManyWithoutEventNestedInput
   }
 
@@ -19351,10 +19751,15 @@ export namespace Prisma {
     creatorId?: StringFieldUpdateOperationsInput | string
     eventName?: StringFieldUpdateOperationsInput | string
     eventTopicId?: IntFieldUpdateOperationsInput | number
+    eventTag?: StringFieldUpdateOperationsInput | string
+    isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventStartDate?: StringFieldUpdateOperationsInput | string
+    eventEndDate?: StringFieldUpdateOperationsInput | string
+    eventStartTime?: StringFieldUpdateOperationsInput | string
+    eventEndTime?: StringFieldUpdateOperationsInput | string
     eventLocation?: StringFieldUpdateOperationsInput | string
     eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
@@ -19363,12 +19768,13 @@ export namespace Prisma {
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
-    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketStartDate?: StringFieldUpdateOperationsInput | string
+    ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
     eventCPEmail?: StringFieldUpdateOperationsInput | string
-    eventCountryPhoneId?: IntFieldUpdateOperationsInput | number
-    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    eventCPCountryPhoneId?: IntFieldUpdateOperationsInput | number
+    eventCPPhone?: StringFieldUpdateOperationsInput | string
+    idCardStatus?: EnumTicketIDCardFieldUpdateOperationsInput | $Enums.TicketIDCard
     maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
     oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
     ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
@@ -19384,10 +19790,15 @@ export namespace Prisma {
     creatorId?: StringFieldUpdateOperationsInput | string
     eventName?: StringFieldUpdateOperationsInput | string
     eventTopicId?: IntFieldUpdateOperationsInput | number
+    eventTag?: StringFieldUpdateOperationsInput | string
+    isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventStartDate?: StringFieldUpdateOperationsInput | string
+    eventEndDate?: StringFieldUpdateOperationsInput | string
+    eventStartTime?: StringFieldUpdateOperationsInput | string
+    eventEndTime?: StringFieldUpdateOperationsInput | string
     eventLocation?: StringFieldUpdateOperationsInput | string
     eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
@@ -19396,12 +19807,13 @@ export namespace Prisma {
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
-    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketStartDate?: StringFieldUpdateOperationsInput | string
+    ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
     eventCPEmail?: StringFieldUpdateOperationsInput | string
-    eventCountryPhoneId?: IntFieldUpdateOperationsInput | number
-    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    eventCPCountryPhoneId?: IntFieldUpdateOperationsInput | number
+    eventCPPhone?: StringFieldUpdateOperationsInput | string
+    idCardStatus?: EnumTicketIDCardFieldUpdateOperationsInput | $Enums.TicketIDCard
     maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
     oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
     ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
@@ -19416,10 +19828,15 @@ export namespace Prisma {
     creatorId: string
     eventName: string
     eventFormatId: number
+    eventTag: string
+    isPrivateEvent?: boolean
     organizerName?: string | null
     organizerLogoImgUrl?: string | null
-    eventDate: Date | string
-    eventTime: Date | string
+    bannerImgUrl?: string | null
+    eventStartDate: string
+    eventEndDate: string
+    eventStartTime: string
+    eventEndTime: string
     eventLocation: string
     eventDesc?: string | null
     ticketType: $Enums.TicketType
@@ -19428,12 +19845,13 @@ export namespace Prisma {
     ticketPrice?: number
     ticketDesc?: string | null
     ticketTermsAndCondition: string
-    ticketStartDate: Date | string
-    ticketEndDate: Date | string
+    ticketStartDate: string
+    ticketEndDate: string
     eventCPName: string
     eventCPEmail: string
-    eventCountryPhoneId: number
-    ticketDataFormType: $Enums.TicketDataFormType
+    eventCPCountryPhoneId: number
+    eventCPPhone: string
+    idCardStatus?: $Enums.TicketIDCard
     maxTicketPerTransaction: number
     oneEmailOneTransaction?: boolean
     ticketDataFormUnique?: boolean
@@ -19445,10 +19863,15 @@ export namespace Prisma {
 
   export type EventUpdateWithoutEventTopicInput = {
     eventName?: StringFieldUpdateOperationsInput | string
+    eventTag?: StringFieldUpdateOperationsInput | string
+    isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventStartDate?: StringFieldUpdateOperationsInput | string
+    eventEndDate?: StringFieldUpdateOperationsInput | string
+    eventStartTime?: StringFieldUpdateOperationsInput | string
+    eventEndTime?: StringFieldUpdateOperationsInput | string
     eventLocation?: StringFieldUpdateOperationsInput | string
     eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
@@ -19457,11 +19880,12 @@ export namespace Prisma {
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
-    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketStartDate?: StringFieldUpdateOperationsInput | string
+    ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
     eventCPEmail?: StringFieldUpdateOperationsInput | string
-    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    eventCPPhone?: StringFieldUpdateOperationsInput | string
+    idCardStatus?: EnumTicketIDCardFieldUpdateOperationsInput | $Enums.TicketIDCard
     maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
     oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
     ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
@@ -19471,7 +19895,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creator?: CreatorProfileUpdateOneRequiredWithoutEventNestedInput
     eventFormat?: EventFormatUpdateOneRequiredWithoutEventNestedInput
-    eventCountryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
+    eventCPCountryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
     ticketTransactions?: TicketTransactionUpdateManyWithoutEventNestedInput
   }
 
@@ -19480,10 +19904,15 @@ export namespace Prisma {
     creatorId?: StringFieldUpdateOperationsInput | string
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
+    eventTag?: StringFieldUpdateOperationsInput | string
+    isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventStartDate?: StringFieldUpdateOperationsInput | string
+    eventEndDate?: StringFieldUpdateOperationsInput | string
+    eventStartTime?: StringFieldUpdateOperationsInput | string
+    eventEndTime?: StringFieldUpdateOperationsInput | string
     eventLocation?: StringFieldUpdateOperationsInput | string
     eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
@@ -19492,12 +19921,13 @@ export namespace Prisma {
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
-    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketStartDate?: StringFieldUpdateOperationsInput | string
+    ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
     eventCPEmail?: StringFieldUpdateOperationsInput | string
-    eventCountryPhoneId?: IntFieldUpdateOperationsInput | number
-    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    eventCPCountryPhoneId?: IntFieldUpdateOperationsInput | number
+    eventCPPhone?: StringFieldUpdateOperationsInput | string
+    idCardStatus?: EnumTicketIDCardFieldUpdateOperationsInput | $Enums.TicketIDCard
     maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
     oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
     ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
@@ -19513,10 +19943,15 @@ export namespace Prisma {
     creatorId?: StringFieldUpdateOperationsInput | string
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
+    eventTag?: StringFieldUpdateOperationsInput | string
+    isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
     organizerName?: NullableStringFieldUpdateOperationsInput | string | null
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
-    eventDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    eventTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    eventStartDate?: StringFieldUpdateOperationsInput | string
+    eventEndDate?: StringFieldUpdateOperationsInput | string
+    eventStartTime?: StringFieldUpdateOperationsInput | string
+    eventEndTime?: StringFieldUpdateOperationsInput | string
     eventLocation?: StringFieldUpdateOperationsInput | string
     eventDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketType?: EnumTicketTypeFieldUpdateOperationsInput | $Enums.TicketType
@@ -19525,12 +19960,13 @@ export namespace Prisma {
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
     ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
-    ticketStartDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    ticketEndDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    ticketStartDate?: StringFieldUpdateOperationsInput | string
+    ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
     eventCPEmail?: StringFieldUpdateOperationsInput | string
-    eventCountryPhoneId?: IntFieldUpdateOperationsInput | number
-    ticketDataFormType?: EnumTicketDataFormTypeFieldUpdateOperationsInput | $Enums.TicketDataFormType
+    eventCPCountryPhoneId?: IntFieldUpdateOperationsInput | number
+    eventCPPhone?: StringFieldUpdateOperationsInput | string
+    idCardStatus?: EnumTicketIDCardFieldUpdateOperationsInput | $Enums.TicketIDCard
     maxTicketPerTransaction?: IntFieldUpdateOperationsInput | number
     oneEmailOneTransaction?: BoolFieldUpdateOperationsInput | boolean
     ticketDataFormUnique?: BoolFieldUpdateOperationsInput | boolean
