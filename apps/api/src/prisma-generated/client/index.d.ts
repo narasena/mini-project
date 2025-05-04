@@ -7267,7 +7267,7 @@ export namespace Prisma {
 
   export type EventGroupByOutputType = {
     id: number
-    creatorId: string | null
+    creatorId: string
     eventName: string
     eventFormatId: number
     eventTopicId: number
@@ -7360,7 +7360,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
-    creator?: boolean | Event$creatorArgs<ExtArgs>
+    creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
     eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
     eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
     eventCPCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
@@ -7405,7 +7405,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
-    creator?: boolean | Event$creatorArgs<ExtArgs>
+    creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
     eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
     eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
     eventCPCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
@@ -7448,7 +7448,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
-    creator?: boolean | Event$creatorArgs<ExtArgs>
+    creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
     eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
     eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
     eventCPCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
@@ -7495,7 +7495,7 @@ export namespace Prisma {
 
   export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "creatorId" | "eventName" | "eventFormatId" | "eventTopicId" | "eventTag" | "isPrivateEvent" | "organizerName" | "organizerLogoImgUrl" | "bannerImgUrl" | "eventStartDate" | "eventEndDate" | "eventStartTime" | "eventEndTime" | "eventLocation" | "eventDesc" | "ticketType" | "ticketName" | "ticketQty" | "ticketPrice" | "ticketDesc" | "ticketTermsAndCondition" | "ticketStartDate" | "ticketEndDate" | "eventCPName" | "eventCPEmail" | "eventCPCountryPhoneId" | "eventCPPhone" | "idCardStatus" | "maxTicketPerTransaction" | "oneEmailOneTransaction" | "ticketDataFormUnique" | "isDraft" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["event"]>
   export type EventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    creator?: boolean | Event$creatorArgs<ExtArgs>
+    creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
     eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
     eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
     eventCPCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
@@ -7503,13 +7503,13 @@ export namespace Prisma {
     _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type EventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    creator?: boolean | Event$creatorArgs<ExtArgs>
+    creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
     eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
     eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
     eventCPCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
   }
   export type EventIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    creator?: boolean | Event$creatorArgs<ExtArgs>
+    creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
     eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
     eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
     eventCPCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
@@ -7518,7 +7518,7 @@ export namespace Prisma {
   export type $EventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Event"
     objects: {
-      creator: Prisma.$CreatorProfilePayload<ExtArgs> | null
+      creator: Prisma.$CreatorProfilePayload<ExtArgs>
       eventFormat: Prisma.$EventFormatPayload<ExtArgs>
       eventTopic: Prisma.$EventTopicPayload<ExtArgs>
       eventCPCountryPhone: Prisma.$CountryPhonePayload<ExtArgs>
@@ -7526,7 +7526,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      creatorId: string | null
+      creatorId: string
       eventName: string
       eventFormatId: number
       eventTopicId: number
@@ -7955,7 +7955,7 @@ export namespace Prisma {
    */
   export interface Prisma__EventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    creator<T extends Event$creatorArgs<ExtArgs> = {}>(args?: Subset<T, Event$creatorArgs<ExtArgs>>): Prisma__CreatorProfileClient<$Result.GetResult<Prisma.$CreatorProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    creator<T extends CreatorProfileDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CreatorProfileDefaultArgs<ExtArgs>>): Prisma__CreatorProfileClient<$Result.GetResult<Prisma.$CreatorProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     eventFormat<T extends EventFormatDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventFormatDefaultArgs<ExtArgs>>): Prisma__EventFormatClient<$Result.GetResult<Prisma.$EventFormatPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     eventTopic<T extends EventTopicDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventTopicDefaultArgs<ExtArgs>>): Prisma__EventTopicClient<$Result.GetResult<Prisma.$EventTopicPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     eventCPCountryPhone<T extends CountryPhoneDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CountryPhoneDefaultArgs<ExtArgs>>): Prisma__CountryPhoneClient<$Result.GetResult<Prisma.$CountryPhonePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
@@ -8418,25 +8418,6 @@ export namespace Prisma {
      * Limit how many Events to delete.
      */
     limit?: number
-  }
-
-  /**
-   * Event.creator
-   */
-  export type Event$creatorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the CreatorProfile
-     */
-    select?: CreatorProfileSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the CreatorProfile
-     */
-    omit?: CreatorProfileOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CreatorProfileInclude<ExtArgs> | null
-    where?: CreatorProfileWhereInput
   }
 
   /**
@@ -13750,7 +13731,7 @@ export namespace Prisma {
     OR?: EventWhereInput[]
     NOT?: EventWhereInput | EventWhereInput[]
     id?: IntFilter<"Event"> | number
-    creatorId?: StringNullableFilter<"Event"> | string | null
+    creatorId?: StringFilter<"Event"> | string
     eventName?: StringFilter<"Event"> | string
     eventFormatId?: IntFilter<"Event"> | number
     eventTopicId?: IntFilter<"Event"> | number
@@ -13785,7 +13766,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Event"> | Date | string
     updatedAt?: DateTimeFilter<"Event"> | Date | string
     deletedAt?: DateTimeNullableFilter<"Event"> | Date | string | null
-    creator?: XOR<CreatorProfileNullableScalarRelationFilter, CreatorProfileWhereInput> | null
+    creator?: XOR<CreatorProfileScalarRelationFilter, CreatorProfileWhereInput>
     eventFormat?: XOR<EventFormatScalarRelationFilter, EventFormatWhereInput>
     eventTopic?: XOR<EventTopicScalarRelationFilter, EventTopicWhereInput>
     eventCPCountryPhone?: XOR<CountryPhoneScalarRelationFilter, CountryPhoneWhereInput>
@@ -13794,7 +13775,7 @@ export namespace Prisma {
 
   export type EventOrderByWithRelationInput = {
     id?: SortOrder
-    creatorId?: SortOrderInput | SortOrder
+    creatorId?: SortOrder
     eventName?: SortOrder
     eventFormatId?: SortOrder
     eventTopicId?: SortOrder
@@ -13841,7 +13822,7 @@ export namespace Prisma {
     AND?: EventWhereInput | EventWhereInput[]
     OR?: EventWhereInput[]
     NOT?: EventWhereInput | EventWhereInput[]
-    creatorId?: StringNullableFilter<"Event"> | string | null
+    creatorId?: StringFilter<"Event"> | string
     eventName?: StringFilter<"Event"> | string
     eventFormatId?: IntFilter<"Event"> | number
     eventTopicId?: IntFilter<"Event"> | number
@@ -13876,7 +13857,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Event"> | Date | string
     updatedAt?: DateTimeFilter<"Event"> | Date | string
     deletedAt?: DateTimeNullableFilter<"Event"> | Date | string | null
-    creator?: XOR<CreatorProfileNullableScalarRelationFilter, CreatorProfileWhereInput> | null
+    creator?: XOR<CreatorProfileScalarRelationFilter, CreatorProfileWhereInput>
     eventFormat?: XOR<EventFormatScalarRelationFilter, EventFormatWhereInput>
     eventTopic?: XOR<EventTopicScalarRelationFilter, EventTopicWhereInput>
     eventCPCountryPhone?: XOR<CountryPhoneScalarRelationFilter, CountryPhoneWhereInput>
@@ -13885,7 +13866,7 @@ export namespace Prisma {
 
   export type EventOrderByWithAggregationInput = {
     id?: SortOrder
-    creatorId?: SortOrderInput | SortOrder
+    creatorId?: SortOrder
     eventName?: SortOrder
     eventFormatId?: SortOrder
     eventTopicId?: SortOrder
@@ -13932,7 +13913,7 @@ export namespace Prisma {
     OR?: EventScalarWhereWithAggregatesInput[]
     NOT?: EventScalarWhereWithAggregatesInput | EventScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Event"> | number
-    creatorId?: StringNullableWithAggregatesFilter<"Event"> | string | null
+    creatorId?: StringWithAggregatesFilter<"Event"> | string
     eventName?: StringWithAggregatesFilter<"Event"> | string
     eventFormatId?: IntWithAggregatesFilter<"Event"> | number
     eventTopicId?: IntWithAggregatesFilter<"Event"> | number
@@ -14718,7 +14699,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
-    creator?: CreatorProfileCreateNestedOneWithoutEventInput
+    creator: CreatorProfileCreateNestedOneWithoutEventInput
     eventFormat: EventFormatCreateNestedOneWithoutEventInput
     eventTopic: EventTopicCreateNestedOneWithoutEventInput
     eventCPCountryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
@@ -14727,7 +14708,7 @@ export namespace Prisma {
 
   export type EventUncheckedCreateInput = {
     id?: number
-    creatorId?: string | null
+    creatorId: string
     eventName: string
     eventFormatId: number
     eventTopicId: number
@@ -14797,7 +14778,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    creator?: CreatorProfileUpdateOneWithoutEventNestedInput
+    creator?: CreatorProfileUpdateOneRequiredWithoutEventNestedInput
     eventFormat?: EventFormatUpdateOneRequiredWithoutEventNestedInput
     eventTopic?: EventTopicUpdateOneRequiredWithoutEventNestedInput
     eventCPCountryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
@@ -14806,7 +14787,7 @@ export namespace Prisma {
 
   export type EventUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
+    creatorId?: StringFieldUpdateOperationsInput | string
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTopicId?: IntFieldUpdateOperationsInput | number
@@ -14846,7 +14827,7 @@ export namespace Prisma {
 
   export type EventCreateManyInput = {
     id?: number
-    creatorId?: string | null
+    creatorId: string
     eventName: string
     eventFormatId: number
     eventTopicId: number
@@ -14919,7 +14900,7 @@ export namespace Prisma {
 
   export type EventUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
+    creatorId?: StringFieldUpdateOperationsInput | string
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTopicId?: IntFieldUpdateOperationsInput | number
@@ -15763,6 +15744,11 @@ export namespace Prisma {
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
+  export type CreatorProfileScalarRelationFilter = {
+    is?: CreatorProfileWhereInput
+    isNot?: CreatorProfileWhereInput
+  }
+
   export type EventFormatScalarRelationFilter = {
     is?: EventFormatWhereInput
     isNot?: EventFormatWhereInput
@@ -16583,12 +16569,10 @@ export namespace Prisma {
     set?: boolean | null
   }
 
-  export type CreatorProfileUpdateOneWithoutEventNestedInput = {
+  export type CreatorProfileUpdateOneRequiredWithoutEventNestedInput = {
     create?: XOR<CreatorProfileCreateWithoutEventInput, CreatorProfileUncheckedCreateWithoutEventInput>
     connectOrCreate?: CreatorProfileCreateOrConnectWithoutEventInput
     upsert?: CreatorProfileUpsertWithoutEventInput
-    disconnect?: CreatorProfileWhereInput | boolean
-    delete?: CreatorProfileWhereInput | boolean
     connect?: CreatorProfileWhereUniqueInput
     update?: XOR<XOR<CreatorProfileUpdateToOneWithWhereWithoutEventInput, CreatorProfileUpdateWithoutEventInput>, CreatorProfileUncheckedUpdateWithoutEventInput>
   }
@@ -17237,7 +17221,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
-    creator?: CreatorProfileCreateNestedOneWithoutEventInput
+    creator: CreatorProfileCreateNestedOneWithoutEventInput
     eventFormat: EventFormatCreateNestedOneWithoutEventInput
     eventTopic: EventTopicCreateNestedOneWithoutEventInput
     ticketTransactions?: TicketTransactionCreateNestedManyWithoutEventInput
@@ -17245,7 +17229,7 @@ export namespace Prisma {
 
   export type EventUncheckedCreateWithoutEventCPCountryPhoneInput = {
     id?: number
-    creatorId?: string | null
+    creatorId: string
     eventName: string
     eventFormatId: number
     eventTopicId: number
@@ -17420,7 +17404,7 @@ export namespace Prisma {
     OR?: EventScalarWhereInput[]
     NOT?: EventScalarWhereInput | EventScalarWhereInput[]
     id?: IntFilter<"Event"> | number
-    creatorId?: StringNullableFilter<"Event"> | string | null
+    creatorId?: StringFilter<"Event"> | string
     eventName?: StringFilter<"Event"> | string
     eventFormatId?: IntFilter<"Event"> | number
     eventTopicId?: IntFilter<"Event"> | number
@@ -18454,7 +18438,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
-    creator?: CreatorProfileCreateNestedOneWithoutEventInput
+    creator: CreatorProfileCreateNestedOneWithoutEventInput
     eventTopic: EventTopicCreateNestedOneWithoutEventInput
     eventCPCountryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
     ticketTransactions?: TicketTransactionCreateNestedManyWithoutEventInput
@@ -18462,7 +18446,7 @@ export namespace Prisma {
 
   export type EventUncheckedCreateWithoutEventFormatInput = {
     id?: number
-    creatorId?: string | null
+    creatorId: string
     eventName: string
     eventTopicId: number
     eventTag?: string | null
@@ -18557,7 +18541,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
-    creator?: CreatorProfileCreateNestedOneWithoutEventInput
+    creator: CreatorProfileCreateNestedOneWithoutEventInput
     eventFormat: EventFormatCreateNestedOneWithoutEventInput
     eventCPCountryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
     ticketTransactions?: TicketTransactionCreateNestedManyWithoutEventInput
@@ -18565,7 +18549,7 @@ export namespace Prisma {
 
   export type EventUncheckedCreateWithoutEventTopicInput = {
     id?: number
-    creatorId?: string | null
+    creatorId: string
     eventName: string
     eventFormatId: number
     eventTag?: string | null
@@ -18660,7 +18644,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
-    creator?: CreatorProfileCreateNestedOneWithoutEventInput
+    creator: CreatorProfileCreateNestedOneWithoutEventInput
     eventFormat: EventFormatCreateNestedOneWithoutEventInput
     eventTopic: EventTopicCreateNestedOneWithoutEventInput
     eventCPCountryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
@@ -18668,7 +18652,7 @@ export namespace Prisma {
 
   export type EventUncheckedCreateWithoutTicketTransactionsInput = {
     id?: number
-    creatorId?: string | null
+    creatorId: string
     eventName: string
     eventFormatId: number
     eventTopicId: number
@@ -18831,7 +18815,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    creator?: CreatorProfileUpdateOneWithoutEventNestedInput
+    creator?: CreatorProfileUpdateOneRequiredWithoutEventNestedInput
     eventFormat?: EventFormatUpdateOneRequiredWithoutEventNestedInput
     eventTopic?: EventTopicUpdateOneRequiredWithoutEventNestedInput
     eventCPCountryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
@@ -18839,7 +18823,7 @@ export namespace Prisma {
 
   export type EventUncheckedUpdateWithoutTicketTransactionsInput = {
     id?: IntFieldUpdateOperationsInput | number
-    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
+    creatorId?: StringFieldUpdateOperationsInput | string
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTopicId?: IntFieldUpdateOperationsInput | number
@@ -19099,7 +19083,7 @@ export namespace Prisma {
 
   export type EventCreateManyEventCPCountryPhoneInput = {
     id?: number
-    creatorId?: string | null
+    creatorId: string
     eventName: string
     eventFormatId: number
     eventTopicId: number
@@ -19289,7 +19273,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    creator?: CreatorProfileUpdateOneWithoutEventNestedInput
+    creator?: CreatorProfileUpdateOneRequiredWithoutEventNestedInput
     eventFormat?: EventFormatUpdateOneRequiredWithoutEventNestedInput
     eventTopic?: EventTopicUpdateOneRequiredWithoutEventNestedInput
     ticketTransactions?: TicketTransactionUpdateManyWithoutEventNestedInput
@@ -19297,7 +19281,7 @@ export namespace Prisma {
 
   export type EventUncheckedUpdateWithoutEventCPCountryPhoneInput = {
     id?: IntFieldUpdateOperationsInput | number
-    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
+    creatorId?: StringFieldUpdateOperationsInput | string
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTopicId?: IntFieldUpdateOperationsInput | number
@@ -19336,7 +19320,7 @@ export namespace Prisma {
 
   export type EventUncheckedUpdateManyWithoutEventCPCountryPhoneInput = {
     id?: IntFieldUpdateOperationsInput | number
-    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
+    creatorId?: StringFieldUpdateOperationsInput | string
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTopicId?: IntFieldUpdateOperationsInput | number
@@ -19688,7 +19672,7 @@ export namespace Prisma {
 
   export type EventCreateManyEventFormatInput = {
     id?: number
-    creatorId?: string | null
+    creatorId: string
     eventName: string
     eventTopicId: number
     eventTag?: string | null
@@ -19756,7 +19740,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    creator?: CreatorProfileUpdateOneWithoutEventNestedInput
+    creator?: CreatorProfileUpdateOneRequiredWithoutEventNestedInput
     eventTopic?: EventTopicUpdateOneRequiredWithoutEventNestedInput
     eventCPCountryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
     ticketTransactions?: TicketTransactionUpdateManyWithoutEventNestedInput
@@ -19764,7 +19748,7 @@ export namespace Prisma {
 
   export type EventUncheckedUpdateWithoutEventFormatInput = {
     id?: IntFieldUpdateOperationsInput | number
-    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
+    creatorId?: StringFieldUpdateOperationsInput | string
     eventName?: StringFieldUpdateOperationsInput | string
     eventTopicId?: IntFieldUpdateOperationsInput | number
     eventTag?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19803,7 +19787,7 @@ export namespace Prisma {
 
   export type EventUncheckedUpdateManyWithoutEventFormatInput = {
     id?: IntFieldUpdateOperationsInput | number
-    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
+    creatorId?: StringFieldUpdateOperationsInput | string
     eventName?: StringFieldUpdateOperationsInput | string
     eventTopicId?: IntFieldUpdateOperationsInput | number
     eventTag?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19841,7 +19825,7 @@ export namespace Prisma {
 
   export type EventCreateManyEventTopicInput = {
     id?: number
-    creatorId?: string | null
+    creatorId: string
     eventName: string
     eventFormatId: number
     eventTag?: string | null
@@ -19909,7 +19893,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    creator?: CreatorProfileUpdateOneWithoutEventNestedInput
+    creator?: CreatorProfileUpdateOneRequiredWithoutEventNestedInput
     eventFormat?: EventFormatUpdateOneRequiredWithoutEventNestedInput
     eventCPCountryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
     ticketTransactions?: TicketTransactionUpdateManyWithoutEventNestedInput
@@ -19917,7 +19901,7 @@ export namespace Prisma {
 
   export type EventUncheckedUpdateWithoutEventTopicInput = {
     id?: IntFieldUpdateOperationsInput | number
-    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
+    creatorId?: StringFieldUpdateOperationsInput | string
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTag?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19956,7 +19940,7 @@ export namespace Prisma {
 
   export type EventUncheckedUpdateManyWithoutEventTopicInput = {
     id?: IntFieldUpdateOperationsInput | number
-    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
+    creatorId?: StringFieldUpdateOperationsInput | string
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTag?: NullableStringFieldUpdateOperationsInput | string | null

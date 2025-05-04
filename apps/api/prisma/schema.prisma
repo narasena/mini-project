@@ -106,8 +106,8 @@ model CreatorProfile {
 
 model Event {
   id                    Int                   @id @default(autoincrement())
-  creatorId             String?        
-  creator               CreatorProfile?        @relation(fields:[creatorId],references: [id])
+  creatorId             String        
+  creator               CreatorProfile        @relation(fields:[creatorId],references: [id])
   eventName             String
   eventFormatId       Int
   eventFormat           EventFormat           @relation(fields: [eventFormatId],references: [id])

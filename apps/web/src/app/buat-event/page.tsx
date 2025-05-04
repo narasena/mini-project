@@ -364,7 +364,7 @@ export default function CreateEventPage() {
   return (
     <Formik
       initialValues={{
-        creatorId: '',
+        creatorId: 'cma9s0l3n0000mkzs326fv05x',
         eventName: '',
         eventFormatId: 0,
         eventTopicId: 0,

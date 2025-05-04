@@ -9,6 +9,8 @@ import { verifyCode } from '@/services/email.verification/verifyVerificationCode
 import { prisma } from '@/prisma';
 import { Sex } from '@/prisma-generated/client';
 import { IJwtPayload, jwtSign } from '@/utils/jwt/jwt.sign';
+import { generateProfileLink } from '@/services/creators/generateProfileLink';
+import { generateCodeEightCharsMix } from '@/utils/code.generator/codeGeneratorEightCharsMix';
 
 export async function registerMember(
   req: Request,
@@ -301,6 +303,15 @@ export async function verifyNewMember(
         isEmailVerified: true,
       },
     });
+
+    const codeProfileLink = generateCodeEightCharsMix();
+    const newCreator = await prisma.creatorProfile.create({
+      data: {
+        memberId: member!.id,
+        profileLinkUrl:codeProfileLink,
+      }
+    })
+
     res.status(200).json({
       success: true,
       message: 'New member verified successfully',
@@ -308,6 +319,7 @@ export async function verifyNewMember(
         email,
         code,
         type,
+        newCreator
       },
     });
   } catch (error) {
