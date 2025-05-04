@@ -13,19 +13,46 @@ import { CiCirclePlus } from 'react-icons/ci';
 import { IoIosArrowDown } from 'react-icons/io';
 import { IoIosInformationCircle } from 'react-icons/io';
 import { AiOutlineClose } from 'react-icons/ai';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { ErrorMessage, Field, Form, Formik, useFormikContext } from 'formik';
 import apiInstance from '@/utils/axiosInstance';
-
+import { createEventSchema } from '@/features/schemas/create.event.schema/createEventSchema';
+import { toast } from 'react-toastify';
 
 type TMainTabKeys = 'eventDateTime' | 'eventForms' | 'ticketForms';
 type TSubTabKeys = 'first' | 'second';
 type TTabTitle = string;
 type TOpenModal = 'eventDateTime' | 'eventCategories' | 'ticketForms' | null;
+type TTicketType = 'BERBAYAR' | 'BAYAR_SESUKAMU' | 'GRATIS';
 
 interface IActiveTabState {
   mainTab: TMainTabKeys;
   subTab: TSubTabKeys;
   tabTitle: TTabTitle;
+}
+
+interface IEventFormat {
+  id: number;
+  formatName: string | undefined;
+}
+
+interface IEventTopic extends IEventFormat {
+  topicName: string;
+}
+
+interface IEventCategory {
+  eventFormatId: number | string;
+  eventTopicId: number | string;
+  formatName: string;
+  topicName: string;
+}
+
+interface ITicketType {
+  ticketType: TTicketType;
+  maxTicketPerTransaction: number;
+}
+
+interface TicketSelectorProps {
+  handleModalOpen: (formName: TOpenModal) => void;
 }
 
 export default function CreateEventPage() {
@@ -119,13 +146,18 @@ export default function CreateEventPage() {
     );
   };
   const [eventCategories, setEventCategories] = React.useState({
+    eventFormatId: 0,
     format: '',
+    eventTopicId: 0,
     topic: '',
-    tags: ''
+    tags: '',
   });
-  const [eventCategoryLists, setEventCategoryLists] = React.useState({
+  const [eventCategoryLists, setEventCategoryLists] = React.useState<{
+    formats: IEventFormat[];
+    topics: IEventTopic[];
+  }>({
     formats: [],
-    topics:[]
+    topics: [],
   });
 
   const handleGetEventCategories = async () => {
@@ -137,24 +169,25 @@ export default function CreateEventPage() {
       });
     } catch (error) {
       console.log(error);
-      
     }
-  }
+  };
   const [countryPhones, setCountryPhones] = React.useState([]);
   const handleGetCountryPhone = async () => {
     try {
       const response = await apiInstance.get('/country-phones');
       setCountryPhones(response.data.countryPhones);
-      console.log(response.data.countryPhones);
     } catch (error) {
       console.log(error);
-      
     }
-  }
-  const [ticketMaxOpen, setTicketMaxOpen] = React.useState(true);
+  };
+  const [idCardStatus, setIdCardStatus] = React.useState('NO_ID');
+  const handleIdCardStatusChange = () => {
+    setIdCardStatus(idCardStatus === 'NO_ID' ? 'WITH_ID' : 'NO_ID');
+  };
+  const [ticketMaxOpen, setTicketMaxOpen] = React.useState(false);
   const [ticketPurchasedMax, setTicketPurchasedMax] = React.useState<number>(3);
   const ticketType = ['Berbayar', 'Bayar Sesukamu', 'Gratis'];
-  
+
   const handleSelectMaxTicket = (e: any) => {
     e.preventDefault();
     setTicketMaxOpen(!ticketMaxOpen);
@@ -183,7 +216,12 @@ export default function CreateEventPage() {
       checkStatus: true,
       value: '',
     },
-    { id: 'idCardStatus', formTitle: 'No. KTP', checkStatus: false, value: 'WITH_ID' },
+    {
+      id: 'idCardStatus',
+      formTitle: 'No. KTP',
+      checkStatus: false,
+      value: 'WITH_ID',
+    },
     {
       id: 'birthDate',
       formTitle: 'Tanggal Lahir',
@@ -192,19 +230,144 @@ export default function CreateEventPage() {
     },
     { id: 'gender', formTitle: 'Jenis Kelamin', checkStatus: true, value: '' },
   ];
-  
-  const ticketPerPurchaseMax = [1, 2, 3, 4, 5];
+  const [submitFormTest, setSubmitFormTest] = React.useState({});
+  const handleFormSubmit = (values: any) => {
+    try {
+      console.log(values);
+      setSubmitFormTest(values);
+      toast.success('Form submitted successfully');
+    } catch (error) {
+      toast.error('Failed to submit form');
+    }
+  };
+  const DisplayEventFormatChosen = () => {
+    const { values } = useFormikContext<IEventCategory>();
+    const selectedFormat: IEventFormat | undefined =
+      eventCategoryLists.formats.find(
+        (f: IEventFormat) => f.id === Number(values.eventFormatId),
+      );
+    const selectedTopic: IEventTopic | undefined =
+      eventCategoryLists.topics.find(
+        (t: IEventTopic) => t.id === Number(values.eventTopicId),
+      );
+    return (
+      <>
+        <span>{selectedFormat?.formatName}</span>
+        <span
+          className={`${selectedFormat !== undefined && selectedTopic !== undefined ? 'inline-block' : 'hidden'} dotdot mx-[5px] w-2 h-2 rounded-full bg-[#d5d5d5]`}
+        ></span>
+        <span>{selectedTopic?.topicName}</span>
+        <span className="ml-1 inline-block leading-1 align-[-0.125em]">
+          {selectedFormat !== undefined && selectedTopic !== undefined && (
+            <BiSolidEdit />
+          )}
+          {selectedFormat === undefined && selectedTopic === undefined && (
+            <span className="!text-[#adb6c9]">{'Pilih Kategori *'}</span>
+          )}
+        </span>
+      </>
+    );
+  };
+
+  const TicketSelector = ({ handleModalOpen }: TicketSelectorProps) => {
+    // Now this is valid - called inside a function component
+    const { values, setFieldValue } = useFormikContext<ITicketType>();
+
+    const ticketOptions = [
+      { label: 'Berbayar', value: 'BERBAYAR' },
+      { label: 'Bayar Sesukamu', value: 'BAYAR_SESUKAMU_' },
+      { label: 'Gratis', value: 'GRATIS' },
+    ];
+
+    const handleTicketSelect = (value: string) => {
+      setFieldValue('ticketType', value);
+      handleModalOpen('ticketForms');
+    };
+
+    return (
+      <>
+        {ticketOptions.map((item, index) => (
+          <div
+            className={`w-full max-w-full cursor-pointer ${
+              values.ticketType === item.value
+                ? 'ring-2 ring-blue-500'
+                : 'hover:ring-1 hover:ring-gray-300'
+            }`}
+            key={index}
+            onClick={() => handleTicketSelect(item.value)}
+            role="button"
+            tabIndex={0}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') handleTicketSelect(item.value);
+            }}
+          >
+            <button type="button" className="ticket-category-button w-full">
+              {/* Keep your existing styling structure here */}
+              <div className="flex">
+                <div className="barcode w-[53px] max-w-full flex-middle-center py-4 overflow-hidden border-r border-[#d8dfe7]">
+                  <Image
+                    src={'/images/icon-barcode.svg'}
+                    width={9}
+                    height={58}
+                    alt=""
+                    className="h-auto max-w-full align-middle"
+                  />
+                </div>
+                <div className="ticket-label">
+                  <div className="flex flex-col justify-center capitalize">
+                    <p className="font-normal text-sm leading-[1.5]">
+                      Buat Tiket
+                    </p>
+                    <span className="text-lg">{item.label}</span>
+                  </div>
+                  <div className="add-ticket-button z-[2] flex items-center">
+                    <span className="text-[42px] text-[#adb6c9]">
+                      <CiCirclePlus />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </div>
+        ))}
+      </>
+    );
+  };
+
+  const MaxTicketSelector = () => {
+    const { values, setFieldValue } = useFormikContext<ITicketType>();
+    const ticketPerPurchaseMax = [1, 2, 3, 4, 5];
+    const handleTicketPerPurchaseMax = (value: number) => {
+      setFieldValue('maxTicketPerTransaction', value);
+      setTicketPurchasedMax(value);
+    };
+    return (
+      <>
+        {ticketPerPurchaseMax.map((item, index) => (
+          <li
+            className="p-[10px_15px] cursor-pointer hover:bg-[#f7f7f7]"
+            key={index}
+            onClick={() => handleTicketPerPurchaseMax(item)}
+          >
+            {item}
+            {' Tiket'}
+          </li>
+        ))}
+      </>
+    );
+  };
+
   React.useEffect(() => {
     handleGetEventCategories();
     handleGetCountryPhone();
-  }, [])
+  }, []);
   return (
     <Formik
       initialValues={{
         creatorId: '',
         eventName: '',
-        eventFormatId: '',
-        eventTopicId: '',
+        eventFormatId: 0,
+        eventTopicId: 0,
         eventTag: '',
         isPrivateEvent: false,
         organizerName: '',
@@ -229,13 +392,25 @@ export default function CreateEventPage() {
         eventCPCountryPhoneId: 103,
         eventCPPhone: '',
         idCardStatus: 'NO_ID',
-        maxTicketPerTransaction: 1,
+        maxTicketPerTransaction: ticketPurchasedMax,
         oneEmailOneTransaction: false,
         ticketDataFormUnique: false,
-        isDraft: false,       
-
+        isDraft: false,
       }}
-      onSubmit={() => { }}>
+      validationSchema={createEventSchema}
+      // onSubmit={(values) => handleFormSubmit(values)}
+      onSubmit={(values, { setSubmitting }) => {
+        console.log('Submission values:', values);
+        handleFormSubmit(values);
+        setSubmitting(false);
+      }}
+      validate={(values) => {
+        createEventSchema
+          .validate(values, { abortEarly: false })
+          .then(() => console.log('Validation passed'))
+          .catch((err) => console.error('Validation errors:', err.errors));
+      }}
+    >
       <Form>
         <div className="relative">
           <div className="header-nav-top absolute top-0 left-0 right-0 z-10 bg-white box-shadow-small">
@@ -327,14 +502,15 @@ export default function CreateEventPage() {
                             <div className="event-name w-full max-w-full sm:mt-[15px] pl-[15px]">
                               <div className="w-full max-w-full">
                                 <Field
-                                  name='eventName'
+                                  name="eventName"
                                   type="text"
                                   placeholder="Nama Event*"
                                   className="h-[55px] w-full max-w-full bg-white text-2xl text-[#151416] outline-none"
                                 />
                                 <ErrorMessage
-                                  name='eventName'
-                                  component='div'
+                                  name="eventName"
+                                  component="div"
+                                  className="text-red-500 text-xs mt-1"
                                 />
                               </div>
                             </div>
@@ -347,23 +523,7 @@ export default function CreateEventPage() {
                                     }}
                                     className="category-wrapper border-b border-[#d8d8d8] mb-[5px] cursor-pointer pb-2.5 text-[0.9375rem] !text-[#0049cc]"
                                   >
-                                    <span>{eventCategories.format}</span>
-                                    <span
-                                      className={`${eventCategories.topic !== '' && eventCategories.format !== '' ? 'inline-block' : 'hidden'} dotdot mx-[5px] w-2 h-2 rounded-full bg-[#d5d5d5]`}
-                                    ></span>
-                                    <span>{eventCategories.topic}</span>
-                                    <span className="ml-1 inline-block leading-1 align-[-0.125em]">
-                                      {eventCategories.topic !== '' &&
-                                        eventCategories.format !== '' && (
-                                          <BiSolidEdit />
-                                        )}
-                                      {eventCategories.topic === '' &&
-                                        eventCategories.format === '' && (
-                                          <span className="!text-[#adb6c9]">
-                                            {'Pilih Kategori *'}
-                                          </span>
-                                        )}
-                                    </span>
+                                    <DisplayEventFormatChosen />
                                   </div>
                                 </div>
                               </div>
@@ -403,12 +563,16 @@ export default function CreateEventPage() {
                                 </div>
                                 <div className="width-expanded pl-[15px] flex-1 w-full max-w-full">
                                   <Field
-                                    name='organizerName'
+                                    name="organizerName"
                                     type="text"
                                     placeholder="Nama Organisasi*"
                                     className="h-[40px] align-middle inline-block w-full max-w-full bg-white text-[0.9375rem] text-[#151416] outline-none"
                                   />
-                                  <ErrorMessage name='organizerName' component='div' />
+                                  <ErrorMessage
+                                    name="organizerName"
+                                    component="div"
+                                    className="text-red-500 text-xs mt-1"
+                                  />
                                 </div>
                               </div>
                             </div>
@@ -450,12 +614,16 @@ export default function CreateEventPage() {
                                 <div className="event-date date-time-button cursor-pointer mb-5 text-[#adb6c9]">
                                   <IoLocationSharp className="text-base md:text-xl inline-block align-middle mr-1.5" />
                                   <Field
-                                    name='eventLocation'
+                                    name="eventLocation"
                                     type="text"
                                     placeholder="Lokasi*"
-                                    className="text-sm md:text-base outline-none border-b border-[#e8e8e8]"
+                                    className="text-sm md:text-base outline-none border-b border-[#e8e8e8] text-[#151416]"
                                   />
-                                  <ErrorMessage name='eventLocation' component='div' />
+                                  <ErrorMessage
+                                    name="eventLocation"
+                                    component="div"
+                                    className="text-red-500 text-xs mt-1"
+                                  />
                                 </div>
                               </div>
                             </div>
@@ -481,11 +649,11 @@ export default function CreateEventPage() {
                         <div className="ticket-category-container md:block hidden">
                           <div className="flex-middle-center ">
                             <div className="md:grid md:grid-cols-[repeat(3,1fr)] grid-cols-[repeat(1,1fr)] gap-[15px] w-full max-w-full">
-                              {ticketType.map((item, index) => (
+                              {/* {ticketOptions.map((item, index) => (
                                 <div
                                   className="w-full max-w-full"
                                   key={index}
-                                  onClick={() => handleModalOpen('ticketForms')}
+                                  onClick={() => handleTicketSelect(item.value)}
                                 >
                                   <button className="ticket-category-button">
                                     <div className="flex">
@@ -504,7 +672,7 @@ export default function CreateEventPage() {
                                             Buat Tiket
                                           </p>
                                           <span className="text-lg ">
-                                            {item}
+                                            {item.label}
                                           </span>
                                         </div>
                                         <div className="add-ticket-button z-[2] flex items-center">
@@ -516,7 +684,10 @@ export default function CreateEventPage() {
                                     </div>
                                   </button>
                                 </div>
-                              ))}
+                              ))} */}
+                              <TicketSelector
+                                handleModalOpen={handleModalOpen}
+                              />
                             </div>
                           </div>
                         </div>
@@ -546,12 +717,16 @@ export default function CreateEventPage() {
                               <div className="form-control w-full max-w-full">
                                 <div className="form-control-input">
                                   <Field
-                                    name='eventCPName'
+                                    name="eventCPName"
                                     type="text"
                                     placeholder="Nama narahubung"
                                     className="c-input"
                                   />
-                                  <ErrorMessage name='eventCPName' component='div' />
+                                  <ErrorMessage
+                                    name="eventCPName"
+                                    component="div"
+                                    className="text-red-500 text-xs mt-1"
+                                  />
                                 </div>
                               </div>
                             </div>
@@ -566,12 +741,16 @@ export default function CreateEventPage() {
                               <div className="form-control w-full max-w-full">
                                 <div className="form-control-input">
                                   <Field
-                                    name='eventCPEmail'
+                                    name="eventCPEmail"
                                     type="email"
                                     placeholder="Email yang dapat dihubungi"
                                     className="c-input"
                                   />
-                                  <ErrorMessage name='eventCPEmail' component='div' />
+                                  <ErrorMessage
+                                    name="eventCPEmail"
+                                    component="div"
+                                    className="text-red-500 text-xs mt-1"
+                                  />
                                 </div>
                               </div>
                             </div>
@@ -592,7 +771,7 @@ export default function CreateEventPage() {
                                     id=""
                                     className="mr-2.5 c-select"
                                   >
-                                    {countryPhones.map((country:any) => (
+                                    {countryPhones.map((country: any) => (
                                       <option
                                         key={country.id}
                                         value={country.id}
@@ -610,22 +789,19 @@ export default function CreateEventPage() {
                                   <div className="form-control w-full max-w-full">
                                     <div className="form-control-input">
                                       <Field
-                                        name='eventCPPhone'
+                                        name="eventCPPhone"
                                         type="text"
                                         inputMode="numeric"
                                         pattern="[0-9]*"
                                         placeholder="Contoh: 081100001111"
                                         className="c-input"
-                                        onChange={(e:any) => {
-                                          e.target.value =
-                                            e.target.value.replace(
-                                              /[^0-9]/g,
-                                              '',
-                                            );
-                                        }}
-                                        maxLength={12}
+                                        maxLength={13}
                                       />
-                                      <ErrorMessage name='eventCPPhone' component='div' />
+                                      <ErrorMessage
+                                        name="eventCPPhone"
+                                        component="div"
+                                        className="text-red-500 text-xs mt-1"
+                                      />
                                     </div>
                                   </div>
                                 </div>
@@ -659,7 +835,11 @@ export default function CreateEventPage() {
                                 <label htmlFor={item.id}>
                                   {item.formTitle}
                                 </label>
-                                <ErrorMessage name={item.id} component='div' />
+                                <ErrorMessage
+                                  name={item.id}
+                                  component="div"
+                                  className="text-red-500 text-xs mt-1"
+                                />
                               </div>
                             ))}
                           </div>
@@ -699,7 +879,7 @@ export default function CreateEventPage() {
                               <div className="w-full md:w-[60%] max-w-full relative z-999">
                                 <Link href={''} onClick={handleSelectMaxTicket}>
                                   <h2 className="min-w-20 p-3 relative text-sm border border-[#e8e8e8] rounded-lg">
-                                    5 Tiket
+                                    {`${ticketPurchasedMax} Tiket`}
                                     <IoIosArrowDown className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-[#8E919B] " />
                                   </h2>
                                 </Link>
@@ -708,15 +888,7 @@ export default function CreateEventPage() {
                                   ref={dropdownRef}
                                 >
                                   <ul className="whitespace-nowrap text-sm list-none">
-                                    {ticketPerPurchaseMax.map((item, index) => (
-                                      <li
-                                        className="p-[10px_15px] cursor-pointer hover:bg-[#f7f7f7]"
-                                        key={index}
-                                      >
-                                        {item}
-                                        {' Tiket'}
-                                      </li>
-                                    ))}
+                                    <MaxTicketSelector />
                                   </ul>
                                 </div>
                               </div>
@@ -739,7 +911,7 @@ export default function CreateEventPage() {
                                 className="relative inline-block w-11 h-6 cursor-pointer"
                               >
                                 <Field
-                                  name='oneEmailOneTransaction'
+                                  name="oneEmailOneTransaction"
                                   type="checkbox"
                                   id="hs-basic-usage"
                                   value={true}
@@ -756,7 +928,9 @@ export default function CreateEventPage() {
                                 {'1 tiket - 1 data pemesan'}
                               </span>
                               <span className="text-sm text-[#8e919b]">
-                                {'1 tiket hanya dapat digunakan untuk 1 data pemesan, data antar tiket tidak boleh sama.'}
+                                {
+                                  '1 tiket hanya dapat digunakan untuk 1 data pemesan, data antar tiket tidak boleh sama.'
+                                }
                               </span>
                             </div>
                             <div className="w-auto max-w-full pl-[15px]">
@@ -765,7 +939,7 @@ export default function CreateEventPage() {
                                 className="relative inline-block w-11 h-6 cursor-pointer"
                               >
                                 <Field
-                                  name='ticketDataFormUnique'
+                                  name="ticketDataFormUnique"
                                   type="checkbox"
                                   id="hs-basic-usage"
                                   value={true}
@@ -801,7 +975,10 @@ export default function CreateEventPage() {
                         </button>
                       </div>
                       <div className="flex-1 lg:w-auto w-1/2 max-w-full pl-[15px] ">
-                        <button className="w-full max-w-full c-button c-button-primary">
+                        <button
+                          type="submit"
+                          className="w-full max-w-full c-button c-button-primary"
+                        >
                           <span>Buat Event Sekarang</span>
                         </button>
                       </div>
@@ -833,25 +1010,23 @@ export default function CreateEventPage() {
                         <div className="form-control-input">
                           <Field
                             as="select"
-                            name='eventFormatId'
+                            name="eventFormatId"
                             className="c-input"
-                            onChange={(e:any) =>
-                              setEventCategories({
-                                ...eventCategories,
-                                format: e.target.value,
-                              })
-                            }
                           >
-                            <option value="">Pilih Format Event</option>
+                            <option value={99}>Pilih Format Event</option>
                             {eventCategoryLists.formats.map(
-                              (format: any) => (
+                              (format: IEventFormat) => (
                                 <option key={format.id} value={format.id}>
                                   {format.formatName}
                                 </option>
                               ),
                             )}
                           </Field>
-                          <ErrorMessage name="eventFormatId" component="div" className="text-red-500 text-xs mt-1" />
+                          <ErrorMessage
+                            name="eventFormatId"
+                            component="div"
+                            className="text-red-500 text-xs mt-1"
+                          />
                         </div>
                       </div>
                     </div>
@@ -867,26 +1042,24 @@ export default function CreateEventPage() {
                       <div className="form-control w-full max-w-full">
                         <div className="form-control-input">
                           <Field
-                            as='select'
-                            name='eventTopicId'
+                            as="select"
+                            name="eventTopicId"
                             className="c-input"
-                            onChange={(e:any) =>
-                              setEventCategories({
-                                ...eventCategories,
-                                topic: e.target.value,
-                              })
-                            }
                           >
                             <option value="">Pilih Topik Event</option>
                             {eventCategoryLists.topics.map(
-                              (topic: any) => (
+                              (topic: IEventTopic) => (
                                 <option key={topic.id} value={topic.id}>
                                   {topic.topicName}
                                 </option>
                               ),
                             )}
                           </Field>
-                          <ErrorMessage name="eventTopicId" component="div" className="text-red-500 text-xs mt-1" />
+                          <ErrorMessage
+                            name="eventTopicId"
+                            component="div"
+                            className="text-red-500 text-xs mt-1"
+                          />
                         </div>
                       </div>
                     </div>
@@ -910,7 +1083,11 @@ export default function CreateEventPage() {
                             placeholder="Pilih topik event"
                             className="c-input"
                           />
-                          <ErrorMessage name="eventTag" component="div" className="text-red-500 text-xs mt-1" />
+                          <ErrorMessage
+                            name="eventTag"
+                            component="div"
+                            className="text-red-500 text-xs mt-1"
+                          />
                         </div>
                       </div>
                     </div>
@@ -1006,11 +1183,15 @@ export default function CreateEventPage() {
                         <div className="form-control w-full max-w-full">
                           <div className="form-control-input">
                             <Field
-                              name="evenStartDate"
+                              name="eventStartDate"
                               type="date"
                               className="c-input"
                             />
-                            <ErrorMessage name="evenStartDate" component={'div'} className='text-red-500 text-sm' />
+                            <ErrorMessage
+                              name="eventStartDate"
+                              component={'div'}
+                              className="text-red-500 text-sm"
+                            />
                           </div>
                         </div>
                       </div>
@@ -1026,11 +1207,15 @@ export default function CreateEventPage() {
                         <div className="form-control w-full max-w-full">
                           <div className="form-control-input">
                             <Field
-                              name="evenEndDate"
+                              name="eventEndDate"
                               type="date"
                               className="c-input"
                             />
-                            <ErrorMessage name="evenEndDate" component={'div'} className='text-red-500 text-sm' />
+                            <ErrorMessage
+                              name="eventEndDate"
+                              component={'div'}
+                              className="text-red-500 text-sm"
+                            />
                           </div>
                         </div>
                       </div>
@@ -1051,11 +1236,16 @@ export default function CreateEventPage() {
                         <div className="form-control w-full max-w-full">
                           <div className="form-control-input">
                             <Field
-                              name='eventStartTime'
+                              name="eventStartTime"
                               type="time"
                               className="c-input"
+                              step="900"
                             />
-                            <ErrorMessage name="eventStartTime" component={'div'} className='text-red-500 text-sm' />
+                            <ErrorMessage
+                              name="eventStartTime"
+                              component={'div'}
+                              className="text-red-500 text-sm"
+                            />
                           </div>
                         </div>
                       </div>
@@ -1071,11 +1261,16 @@ export default function CreateEventPage() {
                         <div className="form-control w-full max-w-full">
                           <div className="form-control-input">
                             <Field
-                              name="eventEndTime" 
+                              name="eventEndTime"
                               type="time"
                               className="c-input"
+                              step="900"
                             />
-                            <ErrorMessage name="eventEndTime" component={'div'} className='text-red-500 text-sm' />
+                            <ErrorMessage
+                              name="eventEndTime"
+                              component={'div'}
+                              className="text-red-500 text-sm"
+                            />
                           </div>
                         </div>
                       </div>
@@ -1123,7 +1318,11 @@ export default function CreateEventPage() {
                               placeholder="Maksimal 50 karakter"
                               className="c-input"
                             />
-                            <ErrorMessage name="ticketName" component={'div'} className='text-red-500 text-sm' />
+                            <ErrorMessage
+                              name="ticketName"
+                              component={'div'}
+                              className="text-red-500 text-sm"
+                            />
                           </div>
                         </div>
                       </div>
@@ -1139,12 +1338,16 @@ export default function CreateEventPage() {
                         <div className="form-control w-full max-w-full">
                           <div className="form-control-input">
                             <Field
-                              name='ticketQty'
+                              name="ticketQty"
                               type="number"
                               placeholder=""
                               className="c-input"
                             />
-                            <ErrorMessage name="ticketQty" component={'div'} className='text-red-500 text-sm' />
+                            <ErrorMessage
+                              name="ticketQty"
+                              component={'div'}
+                              className="text-red-500 text-sm"
+                            />
                           </div>
                         </div>
                       </div>
@@ -1160,12 +1363,16 @@ export default function CreateEventPage() {
                         <div className="form-control w-full max-w-full">
                           <div className="form-control-input">
                             <Field
-                              name='ticketPrice'
+                              name="ticketPrice"
                               type="number"
                               placeholder=""
                               className="c-input"
                             />
-                            <ErrorMessage name="ticketPrice" component={'div'} className='text-red-500 text-sm' />
+                            <ErrorMessage
+                              name="ticketPrice"
+                              component={'div'}
+                              className="text-red-500 text-sm"
+                            />
                           </div>
                         </div>
                       </div>
@@ -1182,11 +1389,15 @@ export default function CreateEventPage() {
                           <div className="form-control-input">
                             <Field
                               as="textarea"
-                              name='ticketDesc'
+                              name="ticketDesc"
                               id=""
                               className="border border-[#d8d8d8] min-h-[70px] rounded-sm p-2.5 w-full outline-none"
                             ></Field>
-                            <ErrorMessage name="ticketDesc" component={'div'} className='text-red-500 text-sm' />
+                            <ErrorMessage
+                              name="ticketDesc"
+                              component={'div'}
+                              className="text-red-500 text-sm"
+                            />
                           </div>
                         </div>
                       </div>
@@ -1207,11 +1418,15 @@ export default function CreateEventPage() {
                         <div className="form-control w-full max-w-full">
                           <div className="form-control-input">
                             <Field
-                              name='ticketStartDate'
+                              name="ticketStartDate"
                               type="date"
                               className="c-input"
                             />
-                            <ErrorMessage name="ticketStartDate" component={'div'} className='text-red-500 text-sm' />
+                            <ErrorMessage
+                              name="ticketStartDate"
+                              component={'div'}
+                              className="text-red-500 text-sm"
+                            />
                           </div>
                         </div>
                       </div>
@@ -1227,11 +1442,15 @@ export default function CreateEventPage() {
                         <div className="form-control w-full max-w-full">
                           <div className="form-control-input">
                             <Field
-                              name='ticketEndDate'
-                              type="number"
+                              name="ticketEndDate"
+                              type="date"
                               className="c-input"
                             />
-                            <ErrorMessage name="ticketEndDate" component={'div'} className='text-red-500 text-sm' />
+                            <ErrorMessage
+                              name="ticketEndDate"
+                              component={'div'}
+                              className="text-red-500 text-sm"
+                            />
                           </div>
                         </div>
                       </div>

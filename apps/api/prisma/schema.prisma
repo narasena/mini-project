@@ -106,16 +106,16 @@ model CreatorProfile {
 
 model Event {
   id                    Int                   @id @default(autoincrement())
-  creatorId             String        
-  creator               CreatorProfile        @relation(fields:[creatorId],references: [id])
+  creatorId             String?        
+  creator               CreatorProfile?        @relation(fields:[creatorId],references: [id])
   eventName             String
   eventFormatId       Int
   eventFormat           EventFormat           @relation(fields: [eventFormatId],references: [id])
   eventTopicId          Int
   eventTopic            EventTopic            @relation(fields:[eventTopicId],references:[id])
-  eventTag             String
+  eventTag             String?
   isPrivateEvent        Boolean               @default(false)
-  organizerName         String?
+  organizerName         String
   organizerLogoImgUrl   String?
   bannerImgUrl          String?
   eventStartDate        String
@@ -129,7 +129,7 @@ model Event {
   ticketQty             Int
   ticketPrice           Int                   @default(20000)
   ticketDesc            String?
-  ticketTermsAndCondition String
+  ticketTermsAndCondition String?
   ticketStartDate       String
   ticketEndDate         String
   eventCPName           String

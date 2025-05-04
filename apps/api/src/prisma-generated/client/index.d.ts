@@ -7267,13 +7267,13 @@ export namespace Prisma {
 
   export type EventGroupByOutputType = {
     id: number
-    creatorId: string
+    creatorId: string | null
     eventName: string
     eventFormatId: number
     eventTopicId: number
-    eventTag: string
+    eventTag: string | null
     isPrivateEvent: boolean
-    organizerName: string | null
+    organizerName: string
     organizerLogoImgUrl: string | null
     bannerImgUrl: string | null
     eventStartDate: string
@@ -7287,7 +7287,7 @@ export namespace Prisma {
     ticketQty: number
     ticketPrice: number
     ticketDesc: string | null
-    ticketTermsAndCondition: string
+    ticketTermsAndCondition: string | null
     ticketStartDate: string
     ticketEndDate: string
     eventCPName: string
@@ -7360,7 +7360,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
-    creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
+    creator?: boolean | Event$creatorArgs<ExtArgs>
     eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
     eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
     eventCPCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
@@ -7405,7 +7405,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
-    creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
+    creator?: boolean | Event$creatorArgs<ExtArgs>
     eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
     eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
     eventCPCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
@@ -7448,7 +7448,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
-    creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
+    creator?: boolean | Event$creatorArgs<ExtArgs>
     eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
     eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
     eventCPCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
@@ -7495,7 +7495,7 @@ export namespace Prisma {
 
   export type EventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "creatorId" | "eventName" | "eventFormatId" | "eventTopicId" | "eventTag" | "isPrivateEvent" | "organizerName" | "organizerLogoImgUrl" | "bannerImgUrl" | "eventStartDate" | "eventEndDate" | "eventStartTime" | "eventEndTime" | "eventLocation" | "eventDesc" | "ticketType" | "ticketName" | "ticketQty" | "ticketPrice" | "ticketDesc" | "ticketTermsAndCondition" | "ticketStartDate" | "ticketEndDate" | "eventCPName" | "eventCPEmail" | "eventCPCountryPhoneId" | "eventCPPhone" | "idCardStatus" | "maxTicketPerTransaction" | "oneEmailOneTransaction" | "ticketDataFormUnique" | "isDraft" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["event"]>
   export type EventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
+    creator?: boolean | Event$creatorArgs<ExtArgs>
     eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
     eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
     eventCPCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
@@ -7503,13 +7503,13 @@ export namespace Prisma {
     _count?: boolean | EventCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type EventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
+    creator?: boolean | Event$creatorArgs<ExtArgs>
     eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
     eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
     eventCPCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
   }
   export type EventIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    creator?: boolean | CreatorProfileDefaultArgs<ExtArgs>
+    creator?: boolean | Event$creatorArgs<ExtArgs>
     eventFormat?: boolean | EventFormatDefaultArgs<ExtArgs>
     eventTopic?: boolean | EventTopicDefaultArgs<ExtArgs>
     eventCPCountryPhone?: boolean | CountryPhoneDefaultArgs<ExtArgs>
@@ -7518,7 +7518,7 @@ export namespace Prisma {
   export type $EventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Event"
     objects: {
-      creator: Prisma.$CreatorProfilePayload<ExtArgs>
+      creator: Prisma.$CreatorProfilePayload<ExtArgs> | null
       eventFormat: Prisma.$EventFormatPayload<ExtArgs>
       eventTopic: Prisma.$EventTopicPayload<ExtArgs>
       eventCPCountryPhone: Prisma.$CountryPhonePayload<ExtArgs>
@@ -7526,13 +7526,13 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      creatorId: string
+      creatorId: string | null
       eventName: string
       eventFormatId: number
       eventTopicId: number
-      eventTag: string
+      eventTag: string | null
       isPrivateEvent: boolean
-      organizerName: string | null
+      organizerName: string
       organizerLogoImgUrl: string | null
       bannerImgUrl: string | null
       eventStartDate: string
@@ -7546,7 +7546,7 @@ export namespace Prisma {
       ticketQty: number
       ticketPrice: number
       ticketDesc: string | null
-      ticketTermsAndCondition: string
+      ticketTermsAndCondition: string | null
       ticketStartDate: string
       ticketEndDate: string
       eventCPName: string
@@ -7955,7 +7955,7 @@ export namespace Prisma {
    */
   export interface Prisma__EventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    creator<T extends CreatorProfileDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CreatorProfileDefaultArgs<ExtArgs>>): Prisma__CreatorProfileClient<$Result.GetResult<Prisma.$CreatorProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    creator<T extends Event$creatorArgs<ExtArgs> = {}>(args?: Subset<T, Event$creatorArgs<ExtArgs>>): Prisma__CreatorProfileClient<$Result.GetResult<Prisma.$CreatorProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     eventFormat<T extends EventFormatDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventFormatDefaultArgs<ExtArgs>>): Prisma__EventFormatClient<$Result.GetResult<Prisma.$EventFormatPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     eventTopic<T extends EventTopicDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventTopicDefaultArgs<ExtArgs>>): Prisma__EventTopicClient<$Result.GetResult<Prisma.$EventTopicPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     eventCPCountryPhone<T extends CountryPhoneDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CountryPhoneDefaultArgs<ExtArgs>>): Prisma__CountryPhoneClient<$Result.GetResult<Prisma.$CountryPhonePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
@@ -8418,6 +8418,25 @@ export namespace Prisma {
      * Limit how many Events to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Event.creator
+   */
+  export type Event$creatorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CreatorProfile
+     */
+    select?: CreatorProfileSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CreatorProfile
+     */
+    omit?: CreatorProfileOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CreatorProfileInclude<ExtArgs> | null
+    where?: CreatorProfileWhereInput
   }
 
   /**
@@ -13731,13 +13750,13 @@ export namespace Prisma {
     OR?: EventWhereInput[]
     NOT?: EventWhereInput | EventWhereInput[]
     id?: IntFilter<"Event"> | number
-    creatorId?: StringFilter<"Event"> | string
+    creatorId?: StringNullableFilter<"Event"> | string | null
     eventName?: StringFilter<"Event"> | string
     eventFormatId?: IntFilter<"Event"> | number
     eventTopicId?: IntFilter<"Event"> | number
-    eventTag?: StringFilter<"Event"> | string
+    eventTag?: StringNullableFilter<"Event"> | string | null
     isPrivateEvent?: BoolFilter<"Event"> | boolean
-    organizerName?: StringNullableFilter<"Event"> | string | null
+    organizerName?: StringFilter<"Event"> | string
     organizerLogoImgUrl?: StringNullableFilter<"Event"> | string | null
     bannerImgUrl?: StringNullableFilter<"Event"> | string | null
     eventStartDate?: StringFilter<"Event"> | string
@@ -13751,7 +13770,7 @@ export namespace Prisma {
     ticketQty?: IntFilter<"Event"> | number
     ticketPrice?: IntFilter<"Event"> | number
     ticketDesc?: StringNullableFilter<"Event"> | string | null
-    ticketTermsAndCondition?: StringFilter<"Event"> | string
+    ticketTermsAndCondition?: StringNullableFilter<"Event"> | string | null
     ticketStartDate?: StringFilter<"Event"> | string
     ticketEndDate?: StringFilter<"Event"> | string
     eventCPName?: StringFilter<"Event"> | string
@@ -13766,7 +13785,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Event"> | Date | string
     updatedAt?: DateTimeFilter<"Event"> | Date | string
     deletedAt?: DateTimeNullableFilter<"Event"> | Date | string | null
-    creator?: XOR<CreatorProfileScalarRelationFilter, CreatorProfileWhereInput>
+    creator?: XOR<CreatorProfileNullableScalarRelationFilter, CreatorProfileWhereInput> | null
     eventFormat?: XOR<EventFormatScalarRelationFilter, EventFormatWhereInput>
     eventTopic?: XOR<EventTopicScalarRelationFilter, EventTopicWhereInput>
     eventCPCountryPhone?: XOR<CountryPhoneScalarRelationFilter, CountryPhoneWhereInput>
@@ -13775,13 +13794,13 @@ export namespace Prisma {
 
   export type EventOrderByWithRelationInput = {
     id?: SortOrder
-    creatorId?: SortOrder
+    creatorId?: SortOrderInput | SortOrder
     eventName?: SortOrder
     eventFormatId?: SortOrder
     eventTopicId?: SortOrder
-    eventTag?: SortOrder
+    eventTag?: SortOrderInput | SortOrder
     isPrivateEvent?: SortOrder
-    organizerName?: SortOrderInput | SortOrder
+    organizerName?: SortOrder
     organizerLogoImgUrl?: SortOrderInput | SortOrder
     bannerImgUrl?: SortOrderInput | SortOrder
     eventStartDate?: SortOrder
@@ -13795,7 +13814,7 @@ export namespace Prisma {
     ticketQty?: SortOrder
     ticketPrice?: SortOrder
     ticketDesc?: SortOrderInput | SortOrder
-    ticketTermsAndCondition?: SortOrder
+    ticketTermsAndCondition?: SortOrderInput | SortOrder
     ticketStartDate?: SortOrder
     ticketEndDate?: SortOrder
     eventCPName?: SortOrder
@@ -13822,13 +13841,13 @@ export namespace Prisma {
     AND?: EventWhereInput | EventWhereInput[]
     OR?: EventWhereInput[]
     NOT?: EventWhereInput | EventWhereInput[]
-    creatorId?: StringFilter<"Event"> | string
+    creatorId?: StringNullableFilter<"Event"> | string | null
     eventName?: StringFilter<"Event"> | string
     eventFormatId?: IntFilter<"Event"> | number
     eventTopicId?: IntFilter<"Event"> | number
-    eventTag?: StringFilter<"Event"> | string
+    eventTag?: StringNullableFilter<"Event"> | string | null
     isPrivateEvent?: BoolFilter<"Event"> | boolean
-    organizerName?: StringNullableFilter<"Event"> | string | null
+    organizerName?: StringFilter<"Event"> | string
     organizerLogoImgUrl?: StringNullableFilter<"Event"> | string | null
     bannerImgUrl?: StringNullableFilter<"Event"> | string | null
     eventStartDate?: StringFilter<"Event"> | string
@@ -13842,7 +13861,7 @@ export namespace Prisma {
     ticketQty?: IntFilter<"Event"> | number
     ticketPrice?: IntFilter<"Event"> | number
     ticketDesc?: StringNullableFilter<"Event"> | string | null
-    ticketTermsAndCondition?: StringFilter<"Event"> | string
+    ticketTermsAndCondition?: StringNullableFilter<"Event"> | string | null
     ticketStartDate?: StringFilter<"Event"> | string
     ticketEndDate?: StringFilter<"Event"> | string
     eventCPName?: StringFilter<"Event"> | string
@@ -13857,7 +13876,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Event"> | Date | string
     updatedAt?: DateTimeFilter<"Event"> | Date | string
     deletedAt?: DateTimeNullableFilter<"Event"> | Date | string | null
-    creator?: XOR<CreatorProfileScalarRelationFilter, CreatorProfileWhereInput>
+    creator?: XOR<CreatorProfileNullableScalarRelationFilter, CreatorProfileWhereInput> | null
     eventFormat?: XOR<EventFormatScalarRelationFilter, EventFormatWhereInput>
     eventTopic?: XOR<EventTopicScalarRelationFilter, EventTopicWhereInput>
     eventCPCountryPhone?: XOR<CountryPhoneScalarRelationFilter, CountryPhoneWhereInput>
@@ -13866,13 +13885,13 @@ export namespace Prisma {
 
   export type EventOrderByWithAggregationInput = {
     id?: SortOrder
-    creatorId?: SortOrder
+    creatorId?: SortOrderInput | SortOrder
     eventName?: SortOrder
     eventFormatId?: SortOrder
     eventTopicId?: SortOrder
-    eventTag?: SortOrder
+    eventTag?: SortOrderInput | SortOrder
     isPrivateEvent?: SortOrder
-    organizerName?: SortOrderInput | SortOrder
+    organizerName?: SortOrder
     organizerLogoImgUrl?: SortOrderInput | SortOrder
     bannerImgUrl?: SortOrderInput | SortOrder
     eventStartDate?: SortOrder
@@ -13886,7 +13905,7 @@ export namespace Prisma {
     ticketQty?: SortOrder
     ticketPrice?: SortOrder
     ticketDesc?: SortOrderInput | SortOrder
-    ticketTermsAndCondition?: SortOrder
+    ticketTermsAndCondition?: SortOrderInput | SortOrder
     ticketStartDate?: SortOrder
     ticketEndDate?: SortOrder
     eventCPName?: SortOrder
@@ -13913,13 +13932,13 @@ export namespace Prisma {
     OR?: EventScalarWhereWithAggregatesInput[]
     NOT?: EventScalarWhereWithAggregatesInput | EventScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Event"> | number
-    creatorId?: StringWithAggregatesFilter<"Event"> | string
+    creatorId?: StringNullableWithAggregatesFilter<"Event"> | string | null
     eventName?: StringWithAggregatesFilter<"Event"> | string
     eventFormatId?: IntWithAggregatesFilter<"Event"> | number
     eventTopicId?: IntWithAggregatesFilter<"Event"> | number
-    eventTag?: StringWithAggregatesFilter<"Event"> | string
+    eventTag?: StringNullableWithAggregatesFilter<"Event"> | string | null
     isPrivateEvent?: BoolWithAggregatesFilter<"Event"> | boolean
-    organizerName?: StringNullableWithAggregatesFilter<"Event"> | string | null
+    organizerName?: StringWithAggregatesFilter<"Event"> | string
     organizerLogoImgUrl?: StringNullableWithAggregatesFilter<"Event"> | string | null
     bannerImgUrl?: StringNullableWithAggregatesFilter<"Event"> | string | null
     eventStartDate?: StringWithAggregatesFilter<"Event"> | string
@@ -13933,7 +13952,7 @@ export namespace Prisma {
     ticketQty?: IntWithAggregatesFilter<"Event"> | number
     ticketPrice?: IntWithAggregatesFilter<"Event"> | number
     ticketDesc?: StringNullableWithAggregatesFilter<"Event"> | string | null
-    ticketTermsAndCondition?: StringWithAggregatesFilter<"Event"> | string
+    ticketTermsAndCondition?: StringNullableWithAggregatesFilter<"Event"> | string | null
     ticketStartDate?: StringWithAggregatesFilter<"Event"> | string
     ticketEndDate?: StringWithAggregatesFilter<"Event"> | string
     eventCPName?: StringWithAggregatesFilter<"Event"> | string
@@ -14669,9 +14688,9 @@ export namespace Prisma {
 
   export type EventCreateInput = {
     eventName: string
-    eventTag: string
+    eventTag?: string | null
     isPrivateEvent?: boolean
-    organizerName?: string | null
+    organizerName: string
     organizerLogoImgUrl?: string | null
     bannerImgUrl?: string | null
     eventStartDate: string
@@ -14685,7 +14704,7 @@ export namespace Prisma {
     ticketQty: number
     ticketPrice?: number
     ticketDesc?: string | null
-    ticketTermsAndCondition: string
+    ticketTermsAndCondition?: string | null
     ticketStartDate: string
     ticketEndDate: string
     eventCPName: string
@@ -14699,7 +14718,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
-    creator: CreatorProfileCreateNestedOneWithoutEventInput
+    creator?: CreatorProfileCreateNestedOneWithoutEventInput
     eventFormat: EventFormatCreateNestedOneWithoutEventInput
     eventTopic: EventTopicCreateNestedOneWithoutEventInput
     eventCPCountryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
@@ -14708,13 +14727,13 @@ export namespace Prisma {
 
   export type EventUncheckedCreateInput = {
     id?: number
-    creatorId: string
+    creatorId?: string | null
     eventName: string
     eventFormatId: number
     eventTopicId: number
-    eventTag: string
+    eventTag?: string | null
     isPrivateEvent?: boolean
-    organizerName?: string | null
+    organizerName: string
     organizerLogoImgUrl?: string | null
     bannerImgUrl?: string | null
     eventStartDate: string
@@ -14728,7 +14747,7 @@ export namespace Prisma {
     ticketQty: number
     ticketPrice?: number
     ticketDesc?: string | null
-    ticketTermsAndCondition: string
+    ticketTermsAndCondition?: string | null
     ticketStartDate: string
     ticketEndDate: string
     eventCPName: string
@@ -14748,9 +14767,9 @@ export namespace Prisma {
 
   export type EventUpdateInput = {
     eventName?: StringFieldUpdateOperationsInput | string
-    eventTag?: StringFieldUpdateOperationsInput | string
+    eventTag?: NullableStringFieldUpdateOperationsInput | string | null
     isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
-    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerName?: StringFieldUpdateOperationsInput | string
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     eventStartDate?: StringFieldUpdateOperationsInput | string
@@ -14764,7 +14783,7 @@ export namespace Prisma {
     ticketQty?: IntFieldUpdateOperationsInput | number
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketTermsAndCondition?: NullableStringFieldUpdateOperationsInput | string | null
     ticketStartDate?: StringFieldUpdateOperationsInput | string
     ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
@@ -14778,7 +14797,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    creator?: CreatorProfileUpdateOneRequiredWithoutEventNestedInput
+    creator?: CreatorProfileUpdateOneWithoutEventNestedInput
     eventFormat?: EventFormatUpdateOneRequiredWithoutEventNestedInput
     eventTopic?: EventTopicUpdateOneRequiredWithoutEventNestedInput
     eventCPCountryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
@@ -14787,13 +14806,13 @@ export namespace Prisma {
 
   export type EventUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    creatorId?: StringFieldUpdateOperationsInput | string
+    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTopicId?: IntFieldUpdateOperationsInput | number
-    eventTag?: StringFieldUpdateOperationsInput | string
+    eventTag?: NullableStringFieldUpdateOperationsInput | string | null
     isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
-    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerName?: StringFieldUpdateOperationsInput | string
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     eventStartDate?: StringFieldUpdateOperationsInput | string
@@ -14807,7 +14826,7 @@ export namespace Prisma {
     ticketQty?: IntFieldUpdateOperationsInput | number
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketTermsAndCondition?: NullableStringFieldUpdateOperationsInput | string | null
     ticketStartDate?: StringFieldUpdateOperationsInput | string
     ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
@@ -14827,13 +14846,13 @@ export namespace Prisma {
 
   export type EventCreateManyInput = {
     id?: number
-    creatorId: string
+    creatorId?: string | null
     eventName: string
     eventFormatId: number
     eventTopicId: number
-    eventTag: string
+    eventTag?: string | null
     isPrivateEvent?: boolean
-    organizerName?: string | null
+    organizerName: string
     organizerLogoImgUrl?: string | null
     bannerImgUrl?: string | null
     eventStartDate: string
@@ -14847,7 +14866,7 @@ export namespace Prisma {
     ticketQty: number
     ticketPrice?: number
     ticketDesc?: string | null
-    ticketTermsAndCondition: string
+    ticketTermsAndCondition?: string | null
     ticketStartDate: string
     ticketEndDate: string
     eventCPName: string
@@ -14866,9 +14885,9 @@ export namespace Prisma {
 
   export type EventUpdateManyMutationInput = {
     eventName?: StringFieldUpdateOperationsInput | string
-    eventTag?: StringFieldUpdateOperationsInput | string
+    eventTag?: NullableStringFieldUpdateOperationsInput | string | null
     isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
-    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerName?: StringFieldUpdateOperationsInput | string
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     eventStartDate?: StringFieldUpdateOperationsInput | string
@@ -14882,7 +14901,7 @@ export namespace Prisma {
     ticketQty?: IntFieldUpdateOperationsInput | number
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketTermsAndCondition?: NullableStringFieldUpdateOperationsInput | string | null
     ticketStartDate?: StringFieldUpdateOperationsInput | string
     ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
@@ -14900,13 +14919,13 @@ export namespace Prisma {
 
   export type EventUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    creatorId?: StringFieldUpdateOperationsInput | string
+    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTopicId?: IntFieldUpdateOperationsInput | number
-    eventTag?: StringFieldUpdateOperationsInput | string
+    eventTag?: NullableStringFieldUpdateOperationsInput | string | null
     isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
-    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerName?: StringFieldUpdateOperationsInput | string
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     eventStartDate?: StringFieldUpdateOperationsInput | string
@@ -14920,7 +14939,7 @@ export namespace Prisma {
     ticketQty?: IntFieldUpdateOperationsInput | number
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketTermsAndCondition?: NullableStringFieldUpdateOperationsInput | string | null
     ticketStartDate?: StringFieldUpdateOperationsInput | string
     ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
@@ -15744,11 +15763,6 @@ export namespace Prisma {
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
-  export type CreatorProfileScalarRelationFilter = {
-    is?: CreatorProfileWhereInput
-    isNot?: CreatorProfileWhereInput
-  }
-
   export type EventFormatScalarRelationFilter = {
     is?: EventFormatWhereInput
     isNot?: EventFormatWhereInput
@@ -16569,10 +16583,12 @@ export namespace Prisma {
     set?: boolean | null
   }
 
-  export type CreatorProfileUpdateOneRequiredWithoutEventNestedInput = {
+  export type CreatorProfileUpdateOneWithoutEventNestedInput = {
     create?: XOR<CreatorProfileCreateWithoutEventInput, CreatorProfileUncheckedCreateWithoutEventInput>
     connectOrCreate?: CreatorProfileCreateOrConnectWithoutEventInput
     upsert?: CreatorProfileUpsertWithoutEventInput
+    disconnect?: CreatorProfileWhereInput | boolean
+    delete?: CreatorProfileWhereInput | boolean
     connect?: CreatorProfileWhereUniqueInput
     update?: XOR<XOR<CreatorProfileUpdateToOneWithWhereWithoutEventInput, CreatorProfileUpdateWithoutEventInput>, CreatorProfileUncheckedUpdateWithoutEventInput>
   }
@@ -17191,9 +17207,9 @@ export namespace Prisma {
 
   export type EventCreateWithoutEventCPCountryPhoneInput = {
     eventName: string
-    eventTag: string
+    eventTag?: string | null
     isPrivateEvent?: boolean
-    organizerName?: string | null
+    organizerName: string
     organizerLogoImgUrl?: string | null
     bannerImgUrl?: string | null
     eventStartDate: string
@@ -17207,7 +17223,7 @@ export namespace Prisma {
     ticketQty: number
     ticketPrice?: number
     ticketDesc?: string | null
-    ticketTermsAndCondition: string
+    ticketTermsAndCondition?: string | null
     ticketStartDate: string
     ticketEndDate: string
     eventCPName: string
@@ -17221,7 +17237,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
-    creator: CreatorProfileCreateNestedOneWithoutEventInput
+    creator?: CreatorProfileCreateNestedOneWithoutEventInput
     eventFormat: EventFormatCreateNestedOneWithoutEventInput
     eventTopic: EventTopicCreateNestedOneWithoutEventInput
     ticketTransactions?: TicketTransactionCreateNestedManyWithoutEventInput
@@ -17229,13 +17245,13 @@ export namespace Prisma {
 
   export type EventUncheckedCreateWithoutEventCPCountryPhoneInput = {
     id?: number
-    creatorId: string
+    creatorId?: string | null
     eventName: string
     eventFormatId: number
     eventTopicId: number
-    eventTag: string
+    eventTag?: string | null
     isPrivateEvent?: boolean
-    organizerName?: string | null
+    organizerName: string
     organizerLogoImgUrl?: string | null
     bannerImgUrl?: string | null
     eventStartDate: string
@@ -17249,7 +17265,7 @@ export namespace Prisma {
     ticketQty: number
     ticketPrice?: number
     ticketDesc?: string | null
-    ticketTermsAndCondition: string
+    ticketTermsAndCondition?: string | null
     ticketStartDate: string
     ticketEndDate: string
     eventCPName: string
@@ -17404,13 +17420,13 @@ export namespace Prisma {
     OR?: EventScalarWhereInput[]
     NOT?: EventScalarWhereInput | EventScalarWhereInput[]
     id?: IntFilter<"Event"> | number
-    creatorId?: StringFilter<"Event"> | string
+    creatorId?: StringNullableFilter<"Event"> | string | null
     eventName?: StringFilter<"Event"> | string
     eventFormatId?: IntFilter<"Event"> | number
     eventTopicId?: IntFilter<"Event"> | number
-    eventTag?: StringFilter<"Event"> | string
+    eventTag?: StringNullableFilter<"Event"> | string | null
     isPrivateEvent?: BoolFilter<"Event"> | boolean
-    organizerName?: StringNullableFilter<"Event"> | string | null
+    organizerName?: StringFilter<"Event"> | string
     organizerLogoImgUrl?: StringNullableFilter<"Event"> | string | null
     bannerImgUrl?: StringNullableFilter<"Event"> | string | null
     eventStartDate?: StringFilter<"Event"> | string
@@ -17424,7 +17440,7 @@ export namespace Prisma {
     ticketQty?: IntFilter<"Event"> | number
     ticketPrice?: IntFilter<"Event"> | number
     ticketDesc?: StringNullableFilter<"Event"> | string | null
-    ticketTermsAndCondition?: StringFilter<"Event"> | string
+    ticketTermsAndCondition?: StringNullableFilter<"Event"> | string | null
     ticketStartDate?: StringFilter<"Event"> | string
     ticketEndDate?: StringFilter<"Event"> | string
     eventCPName?: StringFilter<"Event"> | string
@@ -17927,9 +17943,9 @@ export namespace Prisma {
 
   export type EventCreateWithoutCreatorInput = {
     eventName: string
-    eventTag: string
+    eventTag?: string | null
     isPrivateEvent?: boolean
-    organizerName?: string | null
+    organizerName: string
     organizerLogoImgUrl?: string | null
     bannerImgUrl?: string | null
     eventStartDate: string
@@ -17943,7 +17959,7 @@ export namespace Prisma {
     ticketQty: number
     ticketPrice?: number
     ticketDesc?: string | null
-    ticketTermsAndCondition: string
+    ticketTermsAndCondition?: string | null
     ticketStartDate: string
     ticketEndDate: string
     eventCPName: string
@@ -17968,9 +17984,9 @@ export namespace Prisma {
     eventName: string
     eventFormatId: number
     eventTopicId: number
-    eventTag: string
+    eventTag?: string | null
     isPrivateEvent?: boolean
-    organizerName?: string | null
+    organizerName: string
     organizerLogoImgUrl?: string | null
     bannerImgUrl?: string | null
     eventStartDate: string
@@ -17984,7 +18000,7 @@ export namespace Prisma {
     ticketQty: number
     ticketPrice?: number
     ticketDesc?: string | null
-    ticketTermsAndCondition: string
+    ticketTermsAndCondition?: string | null
     ticketStartDate: string
     ticketEndDate: string
     eventCPName: string
@@ -18408,9 +18424,9 @@ export namespace Prisma {
 
   export type EventCreateWithoutEventFormatInput = {
     eventName: string
-    eventTag: string
+    eventTag?: string | null
     isPrivateEvent?: boolean
-    organizerName?: string | null
+    organizerName: string
     organizerLogoImgUrl?: string | null
     bannerImgUrl?: string | null
     eventStartDate: string
@@ -18424,7 +18440,7 @@ export namespace Prisma {
     ticketQty: number
     ticketPrice?: number
     ticketDesc?: string | null
-    ticketTermsAndCondition: string
+    ticketTermsAndCondition?: string | null
     ticketStartDate: string
     ticketEndDate: string
     eventCPName: string
@@ -18438,7 +18454,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
-    creator: CreatorProfileCreateNestedOneWithoutEventInput
+    creator?: CreatorProfileCreateNestedOneWithoutEventInput
     eventTopic: EventTopicCreateNestedOneWithoutEventInput
     eventCPCountryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
     ticketTransactions?: TicketTransactionCreateNestedManyWithoutEventInput
@@ -18446,12 +18462,12 @@ export namespace Prisma {
 
   export type EventUncheckedCreateWithoutEventFormatInput = {
     id?: number
-    creatorId: string
+    creatorId?: string | null
     eventName: string
     eventTopicId: number
-    eventTag: string
+    eventTag?: string | null
     isPrivateEvent?: boolean
-    organizerName?: string | null
+    organizerName: string
     organizerLogoImgUrl?: string | null
     bannerImgUrl?: string | null
     eventStartDate: string
@@ -18465,7 +18481,7 @@ export namespace Prisma {
     ticketQty: number
     ticketPrice?: number
     ticketDesc?: string | null
-    ticketTermsAndCondition: string
+    ticketTermsAndCondition?: string | null
     ticketStartDate: string
     ticketEndDate: string
     eventCPName: string
@@ -18511,9 +18527,9 @@ export namespace Prisma {
 
   export type EventCreateWithoutEventTopicInput = {
     eventName: string
-    eventTag: string
+    eventTag?: string | null
     isPrivateEvent?: boolean
-    organizerName?: string | null
+    organizerName: string
     organizerLogoImgUrl?: string | null
     bannerImgUrl?: string | null
     eventStartDate: string
@@ -18527,7 +18543,7 @@ export namespace Prisma {
     ticketQty: number
     ticketPrice?: number
     ticketDesc?: string | null
-    ticketTermsAndCondition: string
+    ticketTermsAndCondition?: string | null
     ticketStartDate: string
     ticketEndDate: string
     eventCPName: string
@@ -18541,7 +18557,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
-    creator: CreatorProfileCreateNestedOneWithoutEventInput
+    creator?: CreatorProfileCreateNestedOneWithoutEventInput
     eventFormat: EventFormatCreateNestedOneWithoutEventInput
     eventCPCountryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
     ticketTransactions?: TicketTransactionCreateNestedManyWithoutEventInput
@@ -18549,12 +18565,12 @@ export namespace Prisma {
 
   export type EventUncheckedCreateWithoutEventTopicInput = {
     id?: number
-    creatorId: string
+    creatorId?: string | null
     eventName: string
     eventFormatId: number
-    eventTag: string
+    eventTag?: string | null
     isPrivateEvent?: boolean
-    organizerName?: string | null
+    organizerName: string
     organizerLogoImgUrl?: string | null
     bannerImgUrl?: string | null
     eventStartDate: string
@@ -18568,7 +18584,7 @@ export namespace Prisma {
     ticketQty: number
     ticketPrice?: number
     ticketDesc?: string | null
-    ticketTermsAndCondition: string
+    ticketTermsAndCondition?: string | null
     ticketStartDate: string
     ticketEndDate: string
     eventCPName: string
@@ -18614,9 +18630,9 @@ export namespace Prisma {
 
   export type EventCreateWithoutTicketTransactionsInput = {
     eventName: string
-    eventTag: string
+    eventTag?: string | null
     isPrivateEvent?: boolean
-    organizerName?: string | null
+    organizerName: string
     organizerLogoImgUrl?: string | null
     bannerImgUrl?: string | null
     eventStartDate: string
@@ -18630,7 +18646,7 @@ export namespace Prisma {
     ticketQty: number
     ticketPrice?: number
     ticketDesc?: string | null
-    ticketTermsAndCondition: string
+    ticketTermsAndCondition?: string | null
     ticketStartDate: string
     ticketEndDate: string
     eventCPName: string
@@ -18644,7 +18660,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
-    creator: CreatorProfileCreateNestedOneWithoutEventInput
+    creator?: CreatorProfileCreateNestedOneWithoutEventInput
     eventFormat: EventFormatCreateNestedOneWithoutEventInput
     eventTopic: EventTopicCreateNestedOneWithoutEventInput
     eventCPCountryPhone: CountryPhoneCreateNestedOneWithoutEventsInput
@@ -18652,13 +18668,13 @@ export namespace Prisma {
 
   export type EventUncheckedCreateWithoutTicketTransactionsInput = {
     id?: number
-    creatorId: string
+    creatorId?: string | null
     eventName: string
     eventFormatId: number
     eventTopicId: number
-    eventTag: string
+    eventTag?: string | null
     isPrivateEvent?: boolean
-    organizerName?: string | null
+    organizerName: string
     organizerLogoImgUrl?: string | null
     bannerImgUrl?: string | null
     eventStartDate: string
@@ -18672,7 +18688,7 @@ export namespace Prisma {
     ticketQty: number
     ticketPrice?: number
     ticketDesc?: string | null
-    ticketTermsAndCondition: string
+    ticketTermsAndCondition?: string | null
     ticketStartDate: string
     ticketEndDate: string
     eventCPName: string
@@ -18785,9 +18801,9 @@ export namespace Prisma {
 
   export type EventUpdateWithoutTicketTransactionsInput = {
     eventName?: StringFieldUpdateOperationsInput | string
-    eventTag?: StringFieldUpdateOperationsInput | string
+    eventTag?: NullableStringFieldUpdateOperationsInput | string | null
     isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
-    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerName?: StringFieldUpdateOperationsInput | string
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     eventStartDate?: StringFieldUpdateOperationsInput | string
@@ -18801,7 +18817,7 @@ export namespace Prisma {
     ticketQty?: IntFieldUpdateOperationsInput | number
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketTermsAndCondition?: NullableStringFieldUpdateOperationsInput | string | null
     ticketStartDate?: StringFieldUpdateOperationsInput | string
     ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
@@ -18815,7 +18831,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    creator?: CreatorProfileUpdateOneRequiredWithoutEventNestedInput
+    creator?: CreatorProfileUpdateOneWithoutEventNestedInput
     eventFormat?: EventFormatUpdateOneRequiredWithoutEventNestedInput
     eventTopic?: EventTopicUpdateOneRequiredWithoutEventNestedInput
     eventCPCountryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
@@ -18823,13 +18839,13 @@ export namespace Prisma {
 
   export type EventUncheckedUpdateWithoutTicketTransactionsInput = {
     id?: IntFieldUpdateOperationsInput | number
-    creatorId?: StringFieldUpdateOperationsInput | string
+    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTopicId?: IntFieldUpdateOperationsInput | number
-    eventTag?: StringFieldUpdateOperationsInput | string
+    eventTag?: NullableStringFieldUpdateOperationsInput | string | null
     isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
-    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerName?: StringFieldUpdateOperationsInput | string
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     eventStartDate?: StringFieldUpdateOperationsInput | string
@@ -18843,7 +18859,7 @@ export namespace Prisma {
     ticketQty?: IntFieldUpdateOperationsInput | number
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketTermsAndCondition?: NullableStringFieldUpdateOperationsInput | string | null
     ticketStartDate?: StringFieldUpdateOperationsInput | string
     ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
@@ -19083,13 +19099,13 @@ export namespace Prisma {
 
   export type EventCreateManyEventCPCountryPhoneInput = {
     id?: number
-    creatorId: string
+    creatorId?: string | null
     eventName: string
     eventFormatId: number
     eventTopicId: number
-    eventTag: string
+    eventTag?: string | null
     isPrivateEvent?: boolean
-    organizerName?: string | null
+    organizerName: string
     organizerLogoImgUrl?: string | null
     bannerImgUrl?: string | null
     eventStartDate: string
@@ -19103,7 +19119,7 @@ export namespace Prisma {
     ticketQty: number
     ticketPrice?: number
     ticketDesc?: string | null
-    ticketTermsAndCondition: string
+    ticketTermsAndCondition?: string | null
     ticketStartDate: string
     ticketEndDate: string
     eventCPName: string
@@ -19243,9 +19259,9 @@ export namespace Prisma {
 
   export type EventUpdateWithoutEventCPCountryPhoneInput = {
     eventName?: StringFieldUpdateOperationsInput | string
-    eventTag?: StringFieldUpdateOperationsInput | string
+    eventTag?: NullableStringFieldUpdateOperationsInput | string | null
     isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
-    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerName?: StringFieldUpdateOperationsInput | string
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     eventStartDate?: StringFieldUpdateOperationsInput | string
@@ -19259,7 +19275,7 @@ export namespace Prisma {
     ticketQty?: IntFieldUpdateOperationsInput | number
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketTermsAndCondition?: NullableStringFieldUpdateOperationsInput | string | null
     ticketStartDate?: StringFieldUpdateOperationsInput | string
     ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
@@ -19273,7 +19289,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    creator?: CreatorProfileUpdateOneRequiredWithoutEventNestedInput
+    creator?: CreatorProfileUpdateOneWithoutEventNestedInput
     eventFormat?: EventFormatUpdateOneRequiredWithoutEventNestedInput
     eventTopic?: EventTopicUpdateOneRequiredWithoutEventNestedInput
     ticketTransactions?: TicketTransactionUpdateManyWithoutEventNestedInput
@@ -19281,13 +19297,13 @@ export namespace Prisma {
 
   export type EventUncheckedUpdateWithoutEventCPCountryPhoneInput = {
     id?: IntFieldUpdateOperationsInput | number
-    creatorId?: StringFieldUpdateOperationsInput | string
+    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTopicId?: IntFieldUpdateOperationsInput | number
-    eventTag?: StringFieldUpdateOperationsInput | string
+    eventTag?: NullableStringFieldUpdateOperationsInput | string | null
     isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
-    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerName?: StringFieldUpdateOperationsInput | string
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     eventStartDate?: StringFieldUpdateOperationsInput | string
@@ -19301,7 +19317,7 @@ export namespace Prisma {
     ticketQty?: IntFieldUpdateOperationsInput | number
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketTermsAndCondition?: NullableStringFieldUpdateOperationsInput | string | null
     ticketStartDate?: StringFieldUpdateOperationsInput | string
     ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
@@ -19320,13 +19336,13 @@ export namespace Prisma {
 
   export type EventUncheckedUpdateManyWithoutEventCPCountryPhoneInput = {
     id?: IntFieldUpdateOperationsInput | number
-    creatorId?: StringFieldUpdateOperationsInput | string
+    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTopicId?: IntFieldUpdateOperationsInput | number
-    eventTag?: StringFieldUpdateOperationsInput | string
+    eventTag?: NullableStringFieldUpdateOperationsInput | string | null
     isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
-    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerName?: StringFieldUpdateOperationsInput | string
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     eventStartDate?: StringFieldUpdateOperationsInput | string
@@ -19340,7 +19356,7 @@ export namespace Prisma {
     ticketQty?: IntFieldUpdateOperationsInput | number
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketTermsAndCondition?: NullableStringFieldUpdateOperationsInput | string | null
     ticketStartDate?: StringFieldUpdateOperationsInput | string
     ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
@@ -19485,9 +19501,9 @@ export namespace Prisma {
     eventName: string
     eventFormatId: number
     eventTopicId: number
-    eventTag: string
+    eventTag?: string | null
     isPrivateEvent?: boolean
-    organizerName?: string | null
+    organizerName: string
     organizerLogoImgUrl?: string | null
     bannerImgUrl?: string | null
     eventStartDate: string
@@ -19501,7 +19517,7 @@ export namespace Prisma {
     ticketQty: number
     ticketPrice?: number
     ticketDesc?: string | null
-    ticketTermsAndCondition: string
+    ticketTermsAndCondition?: string | null
     ticketStartDate: string
     ticketEndDate: string
     eventCPName: string
@@ -19520,9 +19536,9 @@ export namespace Prisma {
 
   export type EventUpdateWithoutCreatorInput = {
     eventName?: StringFieldUpdateOperationsInput | string
-    eventTag?: StringFieldUpdateOperationsInput | string
+    eventTag?: NullableStringFieldUpdateOperationsInput | string | null
     isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
-    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerName?: StringFieldUpdateOperationsInput | string
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     eventStartDate?: StringFieldUpdateOperationsInput | string
@@ -19536,7 +19552,7 @@ export namespace Prisma {
     ticketQty?: IntFieldUpdateOperationsInput | number
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketTermsAndCondition?: NullableStringFieldUpdateOperationsInput | string | null
     ticketStartDate?: StringFieldUpdateOperationsInput | string
     ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
@@ -19561,9 +19577,9 @@ export namespace Prisma {
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTopicId?: IntFieldUpdateOperationsInput | number
-    eventTag?: StringFieldUpdateOperationsInput | string
+    eventTag?: NullableStringFieldUpdateOperationsInput | string | null
     isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
-    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerName?: StringFieldUpdateOperationsInput | string
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     eventStartDate?: StringFieldUpdateOperationsInput | string
@@ -19577,7 +19593,7 @@ export namespace Prisma {
     ticketQty?: IntFieldUpdateOperationsInput | number
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketTermsAndCondition?: NullableStringFieldUpdateOperationsInput | string | null
     ticketStartDate?: StringFieldUpdateOperationsInput | string
     ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
@@ -19600,9 +19616,9 @@ export namespace Prisma {
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
     eventTopicId?: IntFieldUpdateOperationsInput | number
-    eventTag?: StringFieldUpdateOperationsInput | string
+    eventTag?: NullableStringFieldUpdateOperationsInput | string | null
     isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
-    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerName?: StringFieldUpdateOperationsInput | string
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     eventStartDate?: StringFieldUpdateOperationsInput | string
@@ -19616,7 +19632,7 @@ export namespace Prisma {
     ticketQty?: IntFieldUpdateOperationsInput | number
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketTermsAndCondition?: NullableStringFieldUpdateOperationsInput | string | null
     ticketStartDate?: StringFieldUpdateOperationsInput | string
     ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
@@ -19672,12 +19688,12 @@ export namespace Prisma {
 
   export type EventCreateManyEventFormatInput = {
     id?: number
-    creatorId: string
+    creatorId?: string | null
     eventName: string
     eventTopicId: number
-    eventTag: string
+    eventTag?: string | null
     isPrivateEvent?: boolean
-    organizerName?: string | null
+    organizerName: string
     organizerLogoImgUrl?: string | null
     bannerImgUrl?: string | null
     eventStartDate: string
@@ -19691,7 +19707,7 @@ export namespace Prisma {
     ticketQty: number
     ticketPrice?: number
     ticketDesc?: string | null
-    ticketTermsAndCondition: string
+    ticketTermsAndCondition?: string | null
     ticketStartDate: string
     ticketEndDate: string
     eventCPName: string
@@ -19710,9 +19726,9 @@ export namespace Prisma {
 
   export type EventUpdateWithoutEventFormatInput = {
     eventName?: StringFieldUpdateOperationsInput | string
-    eventTag?: StringFieldUpdateOperationsInput | string
+    eventTag?: NullableStringFieldUpdateOperationsInput | string | null
     isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
-    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerName?: StringFieldUpdateOperationsInput | string
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     eventStartDate?: StringFieldUpdateOperationsInput | string
@@ -19726,7 +19742,7 @@ export namespace Prisma {
     ticketQty?: IntFieldUpdateOperationsInput | number
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketTermsAndCondition?: NullableStringFieldUpdateOperationsInput | string | null
     ticketStartDate?: StringFieldUpdateOperationsInput | string
     ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
@@ -19740,7 +19756,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    creator?: CreatorProfileUpdateOneRequiredWithoutEventNestedInput
+    creator?: CreatorProfileUpdateOneWithoutEventNestedInput
     eventTopic?: EventTopicUpdateOneRequiredWithoutEventNestedInput
     eventCPCountryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
     ticketTransactions?: TicketTransactionUpdateManyWithoutEventNestedInput
@@ -19748,12 +19764,12 @@ export namespace Prisma {
 
   export type EventUncheckedUpdateWithoutEventFormatInput = {
     id?: IntFieldUpdateOperationsInput | number
-    creatorId?: StringFieldUpdateOperationsInput | string
+    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
     eventName?: StringFieldUpdateOperationsInput | string
     eventTopicId?: IntFieldUpdateOperationsInput | number
-    eventTag?: StringFieldUpdateOperationsInput | string
+    eventTag?: NullableStringFieldUpdateOperationsInput | string | null
     isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
-    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerName?: StringFieldUpdateOperationsInput | string
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     eventStartDate?: StringFieldUpdateOperationsInput | string
@@ -19767,7 +19783,7 @@ export namespace Prisma {
     ticketQty?: IntFieldUpdateOperationsInput | number
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketTermsAndCondition?: NullableStringFieldUpdateOperationsInput | string | null
     ticketStartDate?: StringFieldUpdateOperationsInput | string
     ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
@@ -19787,12 +19803,12 @@ export namespace Prisma {
 
   export type EventUncheckedUpdateManyWithoutEventFormatInput = {
     id?: IntFieldUpdateOperationsInput | number
-    creatorId?: StringFieldUpdateOperationsInput | string
+    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
     eventName?: StringFieldUpdateOperationsInput | string
     eventTopicId?: IntFieldUpdateOperationsInput | number
-    eventTag?: StringFieldUpdateOperationsInput | string
+    eventTag?: NullableStringFieldUpdateOperationsInput | string | null
     isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
-    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerName?: StringFieldUpdateOperationsInput | string
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     eventStartDate?: StringFieldUpdateOperationsInput | string
@@ -19806,7 +19822,7 @@ export namespace Prisma {
     ticketQty?: IntFieldUpdateOperationsInput | number
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketTermsAndCondition?: NullableStringFieldUpdateOperationsInput | string | null
     ticketStartDate?: StringFieldUpdateOperationsInput | string
     ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
@@ -19825,12 +19841,12 @@ export namespace Prisma {
 
   export type EventCreateManyEventTopicInput = {
     id?: number
-    creatorId: string
+    creatorId?: string | null
     eventName: string
     eventFormatId: number
-    eventTag: string
+    eventTag?: string | null
     isPrivateEvent?: boolean
-    organizerName?: string | null
+    organizerName: string
     organizerLogoImgUrl?: string | null
     bannerImgUrl?: string | null
     eventStartDate: string
@@ -19844,7 +19860,7 @@ export namespace Prisma {
     ticketQty: number
     ticketPrice?: number
     ticketDesc?: string | null
-    ticketTermsAndCondition: string
+    ticketTermsAndCondition?: string | null
     ticketStartDate: string
     ticketEndDate: string
     eventCPName: string
@@ -19863,9 +19879,9 @@ export namespace Prisma {
 
   export type EventUpdateWithoutEventTopicInput = {
     eventName?: StringFieldUpdateOperationsInput | string
-    eventTag?: StringFieldUpdateOperationsInput | string
+    eventTag?: NullableStringFieldUpdateOperationsInput | string | null
     isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
-    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerName?: StringFieldUpdateOperationsInput | string
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     eventStartDate?: StringFieldUpdateOperationsInput | string
@@ -19879,7 +19895,7 @@ export namespace Prisma {
     ticketQty?: IntFieldUpdateOperationsInput | number
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketTermsAndCondition?: NullableStringFieldUpdateOperationsInput | string | null
     ticketStartDate?: StringFieldUpdateOperationsInput | string
     ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
@@ -19893,7 +19909,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    creator?: CreatorProfileUpdateOneRequiredWithoutEventNestedInput
+    creator?: CreatorProfileUpdateOneWithoutEventNestedInput
     eventFormat?: EventFormatUpdateOneRequiredWithoutEventNestedInput
     eventCPCountryPhone?: CountryPhoneUpdateOneRequiredWithoutEventsNestedInput
     ticketTransactions?: TicketTransactionUpdateManyWithoutEventNestedInput
@@ -19901,12 +19917,12 @@ export namespace Prisma {
 
   export type EventUncheckedUpdateWithoutEventTopicInput = {
     id?: IntFieldUpdateOperationsInput | number
-    creatorId?: StringFieldUpdateOperationsInput | string
+    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
-    eventTag?: StringFieldUpdateOperationsInput | string
+    eventTag?: NullableStringFieldUpdateOperationsInput | string | null
     isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
-    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerName?: StringFieldUpdateOperationsInput | string
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     eventStartDate?: StringFieldUpdateOperationsInput | string
@@ -19920,7 +19936,7 @@ export namespace Prisma {
     ticketQty?: IntFieldUpdateOperationsInput | number
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketTermsAndCondition?: NullableStringFieldUpdateOperationsInput | string | null
     ticketStartDate?: StringFieldUpdateOperationsInput | string
     ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
@@ -19940,12 +19956,12 @@ export namespace Prisma {
 
   export type EventUncheckedUpdateManyWithoutEventTopicInput = {
     id?: IntFieldUpdateOperationsInput | number
-    creatorId?: StringFieldUpdateOperationsInput | string
+    creatorId?: NullableStringFieldUpdateOperationsInput | string | null
     eventName?: StringFieldUpdateOperationsInput | string
     eventFormatId?: IntFieldUpdateOperationsInput | number
-    eventTag?: StringFieldUpdateOperationsInput | string
+    eventTag?: NullableStringFieldUpdateOperationsInput | string | null
     isPrivateEvent?: BoolFieldUpdateOperationsInput | boolean
-    organizerName?: NullableStringFieldUpdateOperationsInput | string | null
+    organizerName?: StringFieldUpdateOperationsInput | string
     organizerLogoImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     bannerImgUrl?: NullableStringFieldUpdateOperationsInput | string | null
     eventStartDate?: StringFieldUpdateOperationsInput | string
@@ -19959,7 +19975,7 @@ export namespace Prisma {
     ticketQty?: IntFieldUpdateOperationsInput | number
     ticketPrice?: IntFieldUpdateOperationsInput | number
     ticketDesc?: NullableStringFieldUpdateOperationsInput | string | null
-    ticketTermsAndCondition?: StringFieldUpdateOperationsInput | string
+    ticketTermsAndCondition?: NullableStringFieldUpdateOperationsInput | string | null
     ticketStartDate?: StringFieldUpdateOperationsInput | string
     ticketEndDate?: StringFieldUpdateOperationsInput | string
     eventCPName?: StringFieldUpdateOperationsInput | string
