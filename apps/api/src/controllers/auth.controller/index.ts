@@ -9,8 +9,8 @@ import { verifyCode } from '@/services/email.verification/verifyVerificationCode
 import { prisma } from '@/prisma';
 import { Sex } from '@/prisma-generated/client';
 import { IJwtPayload, jwtSign } from '@/utils/jwt/jwt.sign';
-import { generateProfileLink } from '@/services/creators/generateProfileLink';
 import { generateCodeEightCharsMix } from '@/utils/code.generator/codeGeneratorEightCharsMix';
+import { generateCodeTenChars } from '@/utils/code.generator/codeGeneratorTenChars';
 
 export async function registerMember(
   req: Request,
@@ -30,13 +30,8 @@ export async function registerMember(
       personalDataConsentAccepted,
       eventPromoAccepted,
     }: IAuthController = req.body;
-    const existingMember = await prisma.member.findUnique({
-      where: {
-        email,
-      },
-    });
-     const { type } = req.body;
-    
+    const referralNumber = generateCodeTenChars()
+        const referralExpiryDate = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000) // 90 days from now 
     const newMember = await prisma.member.create({
       data: {
         email,
@@ -49,6 +44,8 @@ export async function registerMember(
         termsPrivacyAccepted,
         personalDataConsentAccepted,
         eventPromoAccepted,
+        referralNumber,
+        referralExpiryDate,
       },
     });
     await sendEmailVerificationCode(req, res, next);
