@@ -4,10 +4,7 @@ export interface IJwtPayload {
     id: string | number
     email: string
     activeRole: 'BUYER' | 'EVENT_CREATOR'
-    verification: {
-        isPhoneVerified: boolean
-        isProfileDataProvided: boolean
-    }
+    firstName: string
 }
 
 export const jwtSign = (payload: IJwtPayload) => {

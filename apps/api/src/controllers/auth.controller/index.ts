@@ -189,11 +189,7 @@ export async function sendEmailVerificationCode(
       
     } catch (emailError:any) {
       console.error('Email sending error:', emailError);
-      res.status(500).json({
-        success: false,
-        message: 'Failed to send email verification code',
-        error: emailError.message,
-      });
+      next(emailError)
     }
   } catch (error) {
     next(error);
@@ -210,31 +206,22 @@ export async function verifyEmailVerificationCode(
     const { email, code, type } = req.body;
     console.log(req.body);
     const result = await verifyCode(email, code, type);
-
-    res.status(200).json({
-      success: true,
-      message: 'OTP verified successfully',
-      data: {
-        result,
-      },
-    });
+    
+    req.body.verified = true
+    next()
   } catch (error: any) {
     const { email, code } = req.body;
     await increaseAttemptCount(code, email);
     next(error);
-    res.status(400).json({ succes:false, message: 'Invalid OTP' });
   }
 }
 
-async function createAuthToken(member: any) {
+function createAuthToken(member: any) {
   const tokenPayload:IJwtPayload = {
     id: member.id,
     email: member.email,
     activeRole: 'BUYER',
-    verification: {
-      isPhoneVerified: member.isPhoneVerified,
-      isProfileDataProvided: member.isProfileDataProvided,
-    }
+    firstName: member.firstName
   }
   return jwtSign(tokenPayload);
 }
@@ -247,7 +234,6 @@ export async function verifyLogin(
   res.header('Access-Control-Allow-Origin', '*');
   try {
     const { email, code, type } = req.body;
-    await verifyEmailVerificationCode(req, res, next);
 
     const member = await prisma.member.findUnique({
       where: {
@@ -262,14 +248,19 @@ export async function verifyLogin(
         message: 'Member not found',
       };
     }
+    const token = createAuthToken(member);
 
     res.status(200).json({
       success: true,
       message: 'Login verified successfully',
       data: {
-        email,
-        code,
-        type,
+        token,
+        member: {
+          id: member.id,
+          email: member.email,
+          activeRole: 'BUYER',
+          firstName: member.firstName
+        }
       },
     });
   } catch (error) {
@@ -283,8 +274,8 @@ export async function verifyNewMember(
   next: NextFunction,
 ) {
   try {
-    const { email, code, type } = req.body;
-    await verifyEmailVerificationCode(req, res, next);
+    const { email, code, type} = req.body;
+
     const member = await prisma.member.findUnique({
       where: {
         email,
@@ -308,15 +299,20 @@ export async function verifyNewMember(
         profileLinkUrl:codeProfileLink,
       }
     })
+    const token = createAuthToken(member)
 
     res.status(200).json({
       success: true,
       message: 'New member verified successfully',
       data: {
-        email,
-        code,
-        type,
-        newCreator
+        token,
+        member: {
+          id: member?.id,
+          email: member?.email,
+          activeRole: 'BUYER',
+          firstName: member?.firstName
+        }
+        
       },
     });
   } catch (error) {
@@ -324,13 +320,34 @@ export async function verifyNewMember(
   }
 }
 
+type TUserRole = 'BUYER' | 'EVENT_CREATOR'
+
 export async function sessionLoginMember(
   req: Request,
   res: Response,
   next: NextFunction
 ) {
   try {
-    
+    const {payload} = req.body
+    const member = await prisma.member.findUnique({
+      where: { id: payload.id },
+      include: {
+        creatorProfile: true
+      }
+    })
+    res.status(200).json({
+      success: true,
+      message: 'Session login verified successfully',
+      data: {
+        token: req.headers.authorization?.split(' ')[1],
+        member: {
+          id: member?.id,
+          email: member?.email,
+          firstName: member?.firstName,
+          activeRole:payload.activeRole,
+        }
+      },
+    })
   } catch (error) {
     next(error);
     

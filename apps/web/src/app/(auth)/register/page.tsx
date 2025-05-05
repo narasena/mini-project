@@ -3,6 +3,7 @@ import {
   emailValidationSchema,
   registerValidationSchema,
 } from '@/features/schemas/auth.schema/authSchema';
+import useAuthStore from '@/lib/store/auth-store';
 import apiInstance from '@/utils/axiosInstance';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Link from 'next/link';
@@ -10,6 +11,7 @@ import * as React from 'react';
 import { toast } from 'react-toastify';
 
 export default function RegisterPage() {
+  const { setLogin, setToken, setMember } = useAuthStore();
   const [isEmailAvailable, setIsEmailAvailable] = React.useState(false);
   const [tempEmail, setTempEmail] = React.useState('');
   const [isRegisterSuccess, setIsRegisterSuccess] = React.useState(false);
@@ -100,6 +102,9 @@ export default function RegisterPage() {
       });
       toast.success(response.data.message);
       setIsEmailVerified(true);
+      setLogin(true);
+      setToken(response.data.data.token); // Assuming your API returns a token
+      setMember(response.data.data.member);
     } catch (error: any) {
       toast.error(error.response.data.message);
     }
@@ -108,6 +113,7 @@ export default function RegisterPage() {
   const handlePostRegister = async () => {
     try {
       if (isEmailVerified) {
+         // Assuming your API returns user data
         setTimeout(() => {
           window.location.href = '/';
         }, 2500);

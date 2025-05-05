@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import PrelineScriptWrapper from '@/components/PrelineScriptWrapper';
 import { ToastContainer } from 'react-toastify';
+import AuthProvider from '@/providers/authProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={''}>
         <ToastContainer />
-        <div>{children}</div>
+        <AuthProvider>{children}</AuthProvider>
       </body>
       <PrelineScriptWrapper />
     </html>

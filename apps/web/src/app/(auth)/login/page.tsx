@@ -1,4 +1,5 @@
 'use client';
+import useAuthStore from '@/lib/store/auth-store';
 import axios from 'axios';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import Link from 'next/link';
@@ -6,16 +7,13 @@ import { useRouter } from 'next/navigation';
 import * as React from 'react';
 import { toast } from 'react-toastify';
 export default function LoginPage() {
-  const [isLogin, setIsLogin] = React.useState(false);
+  const {setLogin, setToken, setMember} = useAuthStore()
   const [email, setEmail] = React.useState('');
   const [isOTPLoginSent, setIsOTPLoginSent] = React.useState(false);
-  const [member, setMember] = React.useState({}); 
   const router = useRouter()
   const handleLogin = async (email: string) => {
     try {
       const response = await axios.post('http://localhost:8000/api/auth/login', { email, type: "LOGIN" });
-      
-      console.log(response);
       toast.success(response.data.message);
       setEmail(email);
       setIsOTPLoginSent(true);
@@ -35,9 +33,10 @@ export default function LoginPage() {
   const handleOTPVerify = async (code: string) => {
     try {
       const response = await axios.post('http://localhost:8000/api/auth/verify-login', {email, code, type: "LOGIN" });
-      console.log(response.data);
       toast.success(response.data.message);
-      setIsLogin(true);
+      setLogin(true)
+      setToken(response.data.data.token) // Assuming your API returns a token
+      setMember(response.data.data.member) // Assuming your API returns user data
       setTimeout(() => {
         router.push('/')
       },3000)

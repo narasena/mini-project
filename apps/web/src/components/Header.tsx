@@ -10,11 +10,11 @@ import Image from 'next/image';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { RiCloseLargeFill } from 'react-icons/ri';
 import { FaCircleUser } from 'react-icons/fa6';
+import useAuthStore from '@/lib/store/auth-store';
 
 export const Header = () => {
-  const [token, setToken] = React.useState<string | null>(null);
+  const {isLogin, token, member} = useAuthStore();
   const [mobileMenuShown, setMobileMenuShown] = React.useState<boolean>(false);
-  const [isLogin, setIsLogin] = React.useState<boolean>(false);
   const [userMenuShown, setUserMenuShown] = React.useState<boolean>(false);
   const mobileMenuListNoLogin = [
     { title: 'Tentang Loket', link: '/' },
@@ -38,8 +38,8 @@ export const Header = () => {
     setMobileMenuShown(!mobileMenuShown);
   };
   return (
-    <div className="h-max overflow-hidden">
-      <nav className="s-navbar">
+    <div className="h-max ">
+      <nav className="s-navbar relative">
         <div className="navbar-bottom">
           <div className="navbar-left">
             <ul className="navbar-nav">
@@ -108,7 +108,7 @@ export const Header = () => {
             </ul>
           </div>
           <div className="navbar-right">
-            <ul className="navbar-desktop">
+            <ul className="navbar-desktop relative">
               <li className="auth-navbar-link-event navbar-link visible-lg">
                 <Link href={'/buat-event'}>
                   <span className="svg-white">
@@ -142,15 +142,18 @@ export const Header = () => {
                 </li>
               )}
               {isLogin && (
-                <li className="auth-navbar-button-container ml-3">
+                <li className="auth-navbar-button-container ml-3 relative group">
                   <div className="w-auto max-w-[192px] p-0.5 overflow-hidden bg-[#0049cc] rounded-full flex justify-center items-center cursor-pointer">
                     <div>
                       <FaCircleUser className="text-[30px] text-white " />
                     </div>
                   </div>
+                  <div className='group-hover:block hidden absolute w-[280px] min-h-[280px] bg-red-500 z-[9999] transition-opacity duration-500  right-0 border border-black mt-2.5 '></div>
                 </li>
               )}
+              
             </ul>
+            
             <div className="hidden-lg">
               <div
                 className={`${mobileMenuShown ? 'hidden' : ''} text-lg text-white flex justify-center items-center gap-2 *:cursor-pointer`}
@@ -172,6 +175,7 @@ export const Header = () => {
             </div>
           </div>
         </div>
+    
       </nav>
       {/* mobile dropdown menu  */}
       <div
