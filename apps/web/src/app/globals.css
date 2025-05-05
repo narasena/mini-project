@@ -153,6 +153,9 @@
   .c-button-primary {
     @apply text-white bg-[#0049cc];
   }
+  .c-button-red {
+    @apply text-white bg-[#a40707];
+  }
   .c-button-primary:hover,
   .c-button-primary:focus {
     @apply text-white bg-[#005eff];

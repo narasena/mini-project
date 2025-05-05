@@ -38,7 +38,7 @@ model Member {
   termsPrivacyAccepted        Boolean
   sex                         Sex
   isEmailVerified             Boolean                    @default(false)
-  referralNumber              String                     
+  referralNumber              String                     @unique                   
   referralExpiryDate           DateTime                   
   countryPhone                CountryPhone               @relation(fields: [countryPhoneId], references: [id])
   verificationCodes           VerificationCode[]

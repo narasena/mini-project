@@ -10,6 +10,7 @@ authRouter.post('/login', loginMember)
 authRouter.post('/verify-login',verifyEmailVerificationCode, verifyLogin)
 authRouter.post('/verify-new-member',verifyEmailVerificationCode, verifyNewMember)
 authRouter.post('/register-check', registerMemberCheck)
-authRouter.post('/session-login',verifyToken ,sessionLoginMember)
+authRouter.get('/session-login', verifyToken, sessionLoginMember)
+authRouter.post('/switch-role', verifyToken, sessionLoginMember);
 
 export default authRouter

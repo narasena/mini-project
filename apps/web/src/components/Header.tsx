@@ -11,9 +11,33 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { RiCloseLargeFill } from 'react-icons/ri';
 import { FaCircleUser } from 'react-icons/fa6';
 import useAuthStore from '@/lib/store/auth-store';
+import apiInstance from '@/utils/axiosInstance';
+import { headers } from 'next/headers';
 
 export const Header = () => {
-  const {isLogin, token, member} = useAuthStore();
+  const { isLogin, token, member, activeRole, switchRole, reset } =
+    useAuthStore();
+  console.log(member, activeRole);
+
+  // Check for inconsistent auth state
+  React.useEffect(() => {
+    if (isLogin && !token) {
+      console.log('Inconsistent auth state detected: logged in but no token');
+      reset(); // Reset the auth state
+      window.location.href = '/login'; // Redirect to login
+    }
+  }, [isLogin, token, reset]);
+
+  // Log auth state changes
+  React.useEffect(() => {
+    console.log('Auth state:', {
+      isLogin,
+      hasToken: !!token,
+      member,
+      activeRole,
+    });
+  }, [isLogin, token, member, activeRole]);
+
   const [mobileMenuShown, setMobileMenuShown] = React.useState<boolean>(false);
   const [userMenuShown, setUserMenuShown] = React.useState<boolean>(false);
   const mobileMenuListNoLogin = [
@@ -37,6 +61,71 @@ export const Header = () => {
   const handleMobileMenuClick = () => {
     setMobileMenuShown(!mobileMenuShown);
   };
+
+  //  const switchRoleAndUpdateToken = async () => {
+  //    try {
+  //      const newRole = activeRole === 'BUYER' ? 'EVENT_CREATOR' : 'BUYER';
+  //      const response = await apiInstance.post(
+  //        '/auth/switch-role',
+  //        { activeRole: newRole },
+  //        {
+  //          headers: { Authorization: `Bearer ${token}` },
+  //        },
+  //      );
+  //      const newToken = response.data.token;
+  //      useAuthStore.getState().setToken(newToken);
+  //      useAuthStore.getState().switchRole();
+  //      apiInstance.defaults.headers.common['Authorization'] =
+  //        `Bearer ${newToken}`;
+  //    } catch (error) {
+  //      console.error(error);
+  //    }
+  //  };
+  const switchRoleAndUpdateToken = async () => {
+    try {
+      const newRole = activeRole === 'BUYER' ? 'EVENT_CREATOR' : 'BUYER';
+
+      const response = await apiInstance.post(
+        '/auth/switch-role',
+        { activeRole: newRole },
+        { headers: { Authorization: `Bearer ${token}` } },
+      );
+
+      const newToken = response.data.token;
+      const store = useAuthStore.getState();
+
+      // Update all necessary state in one go
+      store.setToken(newToken);
+      store.switchRole();
+      store.setLogin(true);
+
+      // Update member data if available
+      if (response.data.member) {
+        store.setMember(response.data.member);
+      }
+
+      // Update API headers
+      apiInstance.defaults.headers.common['Authorization'] =
+        `Bearer ${newToken}`;
+    } catch (error) {
+      console.error('Error switching role:', error);
+    }
+  };
+
+  // Single useEffect for auth state management and debugging
+  React.useEffect(() => {
+    // Handle inconsistent auth state
+    if (isLogin && !token) {
+      console.log('Inconsistent auth state detected: logged in but no token');
+      reset();
+      window.location.href = '/login';
+    }
+
+    // Optional: Log state changes in development only
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Auth state:', { isLogin, hasToken: !!token, activeRole });
+    }
+  }, [isLogin, token, activeRole, reset]);
   return (
     <div className="h-max ">
       <nav className="s-navbar relative">
@@ -148,12 +237,56 @@ export const Header = () => {
                       <FaCircleUser className="text-[30px] text-white " />
                     </div>
                   </div>
-                  <div className='group-hover:block hidden absolute w-[280px] min-h-[280px] bg-red-500 z-[9999] transition-opacity duration-500  right-0 border border-black mt-2.5 '></div>
+                  <div
+                    className="absolute
+      w-[280px]
+      h-auto
+      bg-white
+      z-[9999]
+      right-0
+      border
+      border-[#dbdbdb]
+      rounded-lg
+      mt-2.5
+      p-3
+      opacity-0
+      invisible
+      transition-all
+      duration-300
+      group-hover:opacity-100
+      group-hover:visible
+      group-hover:delay-300
+      before:absolute
+      before:-top-5
+      before:left-0
+      before:w-full
+      before:h-5
+      before:content-['']
+      hover:opacity-100
+      hover:visible"
+                  >
+                    <div className="font-semibold w-full my-2 text-[#151416] text-center">
+                      <span>{`${member?.firstName} `}</span>
+                      <button
+                        className="c-button c-button-primary text-xs"
+                        onClick={switchRoleAndUpdateToken}
+                      >
+                        {`Ganti Akun > `}
+                        <span>{`${activeRole}`}</span>
+                      </button>
+                    </div>
+                    <div className="font-semibold w-full my-2 text-[#8f8f8f] text-center">{`${member?.email}`}</div>
+                    <button
+                      className="c-button c-button-red w-full my-2"
+                      onClick={() => reset()}
+                    >
+                      Logout
+                    </button>
+                  </div>
                 </li>
               )}
-              
             </ul>
-            
+
             <div className="hidden-lg">
               <div
                 className={`${mobileMenuShown ? 'hidden' : ''} text-lg text-white flex justify-center items-center gap-2 *:cursor-pointer`}
@@ -175,7 +308,6 @@ export const Header = () => {
             </div>
           </div>
         </div>
-    
       </nav>
       {/* mobile dropdown menu  */}
       <div
