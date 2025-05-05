@@ -135,14 +135,39 @@ exports.Prisma.MemberScalarFieldEnum = {
   firstName: 'firstName',
   lastName: 'lastName',
   birthDate: 'birthDate',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  deletedAt: 'deletedAt',
   eventPromoAccepted: 'eventPromoAccepted',
   personalDataConsentAccepted: 'personalDataConsentAccepted',
   termsPrivacyAccepted: 'termsPrivacyAccepted',
   sex: 'sex',
-  isEmailVerified: 'isEmailVerified'
+  isEmailVerified: 'isEmailVerified',
+  referralNumber: 'referralNumber',
+  referralExpiryDate: 'referralExpiryDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.ReferralHistoryScalarFieldEnum = {
+  id: 'id',
+  referralOwnerId: 'referralOwnerId',
+  referralUserId: 'referralUserId',
+  pointsEarned: 'pointsEarned',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.PointsTransactionScalarFieldEnum = {
+  id: 'id',
+  memberId: 'memberId',
+  amount: 'amount',
+  type: 'type',
+  expiryDate: 'expiryDate',
+  ticketTransactionId: 'ticketTransactionId',
+  referralHistoryId: 'referralHistoryId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
 };
 
 exports.Prisma.VerificationCodeScalarFieldEnum = {
@@ -237,6 +262,24 @@ exports.Prisma.TicketTransactionScalarFieldEnum = {
   eventId: 'eventId',
   memberId: 'memberId',
   ticketCode: 'ticketCode',
+  pointTransactionId: 'pointTransactionId',
+  discountCouponId: 'discountCouponId',
+  finalPrice: 'finalPrice',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+};
+
+exports.Prisma.DiscountCouponScalarFieldEnum = {
+  id: 'id',
+  memberId: 'memberId',
+  name: 'name',
+  type: 'type',
+  percentage: 'percentage',
+  expiryDate: 'expiryDate',
+  isUsed: 'isUsed',
+  referralHistoryid: 'referralHistoryid',
+  ticketTransactionId: 'ticketTransactionId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'
@@ -276,6 +319,11 @@ exports.Sex = exports.$Enums.Sex = {
   PREFER_NOT_TO_SAY: 'PREFER_NOT_TO_SAY'
 };
 
+exports.PointsType = exports.$Enums.PointsType = {
+  EARNED: 'EARNED',
+  REDEEM: 'REDEEM'
+};
+
 exports.CodeType = exports.$Enums.CodeType = {
   REGISTRATION: 'REGISTRATION',
   LOGIN: 'LOGIN'
@@ -292,15 +340,25 @@ exports.TicketIDCard = exports.$Enums.TicketIDCard = {
   WITH_ID: 'WITH_ID'
 };
 
+exports.CouponType = exports.$Enums.CouponType = {
+  REFERRAL: 'REFERRAL',
+  PROMOTIONAL: 'PROMOTIONAL',
+  LOYALTY: 'LOYALTY',
+  EVENT_SPECIFIC: 'EVENT_SPECIFIC'
+};
+
 exports.Prisma.ModelName = {
   CountryPhone: 'CountryPhone',
   Member: 'Member',
+  ReferralHistory: 'ReferralHistory',
+  PointsTransaction: 'PointsTransaction',
   VerificationCode: 'VerificationCode',
   CreatorProfile: 'CreatorProfile',
   Event: 'Event',
   EventFormat: 'EventFormat',
   EventTopic: 'EventTopic',
   TicketTransaction: 'TicketTransaction',
+  DiscountCoupon: 'DiscountCoupon',
   TicketTransactionDetail: 'TicketTransactionDetail'
 };
 

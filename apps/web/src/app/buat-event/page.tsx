@@ -231,10 +231,14 @@ export default function CreateEventPage() {
     { id: 'gender', formTitle: 'Jenis Kelamin', checkStatus: true, value: '' },
   ];
   const [submitFormTest, setSubmitFormTest] = React.useState({});
-  const handleFormSubmit = (values: any) => {
+  const handleFormSubmit = async (values: any) => {
     try {
-      console.log(values);
-      setSubmitFormTest(values);
+      const response = await apiInstance.post('/events/create', {
+        ...values,
+        eventFormatId: Number(values.eventFormatId),
+        eventTopicId: Number(values.eventTopicId),
+      });
+      
       toast.success('Form submitted successfully');
     } catch (error) {
       toast.error('Failed to submit form');

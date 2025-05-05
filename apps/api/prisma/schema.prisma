@@ -33,18 +33,25 @@ model Member {
   firstName                   String
   lastName                    String?
   birthDate                   String
-  createdAt                   DateTime                   @default(now())
-  updatedAt                   DateTime                   @updatedAt
-  deletedAt                   DateTime?
   eventPromoAccepted          Boolean                    @default(true)
   personalDataConsentAccepted Boolean
   termsPrivacyAccepted        Boolean
   sex                         Sex
   isEmailVerified             Boolean                    @default(false)
+  referralNumber              String                     
+  referralExpiryDate           DateTime                   
   countryPhone                CountryPhone               @relation(fields: [countryPhoneId], references: [id])
   verificationCodes           VerificationCode[]
   creatorProfile              CreatorProfile? 
   ticketTransactions          TicketTransaction[]
+  referralOwnerHistory             ReferralHistory[]      @relation("ReferralOwnerHistory")
+  referralUserHistory           ReferralHistory[]         @relation("ReferralUserHistory")
+  pointTransaction            PointsTransaction[]
+  discountCoupon              DiscountCoupon[]
+
+  createdAt                   DateTime                   @default(now())
+  updatedAt                   DateTime                   @updatedAt
+  deletedAt                   DateTime?
 
   @@map("members")
 }
@@ -54,6 +61,47 @@ enum Sex {
   FEMALE
   OTHER
   PREFER_NOT_TO_SAY
+}
+
+
+model ReferralHistory {
+  id                        String                       @id @default(cuid())
+  referralOwnerId           String
+  referralOwner             Member                    @relation("ReferralOwnerHistory",fields: [referralOwnerId],references: [id])
+  referralUserId           String
+  referralUser              Member                    @relation("ReferralUserHistory",fields: [referralUserId],references: [id])
+  pointsEarned              Int                       @default(10000)
+  discountCoupon            DiscountCoupon?
+
+  pointTransaction          PointsTransaction?               
+
+  createdAt                   DateTime                   @default(now())
+  updatedAt                   DateTime                   @updatedAt
+  deletedAt                   DateTime?
+
+  @@map("referral_histories")
+}
+
+model PointsTransaction {
+  id                      String                       @id @default(cuid())
+  memberId                String
+  member                  Member                    @relation(fields: [memberId],references: [id])
+  amount                  Int
+  type                    PointsType
+  expiryDate              DateTime?
+  ticketTransactionId     String?
+  ticketTransaction       TicketTransaction[]              
+  referralHistoryId       String                    @unique
+  referralHistory         ReferralHistory           @relation(fields: [referralHistoryId],references: [id])
+
+  createdAt                   DateTime                   @default(now())
+  updatedAt                   DateTime                   @updatedAt
+  deletedAt                   DateTime?
+}
+
+enum PointsType {
+  EARNED
+  REDEEM
 }
 
 model VerificationCode {
@@ -103,6 +151,7 @@ model CreatorProfile {
 
   @@map("creator_profile")
 }
+
 
 model Event {
   id                    Int                   @id @default(autoincrement())
@@ -186,13 +235,19 @@ model EventTopic {
 }
 
 model TicketTransaction {
-  id                    Int               @id @default(autoincrement())
+  id                    String               @id @default(cuid())
   eventId               Int
   event                 Event             @relation(fields:[eventId],references: [id])
   memberId              String
   member                Member            @relation(fields:[memberId],references: [id])
   ticketCode            String            @unique
   ticketTransactionDetails  TicketTransactionDetail[]
+  pointTransactionId    String?
+  pointTransaction      PointsTransaction? @relation(fields:[pointTransactionId],references:[id])
+ discountCouponId       String?
+ discountCoupon         DiscountCoupon[] 
+  finalPrice            Int   
+  
 
   createdAt         DateTime      @default(now())
   updatedAt         DateTime      @updatedAt
@@ -200,9 +255,37 @@ model TicketTransaction {
   @@map("ticket_transactions")
 }
 
+model DiscountCoupon {
+  id                    String               @id @default(cuid())
+  memberId              String
+  member                Member           @relation(fields:[memberId],references: [id])
+  name                  String            @default("REFERRAL_WELCOME")
+  type                  CouponType        @default(REFERRAL)
+  percentage            Int               @default (10)
+  expiryDate            DateTime?
+  isUsed               Boolean            @default(false)
+  referralHistoryid     String?              @unique
+  referralHistory       ReferralHistory?  @relation(fields: [referralHistoryid],references: [id])
+  ticketTransactionId   String?
+  ticketTransaction     TicketTransaction?   @relation(fields: [ticketTransactionId],references: [id])
+
+
+createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  deletedAt         DateTime?
+  @@map("discount_coupons")
+}
+
+enum CouponType {
+  REFERRAL
+  PROMOTIONAL
+  LOYALTY
+  EVENT_SPECIFIC
+}
+
 model TicketTransactionDetail {
   id                Int                   @id @default(autoincrement())
-  ticketTransactionId Int
+  ticketTransactionId String
   ticketTransactions  TicketTransaction   @relation(fields: [ticketTransactionId],references: [id])
   orderName         String
   orderCountryPhoneId Int
