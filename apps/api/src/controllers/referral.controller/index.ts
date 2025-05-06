@@ -130,3 +130,28 @@ export async function useReferralNumber(
     next(error);
   }
 }
+
+export async function getReferralHistory(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
+  try {
+    const { id } = req.params
+    const referralHistories = await prisma.referralHistory.findMany({
+      where: {
+        referralOwnerId: id,
+      },
+      include: {
+        referralUser:true
+      }
+    })
+    res.status(200).json({
+      success: true,
+      message: 'Referral Histories found',
+      referralHistories
+    });
+  } catch (error) {
+    next(error);
+  }
+}

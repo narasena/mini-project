@@ -20,7 +20,9 @@ export default function RegisterPage() {
   const handleEmailCheck = async (email: string) => {
     try {
       setIsLoading(true);
-      const response = await apiInstance.post('/auth/register-check', { email: email });
+      const response = await apiInstance.post('/auth/register-check', {
+        email: email,
+      });
       toast.success(response.data.message);
       setIsEmailAvailable(true);
       setTempEmail(email);
@@ -31,7 +33,7 @@ export default function RegisterPage() {
         setIsEmailAvailable(false);
         setIsRegisterSuccess(true);
         setTempEmail(error.response.data.email);
-      }else{
+      } else {
         toast.error(error.response.data.message);
       }
     } finally {
@@ -55,12 +57,15 @@ export default function RegisterPage() {
         eventPromoAccepted: values.eventPromoAccepted,
         type: 'REGISTRATION',
       });
-      const referralResponse = await apiInstance.post('/referral/use', {
-        referralNumber: values.referralNumber,
-        email: tempEmail
-      })
+      if (values.referralNumber !== '') {
+        const referralResponse = await apiInstance.post('/referral/use', {
+          referralNumber: values.referralNumber,
+          email: tempEmail,
+        });
+        toast.success(referralResponse.data.message);
+      }
       toast.success(response.data.message);
-      toast.success(referralResponse.data.message);
+
       setIsEmailAvailable(false);
       setIsRegisterSuccess(true);
     } catch (error) {
@@ -77,25 +82,28 @@ export default function RegisterPage() {
         return;
       }
 
-      const response = await apiInstance.post('/auth/send-otp', { email , type: 'REGISTRATION' });
+      const response = await apiInstance.post('/auth/send-otp', {
+        email,
+        type: 'REGISTRATION',
+      });
       if (response.data.success) {
         toast.success(response.data.message);
       }
     } catch (error: any) {
-       if (error.response) {
-         // The request was made and the server responded with a status code
-         // that falls out of the range of 2xx
-         toast.error(
-           error.response.data.message || 'Failed to send verification code',
-         );
-       } else if (error.request) {
-         // The request was made but no response was received
-         toast.error('No response from server. Please try again.');
-       } else {
-         // Something happened in setting up the request
-         toast.error('Error sending request. Please try again.');
-       }
-       console.error('Error details:', error);
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        toast.error(
+          error.response.data.message || 'Failed to send verification code',
+        );
+      } else if (error.request) {
+        // The request was made but no response was received
+        toast.error('No response from server. Please try again.');
+      } else {
+        // Something happened in setting up the request
+        toast.error('Error sending request. Please try again.');
+      }
+      console.error('Error details:', error);
     }
   };
   const handleMemberRegisterVerifyCode = async (code: string) => {
@@ -118,7 +126,7 @@ export default function RegisterPage() {
   const handlePostRegister = async () => {
     try {
       if (isEmailVerified) {
-         // Assuming your API returns user data
+        // Assuming your API returns user data
         setTimeout(() => {
           window.location.href = '/';
         }, 2500);
@@ -137,7 +145,7 @@ export default function RegisterPage() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-w-screen min-h-screen bg-white/30">
+      <div className="flex items-center justify-center min-w-screen min-h-screen bg-gray-700/30">
         <div className="flex items-center justify-center w-10 h-10 border border-gray-200 rounded-lg bg-gray-50/50 dark:bg-gray-800/30 dark:border-gray-700">
           <div role="status">
             <svg
@@ -240,7 +248,7 @@ export default function RegisterPage() {
                     firstName: '',
                     lastName: '',
                     birthDate: '',
-                    referralNumber:'',
+                    referralNumber: '',
                     sex: '',
                     termsPrivacyAccepted: false,
                     personalDataConsentAccepted: false,
