@@ -6,9 +6,12 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import React, { useEffect } from 'react';
 import apiInstance from '@/utils/axiosInstance';
+import Link from 'next/link';
+import { IEvent } from '@/types/event.type';
 
 export default function HomePage() {
-  const [events, setEvents] = React.useState([]);
+  const [events, setEvents] = React.useState<IEvent[]>([]);
+  console.log(events)
   const handleGetEvents = async () => {
     try {
       const response = await apiInstance.get('/events');
@@ -79,11 +82,12 @@ export default function HomePage() {
             }}
           >
 
-            {events.map((event:any, index) => (
-            <SwiperSlide key={index}>
+            {events.map((event:IEvent, index) => (
+              <SwiperSlide key={index}>
+                <Link href={`/event/${event.id}`}>
               <div className="bg-white shadow-md rounded-md overflow-hidden text-sm">
                 <img
-                  src="https://assets.loket.com/images/ss/1744096102_YJdAlk.jpg"
+                  src={event?.bannerImgUrl!}
                   alt="Grand Final Ambassadors of UPH Medan Campus 2025"
                   className="w-full h-32 object-cover"
                 />
@@ -98,6 +102,7 @@ export default function HomePage() {
                   </p>
                 </div>
               </div>
+                </Link>
             </SwiperSlide>
               
             ))}

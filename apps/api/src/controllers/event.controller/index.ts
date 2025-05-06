@@ -128,3 +128,68 @@ export async function getEvents(
     next(error)
   }
 }
+
+export async function getEventByCreatorId(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const {payload} = req.body
+    const creator = await prisma.creatorProfile.findUnique({
+      where: {
+        memberId: payload.id
+      }
+    })
+    if(!creator) {
+      throw {
+        isExpose: true,
+        status: 400,
+        message: 'Creator not found'
+      }
+    }
+    const creatorEvents = await prisma.event.findMany({
+      where: {
+        creatorId: creator!.id
+      }
+    })
+    res.status(200).json({
+      success: true,
+      message: 'Events retrieved successfully',
+      creatorEvents,
+    })
+  } catch (error) {
+    next(error)
+    
+  }
+  
+}
+
+export async function getEventById(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const { id } = req.params
+    const event = await prisma.event.findUnique({
+      where: {
+        id: Number(id)
+      }
+    })
+    if(!event) {
+      throw {
+        isExpose: true,
+        status: 400,
+        message: 'Event not found'
+      }
+    }
+    res.status(200).json({
+      success: true,
+      message: 'Event retrieved successfully',
+      event,
+    })
+  } catch (error) {
+    next(error)
+  }
+}

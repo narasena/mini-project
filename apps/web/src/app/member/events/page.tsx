@@ -1,13 +1,43 @@
 'use client'
+import useAuthStore from '@/lib/store/auth-store';
+import { IEvent } from '@/types/event.type';
+import apiInstance from '@/utils/axiosInstance';
 import Image from 'next/image';
 import Link from 'next/link';
 import * as React from 'react';
 import { CiSearch } from 'react-icons/ci';
+import { FaCalendarAlt } from 'react-icons/fa';
+import { LuTicket } from 'react-icons/lu';
+import { IoMdInformationCircle } from 'react-icons/io';
+import { BsThreeDotsVertical } from 'react-icons/bs';
 
 export default function DashboardMyEventPage() {
   const [activeTab, setActiveTab] = React.useState<'active' | 'draft' | 'past'>(
     'active',
   );
+  const { token } = useAuthStore();
+  console.log(token);
+  const [myEvents, setMyEvents] = React.useState<IEvent[]>([]);
+  let activeEvent:IEvent[] = []
+  let draftEvent:IEvent[] = []
+  let pastEvent: IEvent[] = []
+  if(myEvents.length !== 0){
+    activeEvent = myEvents.filter((event) => new Date(event.eventEndDate).getTime() > new Date().getTime());
+    draftEvent = myEvents.filter((event) => event.isDraft === true);
+    pastEvent = myEvents.filter((event) => new Date(event.eventEndDate).getTime() < new Date().getTime());
+  }
+  console.log(myEvents)
+  console.log(activeEvent)
+  const handleGetMyEvents = async () => {
+    try {
+      const response = await apiInstance.get('/events/my-events', { headers: { Authorization: `Bearer ${token}` } });
+      console.log(response.data);
+      setMyEvents(response.data.creatorEvents);
+    } catch (error:any) {
+      console.log(error.config);
+      
+    }
+  };
   const tabStyles = {
     active: ' active text-[#151416]',
     inactive: ' text-[#8e919b]',
@@ -21,6 +51,35 @@ export default function DashboardMyEventPage() {
     'Nama Event (A-Z)',
     'Nama Event (Z-A)',
   ];
+  const EventNoData = (): JSX.Element => {
+    return (
+      
+    <div className="mt-[30px] mb-5 pl-5 text-center w-full max-w-full">
+      <div className="lokasi-event padding-large p-[30px] xl:p-[70px]">
+        <div className="mb-5 relative flex-middle-center">
+          <Image
+            src={'/images/icon-event-first-user.svg'}
+            width={232}
+            height={137}
+            alt="Events"
+          />
+        </div>
+        <Link href={'/buat-event'} className="c-button-primary c-button">
+          Buat Event
+        </Link>
+        <h2 className="mb-[5px] pr-[25px] text-[19px] text-[#595959] font-medium whitespace-nowrap overflow-ellipsis">
+          {'Hai, terima kasih telah menggunakan layanan LOKET'}
+        </h2>
+        <p className="text-sm text-[#595959]">
+          {'Silahkan buat eventmu dengan klik tombol "Buat Event" di atas'}
+        </p>
+      </div>
+    </div>
+    )
+  }
+  React.useEffect(() => {
+    handleGetMyEvents();
+  },[activeTab, token])
   return (
     <div className="page-layout padding-remove-top p-[25px_40px]">
       <div className="flex flex-wrap -ml-[30px]">
@@ -93,21 +152,87 @@ export default function DashboardMyEventPage() {
           </div>
         </div>
         {/* event tab content no data */}
-        <div className="mt-[30px] mb-5 pl-5 text-center w-full max-w-full">
-          <div className="lokasi-event padding-large p-[30px] xl:p-[70px]">
-            <div className="mb-5 relative flex-middle-center">
-              <Image
-                src={'/images/icon-event-first-user.svg'}
-                width={232}
-                height={137}
-                alt="Events"
-              />
-            </div>
-            <Link href={'/member/events'} className='s-button-primary s-button'>Buat Event</Link>
-            <h2 className='mb-[5px] pr-[25px] text-[19px] text-[#595959] font-medium whitespace-nowrap overflow-ellipsis'>{'Hai, terima kasih telah menggunakan layanan LOKET'}</h2>
-            <p className='text-sm text-[#595959]'>{'Silahkan buat eventmu dengan klik tombol "Buat Event" di atas'}</p>
-          </div>
-        </div>
+        {activeTab === 'active' && activeEvent.length === 0 && <EventNoData />}
+        {activeTab === 'draft' && draftEvent.length === 0 && <EventNoData />}
+        {activeTab === 'past' && pastEvent.length === 0 && <EventNoData />}
+        
+        {/* event tab content */}
+        {activeTab === 'active' && activeEvent.length > 0 && (
+          
+          activeEvent.map((event, index) => {
+            return (
+              <div className="panel" key={index}>
+                              <div className="invoice-list grid grid-rows-[1fr] gap-y-7">
+                                <div className="invoice-item shadow-[0px_4px_8px_rgba(30,44,106,0.1)] rounded-lg">
+                                  <div className="invoice-item-header p-[24px_24px_16px] flex-middle-between ">
+                                    <div className="invoice-status">
+                                      
+                                    </div>
+                                    <div className="invoice-actions">
+                                      <div className="text-2xl text-[#494a4a]">
+                                        <BsThreeDotsVertical />
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="invoice-item-content sm:p-6 sm:grid sm:grid-cols-[1fr_auto] gap-4 border-t border-[#e8e8e8]">
+                                    <div className="item-content-detail text-sm text-[#494a4a]">
+                                      <div className="event-detail-title font-semibold text-[1.313rem] text-[#151416] ">
+                                        {event.eventName}
+                                      </div>
+                                      <div className="event-detail-additional flex items-center mt-1 ">
+                                        <div className="event-detail-date flex items-center gap-2 font-normal leading-1 align-[-.125rem]">
+                                          <FaCalendarAlt className="!text-[#adb6c9]" />
+                                          <span className="">{`${event.eventStartDate} - ${event.eventEndDate}`}</span>
+                                        </div>
+                                        <div className="additional-separator w-[1px] h-5 bg-[#e8e8e8] mx-3"></div>
+                                        <div className="event-detail-ticket-qty flex items-center gap-2 font-normal leading-1 align-[-.125rem]">
+                                          <LuTicket className="!text-[#adb6c9]" />
+                                          <span className="">
+                                            {event.ticketQty}
+                                            {' Tiket'}
+                                          </span>
+                                        </div>
+                                      </div>
+                                      <div className="invoice-date mt-1">
+                                        {event.ticketPrice.toLocaleString('id-ID', {
+                                          style: 'currency',
+                                          currency: 'IDR',
+                                        })}
+                                      </div>
+                                      <div className="additional-cta mt-4 ">
+                                        <div className="invoice-links flex gap-4 ">
+                                          <button className="c-button c-button-primary">
+                                            Liat Event
+                                          </button>
+                                          <button className="c-button c-button-tertiary">
+                                            Invoice
+                                          </button>
+                                        </div>
+                                      </div>
+                                      <div className="info-multiple mt-2 flex items-center gap-2 font-normal leading-1 align-[-.125rem]">
+                                        <IoMdInformationCircle className="!text-[#adb6c9]" />
+                                        <span className="">
+                                          {'E-Voucher dikirim ke masing-masing pengunjung'}
+                                        </span>
+                                      </div>
+                                    </div>
+                                    <div className="item-content-banner w-[283px] h-full max-h-[137px] rounded-lg overflow-hidden bg-white relative">
+                                      <Image
+                                        src={event.bannerImgUrl!}
+                                        fill
+                                        sizes="283px"
+                                        alt={event.eventName}
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+            )
+          })
+        )}
+        {/* {activeTab === 'draft' && <EventDraft />} */}
+        {/* {activeTab === 'past' && <EventPast />} */}
       </div>
     </div>
   );

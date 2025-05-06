@@ -1,7 +1,20 @@
 'use client';
-import React, { useState } from 'react';
+import { IEvent } from '@/types/event.type';
+import apiInstance from '@/utils/axiosInstance';
+import { useParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 
 const BannerCard: React.FC = () => {
+  const params = useParams();
+  const [event, setEvent] = useState<IEvent|null>(null);
+  const handleGetEventById = async () => {
+    try {
+      const response = await apiInstance.get(`/events/${params.id}`);
+      setEvent(response.data.event);
+    } catch (error) {
+      console.log(error)
+    }
+  }
   const [isDescriptionVisible, setIsDescriptionVisible] = useState(true); // Track which content is visible
   const [quantity, setQuantity] = useState(0); // Track ticket quantity
   const ticketPrice = 100000; // Price per ticket in IDR
@@ -17,6 +30,9 @@ const BannerCard: React.FC = () => {
   const toggleContent = () => {
     setIsDescriptionVisible(!isDescriptionVisible);
   };
+  useEffect(() => {
+    handleGetEventById();
+  }, []);
 
   return (
     <div style={{ maxWidth: '1300px', margin: '0 auto', padding: '16px' }}>
@@ -29,7 +45,7 @@ const BannerCard: React.FC = () => {
         }}
       >
         <img
-          src="https://assets.loket.com/neo/production/images/banner/20250429133940_6810742c07c7f.jpg"
+          src={event?.bannerImgUrl!}
           alt="Event Banner"
           style={{
             width: '800px',
@@ -51,7 +67,7 @@ const BannerCard: React.FC = () => {
           }}
         >
           <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>
-            KOPLO PARTY MADNESS WITH FEEL KOPLO
+            {event?.eventName}
           </h2>
 
           {/* Ticket Redemption Terms & Conditions below the event title */}
@@ -61,22 +77,21 @@ const BannerCard: React.FC = () => {
             </h4>
             <p>
               <strong>Ticket Validity:</strong>
-              <br />• Each ticket admits one (1) person only.
+              <br />{`• Each ticket admits (${event?.maxTicketPerTransaction}) person only.`}
             </p>
           </div>
 
           <p>
-            <strong>📅</strong> 02 May 2025
+            <strong>📅</strong> {`${event?.eventStartDate} - ${event?.eventEndDate}`}
           </p>
           <p>
-            <strong>🕓</strong> 20:00 WIB
+            <strong>🕓</strong> {`${event?.eventStartTime} - ${event?.eventEndTime}`}
           </p>
           <p>
-            <strong>📍</strong> Dewa Sport & Bar, Carstensz Mall - Basement
-            Floor
+            <strong>📍</strong> {event?.eventLocation}
           </p>
           <p style={{ marginTop: '8px', fontStyle: 'italic' }}>
-            Diselenggarakan oleh: Annisa Zahara
+            {`Diselenggarakan oleh: ${event?.organizerName!}`}
           </p>
         </div>
       </div>
@@ -127,9 +142,7 @@ const BannerCard: React.FC = () => {
             Deskripsi Event
           </h2>
           <p>
-            Get ready to shake the night away! Feel Koplo is bringing the
-            ultimate party vibes to Dewa Sport & Bar — beats, energy, and pure
-            madness await. See you on the dancefloor!
+            {`${event?.eventDesc!}`}
           </p>
         </div>
       ) : (
@@ -157,13 +170,16 @@ const BannerCard: React.FC = () => {
             }}
           >
             <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>
-              KOPLO PARTY MADNESS WITH FEEL KOPLO
+              {event?.eventName}
             </h3>
             <p style={{ margin: '5px 0' }}>
-              <strong>Berakhir:</strong> 02 May 2025 · 20:00 WIB
+              <strong>Berakhir:</strong> {`${event?.eventEndDate} · ${event?.eventEndTime}`}
             </p>
             <p style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>
-              Rp{totalPrice.toLocaleString()}
+              {event?.ticketPrice.toLocaleString('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+              })}
             </p>
           </div>
 

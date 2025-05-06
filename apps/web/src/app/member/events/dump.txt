@@ -1,0 +1,80 @@
+'use client';
+import useAuthStore from '@/lib/store/auth-store';
+import apiInstance from '@/utils/axiosInstance';
+import { usePathname, useRouter } from 'next/navigation';
+import * as React from 'react';
+
+const publicRoutes = ['/login', '/register'];
+
+export default function AuthProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const { isLogin, token, member, setLogin, setToken, setMember, hasHydrated } =
+    useAuthStore();
+  const [isCheckingSession, setIsCheckingSession] = React.useState(false);
+  const pathName = usePathname();
+  const router = useRouter();
+
+  // First effect: Set authorization header whenever token changes
+  React.useEffect(() => {
+    if (token) {
+      apiInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    } else {
+      delete apiInstance.defaults.headers.common['Authorization'];
+    }
+  }, [token]);
+
+  // Second effect: Check session when token is available
+  React.useEffect(() => {
+    if (!hasHydrated) return;
+
+    if (token) {
+      handleSessionLogin();
+    }
+  }, [token, hasHydrated]);
+
+  // Third effect: Handle routing based on auth state
+  React.useEffect(() => {
+    if (!hasHydrated || isCheckingSession) return;
+
+    if (isLogin && token && publicRoutes.includes(pathName)) {
+      router.push('/');
+    } else if (!isLogin && !token && !publicRoutes.includes(pathName)) {
+      router.push('/login');
+    }
+  }, [isLogin, token, pathName, router, hasHydrated, isCheckingSession]);
+
+  const handleSessionLogin = async () => {
+    try {
+      setIsCheckingSession(true);
+      const response = await apiInstance.get('/auth/session-login', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (response.data.success) {
+        setMember(response.data.data.member);
+        setLogin(true);
+        setToken(response.data.data.token);
+      }
+    } catch (error) {
+      console.error(error);
+      // Consider handling failed session validation here
+      // setLogin(false);
+      // setToken(null);
+    } finally {
+      setIsCheckingSession(false);
+    }
+  };
+
+  // Show loading state while checking session
+  if (isCheckingSession) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <span className="loading loading-spinner loading-lg"></span>
+      </div>
+    );
+  }
+
+  return <>{children}</>;
+}

@@ -58,7 +58,7 @@ export default function AuthProvider({
   }, [token]);
 
   //
-  console.log(isLogin, token, member);
+  // console.log(isLogin, token, member);
   // For public routes or when logged in, render the children
   return <>{children}</>;
 }
