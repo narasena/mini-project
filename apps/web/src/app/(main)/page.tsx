@@ -4,9 +4,22 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
-import React from 'react';
+import React, { useEffect } from 'react';
+import apiInstance from '@/utils/axiosInstance';
 
 export default function HomePage() {
+  const [events, setEvents] = React.useState([]);
+  const handleGetEvents = async () => {
+    try {
+      const response = await apiInstance.get('/events');
+      setEvents(response.data.events);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    handleGetEvents();
+  },[])
   return (
     <div className="px-4 md:px-8 pt-6 pb-12">
       {/* Carousel Banner */}
@@ -65,8 +78,9 @@ export default function HomePage() {
               nextEl: '.swiper-button-next', // tombol kanan
             }}
           >
-            {/* Event Card 1 */}
-            <SwiperSlide>
+
+            {events.map((event:any, index) => (
+            <SwiperSlide key={index}>
               <div className="bg-white shadow-md rounded-md overflow-hidden text-sm">
                 <img
                   src="https://assets.loket.com/images/ss/1744096102_YJdAlk.jpg"
@@ -75,195 +89,20 @@ export default function HomePage() {
                 />
                 <div className="p-3">
                   <h3 className="text-sm font-semibold leading-tight">
-                    Grand Final Ambassadors of UPH Medan Campus 2025
+                    {event.eventName}
                   </h3>
-                  <p className="mt-1 text-gray-600 text-xs">26 Apr 2025</p>
-                  <p className="text-sm font-bold mt-1">Rp200.000</p>
+                  <p className="mt-1 text-gray-600 text-xs">{event.eventStartDate}</p>
+                  <p className="text-sm font-bold mt-1">{event.ticketPrice.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</p>
                   <p className="mt-1 text-gray-500 text-xs">
-                    Ambassadors of UPH Medan Campus
+                    {event.organizerName}
                   </p>
                 </div>
               </div>
             </SwiperSlide>
+              
+            ))}
 
-            {/* Event Card 2 */}
-            <SwiperSlide>
-              <div className="bg-white shadow-md rounded-md overflow-hidden text-sm">
-                <img
-                  src="https://assets.loket.com/images/ss/1744886125_j5kbXb.jpg"
-                  alt="YES CONFERENCE"
-                  className="w-full h-32 object-cover"
-                />
-                <div className="p-3">
-                  <h3 className="text-sm font-semibold leading-tight">
-                    YES CONFERENCE
-                  </h3>
-                  <p className="mt-1 text-gray-600 text-xs">27 Apr 2025</p>
-                  <p className="text-sm font-bold mt-1">Rp100.000</p>
-                  <p className="mt-1 text-gray-500 text-xs">YES CONFERENCE</p>
-                </div>
-              </div>
-            </SwiperSlide>
-
-            {/* Event Card 3 */}
-            <SwiperSlide>
-              <div className="bg-white shadow-md rounded-md overflow-hidden text-sm">
-                <img
-                  src="https://assets.loket.com/images/ss/1742964569_FhQTIw.jpg"
-                  alt="Flow World Tour Jakarta"
-                  className="w-full h-32 object-cover"
-                />
-                <div className="p-3">
-                  <h3 className="text-sm font-semibold leading-tight">
-                    Flow World Tour "Anime Shibari 2024 - 2025" - Jakarta
-                  </h3>
-                  <p className="mt-1 text-gray-600 text-xs">02 May 2025</p>
-                  <p className="text-sm font-bold mt-1">Rp1.000.000</p>
-                  <p className="mt-1 text-gray-500 text-xs">
-                    PT. FRIEDRICE ENTERTAINTAMENT INDONESIA
-                  </p>
-                </div>
-              </div>
-            </SwiperSlide>
-
-            {/* Event Card 4 */}
-            <SwiperSlide>
-              <div className="bg-white shadow-md rounded-md overflow-hidden text-sm">
-                <img
-                  src="https://loket-production-sg.s3.ap-southeast-1.amazonaws.com/images/ss/1721024027_4fclnB.jpg"
-                  alt="SUPERMUSIC INTIMATE SESSIONS 2025 - MADIUN"
-                  className="w-full h-32 object-cover"
-                />
-                <div className="p-3">
-                  <h3 className="text-sm font-semibold leading-tight">
-                    SUPERMUSIC INTIMATE SESSIONS 2025 - MADIUN
-                  </h3>
-                  <p className="mt-1 text-gray-600 text-xs">29 Apr 2025</p>
-                  <p className="text-sm font-bold mt-1">Rp75.000</p>
-                  <p className="mt-1 text-gray-500 text-xs">SUPERMUSIC</p>
-                </div>
-              </div>
-            </SwiperSlide>
-
-            {/* Event Card 5 */}
-            <SwiperSlide>
-              <div className="bg-white shadow-md rounded-md overflow-hidden text-sm">
-                <img
-                  src="https://assets.loket.com/images/ss/1742800117_WkGnwz.png"
-                  alt="Jazz Festival 2025"
-                  className="w-full h-32 object-cover"
-                />
-                <div className="p-3">
-                  <h3 className="text-sm font-semibold leading-tight">
-                    Jazz Festival 2025
-                  </h3>
-                  <p className="mt-1 text-gray-600 text-xs">05 May 2025</p>
-                  <p className="text-sm font-bold mt-1">Rp150.000</p>
-                  <p className="mt-1 text-gray-500 text-xs">Jazz Event</p>
-                </div>
-              </div>
-            </SwiperSlide>
-
-            {/* Event Card 6 */}
-            <SwiperSlide>
-              <div className="bg-white shadow-md rounded-md overflow-hidden text-sm">
-                <img
-                  src="https://assets.loket.com/images/ss/1740817478_fnv50E.png"
-                  alt="Tech Expo 2025"
-                  className="w-full h-32 object-cover"
-                />
-                <div className="p-3">
-                  <h3 className="text-sm font-semibold leading-tight">
-                    Tech Expo 2025
-                  </h3>
-                  <p className="mt-1 text-gray-600 text-xs">10 May 2025</p>
-                  <p className="text-sm font-bold mt-1">Rp200.000</p>
-                  <p className="mt-1 text-gray-500 text-xs">
-                    Technology Showcase
-                  </p>
-                </div>
-              </div>
-            </SwiperSlide>
-
-            {/* Event Card 7 */}
-            <SwiperSlide>
-              <div className="bg-white shadow-md rounded-md overflow-hidden text-sm">
-                <img
-                  src="https://assets.loket.com/images/ss/1744610628_nM3bBm.jpg"
-                  alt="Music Concert 2025"
-                  className="w-full h-32 object-cover"
-                />
-                <div className="p-3">
-                  <h3 className="text-sm font-semibold leading-tight">
-                    Music Concert 2025
-                  </h3>
-                  <p className="mt-1 text-gray-600 text-xs">15 May 2025</p>
-                  <p className="text-sm font-bold mt-1">Rp180.000</p>
-                  <p className="mt-1 text-gray-500 text-xs">Live Performance</p>
-                </div>
-              </div>
-            </SwiperSlide>
-
-            {/* Event Card 8 */}
-            <SwiperSlide>
-              <div className="bg-white shadow-md rounded-md overflow-hidden text-sm">
-                <img
-                  src="https://assets.loket.com/images/ss/1744873923_9Bbcso.jpg"
-                  alt="Art Exhibition 2025"
-                  className="w-full h-32 object-cover"
-                />
-                <div className="p-3">
-                  <h3 className="text-sm font-semibold leading-tight">
-                    Art Exhibition 2025
-                  </h3>
-                  <p className="mt-1 text-gray-600 text-xs">20 May 2025</p>
-                  <p className="text-sm font-bold mt-1">Rp120.000</p>
-                  <p className="mt-1 text-gray-500 text-xs">
-                    Contemporary Art Show
-                  </p>
-                </div>
-              </div>
-            </SwiperSlide>
-
-            {/* Event Card 9 */}
-            <SwiperSlide>
-              <div className="bg-white shadow-md rounded-md overflow-hidden text-sm">
-                <img
-                  src="https://assets.loket.com/images/ss/1735787178_LI1sWF.jpg"
-                  alt="Food Festival 2025"
-                  className="w-full h-32 object-cover"
-                />
-                <div className="p-3">
-                  <h3 className="text-sm font-semibold leading-tight">
-                    Food Festival 2025
-                  </h3>
-                  <p className="mt-1 text-gray-600 text-xs">25 May 2025</p>
-                  <p className="text-sm font-bold mt-1">Rp90.000</p>
-                  <p className="mt-1 text-gray-500 text-xs">
-                    Gastronomic Experience
-                  </p>
-                </div>
-              </div>
-            </SwiperSlide>
-
-            {/* Event Card 10 */}
-            <SwiperSlide>
-              <div className="bg-white shadow-md rounded-md overflow-hidden text-sm">
-                <img
-                  src="https://assets.loket.com/images/ss/1744096102_YJdAlk.jpg"
-                  alt="Film Screening 2025"
-                  className="w-full h-32 object-cover"
-                />
-                <div className="p-3">
-                  <h3 className="text-sm font-semibold leading-tight">
-                    Film Screening 2025
-                  </h3>
-                  <p className="mt-1 text-gray-600 text-xs">30 May 2025</p>
-                  <p className="text-sm font-bold mt-1">Rp110.000</p>
-                  <p className="mt-1 text-gray-500 text-xs">Cinematic Event</p>
-                </div>
-              </div>
-            </SwiperSlide>
+            
           </Swiper>
         </div>
       </section>

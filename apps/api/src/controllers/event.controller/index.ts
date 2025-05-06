@@ -111,3 +111,20 @@ export async function createEvent(
   }
   
 }
+
+export async function getEvents(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const events = await prisma.event.findMany()
+    res.status(200).json({
+      success: true,
+      message: 'Events retrieved successfully',
+      events,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
