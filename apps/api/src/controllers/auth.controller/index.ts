@@ -30,7 +30,11 @@ export async function registerMember(
       personalDataConsentAccepted,
       eventPromoAccepted,
     }: IAuthController = req.body;
-    const referralNumber = generateCodeTenChars();
+    
+    let referralNumber = generateCodeTenChars();
+    while (await prisma.member.findUnique({ where: { referralNumber } })) {
+      referralNumber = generateCodeTenChars();
+    }
     const referralExpiryDate = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000); // 90 days from now
     const newMember = await prisma.member.create({
       data: {
@@ -49,11 +53,7 @@ export async function registerMember(
       },
     });
     await sendEmailVerificationCode(req, res, next);
-    res.status(200).json({
-      success: true,
-      message: 'Member created successfully please verify email',
-      data: newMember,
-    });
+    next()
   } catch (error) {
     next(error);
   }

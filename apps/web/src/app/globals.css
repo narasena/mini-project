@@ -61,7 +61,7 @@
   }
 
   .auth-member {
-    @apply lg:grid lg:grid-cols-[repeat(2,1fr)] lg:grid-rows-[180px] lg:h-auto h-screen relative;
+    @apply lg:grid lg:grid-cols-[repeat(2,1fr)] lg:grid-rows-[auto] lg:h-auto h-screen relative;
   }
 
   .auth-member-brand {

@@ -2013,7 +2013,6 @@ export namespace Prisma {
     verificationCodes: number
     ticketTransactions: number
     referralOwnerHistory: number
-    referralUserHistory: number
     pointTransaction: number
     discountCoupon: number
   }
@@ -2022,7 +2021,6 @@ export namespace Prisma {
     verificationCodes?: boolean | MemberCountOutputTypeCountVerificationCodesArgs
     ticketTransactions?: boolean | MemberCountOutputTypeCountTicketTransactionsArgs
     referralOwnerHistory?: boolean | MemberCountOutputTypeCountReferralOwnerHistoryArgs
-    referralUserHistory?: boolean | MemberCountOutputTypeCountReferralUserHistoryArgs
     pointTransaction?: boolean | MemberCountOutputTypeCountPointTransactionArgs
     discountCoupon?: boolean | MemberCountOutputTypeCountDiscountCouponArgs
   }
@@ -2056,13 +2054,6 @@ export namespace Prisma {
    * MemberCountOutputType without action
    */
   export type MemberCountOutputTypeCountReferralOwnerHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ReferralHistoryWhereInput
-  }
-
-  /**
-   * MemberCountOutputType without action
-   */
-  export type MemberCountOutputTypeCountReferralUserHistoryArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReferralHistoryWhereInput
   }
 
@@ -3888,7 +3879,7 @@ export namespace Prisma {
       creatorProfile: Prisma.$CreatorProfilePayload<ExtArgs> | null
       ticketTransactions: Prisma.$TicketTransactionPayload<ExtArgs>[]
       referralOwnerHistory: Prisma.$ReferralHistoryPayload<ExtArgs>[]
-      referralUserHistory: Prisma.$ReferralHistoryPayload<ExtArgs>[]
+      referralUserHistory: Prisma.$ReferralHistoryPayload<ExtArgs> | null
       pointTransaction: Prisma.$PointsTransactionPayload<ExtArgs>[]
       discountCoupon: Prisma.$DiscountCouponPayload<ExtArgs>[]
     }
@@ -4309,7 +4300,7 @@ export namespace Prisma {
     creatorProfile<T extends Member$creatorProfileArgs<ExtArgs> = {}>(args?: Subset<T, Member$creatorProfileArgs<ExtArgs>>): Prisma__CreatorProfileClient<$Result.GetResult<Prisma.$CreatorProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     ticketTransactions<T extends Member$ticketTransactionsArgs<ExtArgs> = {}>(args?: Subset<T, Member$ticketTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     referralOwnerHistory<T extends Member$referralOwnerHistoryArgs<ExtArgs> = {}>(args?: Subset<T, Member$referralOwnerHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReferralHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    referralUserHistory<T extends Member$referralUserHistoryArgs<ExtArgs> = {}>(args?: Subset<T, Member$referralUserHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReferralHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    referralUserHistory<T extends Member$referralUserHistoryArgs<ExtArgs> = {}>(args?: Subset<T, Member$referralUserHistoryArgs<ExtArgs>>): Prisma__ReferralHistoryClient<$Result.GetResult<Prisma.$ReferralHistoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     pointTransaction<T extends Member$pointTransactionArgs<ExtArgs> = {}>(args?: Subset<T, Member$pointTransactionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PointsTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     discountCoupon<T extends Member$discountCouponArgs<ExtArgs> = {}>(args?: Subset<T, Member$discountCouponArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscountCouponPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -4861,11 +4852,6 @@ export namespace Prisma {
      */
     include?: ReferralHistoryInclude<ExtArgs> | null
     where?: ReferralHistoryWhereInput
-    orderBy?: ReferralHistoryOrderByWithRelationInput | ReferralHistoryOrderByWithRelationInput[]
-    cursor?: ReferralHistoryWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ReferralHistoryScalarFieldEnum | ReferralHistoryScalarFieldEnum[]
   }
 
   /**
@@ -4941,25 +4927,14 @@ export namespace Prisma {
 
   export type AggregateReferralHistory = {
     _count: ReferralHistoryCountAggregateOutputType | null
-    _avg: ReferralHistoryAvgAggregateOutputType | null
-    _sum: ReferralHistorySumAggregateOutputType | null
     _min: ReferralHistoryMinAggregateOutputType | null
     _max: ReferralHistoryMaxAggregateOutputType | null
-  }
-
-  export type ReferralHistoryAvgAggregateOutputType = {
-    pointsEarned: number | null
-  }
-
-  export type ReferralHistorySumAggregateOutputType = {
-    pointsEarned: number | null
   }
 
   export type ReferralHistoryMinAggregateOutputType = {
     id: string | null
     referralOwnerId: string | null
     referralUserId: string | null
-    pointsEarned: number | null
     createdAt: Date | null
     updatedAt: Date | null
     deletedAt: Date | null
@@ -4969,7 +4944,6 @@ export namespace Prisma {
     id: string | null
     referralOwnerId: string | null
     referralUserId: string | null
-    pointsEarned: number | null
     createdAt: Date | null
     updatedAt: Date | null
     deletedAt: Date | null
@@ -4979,7 +4953,6 @@ export namespace Prisma {
     id: number
     referralOwnerId: number
     referralUserId: number
-    pointsEarned: number
     createdAt: number
     updatedAt: number
     deletedAt: number
@@ -4987,19 +4960,10 @@ export namespace Prisma {
   }
 
 
-  export type ReferralHistoryAvgAggregateInputType = {
-    pointsEarned?: true
-  }
-
-  export type ReferralHistorySumAggregateInputType = {
-    pointsEarned?: true
-  }
-
   export type ReferralHistoryMinAggregateInputType = {
     id?: true
     referralOwnerId?: true
     referralUserId?: true
-    pointsEarned?: true
     createdAt?: true
     updatedAt?: true
     deletedAt?: true
@@ -5009,7 +4973,6 @@ export namespace Prisma {
     id?: true
     referralOwnerId?: true
     referralUserId?: true
-    pointsEarned?: true
     createdAt?: true
     updatedAt?: true
     deletedAt?: true
@@ -5019,7 +4982,6 @@ export namespace Prisma {
     id?: true
     referralOwnerId?: true
     referralUserId?: true
-    pointsEarned?: true
     createdAt?: true
     updatedAt?: true
     deletedAt?: true
@@ -5064,18 +5026,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: ReferralHistoryAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: ReferralHistorySumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: ReferralHistoryMinAggregateInputType
@@ -5106,8 +5056,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: ReferralHistoryCountAggregateInputType | true
-    _avg?: ReferralHistoryAvgAggregateInputType
-    _sum?: ReferralHistorySumAggregateInputType
     _min?: ReferralHistoryMinAggregateInputType
     _max?: ReferralHistoryMaxAggregateInputType
   }
@@ -5116,13 +5064,10 @@ export namespace Prisma {
     id: string
     referralOwnerId: string
     referralUserId: string
-    pointsEarned: number
     createdAt: Date
     updatedAt: Date
     deletedAt: Date | null
     _count: ReferralHistoryCountAggregateOutputType | null
-    _avg: ReferralHistoryAvgAggregateOutputType | null
-    _sum: ReferralHistorySumAggregateOutputType | null
     _min: ReferralHistoryMinAggregateOutputType | null
     _max: ReferralHistoryMaxAggregateOutputType | null
   }
@@ -5145,7 +5090,6 @@ export namespace Prisma {
     id?: boolean
     referralOwnerId?: boolean
     referralUserId?: boolean
-    pointsEarned?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
@@ -5159,7 +5103,6 @@ export namespace Prisma {
     id?: boolean
     referralOwnerId?: boolean
     referralUserId?: boolean
-    pointsEarned?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
@@ -5171,7 +5114,6 @@ export namespace Prisma {
     id?: boolean
     referralOwnerId?: boolean
     referralUserId?: boolean
-    pointsEarned?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
@@ -5183,13 +5125,12 @@ export namespace Prisma {
     id?: boolean
     referralOwnerId?: boolean
     referralUserId?: boolean
-    pointsEarned?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
   }
 
-  export type ReferralHistoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "referralOwnerId" | "referralUserId" | "pointsEarned" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["referralHistory"]>
+  export type ReferralHistoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "referralOwnerId" | "referralUserId" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["referralHistory"]>
   export type ReferralHistoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     referralOwner?: boolean | MemberDefaultArgs<ExtArgs>
     referralUser?: boolean | MemberDefaultArgs<ExtArgs>
@@ -5217,7 +5158,6 @@ export namespace Prisma {
       id: string
       referralOwnerId: string
       referralUserId: string
-      pointsEarned: number
       createdAt: Date
       updatedAt: Date
       deletedAt: Date | null
@@ -5651,7 +5591,6 @@ export namespace Prisma {
     readonly id: FieldRef<"ReferralHistory", 'String'>
     readonly referralOwnerId: FieldRef<"ReferralHistory", 'String'>
     readonly referralUserId: FieldRef<"ReferralHistory", 'String'>
-    readonly pointsEarned: FieldRef<"ReferralHistory", 'Int'>
     readonly createdAt: FieldRef<"ReferralHistory", 'DateTime'>
     readonly updatedAt: FieldRef<"ReferralHistory", 'DateTime'>
     readonly deletedAt: FieldRef<"ReferralHistory", 'DateTime'>
@@ -14833,7 +14772,7 @@ export namespace Prisma {
     percentage: number | null
     expiryDate: Date | null
     isUsed: boolean | null
-    referralHistoryid: string | null
+    referralHistoryId: string | null
     ticketTransactionId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -14848,7 +14787,7 @@ export namespace Prisma {
     percentage: number | null
     expiryDate: Date | null
     isUsed: boolean | null
-    referralHistoryid: string | null
+    referralHistoryId: string | null
     ticketTransactionId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -14863,7 +14802,7 @@ export namespace Prisma {
     percentage: number
     expiryDate: number
     isUsed: number
-    referralHistoryid: number
+    referralHistoryId: number
     ticketTransactionId: number
     createdAt: number
     updatedAt: number
@@ -14888,7 +14827,7 @@ export namespace Prisma {
     percentage?: true
     expiryDate?: true
     isUsed?: true
-    referralHistoryid?: true
+    referralHistoryId?: true
     ticketTransactionId?: true
     createdAt?: true
     updatedAt?: true
@@ -14903,7 +14842,7 @@ export namespace Prisma {
     percentage?: true
     expiryDate?: true
     isUsed?: true
-    referralHistoryid?: true
+    referralHistoryId?: true
     ticketTransactionId?: true
     createdAt?: true
     updatedAt?: true
@@ -14918,7 +14857,7 @@ export namespace Prisma {
     percentage?: true
     expiryDate?: true
     isUsed?: true
-    referralHistoryid?: true
+    referralHistoryId?: true
     ticketTransactionId?: true
     createdAt?: true
     updatedAt?: true
@@ -15020,7 +14959,7 @@ export namespace Prisma {
     percentage: number
     expiryDate: Date | null
     isUsed: boolean
-    referralHistoryid: string | null
+    referralHistoryId: string | null
     ticketTransactionId: string | null
     createdAt: Date
     updatedAt: Date
@@ -15054,7 +14993,7 @@ export namespace Prisma {
     percentage?: boolean
     expiryDate?: boolean
     isUsed?: boolean
-    referralHistoryid?: boolean
+    referralHistoryId?: boolean
     ticketTransactionId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -15072,7 +15011,7 @@ export namespace Prisma {
     percentage?: boolean
     expiryDate?: boolean
     isUsed?: boolean
-    referralHistoryid?: boolean
+    referralHistoryId?: boolean
     ticketTransactionId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -15090,7 +15029,7 @@ export namespace Prisma {
     percentage?: boolean
     expiryDate?: boolean
     isUsed?: boolean
-    referralHistoryid?: boolean
+    referralHistoryId?: boolean
     ticketTransactionId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -15108,14 +15047,14 @@ export namespace Prisma {
     percentage?: boolean
     expiryDate?: boolean
     isUsed?: boolean
-    referralHistoryid?: boolean
+    referralHistoryId?: boolean
     ticketTransactionId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     deletedAt?: boolean
   }
 
-  export type DiscountCouponOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "memberId" | "name" | "type" | "percentage" | "expiryDate" | "isUsed" | "referralHistoryid" | "ticketTransactionId" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["discountCoupon"]>
+  export type DiscountCouponOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "memberId" | "name" | "type" | "percentage" | "expiryDate" | "isUsed" | "referralHistoryId" | "ticketTransactionId" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["discountCoupon"]>
   export type DiscountCouponInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     member?: boolean | MemberDefaultArgs<ExtArgs>
     referralHistory?: boolean | DiscountCoupon$referralHistoryArgs<ExtArgs>
@@ -15147,7 +15086,7 @@ export namespace Prisma {
       percentage: number
       expiryDate: Date | null
       isUsed: boolean
-      referralHistoryid: string | null
+      referralHistoryId: string | null
       ticketTransactionId: string | null
       createdAt: Date
       updatedAt: Date
@@ -15585,7 +15524,7 @@ export namespace Prisma {
     readonly percentage: FieldRef<"DiscountCoupon", 'Int'>
     readonly expiryDate: FieldRef<"DiscountCoupon", 'DateTime'>
     readonly isUsed: FieldRef<"DiscountCoupon", 'Boolean'>
-    readonly referralHistoryid: FieldRef<"DiscountCoupon", 'String'>
+    readonly referralHistoryId: FieldRef<"DiscountCoupon", 'String'>
     readonly ticketTransactionId: FieldRef<"DiscountCoupon", 'String'>
     readonly createdAt: FieldRef<"DiscountCoupon", 'DateTime'>
     readonly updatedAt: FieldRef<"DiscountCoupon", 'DateTime'>
@@ -17265,7 +17204,6 @@ export namespace Prisma {
     id: 'id',
     referralOwnerId: 'referralOwnerId',
     referralUserId: 'referralUserId',
-    pointsEarned: 'pointsEarned',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     deletedAt: 'deletedAt'
@@ -17416,7 +17354,7 @@ export namespace Prisma {
     percentage: 'percentage',
     expiryDate: 'expiryDate',
     isUsed: 'isUsed',
-    referralHistoryid: 'referralHistoryid',
+    referralHistoryId: 'referralHistoryId',
     ticketTransactionId: 'ticketTransactionId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
@@ -17723,7 +17661,7 @@ export namespace Prisma {
     creatorProfile?: XOR<CreatorProfileNullableScalarRelationFilter, CreatorProfileWhereInput> | null
     ticketTransactions?: TicketTransactionListRelationFilter
     referralOwnerHistory?: ReferralHistoryListRelationFilter
-    referralUserHistory?: ReferralHistoryListRelationFilter
+    referralUserHistory?: XOR<ReferralHistoryNullableScalarRelationFilter, ReferralHistoryWhereInput> | null
     pointTransaction?: PointsTransactionListRelationFilter
     discountCoupon?: DiscountCouponListRelationFilter
   }
@@ -17751,7 +17689,7 @@ export namespace Prisma {
     creatorProfile?: CreatorProfileOrderByWithRelationInput
     ticketTransactions?: TicketTransactionOrderByRelationAggregateInput
     referralOwnerHistory?: ReferralHistoryOrderByRelationAggregateInput
-    referralUserHistory?: ReferralHistoryOrderByRelationAggregateInput
+    referralUserHistory?: ReferralHistoryOrderByWithRelationInput
     pointTransaction?: PointsTransactionOrderByRelationAggregateInput
     discountCoupon?: DiscountCouponOrderByRelationAggregateInput
   }
@@ -17760,6 +17698,7 @@ export namespace Prisma {
     id?: string
     email?: string
     phoneNumber?: string
+    referralNumber?: string
     AND?: MemberWhereInput | MemberWhereInput[]
     OR?: MemberWhereInput[]
     NOT?: MemberWhereInput | MemberWhereInput[]
@@ -17772,7 +17711,6 @@ export namespace Prisma {
     termsPrivacyAccepted?: BoolFilter<"Member"> | boolean
     sex?: EnumSexFilter<"Member"> | $Enums.Sex
     isEmailVerified?: BoolFilter<"Member"> | boolean
-    referralNumber?: StringFilter<"Member"> | string
     referralExpiryDate?: DateTimeFilter<"Member"> | Date | string
     createdAt?: DateTimeFilter<"Member"> | Date | string
     updatedAt?: DateTimeFilter<"Member"> | Date | string
@@ -17782,10 +17720,10 @@ export namespace Prisma {
     creatorProfile?: XOR<CreatorProfileNullableScalarRelationFilter, CreatorProfileWhereInput> | null
     ticketTransactions?: TicketTransactionListRelationFilter
     referralOwnerHistory?: ReferralHistoryListRelationFilter
-    referralUserHistory?: ReferralHistoryListRelationFilter
+    referralUserHistory?: XOR<ReferralHistoryNullableScalarRelationFilter, ReferralHistoryWhereInput> | null
     pointTransaction?: PointsTransactionListRelationFilter
     discountCoupon?: DiscountCouponListRelationFilter
-  }, "id" | "email" | "phoneNumber">
+  }, "id" | "email" | "phoneNumber" | "referralNumber">
 
   export type MemberOrderByWithAggregationInput = {
     id?: SortOrder
@@ -17842,7 +17780,6 @@ export namespace Prisma {
     id?: StringFilter<"ReferralHistory"> | string
     referralOwnerId?: StringFilter<"ReferralHistory"> | string
     referralUserId?: StringFilter<"ReferralHistory"> | string
-    pointsEarned?: IntFilter<"ReferralHistory"> | number
     createdAt?: DateTimeFilter<"ReferralHistory"> | Date | string
     updatedAt?: DateTimeFilter<"ReferralHistory"> | Date | string
     deletedAt?: DateTimeNullableFilter<"ReferralHistory"> | Date | string | null
@@ -17856,7 +17793,6 @@ export namespace Prisma {
     id?: SortOrder
     referralOwnerId?: SortOrder
     referralUserId?: SortOrder
-    pointsEarned?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     deletedAt?: SortOrderInput | SortOrder
@@ -17868,12 +17804,11 @@ export namespace Prisma {
 
   export type ReferralHistoryWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    referralUserId?: string
     AND?: ReferralHistoryWhereInput | ReferralHistoryWhereInput[]
     OR?: ReferralHistoryWhereInput[]
     NOT?: ReferralHistoryWhereInput | ReferralHistoryWhereInput[]
     referralOwnerId?: StringFilter<"ReferralHistory"> | string
-    referralUserId?: StringFilter<"ReferralHistory"> | string
-    pointsEarned?: IntFilter<"ReferralHistory"> | number
     createdAt?: DateTimeFilter<"ReferralHistory"> | Date | string
     updatedAt?: DateTimeFilter<"ReferralHistory"> | Date | string
     deletedAt?: DateTimeNullableFilter<"ReferralHistory"> | Date | string | null
@@ -17881,21 +17816,18 @@ export namespace Prisma {
     referralUser?: XOR<MemberScalarRelationFilter, MemberWhereInput>
     discountCoupon?: XOR<DiscountCouponNullableScalarRelationFilter, DiscountCouponWhereInput> | null
     pointTransaction?: XOR<PointsTransactionNullableScalarRelationFilter, PointsTransactionWhereInput> | null
-  }, "id">
+  }, "id" | "referralUserId">
 
   export type ReferralHistoryOrderByWithAggregationInput = {
     id?: SortOrder
     referralOwnerId?: SortOrder
     referralUserId?: SortOrder
-    pointsEarned?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     deletedAt?: SortOrderInput | SortOrder
     _count?: ReferralHistoryCountOrderByAggregateInput
-    _avg?: ReferralHistoryAvgOrderByAggregateInput
     _max?: ReferralHistoryMaxOrderByAggregateInput
     _min?: ReferralHistoryMinOrderByAggregateInput
-    _sum?: ReferralHistorySumOrderByAggregateInput
   }
 
   export type ReferralHistoryScalarWhereWithAggregatesInput = {
@@ -17905,7 +17837,6 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"ReferralHistory"> | string
     referralOwnerId?: StringWithAggregatesFilter<"ReferralHistory"> | string
     referralUserId?: StringWithAggregatesFilter<"ReferralHistory"> | string
-    pointsEarned?: IntWithAggregatesFilter<"ReferralHistory"> | number
     createdAt?: DateTimeWithAggregatesFilter<"ReferralHistory"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ReferralHistory"> | Date | string
     deletedAt?: DateTimeNullableWithAggregatesFilter<"ReferralHistory"> | Date | string | null
@@ -18642,7 +18573,7 @@ export namespace Prisma {
     percentage?: IntFilter<"DiscountCoupon"> | number
     expiryDate?: DateTimeNullableFilter<"DiscountCoupon"> | Date | string | null
     isUsed?: BoolFilter<"DiscountCoupon"> | boolean
-    referralHistoryid?: StringNullableFilter<"DiscountCoupon"> | string | null
+    referralHistoryId?: StringNullableFilter<"DiscountCoupon"> | string | null
     ticketTransactionId?: StringNullableFilter<"DiscountCoupon"> | string | null
     createdAt?: DateTimeFilter<"DiscountCoupon"> | Date | string
     updatedAt?: DateTimeFilter<"DiscountCoupon"> | Date | string
@@ -18660,7 +18591,7 @@ export namespace Prisma {
     percentage?: SortOrder
     expiryDate?: SortOrderInput | SortOrder
     isUsed?: SortOrder
-    referralHistoryid?: SortOrderInput | SortOrder
+    referralHistoryId?: SortOrderInput | SortOrder
     ticketTransactionId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -18672,7 +18603,7 @@ export namespace Prisma {
 
   export type DiscountCouponWhereUniqueInput = Prisma.AtLeast<{
     id?: string
-    referralHistoryid?: string
+    referralHistoryId?: string
     AND?: DiscountCouponWhereInput | DiscountCouponWhereInput[]
     OR?: DiscountCouponWhereInput[]
     NOT?: DiscountCouponWhereInput | DiscountCouponWhereInput[]
@@ -18689,7 +18620,7 @@ export namespace Prisma {
     member?: XOR<MemberScalarRelationFilter, MemberWhereInput>
     referralHistory?: XOR<ReferralHistoryNullableScalarRelationFilter, ReferralHistoryWhereInput> | null
     ticketTransaction?: XOR<TicketTransactionNullableScalarRelationFilter, TicketTransactionWhereInput> | null
-  }, "id" | "referralHistoryid">
+  }, "id" | "referralHistoryId">
 
   export type DiscountCouponOrderByWithAggregationInput = {
     id?: SortOrder
@@ -18699,7 +18630,7 @@ export namespace Prisma {
     percentage?: SortOrder
     expiryDate?: SortOrderInput | SortOrder
     isUsed?: SortOrder
-    referralHistoryid?: SortOrderInput | SortOrder
+    referralHistoryId?: SortOrderInput | SortOrder
     ticketTransactionId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -18722,7 +18653,7 @@ export namespace Prisma {
     percentage?: IntWithAggregatesFilter<"DiscountCoupon"> | number
     expiryDate?: DateTimeNullableWithAggregatesFilter<"DiscountCoupon"> | Date | string | null
     isUsed?: BoolWithAggregatesFilter<"DiscountCoupon"> | boolean
-    referralHistoryid?: StringNullableWithAggregatesFilter<"DiscountCoupon"> | string | null
+    referralHistoryId?: StringNullableWithAggregatesFilter<"DiscountCoupon"> | string | null
     ticketTransactionId?: StringNullableWithAggregatesFilter<"DiscountCoupon"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"DiscountCoupon"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"DiscountCoupon"> | Date | string
@@ -18919,7 +18850,7 @@ export namespace Prisma {
     creatorProfile?: CreatorProfileCreateNestedOneWithoutMemberInput
     ticketTransactions?: TicketTransactionCreateNestedManyWithoutMemberInput
     referralOwnerHistory?: ReferralHistoryCreateNestedManyWithoutReferralOwnerInput
-    referralUserHistory?: ReferralHistoryCreateNestedManyWithoutReferralUserInput
+    referralUserHistory?: ReferralHistoryCreateNestedOneWithoutReferralUserInput
     pointTransaction?: PointsTransactionCreateNestedManyWithoutMemberInput
     discountCoupon?: DiscountCouponCreateNestedManyWithoutMemberInput
   }
@@ -18946,7 +18877,7 @@ export namespace Prisma {
     creatorProfile?: CreatorProfileUncheckedCreateNestedOneWithoutMemberInput
     ticketTransactions?: TicketTransactionUncheckedCreateNestedManyWithoutMemberInput
     referralOwnerHistory?: ReferralHistoryUncheckedCreateNestedManyWithoutReferralOwnerInput
-    referralUserHistory?: ReferralHistoryUncheckedCreateNestedManyWithoutReferralUserInput
+    referralUserHistory?: ReferralHistoryUncheckedCreateNestedOneWithoutReferralUserInput
     pointTransaction?: PointsTransactionUncheckedCreateNestedManyWithoutMemberInput
     discountCoupon?: DiscountCouponUncheckedCreateNestedManyWithoutMemberInput
   }
@@ -18973,7 +18904,7 @@ export namespace Prisma {
     creatorProfile?: CreatorProfileUpdateOneWithoutMemberNestedInput
     ticketTransactions?: TicketTransactionUpdateManyWithoutMemberNestedInput
     referralOwnerHistory?: ReferralHistoryUpdateManyWithoutReferralOwnerNestedInput
-    referralUserHistory?: ReferralHistoryUpdateManyWithoutReferralUserNestedInput
+    referralUserHistory?: ReferralHistoryUpdateOneWithoutReferralUserNestedInput
     pointTransaction?: PointsTransactionUpdateManyWithoutMemberNestedInput
     discountCoupon?: DiscountCouponUpdateManyWithoutMemberNestedInput
   }
@@ -19000,7 +18931,7 @@ export namespace Prisma {
     creatorProfile?: CreatorProfileUncheckedUpdateOneWithoutMemberNestedInput
     ticketTransactions?: TicketTransactionUncheckedUpdateManyWithoutMemberNestedInput
     referralOwnerHistory?: ReferralHistoryUncheckedUpdateManyWithoutReferralOwnerNestedInput
-    referralUserHistory?: ReferralHistoryUncheckedUpdateManyWithoutReferralUserNestedInput
+    referralUserHistory?: ReferralHistoryUncheckedUpdateOneWithoutReferralUserNestedInput
     pointTransaction?: PointsTransactionUncheckedUpdateManyWithoutMemberNestedInput
     discountCoupon?: DiscountCouponUncheckedUpdateManyWithoutMemberNestedInput
   }
@@ -19066,7 +18997,6 @@ export namespace Prisma {
 
   export type ReferralHistoryCreateInput = {
     id?: string
-    pointsEarned?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -19080,7 +19010,6 @@ export namespace Prisma {
     id?: string
     referralOwnerId: string
     referralUserId: string
-    pointsEarned?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -19090,7 +19019,6 @@ export namespace Prisma {
 
   export type ReferralHistoryUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    pointsEarned?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -19104,7 +19032,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     referralOwnerId?: StringFieldUpdateOperationsInput | string
     referralUserId?: StringFieldUpdateOperationsInput | string
-    pointsEarned?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -19116,7 +19043,6 @@ export namespace Prisma {
     id?: string
     referralOwnerId: string
     referralUserId: string
-    pointsEarned?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -19124,7 +19050,6 @@ export namespace Prisma {
 
   export type ReferralHistoryUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    pointsEarned?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -19134,7 +19059,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     referralOwnerId?: StringFieldUpdateOperationsInput | string
     referralUserId?: StringFieldUpdateOperationsInput | string
-    pointsEarned?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -19142,7 +19066,7 @@ export namespace Prisma {
 
   export type PointsTransactionCreateInput = {
     id?: string
-    amount: number
+    amount?: number
     type: $Enums.PointsType
     expiryDate?: Date | string | null
     ticketTransactionId?: string | null
@@ -19157,7 +19081,7 @@ export namespace Prisma {
   export type PointsTransactionUncheckedCreateInput = {
     id?: string
     memberId: string
-    amount: number
+    amount?: number
     type: $Enums.PointsType
     expiryDate?: Date | string | null
     ticketTransactionId?: string | null
@@ -19199,7 +19123,7 @@ export namespace Prisma {
   export type PointsTransactionCreateManyInput = {
     id?: string
     memberId: string
-    amount: number
+    amount?: number
     type: $Enums.PointsType
     expiryDate?: Date | string | null
     ticketTransactionId?: string | null
@@ -19961,7 +19885,7 @@ export namespace Prisma {
     percentage?: number
     expiryDate?: Date | string | null
     isUsed?: boolean
-    referralHistoryid?: string | null
+    referralHistoryId?: string | null
     ticketTransactionId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -19991,7 +19915,7 @@ export namespace Prisma {
     percentage?: IntFieldUpdateOperationsInput | number
     expiryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isUsed?: BoolFieldUpdateOperationsInput | boolean
-    referralHistoryid?: NullableStringFieldUpdateOperationsInput | string | null
+    referralHistoryId?: NullableStringFieldUpdateOperationsInput | string | null
     ticketTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20006,7 +19930,7 @@ export namespace Prisma {
     percentage?: number
     expiryDate?: Date | string | null
     isUsed?: boolean
-    referralHistoryid?: string | null
+    referralHistoryId?: string | null
     ticketTransactionId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -20033,7 +19957,7 @@ export namespace Prisma {
     percentage?: IntFieldUpdateOperationsInput | number
     expiryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isUsed?: BoolFieldUpdateOperationsInput | boolean
-    referralHistoryid?: NullableStringFieldUpdateOperationsInput | string | null
+    referralHistoryId?: NullableStringFieldUpdateOperationsInput | string | null
     ticketTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20374,6 +20298,11 @@ export namespace Prisma {
     none?: ReferralHistoryWhereInput
   }
 
+  export type ReferralHistoryNullableScalarRelationFilter = {
+    is?: ReferralHistoryWhereInput | null
+    isNot?: ReferralHistoryWhereInput | null
+  }
+
   export type PointsTransactionListRelationFilter = {
     every?: PointsTransactionWhereInput
     some?: PointsTransactionWhereInput
@@ -20529,21 +20458,15 @@ export namespace Prisma {
     id?: SortOrder
     referralOwnerId?: SortOrder
     referralUserId?: SortOrder
-    pointsEarned?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     deletedAt?: SortOrder
-  }
-
-  export type ReferralHistoryAvgOrderByAggregateInput = {
-    pointsEarned?: SortOrder
   }
 
   export type ReferralHistoryMaxOrderByAggregateInput = {
     id?: SortOrder
     referralOwnerId?: SortOrder
     referralUserId?: SortOrder
-    pointsEarned?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     deletedAt?: SortOrder
@@ -20553,14 +20476,9 @@ export namespace Prisma {
     id?: SortOrder
     referralOwnerId?: SortOrder
     referralUserId?: SortOrder
-    pointsEarned?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     deletedAt?: SortOrder
-  }
-
-  export type ReferralHistorySumOrderByAggregateInput = {
-    pointsEarned?: SortOrder
   }
 
   export type EnumPointsTypeFilter<$PrismaModel = never> = {
@@ -21122,11 +21040,6 @@ export namespace Prisma {
     not?: NestedEnumCouponTypeFilter<$PrismaModel> | $Enums.CouponType
   }
 
-  export type ReferralHistoryNullableScalarRelationFilter = {
-    is?: ReferralHistoryWhereInput | null
-    isNot?: ReferralHistoryWhereInput | null
-  }
-
   export type TicketTransactionNullableScalarRelationFilter = {
     is?: TicketTransactionWhereInput | null
     isNot?: TicketTransactionWhereInput | null
@@ -21140,7 +21053,7 @@ export namespace Prisma {
     percentage?: SortOrder
     expiryDate?: SortOrder
     isUsed?: SortOrder
-    referralHistoryid?: SortOrder
+    referralHistoryId?: SortOrder
     ticketTransactionId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -21159,7 +21072,7 @@ export namespace Prisma {
     percentage?: SortOrder
     expiryDate?: SortOrder
     isUsed?: SortOrder
-    referralHistoryid?: SortOrder
+    referralHistoryId?: SortOrder
     ticketTransactionId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -21174,7 +21087,7 @@ export namespace Prisma {
     percentage?: SortOrder
     expiryDate?: SortOrder
     isUsed?: SortOrder
-    referralHistoryid?: SortOrder
+    referralHistoryId?: SortOrder
     ticketTransactionId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -21470,11 +21383,10 @@ export namespace Prisma {
     connect?: ReferralHistoryWhereUniqueInput | ReferralHistoryWhereUniqueInput[]
   }
 
-  export type ReferralHistoryCreateNestedManyWithoutReferralUserInput = {
-    create?: XOR<ReferralHistoryCreateWithoutReferralUserInput, ReferralHistoryUncheckedCreateWithoutReferralUserInput> | ReferralHistoryCreateWithoutReferralUserInput[] | ReferralHistoryUncheckedCreateWithoutReferralUserInput[]
-    connectOrCreate?: ReferralHistoryCreateOrConnectWithoutReferralUserInput | ReferralHistoryCreateOrConnectWithoutReferralUserInput[]
-    createMany?: ReferralHistoryCreateManyReferralUserInputEnvelope
-    connect?: ReferralHistoryWhereUniqueInput | ReferralHistoryWhereUniqueInput[]
+  export type ReferralHistoryCreateNestedOneWithoutReferralUserInput = {
+    create?: XOR<ReferralHistoryCreateWithoutReferralUserInput, ReferralHistoryUncheckedCreateWithoutReferralUserInput>
+    connectOrCreate?: ReferralHistoryCreateOrConnectWithoutReferralUserInput
+    connect?: ReferralHistoryWhereUniqueInput
   }
 
   export type PointsTransactionCreateNestedManyWithoutMemberInput = {
@@ -21518,11 +21430,10 @@ export namespace Prisma {
     connect?: ReferralHistoryWhereUniqueInput | ReferralHistoryWhereUniqueInput[]
   }
 
-  export type ReferralHistoryUncheckedCreateNestedManyWithoutReferralUserInput = {
-    create?: XOR<ReferralHistoryCreateWithoutReferralUserInput, ReferralHistoryUncheckedCreateWithoutReferralUserInput> | ReferralHistoryCreateWithoutReferralUserInput[] | ReferralHistoryUncheckedCreateWithoutReferralUserInput[]
-    connectOrCreate?: ReferralHistoryCreateOrConnectWithoutReferralUserInput | ReferralHistoryCreateOrConnectWithoutReferralUserInput[]
-    createMany?: ReferralHistoryCreateManyReferralUserInputEnvelope
-    connect?: ReferralHistoryWhereUniqueInput | ReferralHistoryWhereUniqueInput[]
+  export type ReferralHistoryUncheckedCreateNestedOneWithoutReferralUserInput = {
+    create?: XOR<ReferralHistoryCreateWithoutReferralUserInput, ReferralHistoryUncheckedCreateWithoutReferralUserInput>
+    connectOrCreate?: ReferralHistoryCreateOrConnectWithoutReferralUserInput
+    connect?: ReferralHistoryWhereUniqueInput
   }
 
   export type PointsTransactionUncheckedCreateNestedManyWithoutMemberInput = {
@@ -21611,18 +21522,14 @@ export namespace Prisma {
     deleteMany?: ReferralHistoryScalarWhereInput | ReferralHistoryScalarWhereInput[]
   }
 
-  export type ReferralHistoryUpdateManyWithoutReferralUserNestedInput = {
-    create?: XOR<ReferralHistoryCreateWithoutReferralUserInput, ReferralHistoryUncheckedCreateWithoutReferralUserInput> | ReferralHistoryCreateWithoutReferralUserInput[] | ReferralHistoryUncheckedCreateWithoutReferralUserInput[]
-    connectOrCreate?: ReferralHistoryCreateOrConnectWithoutReferralUserInput | ReferralHistoryCreateOrConnectWithoutReferralUserInput[]
-    upsert?: ReferralHistoryUpsertWithWhereUniqueWithoutReferralUserInput | ReferralHistoryUpsertWithWhereUniqueWithoutReferralUserInput[]
-    createMany?: ReferralHistoryCreateManyReferralUserInputEnvelope
-    set?: ReferralHistoryWhereUniqueInput | ReferralHistoryWhereUniqueInput[]
-    disconnect?: ReferralHistoryWhereUniqueInput | ReferralHistoryWhereUniqueInput[]
-    delete?: ReferralHistoryWhereUniqueInput | ReferralHistoryWhereUniqueInput[]
-    connect?: ReferralHistoryWhereUniqueInput | ReferralHistoryWhereUniqueInput[]
-    update?: ReferralHistoryUpdateWithWhereUniqueWithoutReferralUserInput | ReferralHistoryUpdateWithWhereUniqueWithoutReferralUserInput[]
-    updateMany?: ReferralHistoryUpdateManyWithWhereWithoutReferralUserInput | ReferralHistoryUpdateManyWithWhereWithoutReferralUserInput[]
-    deleteMany?: ReferralHistoryScalarWhereInput | ReferralHistoryScalarWhereInput[]
+  export type ReferralHistoryUpdateOneWithoutReferralUserNestedInput = {
+    create?: XOR<ReferralHistoryCreateWithoutReferralUserInput, ReferralHistoryUncheckedCreateWithoutReferralUserInput>
+    connectOrCreate?: ReferralHistoryCreateOrConnectWithoutReferralUserInput
+    upsert?: ReferralHistoryUpsertWithoutReferralUserInput
+    disconnect?: ReferralHistoryWhereInput | boolean
+    delete?: ReferralHistoryWhereInput | boolean
+    connect?: ReferralHistoryWhereUniqueInput
+    update?: XOR<XOR<ReferralHistoryUpdateToOneWithWhereWithoutReferralUserInput, ReferralHistoryUpdateWithoutReferralUserInput>, ReferralHistoryUncheckedUpdateWithoutReferralUserInput>
   }
 
   export type PointsTransactionUpdateManyWithoutMemberNestedInput = {
@@ -21705,18 +21612,14 @@ export namespace Prisma {
     deleteMany?: ReferralHistoryScalarWhereInput | ReferralHistoryScalarWhereInput[]
   }
 
-  export type ReferralHistoryUncheckedUpdateManyWithoutReferralUserNestedInput = {
-    create?: XOR<ReferralHistoryCreateWithoutReferralUserInput, ReferralHistoryUncheckedCreateWithoutReferralUserInput> | ReferralHistoryCreateWithoutReferralUserInput[] | ReferralHistoryUncheckedCreateWithoutReferralUserInput[]
-    connectOrCreate?: ReferralHistoryCreateOrConnectWithoutReferralUserInput | ReferralHistoryCreateOrConnectWithoutReferralUserInput[]
-    upsert?: ReferralHistoryUpsertWithWhereUniqueWithoutReferralUserInput | ReferralHistoryUpsertWithWhereUniqueWithoutReferralUserInput[]
-    createMany?: ReferralHistoryCreateManyReferralUserInputEnvelope
-    set?: ReferralHistoryWhereUniqueInput | ReferralHistoryWhereUniqueInput[]
-    disconnect?: ReferralHistoryWhereUniqueInput | ReferralHistoryWhereUniqueInput[]
-    delete?: ReferralHistoryWhereUniqueInput | ReferralHistoryWhereUniqueInput[]
-    connect?: ReferralHistoryWhereUniqueInput | ReferralHistoryWhereUniqueInput[]
-    update?: ReferralHistoryUpdateWithWhereUniqueWithoutReferralUserInput | ReferralHistoryUpdateWithWhereUniqueWithoutReferralUserInput[]
-    updateMany?: ReferralHistoryUpdateManyWithWhereWithoutReferralUserInput | ReferralHistoryUpdateManyWithWhereWithoutReferralUserInput[]
-    deleteMany?: ReferralHistoryScalarWhereInput | ReferralHistoryScalarWhereInput[]
+  export type ReferralHistoryUncheckedUpdateOneWithoutReferralUserNestedInput = {
+    create?: XOR<ReferralHistoryCreateWithoutReferralUserInput, ReferralHistoryUncheckedCreateWithoutReferralUserInput>
+    connectOrCreate?: ReferralHistoryCreateOrConnectWithoutReferralUserInput
+    upsert?: ReferralHistoryUpsertWithoutReferralUserInput
+    disconnect?: ReferralHistoryWhereInput | boolean
+    delete?: ReferralHistoryWhereInput | boolean
+    connect?: ReferralHistoryWhereUniqueInput
+    update?: XOR<XOR<ReferralHistoryUpdateToOneWithWhereWithoutReferralUserInput, ReferralHistoryUpdateWithoutReferralUserInput>, ReferralHistoryUncheckedUpdateWithoutReferralUserInput>
   }
 
   export type PointsTransactionUncheckedUpdateManyWithoutMemberNestedInput = {
@@ -22750,7 +22653,7 @@ export namespace Prisma {
     creatorProfile?: CreatorProfileCreateNestedOneWithoutMemberInput
     ticketTransactions?: TicketTransactionCreateNestedManyWithoutMemberInput
     referralOwnerHistory?: ReferralHistoryCreateNestedManyWithoutReferralOwnerInput
-    referralUserHistory?: ReferralHistoryCreateNestedManyWithoutReferralUserInput
+    referralUserHistory?: ReferralHistoryCreateNestedOneWithoutReferralUserInput
     pointTransaction?: PointsTransactionCreateNestedManyWithoutMemberInput
     discountCoupon?: DiscountCouponCreateNestedManyWithoutMemberInput
   }
@@ -22776,7 +22679,7 @@ export namespace Prisma {
     creatorProfile?: CreatorProfileUncheckedCreateNestedOneWithoutMemberInput
     ticketTransactions?: TicketTransactionUncheckedCreateNestedManyWithoutMemberInput
     referralOwnerHistory?: ReferralHistoryUncheckedCreateNestedManyWithoutReferralOwnerInput
-    referralUserHistory?: ReferralHistoryUncheckedCreateNestedManyWithoutReferralUserInput
+    referralUserHistory?: ReferralHistoryUncheckedCreateNestedOneWithoutReferralUserInput
     pointTransaction?: PointsTransactionUncheckedCreateNestedManyWithoutMemberInput
     discountCoupon?: DiscountCouponUncheckedCreateNestedManyWithoutMemberInput
   }
@@ -23270,7 +23173,6 @@ export namespace Prisma {
 
   export type ReferralHistoryCreateWithoutReferralOwnerInput = {
     id?: string
-    pointsEarned?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -23282,7 +23184,6 @@ export namespace Prisma {
   export type ReferralHistoryUncheckedCreateWithoutReferralOwnerInput = {
     id?: string
     referralUserId: string
-    pointsEarned?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -23302,7 +23203,6 @@ export namespace Prisma {
 
   export type ReferralHistoryCreateWithoutReferralUserInput = {
     id?: string
-    pointsEarned?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -23314,7 +23214,6 @@ export namespace Prisma {
   export type ReferralHistoryUncheckedCreateWithoutReferralUserInput = {
     id?: string
     referralOwnerId: string
-    pointsEarned?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -23327,14 +23226,9 @@ export namespace Prisma {
     create: XOR<ReferralHistoryCreateWithoutReferralUserInput, ReferralHistoryUncheckedCreateWithoutReferralUserInput>
   }
 
-  export type ReferralHistoryCreateManyReferralUserInputEnvelope = {
-    data: ReferralHistoryCreateManyReferralUserInput | ReferralHistoryCreateManyReferralUserInput[]
-    skipDuplicates?: boolean
-  }
-
   export type PointsTransactionCreateWithoutMemberInput = {
     id?: string
-    amount: number
+    amount?: number
     type: $Enums.PointsType
     expiryDate?: Date | string | null
     ticketTransactionId?: string | null
@@ -23347,7 +23241,7 @@ export namespace Prisma {
 
   export type PointsTransactionUncheckedCreateWithoutMemberInput = {
     id?: string
-    amount: number
+    amount?: number
     type: $Enums.PointsType
     expiryDate?: Date | string | null
     ticketTransactionId?: string | null
@@ -23389,7 +23283,7 @@ export namespace Prisma {
     percentage?: number
     expiryDate?: Date | string | null
     isUsed?: boolean
-    referralHistoryid?: string | null
+    referralHistoryId?: string | null
     ticketTransactionId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -23577,26 +23471,40 @@ export namespace Prisma {
     id?: StringFilter<"ReferralHistory"> | string
     referralOwnerId?: StringFilter<"ReferralHistory"> | string
     referralUserId?: StringFilter<"ReferralHistory"> | string
-    pointsEarned?: IntFilter<"ReferralHistory"> | number
     createdAt?: DateTimeFilter<"ReferralHistory"> | Date | string
     updatedAt?: DateTimeFilter<"ReferralHistory"> | Date | string
     deletedAt?: DateTimeNullableFilter<"ReferralHistory"> | Date | string | null
   }
 
-  export type ReferralHistoryUpsertWithWhereUniqueWithoutReferralUserInput = {
-    where: ReferralHistoryWhereUniqueInput
+  export type ReferralHistoryUpsertWithoutReferralUserInput = {
     update: XOR<ReferralHistoryUpdateWithoutReferralUserInput, ReferralHistoryUncheckedUpdateWithoutReferralUserInput>
     create: XOR<ReferralHistoryCreateWithoutReferralUserInput, ReferralHistoryUncheckedCreateWithoutReferralUserInput>
+    where?: ReferralHistoryWhereInput
   }
 
-  export type ReferralHistoryUpdateWithWhereUniqueWithoutReferralUserInput = {
-    where: ReferralHistoryWhereUniqueInput
+  export type ReferralHistoryUpdateToOneWithWhereWithoutReferralUserInput = {
+    where?: ReferralHistoryWhereInput
     data: XOR<ReferralHistoryUpdateWithoutReferralUserInput, ReferralHistoryUncheckedUpdateWithoutReferralUserInput>
   }
 
-  export type ReferralHistoryUpdateManyWithWhereWithoutReferralUserInput = {
-    where: ReferralHistoryScalarWhereInput
-    data: XOR<ReferralHistoryUpdateManyMutationInput, ReferralHistoryUncheckedUpdateManyWithoutReferralUserInput>
+  export type ReferralHistoryUpdateWithoutReferralUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    referralOwner?: MemberUpdateOneRequiredWithoutReferralOwnerHistoryNestedInput
+    discountCoupon?: DiscountCouponUpdateOneWithoutReferralHistoryNestedInput
+    pointTransaction?: PointsTransactionUpdateOneWithoutReferralHistoryNestedInput
+  }
+
+  export type ReferralHistoryUncheckedUpdateWithoutReferralUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    referralOwnerId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    discountCoupon?: DiscountCouponUncheckedUpdateOneWithoutReferralHistoryNestedInput
+    pointTransaction?: PointsTransactionUncheckedUpdateOneWithoutReferralHistoryNestedInput
   }
 
   export type PointsTransactionUpsertWithWhereUniqueWithoutMemberInput = {
@@ -23658,7 +23566,7 @@ export namespace Prisma {
     percentage?: IntFilter<"DiscountCoupon"> | number
     expiryDate?: DateTimeNullableFilter<"DiscountCoupon"> | Date | string | null
     isUsed?: BoolFilter<"DiscountCoupon"> | boolean
-    referralHistoryid?: StringNullableFilter<"DiscountCoupon"> | string | null
+    referralHistoryId?: StringNullableFilter<"DiscountCoupon"> | string | null
     ticketTransactionId?: StringNullableFilter<"DiscountCoupon"> | string | null
     createdAt?: DateTimeFilter<"DiscountCoupon"> | Date | string
     updatedAt?: DateTimeFilter<"DiscountCoupon"> | Date | string
@@ -23686,7 +23594,7 @@ export namespace Prisma {
     verificationCodes?: VerificationCodeCreateNestedManyWithoutMemberInput
     creatorProfile?: CreatorProfileCreateNestedOneWithoutMemberInput
     ticketTransactions?: TicketTransactionCreateNestedManyWithoutMemberInput
-    referralUserHistory?: ReferralHistoryCreateNestedManyWithoutReferralUserInput
+    referralUserHistory?: ReferralHistoryCreateNestedOneWithoutReferralUserInput
     pointTransaction?: PointsTransactionCreateNestedManyWithoutMemberInput
     discountCoupon?: DiscountCouponCreateNestedManyWithoutMemberInput
   }
@@ -23712,7 +23620,7 @@ export namespace Prisma {
     verificationCodes?: VerificationCodeUncheckedCreateNestedManyWithoutMemberInput
     creatorProfile?: CreatorProfileUncheckedCreateNestedOneWithoutMemberInput
     ticketTransactions?: TicketTransactionUncheckedCreateNestedManyWithoutMemberInput
-    referralUserHistory?: ReferralHistoryUncheckedCreateNestedManyWithoutReferralUserInput
+    referralUserHistory?: ReferralHistoryUncheckedCreateNestedOneWithoutReferralUserInput
     pointTransaction?: PointsTransactionUncheckedCreateNestedManyWithoutMemberInput
     discountCoupon?: DiscountCouponUncheckedCreateNestedManyWithoutMemberInput
   }
@@ -23814,7 +23722,7 @@ export namespace Prisma {
 
   export type PointsTransactionCreateWithoutReferralHistoryInput = {
     id?: string
-    amount: number
+    amount?: number
     type: $Enums.PointsType
     expiryDate?: Date | string | null
     ticketTransactionId?: string | null
@@ -23828,7 +23736,7 @@ export namespace Prisma {
   export type PointsTransactionUncheckedCreateWithoutReferralHistoryInput = {
     id?: string
     memberId: string
-    amount: number
+    amount?: number
     type: $Enums.PointsType
     expiryDate?: Date | string | null
     ticketTransactionId?: string | null
@@ -23875,7 +23783,7 @@ export namespace Prisma {
     verificationCodes?: VerificationCodeUpdateManyWithoutMemberNestedInput
     creatorProfile?: CreatorProfileUpdateOneWithoutMemberNestedInput
     ticketTransactions?: TicketTransactionUpdateManyWithoutMemberNestedInput
-    referralUserHistory?: ReferralHistoryUpdateManyWithoutReferralUserNestedInput
+    referralUserHistory?: ReferralHistoryUpdateOneWithoutReferralUserNestedInput
     pointTransaction?: PointsTransactionUpdateManyWithoutMemberNestedInput
     discountCoupon?: DiscountCouponUpdateManyWithoutMemberNestedInput
   }
@@ -23901,7 +23809,7 @@ export namespace Prisma {
     verificationCodes?: VerificationCodeUncheckedUpdateManyWithoutMemberNestedInput
     creatorProfile?: CreatorProfileUncheckedUpdateOneWithoutMemberNestedInput
     ticketTransactions?: TicketTransactionUncheckedUpdateManyWithoutMemberNestedInput
-    referralUserHistory?: ReferralHistoryUncheckedUpdateManyWithoutReferralUserNestedInput
+    referralUserHistory?: ReferralHistoryUncheckedUpdateOneWithoutReferralUserNestedInput
     pointTransaction?: PointsTransactionUncheckedUpdateManyWithoutMemberNestedInput
     discountCoupon?: DiscountCouponUncheckedUpdateManyWithoutMemberNestedInput
   }
@@ -24067,7 +23975,7 @@ export namespace Prisma {
     creatorProfile?: CreatorProfileCreateNestedOneWithoutMemberInput
     ticketTransactions?: TicketTransactionCreateNestedManyWithoutMemberInput
     referralOwnerHistory?: ReferralHistoryCreateNestedManyWithoutReferralOwnerInput
-    referralUserHistory?: ReferralHistoryCreateNestedManyWithoutReferralUserInput
+    referralUserHistory?: ReferralHistoryCreateNestedOneWithoutReferralUserInput
     discountCoupon?: DiscountCouponCreateNestedManyWithoutMemberInput
   }
 
@@ -24093,7 +24001,7 @@ export namespace Prisma {
     creatorProfile?: CreatorProfileUncheckedCreateNestedOneWithoutMemberInput
     ticketTransactions?: TicketTransactionUncheckedCreateNestedManyWithoutMemberInput
     referralOwnerHistory?: ReferralHistoryUncheckedCreateNestedManyWithoutReferralOwnerInput
-    referralUserHistory?: ReferralHistoryUncheckedCreateNestedManyWithoutReferralUserInput
+    referralUserHistory?: ReferralHistoryUncheckedCreateNestedOneWithoutReferralUserInput
     discountCoupon?: DiscountCouponUncheckedCreateNestedManyWithoutMemberInput
   }
 
@@ -24142,7 +24050,6 @@ export namespace Prisma {
 
   export type ReferralHistoryCreateWithoutPointTransactionInput = {
     id?: string
-    pointsEarned?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -24155,7 +24062,6 @@ export namespace Prisma {
     id?: string
     referralOwnerId: string
     referralUserId: string
-    pointsEarned?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -24200,7 +24106,7 @@ export namespace Prisma {
     creatorProfile?: CreatorProfileUpdateOneWithoutMemberNestedInput
     ticketTransactions?: TicketTransactionUpdateManyWithoutMemberNestedInput
     referralOwnerHistory?: ReferralHistoryUpdateManyWithoutReferralOwnerNestedInput
-    referralUserHistory?: ReferralHistoryUpdateManyWithoutReferralUserNestedInput
+    referralUserHistory?: ReferralHistoryUpdateOneWithoutReferralUserNestedInput
     discountCoupon?: DiscountCouponUpdateManyWithoutMemberNestedInput
   }
 
@@ -24226,7 +24132,7 @@ export namespace Prisma {
     creatorProfile?: CreatorProfileUncheckedUpdateOneWithoutMemberNestedInput
     ticketTransactions?: TicketTransactionUncheckedUpdateManyWithoutMemberNestedInput
     referralOwnerHistory?: ReferralHistoryUncheckedUpdateManyWithoutReferralOwnerNestedInput
-    referralUserHistory?: ReferralHistoryUncheckedUpdateManyWithoutReferralUserNestedInput
+    referralUserHistory?: ReferralHistoryUncheckedUpdateOneWithoutReferralUserNestedInput
     discountCoupon?: DiscountCouponUncheckedUpdateManyWithoutMemberNestedInput
   }
 
@@ -24259,7 +24165,6 @@ export namespace Prisma {
 
   export type ReferralHistoryUpdateWithoutPointTransactionInput = {
     id?: StringFieldUpdateOperationsInput | string
-    pointsEarned?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24272,7 +24177,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     referralOwnerId?: StringFieldUpdateOperationsInput | string
     referralUserId?: StringFieldUpdateOperationsInput | string
-    pointsEarned?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -24300,7 +24204,7 @@ export namespace Prisma {
     creatorProfile?: CreatorProfileCreateNestedOneWithoutMemberInput
     ticketTransactions?: TicketTransactionCreateNestedManyWithoutMemberInput
     referralOwnerHistory?: ReferralHistoryCreateNestedManyWithoutReferralOwnerInput
-    referralUserHistory?: ReferralHistoryCreateNestedManyWithoutReferralUserInput
+    referralUserHistory?: ReferralHistoryCreateNestedOneWithoutReferralUserInput
     pointTransaction?: PointsTransactionCreateNestedManyWithoutMemberInput
     discountCoupon?: DiscountCouponCreateNestedManyWithoutMemberInput
   }
@@ -24326,7 +24230,7 @@ export namespace Prisma {
     creatorProfile?: CreatorProfileUncheckedCreateNestedOneWithoutMemberInput
     ticketTransactions?: TicketTransactionUncheckedCreateNestedManyWithoutMemberInput
     referralOwnerHistory?: ReferralHistoryUncheckedCreateNestedManyWithoutReferralOwnerInput
-    referralUserHistory?: ReferralHistoryUncheckedCreateNestedManyWithoutReferralUserInput
+    referralUserHistory?: ReferralHistoryUncheckedCreateNestedOneWithoutReferralUserInput
     pointTransaction?: PointsTransactionUncheckedCreateNestedManyWithoutMemberInput
     discountCoupon?: DiscountCouponUncheckedCreateNestedManyWithoutMemberInput
   }
@@ -24368,7 +24272,7 @@ export namespace Prisma {
     creatorProfile?: CreatorProfileUpdateOneWithoutMemberNestedInput
     ticketTransactions?: TicketTransactionUpdateManyWithoutMemberNestedInput
     referralOwnerHistory?: ReferralHistoryUpdateManyWithoutReferralOwnerNestedInput
-    referralUserHistory?: ReferralHistoryUpdateManyWithoutReferralUserNestedInput
+    referralUserHistory?: ReferralHistoryUpdateOneWithoutReferralUserNestedInput
     pointTransaction?: PointsTransactionUpdateManyWithoutMemberNestedInput
     discountCoupon?: DiscountCouponUpdateManyWithoutMemberNestedInput
   }
@@ -24394,7 +24298,7 @@ export namespace Prisma {
     creatorProfile?: CreatorProfileUncheckedUpdateOneWithoutMemberNestedInput
     ticketTransactions?: TicketTransactionUncheckedUpdateManyWithoutMemberNestedInput
     referralOwnerHistory?: ReferralHistoryUncheckedUpdateManyWithoutReferralOwnerNestedInput
-    referralUserHistory?: ReferralHistoryUncheckedUpdateManyWithoutReferralUserNestedInput
+    referralUserHistory?: ReferralHistoryUncheckedUpdateOneWithoutReferralUserNestedInput
     pointTransaction?: PointsTransactionUncheckedUpdateManyWithoutMemberNestedInput
     discountCoupon?: DiscountCouponUncheckedUpdateManyWithoutMemberNestedInput
   }
@@ -24420,7 +24324,7 @@ export namespace Prisma {
     verificationCodes?: VerificationCodeCreateNestedManyWithoutMemberInput
     ticketTransactions?: TicketTransactionCreateNestedManyWithoutMemberInput
     referralOwnerHistory?: ReferralHistoryCreateNestedManyWithoutReferralOwnerInput
-    referralUserHistory?: ReferralHistoryCreateNestedManyWithoutReferralUserInput
+    referralUserHistory?: ReferralHistoryCreateNestedOneWithoutReferralUserInput
     pointTransaction?: PointsTransactionCreateNestedManyWithoutMemberInput
     discountCoupon?: DiscountCouponCreateNestedManyWithoutMemberInput
   }
@@ -24446,7 +24350,7 @@ export namespace Prisma {
     verificationCodes?: VerificationCodeUncheckedCreateNestedManyWithoutMemberInput
     ticketTransactions?: TicketTransactionUncheckedCreateNestedManyWithoutMemberInput
     referralOwnerHistory?: ReferralHistoryUncheckedCreateNestedManyWithoutReferralOwnerInput
-    referralUserHistory?: ReferralHistoryUncheckedCreateNestedManyWithoutReferralUserInput
+    referralUserHistory?: ReferralHistoryUncheckedCreateNestedOneWithoutReferralUserInput
     pointTransaction?: PointsTransactionUncheckedCreateNestedManyWithoutMemberInput
     discountCoupon?: DiscountCouponUncheckedCreateNestedManyWithoutMemberInput
   }
@@ -24605,7 +24509,7 @@ export namespace Prisma {
     verificationCodes?: VerificationCodeUpdateManyWithoutMemberNestedInput
     ticketTransactions?: TicketTransactionUpdateManyWithoutMemberNestedInput
     referralOwnerHistory?: ReferralHistoryUpdateManyWithoutReferralOwnerNestedInput
-    referralUserHistory?: ReferralHistoryUpdateManyWithoutReferralUserNestedInput
+    referralUserHistory?: ReferralHistoryUpdateOneWithoutReferralUserNestedInput
     pointTransaction?: PointsTransactionUpdateManyWithoutMemberNestedInput
     discountCoupon?: DiscountCouponUpdateManyWithoutMemberNestedInput
   }
@@ -24631,7 +24535,7 @@ export namespace Prisma {
     verificationCodes?: VerificationCodeUncheckedUpdateManyWithoutMemberNestedInput
     ticketTransactions?: TicketTransactionUncheckedUpdateManyWithoutMemberNestedInput
     referralOwnerHistory?: ReferralHistoryUncheckedUpdateManyWithoutReferralOwnerNestedInput
-    referralUserHistory?: ReferralHistoryUncheckedUpdateManyWithoutReferralUserNestedInput
+    referralUserHistory?: ReferralHistoryUncheckedUpdateOneWithoutReferralUserNestedInput
     pointTransaction?: PointsTransactionUncheckedUpdateManyWithoutMemberNestedInput
     discountCoupon?: DiscountCouponUncheckedUpdateManyWithoutMemberNestedInput
   }
@@ -25297,7 +25201,7 @@ export namespace Prisma {
     verificationCodes?: VerificationCodeCreateNestedManyWithoutMemberInput
     creatorProfile?: CreatorProfileCreateNestedOneWithoutMemberInput
     referralOwnerHistory?: ReferralHistoryCreateNestedManyWithoutReferralOwnerInput
-    referralUserHistory?: ReferralHistoryCreateNestedManyWithoutReferralUserInput
+    referralUserHistory?: ReferralHistoryCreateNestedOneWithoutReferralUserInput
     pointTransaction?: PointsTransactionCreateNestedManyWithoutMemberInput
     discountCoupon?: DiscountCouponCreateNestedManyWithoutMemberInput
   }
@@ -25323,7 +25227,7 @@ export namespace Prisma {
     verificationCodes?: VerificationCodeUncheckedCreateNestedManyWithoutMemberInput
     creatorProfile?: CreatorProfileUncheckedCreateNestedOneWithoutMemberInput
     referralOwnerHistory?: ReferralHistoryUncheckedCreateNestedManyWithoutReferralOwnerInput
-    referralUserHistory?: ReferralHistoryUncheckedCreateNestedManyWithoutReferralUserInput
+    referralUserHistory?: ReferralHistoryUncheckedCreateNestedOneWithoutReferralUserInput
     pointTransaction?: PointsTransactionUncheckedCreateNestedManyWithoutMemberInput
     discountCoupon?: DiscountCouponUncheckedCreateNestedManyWithoutMemberInput
   }
@@ -25368,7 +25272,7 @@ export namespace Prisma {
 
   export type PointsTransactionCreateWithoutTicketTransactionInput = {
     id?: string
-    amount: number
+    amount?: number
     type: $Enums.PointsType
     expiryDate?: Date | string | null
     ticketTransactionId?: string | null
@@ -25382,7 +25286,7 @@ export namespace Prisma {
   export type PointsTransactionUncheckedCreateWithoutTicketTransactionInput = {
     id?: string
     memberId: string
-    amount: number
+    amount?: number
     type: $Enums.PointsType
     expiryDate?: Date | string | null
     ticketTransactionId?: string | null
@@ -25419,7 +25323,7 @@ export namespace Prisma {
     percentage?: number
     expiryDate?: Date | string | null
     isUsed?: boolean
-    referralHistoryid?: string | null
+    referralHistoryId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -25555,7 +25459,7 @@ export namespace Prisma {
     verificationCodes?: VerificationCodeUpdateManyWithoutMemberNestedInput
     creatorProfile?: CreatorProfileUpdateOneWithoutMemberNestedInput
     referralOwnerHistory?: ReferralHistoryUpdateManyWithoutReferralOwnerNestedInput
-    referralUserHistory?: ReferralHistoryUpdateManyWithoutReferralUserNestedInput
+    referralUserHistory?: ReferralHistoryUpdateOneWithoutReferralUserNestedInput
     pointTransaction?: PointsTransactionUpdateManyWithoutMemberNestedInput
     discountCoupon?: DiscountCouponUpdateManyWithoutMemberNestedInput
   }
@@ -25581,7 +25485,7 @@ export namespace Prisma {
     verificationCodes?: VerificationCodeUncheckedUpdateManyWithoutMemberNestedInput
     creatorProfile?: CreatorProfileUncheckedUpdateOneWithoutMemberNestedInput
     referralOwnerHistory?: ReferralHistoryUncheckedUpdateManyWithoutReferralOwnerNestedInput
-    referralUserHistory?: ReferralHistoryUncheckedUpdateManyWithoutReferralUserNestedInput
+    referralUserHistory?: ReferralHistoryUncheckedUpdateOneWithoutReferralUserNestedInput
     pointTransaction?: PointsTransactionUncheckedUpdateManyWithoutMemberNestedInput
     discountCoupon?: DiscountCouponUncheckedUpdateManyWithoutMemberNestedInput
   }
@@ -25677,7 +25581,7 @@ export namespace Prisma {
     creatorProfile?: CreatorProfileCreateNestedOneWithoutMemberInput
     ticketTransactions?: TicketTransactionCreateNestedManyWithoutMemberInput
     referralOwnerHistory?: ReferralHistoryCreateNestedManyWithoutReferralOwnerInput
-    referralUserHistory?: ReferralHistoryCreateNestedManyWithoutReferralUserInput
+    referralUserHistory?: ReferralHistoryCreateNestedOneWithoutReferralUserInput
     pointTransaction?: PointsTransactionCreateNestedManyWithoutMemberInput
   }
 
@@ -25703,7 +25607,7 @@ export namespace Prisma {
     creatorProfile?: CreatorProfileUncheckedCreateNestedOneWithoutMemberInput
     ticketTransactions?: TicketTransactionUncheckedCreateNestedManyWithoutMemberInput
     referralOwnerHistory?: ReferralHistoryUncheckedCreateNestedManyWithoutReferralOwnerInput
-    referralUserHistory?: ReferralHistoryUncheckedCreateNestedManyWithoutReferralUserInput
+    referralUserHistory?: ReferralHistoryUncheckedCreateNestedOneWithoutReferralUserInput
     pointTransaction?: PointsTransactionUncheckedCreateNestedManyWithoutMemberInput
   }
 
@@ -25714,7 +25618,6 @@ export namespace Prisma {
 
   export type ReferralHistoryCreateWithoutDiscountCouponInput = {
     id?: string
-    pointsEarned?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -25727,7 +25630,6 @@ export namespace Prisma {
     id?: string
     referralOwnerId: string
     referralUserId: string
-    pointsEarned?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -25805,7 +25707,7 @@ export namespace Prisma {
     creatorProfile?: CreatorProfileUpdateOneWithoutMemberNestedInput
     ticketTransactions?: TicketTransactionUpdateManyWithoutMemberNestedInput
     referralOwnerHistory?: ReferralHistoryUpdateManyWithoutReferralOwnerNestedInput
-    referralUserHistory?: ReferralHistoryUpdateManyWithoutReferralUserNestedInput
+    referralUserHistory?: ReferralHistoryUpdateOneWithoutReferralUserNestedInput
     pointTransaction?: PointsTransactionUpdateManyWithoutMemberNestedInput
   }
 
@@ -25831,7 +25733,7 @@ export namespace Prisma {
     creatorProfile?: CreatorProfileUncheckedUpdateOneWithoutMemberNestedInput
     ticketTransactions?: TicketTransactionUncheckedUpdateManyWithoutMemberNestedInput
     referralOwnerHistory?: ReferralHistoryUncheckedUpdateManyWithoutReferralOwnerNestedInput
-    referralUserHistory?: ReferralHistoryUncheckedUpdateManyWithoutReferralUserNestedInput
+    referralUserHistory?: ReferralHistoryUncheckedUpdateOneWithoutReferralUserNestedInput
     pointTransaction?: PointsTransactionUncheckedUpdateManyWithoutMemberNestedInput
   }
 
@@ -25848,7 +25750,6 @@ export namespace Prisma {
 
   export type ReferralHistoryUpdateWithoutDiscountCouponInput = {
     id?: StringFieldUpdateOperationsInput | string
-    pointsEarned?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -25861,7 +25762,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     referralOwnerId?: StringFieldUpdateOperationsInput | string
     referralUserId?: StringFieldUpdateOperationsInput | string
-    pointsEarned?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26152,7 +26052,7 @@ export namespace Prisma {
     creatorProfile?: CreatorProfileUpdateOneWithoutMemberNestedInput
     ticketTransactions?: TicketTransactionUpdateManyWithoutMemberNestedInput
     referralOwnerHistory?: ReferralHistoryUpdateManyWithoutReferralOwnerNestedInput
-    referralUserHistory?: ReferralHistoryUpdateManyWithoutReferralUserNestedInput
+    referralUserHistory?: ReferralHistoryUpdateOneWithoutReferralUserNestedInput
     pointTransaction?: PointsTransactionUpdateManyWithoutMemberNestedInput
     discountCoupon?: DiscountCouponUpdateManyWithoutMemberNestedInput
   }
@@ -26178,7 +26078,7 @@ export namespace Prisma {
     creatorProfile?: CreatorProfileUncheckedUpdateOneWithoutMemberNestedInput
     ticketTransactions?: TicketTransactionUncheckedUpdateManyWithoutMemberNestedInput
     referralOwnerHistory?: ReferralHistoryUncheckedUpdateManyWithoutReferralOwnerNestedInput
-    referralUserHistory?: ReferralHistoryUncheckedUpdateManyWithoutReferralUserNestedInput
+    referralUserHistory?: ReferralHistoryUncheckedUpdateOneWithoutReferralUserNestedInput
     pointTransaction?: PointsTransactionUncheckedUpdateManyWithoutMemberNestedInput
     discountCoupon?: DiscountCouponUncheckedUpdateManyWithoutMemberNestedInput
   }
@@ -26433,16 +26333,6 @@ export namespace Prisma {
   export type ReferralHistoryCreateManyReferralOwnerInput = {
     id?: string
     referralUserId: string
-    pointsEarned?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    deletedAt?: Date | string | null
-  }
-
-  export type ReferralHistoryCreateManyReferralUserInput = {
-    id?: string
-    referralOwnerId: string
-    pointsEarned?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -26450,7 +26340,7 @@ export namespace Prisma {
 
   export type PointsTransactionCreateManyMemberInput = {
     id?: string
-    amount: number
+    amount?: number
     type: $Enums.PointsType
     expiryDate?: Date | string | null
     ticketTransactionId?: string | null
@@ -26467,7 +26357,7 @@ export namespace Prisma {
     percentage?: number
     expiryDate?: Date | string | null
     isUsed?: boolean
-    referralHistoryid?: string | null
+    referralHistoryId?: string | null
     ticketTransactionId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -26555,7 +26445,6 @@ export namespace Prisma {
 
   export type ReferralHistoryUpdateWithoutReferralOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
-    pointsEarned?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26567,7 +26456,6 @@ export namespace Prisma {
   export type ReferralHistoryUncheckedUpdateWithoutReferralOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
     referralUserId?: StringFieldUpdateOperationsInput | string
-    pointsEarned?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26578,38 +26466,6 @@ export namespace Prisma {
   export type ReferralHistoryUncheckedUpdateManyWithoutReferralOwnerInput = {
     id?: StringFieldUpdateOperationsInput | string
     referralUserId?: StringFieldUpdateOperationsInput | string
-    pointsEarned?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type ReferralHistoryUpdateWithoutReferralUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    pointsEarned?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    referralOwner?: MemberUpdateOneRequiredWithoutReferralOwnerHistoryNestedInput
-    discountCoupon?: DiscountCouponUpdateOneWithoutReferralHistoryNestedInput
-    pointTransaction?: PointsTransactionUpdateOneWithoutReferralHistoryNestedInput
-  }
-
-  export type ReferralHistoryUncheckedUpdateWithoutReferralUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    referralOwnerId?: StringFieldUpdateOperationsInput | string
-    pointsEarned?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    discountCoupon?: DiscountCouponUncheckedUpdateOneWithoutReferralHistoryNestedInput
-    pointTransaction?: PointsTransactionUncheckedUpdateOneWithoutReferralHistoryNestedInput
-  }
-
-  export type ReferralHistoryUncheckedUpdateManyWithoutReferralUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    referralOwnerId?: StringFieldUpdateOperationsInput | string
-    pointsEarned?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -26674,7 +26530,7 @@ export namespace Prisma {
     percentage?: IntFieldUpdateOperationsInput | number
     expiryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isUsed?: BoolFieldUpdateOperationsInput | boolean
-    referralHistoryid?: NullableStringFieldUpdateOperationsInput | string | null
+    referralHistoryId?: NullableStringFieldUpdateOperationsInput | string | null
     ticketTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26688,7 +26544,7 @@ export namespace Prisma {
     percentage?: IntFieldUpdateOperationsInput | number
     expiryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isUsed?: BoolFieldUpdateOperationsInput | boolean
-    referralHistoryid?: NullableStringFieldUpdateOperationsInput | string | null
+    referralHistoryId?: NullableStringFieldUpdateOperationsInput | string | null
     ticketTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27278,7 +27134,7 @@ export namespace Prisma {
     percentage?: number
     expiryDate?: Date | string | null
     isUsed?: boolean
-    referralHistoryid?: string | null
+    referralHistoryId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
@@ -27341,7 +27197,7 @@ export namespace Prisma {
     percentage?: IntFieldUpdateOperationsInput | number
     expiryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isUsed?: BoolFieldUpdateOperationsInput | boolean
-    referralHistoryid?: NullableStringFieldUpdateOperationsInput | string | null
+    referralHistoryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -27355,7 +27211,7 @@ export namespace Prisma {
     percentage?: IntFieldUpdateOperationsInput | number
     expiryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isUsed?: BoolFieldUpdateOperationsInput | boolean
-    referralHistoryid?: NullableStringFieldUpdateOperationsInput | string | null
+    referralHistoryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null

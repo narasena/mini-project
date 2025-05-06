@@ -55,7 +55,12 @@ export default function RegisterPage() {
         eventPromoAccepted: values.eventPromoAccepted,
         type: 'REGISTRATION',
       });
+      const referralResponse = await apiInstance.post('/referral/use', {
+        referralNumber: values.referralNumber,
+        email: tempEmail
+      })
       toast.success(response.data.message);
+      toast.success(referralResponse.data.message);
       setIsEmailAvailable(false);
       setIsRegisterSuccess(true);
     } catch (error) {
@@ -200,7 +205,7 @@ export default function RegisterPage() {
                     <ErrorMessage
                       name="email"
                       component="div"
-                      className="error-message"
+                      className="error-message text-xs mt-1 text-red-500"
                     />
                     <div className="!mb-0 !mt-5 w-full max-w-full">
                       <button
@@ -235,6 +240,7 @@ export default function RegisterPage() {
                     firstName: '',
                     lastName: '',
                     birthDate: '',
+                    referralNumber:'',
                     sex: '',
                     termsPrivacyAccepted: false,
                     personalDataConsentAccepted: false,
@@ -264,11 +270,11 @@ export default function RegisterPage() {
                       className="error-message"
                     />
                     {/* nama depan */}
-                    <div className="!mb-2.5">
+                    <div className="!mt-2.5">
                       <label className="auth-label block">Nama Depan</label>
                     </div>
                     <div className="!mb-2.5">
-                      <label className="auth-label block">
+                      <label className="auth-label block text-xs text-gray-500">
                         Sesuai di KTP/Paspor/SIM
                       </label>
                     </div>
@@ -316,6 +322,23 @@ export default function RegisterPage() {
                     </div>
                     <ErrorMessage
                       name="birthDate"
+                      component="div"
+                      className="error-message"
+                    />
+                    {/* referral */}
+                    <div className="!mb-2.5">
+                      <label className="auth-label block">{`(Optional) Punya Referral?`}</label>
+                    </div>
+                    <div className="auth-form-control">
+                      <Field
+                        name="referralNumber"
+                        type="text"
+                        placeholder="Masukkan nomor referral member lain"
+                        className="auth-form-input"
+                      />
+                    </div>
+                    <ErrorMessage
+                      name="referralNumber"
                       component="div"
                       className="error-message"
                     />
@@ -451,12 +474,15 @@ export default function RegisterPage() {
                       component="div"
                       className="error-message"
                     />
-                    <label className='block mt-2'><span className='block'>Belum terkirim / kadaluarsa?</span>
+                    <label className="block mt-2">
+                      <span className="block">
+                        Belum terkirim / kadaluarsa?
+                      </span>
                       Kirim kode baru
                       <span
                         onClick={() => {
-                          console.log("email:",tempEmail)
-                          handleGenerateCode(tempEmail)
+                          console.log('email:', tempEmail);
+                          handleGenerateCode(tempEmail);
                         }}
                       >
                         <span className="font-bold cursor-pointer !text-[#0049cc]">

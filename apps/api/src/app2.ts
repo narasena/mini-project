@@ -3,6 +3,7 @@ import { PORT } from './config';
 import authRouter from './routers/auth.router';
 import eventRouter from './routers/event.router';
 import countryPhoneRouter from './routers/countryPhone.router';
+import referralRouter from './routers/referral.router';
 export default async function App() {
   const app: Express = express();
   const cors = require('cors');
@@ -17,6 +18,7 @@ export default async function App() {
   app.use('/api/auth', authRouter)
   app.use('/api/events', eventRouter)
   app.use('/api/country-phones', countryPhoneRouter)
+  app.use('/api/referral', referralRouter)
   //centralized error handler
 
   interface IError extends Error {

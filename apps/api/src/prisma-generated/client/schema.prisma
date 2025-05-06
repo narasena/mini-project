@@ -38,14 +38,14 @@ model Member {
   termsPrivacyAccepted        Boolean
   sex                         Sex
   isEmailVerified             Boolean             @default(false)
-  referralNumber              String
+  referralNumber              String              @unique
   referralExpiryDate          DateTime
   countryPhone                CountryPhone        @relation(fields: [countryPhoneId], references: [id])
   verificationCodes           VerificationCode[]
   creatorProfile              CreatorProfile?
   ticketTransactions          TicketTransaction[]
   referralOwnerHistory        ReferralHistory[]   @relation("ReferralOwnerHistory")
-  referralUserHistory         ReferralHistory[]   @relation("ReferralUserHistory")
+  referralUserHistory         ReferralHistory?    @relation("ReferralUserHistory")
   pointTransaction            PointsTransaction[]
   discountCoupon              DiscountCoupon[]
 
@@ -67,9 +67,8 @@ model ReferralHistory {
   id              String          @id @default(cuid())
   referralOwnerId String
   referralOwner   Member          @relation("ReferralOwnerHistory", fields: [referralOwnerId], references: [id])
-  referralUserId  String
+  referralUserId  String          @unique
   referralUser    Member          @relation("ReferralUserHistory", fields: [referralUserId], references: [id])
-  pointsEarned    Int             @default(10000)
   discountCoupon  DiscountCoupon?
 
   pointTransaction PointsTransaction?
@@ -85,7 +84,7 @@ model PointsTransaction {
   id                  String              @id @default(cuid())
   memberId            String
   member              Member              @relation(fields: [memberId], references: [id])
-  amount              Int
+  amount              Int                 @default(10000)
   type                PointsType
   expiryDate          DateTime?
   ticketTransactionId String?
@@ -261,8 +260,8 @@ model DiscountCoupon {
   percentage          Int                @default(10)
   expiryDate          DateTime?
   isUsed              Boolean            @default(false)
-  referralHistoryid   String?            @unique
-  referralHistory     ReferralHistory?   @relation(fields: [referralHistoryid], references: [id])
+  referralHistoryId   String?            @unique
+  referralHistory     ReferralHistory?   @relation(fields: [referralHistoryId], references: [id])
   ticketTransactionId String?
   ticketTransaction   TicketTransaction? @relation(fields: [ticketTransactionId], references: [id])
 

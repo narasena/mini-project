@@ -151,7 +151,6 @@ exports.Prisma.ReferralHistoryScalarFieldEnum = {
   id: 'id',
   referralOwnerId: 'referralOwnerId',
   referralUserId: 'referralUserId',
-  pointsEarned: 'pointsEarned',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   deletedAt: 'deletedAt'
@@ -278,7 +277,7 @@ exports.Prisma.DiscountCouponScalarFieldEnum = {
   percentage: 'percentage',
   expiryDate: 'expiryDate',
   isUsed: 'isUsed',
-  referralHistoryid: 'referralHistoryid',
+  referralHistoryId: 'referralHistoryId',
   ticketTransactionId: 'ticketTransactionId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
