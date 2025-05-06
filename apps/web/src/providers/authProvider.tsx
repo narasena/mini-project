@@ -31,21 +31,31 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
     }
   }, [isLogin, token, pathName, router, hasHydrated]);
 
-  const handleSessionLogin = async () => {
-    try {
-      const response = await apiInstance.get('/auth/session-login', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (response.data.success) {
-        setMember(response.data.data.member);
-        setLogin(true);
-        setToken(response.data.data.token);
-      }
-    } catch (error) {
-      console.error(error);
+  // 2️⃣ if there’s a token but no isLogin, validate it
+  React.useEffect(() => {
+    if (!hasInit) return;
+    if (token && !isLogin) {
+      apiInstance
+        .get('/auth/session-login', {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => {
+          if (res.data.success) {
+            setMember(res.data.data.member);
+            setLogin(true);
+          } else {
+            setToken(null);
+            localStorage.removeItem('token');
+          }
+        })
+        .catch(() => {
+          setToken(null);
+          localStorage.removeItem('token');
+        });
     }
-  };
+  }, [hasInit, token, isLogin, setLogin, setMember, setToken]);
 
+  // 3️⃣ after init & validation, handle routing
   React.useEffect(() => {
     if (token) {
       apiInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
