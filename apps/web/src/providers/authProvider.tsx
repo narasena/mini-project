@@ -6,8 +6,13 @@ import * as React from 'react';
 
 const publicRoutes = ['/login', '/register'];
 
-export default function AuthProvider({ children }: { children: React.ReactNode }) {
-  const { isLogin, token, member, setLogin, setToken, setMember, hasHydrated } = useAuthStore();
+export default function AuthProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const { isLogin, token, member, setLogin, setToken, setMember, hasHydrated } =
+    useAuthStore();
   const pathName = usePathname();
   const router = useRouter();
 
@@ -31,38 +36,28 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
     }
   }, [isLogin, token, pathName, router, hasHydrated]);
 
-  // 2️⃣ if there’s a token but no isLogin, validate it
-  React.useEffect(() => {
-    if (!hasInit) return;
-    if (token && !isLogin) {
-      apiInstance
-        .get('/auth/session-login', {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((res) => {
-          if (res.data.success) {
-            setMember(res.data.data.member);
-            setLogin(true);
-          } else {
-            setToken(null);
-            localStorage.removeItem('token');
-          }
-        })
-        .catch(() => {
-          setToken(null);
-          localStorage.removeItem('token');
-        });
+  const handleSessionLogin = async () => {
+    try {
+      const response = await apiInstance.get('/auth/session-login', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (response.data.success) {
+        setMember(response.data.data.member);
+        setLogin(true);
+        setToken(response.data.data.token);
+      }
+    } catch (error) {
+      console.error(error);
     }
-  }, [hasInit, token, isLogin, setLogin, setMember, setToken]);
+  };
 
-  // 3️⃣ after init & validation, handle routing
   React.useEffect(() => {
     if (token) {
       apiInstance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     }
   }, [token]);
 
-  // 
+  //
   console.log(isLogin, token, member);
   // For public routes or when logged in, render the children
   return <>{children}</>;
