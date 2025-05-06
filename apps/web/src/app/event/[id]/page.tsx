@@ -1,6 +1,7 @@
 'use client';
 import { IEvent } from '@/types/event.type';
 import apiInstance from '@/utils/axiosInstance';
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
@@ -236,7 +237,8 @@ const BannerCard: React.FC = () => {
               </button>
             </div>
 
-            {/* Beli Tiket Button */}
+              {/* Beli Tiket Button */}
+              <Link href={`/event/${event?.id}/book`}>
             <button
               style={{
                 padding: '12px 24px',
@@ -251,6 +253,7 @@ const BannerCard: React.FC = () => {
             >
               Beli Tiket
             </button>
+              </Link>
           </div>
         </div>
       )}

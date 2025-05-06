@@ -54,14 +54,14 @@ export default function LoginPage() {
       setIsLoading(false);
     }
   }
-  if (isLoading) {
+  const LoadingScreen = ():JSX.Element => {
     return (
-      <div className="flex items-center justify-center min-w-screen min-h-screen bg-gray-700/30">
-        <div className="flex items-center justify-center w-10 h-10 border border-gray-200 rounded-lg bg-gray-50/50 dark:bg-gray-800/30 dark:border-gray-700">
+      <div className={`flex items-center absolute top-0 z-[999] justify-center min-w-full min-h-screen bg-gray-700/50 ${isLoading? 'block' : 'hidden'}`}>
+        <div className="flex size-32 items-center justify-center border border-gray-400 rounded-lg bg-white">
           <div role="status">
             <svg
               aria-hidden="true"
-              className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+              className="size-12 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
               viewBox="0 0 100 101"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +84,9 @@ export default function LoginPage() {
   return (
     <>
       {!isOTPLoginSent && (
+        <div>
 
+<LoadingScreen/>
       <div className="auth-container">
         <div className="auth-title pre-sign-up">
           <h3>Masuk ke akunmu</h3>
@@ -132,8 +134,11 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
+        </div>
       )}
       {isOTPLoginSent && (
+        <div>
+          <LoadingScreen/>
         <div className="auth-container">
           <div className="auth-title pre-sign-up">
             <h3>Masuk kan OTP</h3>
@@ -171,6 +176,7 @@ export default function LoginPage() {
               </Formik>
             </div>
           </div>
+        </div>
         </div>
       )}
     </>

@@ -8,12 +8,12 @@ export async function findReferralNumber(
   next: NextFunction,
 ) {
   try {
-      const { referralNumber } = req.params
-      const member = await prisma.member.findUnique({
-          where: {
-              referralNumber,
-          },
-      })
+    const { referralNumber } = req.params;
+    const member = await prisma.member.findUnique({
+      where: {
+        referralNumber,
+      },
+    });
     if (!member) {
       throw {
         isExpose: true,
@@ -21,7 +21,7 @@ export async function findReferralNumber(
         message: 'Member not found',
       };
     } else {
-      if(member.referralExpiryDate < new Date()){
+      if (member.referralExpiryDate < new Date()) {
         throw {
           isExpose: true,
           status: 400,
@@ -32,10 +32,10 @@ export async function findReferralNumber(
     res.status(200).json({
       success: true,
       message: 'Member found',
-      member:{
+      member: {
         referralNumber: member.referralNumber,
         referralExpiryDate: member.referralExpiryDate,
-      }
+      },
     });
   } catch (error) {
     next(error);
@@ -48,14 +48,15 @@ export async function useReferralNumber(
   next: NextFunction,
 ) {
   try {
-    const { referralNumber,email } = req.body
+    const { referralNumber, email } = req.body;
     const referralOwner = await prisma.member.findUnique({
-        where: {
-            referralNumber,
-        },include: {
-          referralUserHistory:true
-        },
-    })
+      where: {
+        referralNumber,
+      },
+      include: {
+        referralUserHistory: true,
+      },
+    });
     if (!referralOwner) {
       throw {
         isExpose: true,
@@ -63,7 +64,7 @@ export async function useReferralNumber(
         message: 'Referral Number not found',
       };
     } else {
-      if(referralOwner.referralExpiryDate < new Date()){
+      if (referralOwner.referralExpiryDate < new Date()) {
         throw {
           isExpose: true,
           status: 400,
@@ -73,9 +74,9 @@ export async function useReferralNumber(
     }
     const referralUser = await prisma.member.findUnique({
       where: {
-        email
-      }
-    })
+        email,
+      },
+    });
     if (!referralUser) {
       throw {
         isExpose: true,
@@ -83,74 +84,74 @@ export async function useReferralNumber(
         message: 'Member not found',
       };
     }
-    const existingReferralUserHistory = await prisma.referralHistory.findUnique({
-      where: {
-        referralUserId: referralUser.id
-      }
-    })
+    const existingReferralUserHistory = await prisma.referralHistory.findUnique(
+      {
+        where: {
+          referralUserId: referralUser.id,
+        },
+      },
+    );
     if (existingReferralUserHistory) {
       return res.status(200).json({
         success: true,
         message: 'Referral Number had been used',
-        referralNumber
-      })
+        referralNumber,
+      });
     }
-  const newReferralUserHistory = await prisma.referralHistory.create({
-    data: {
-      referralOwnerId: referralOwner.id,
-      referralUserId: referralUser?.id,
-    },
-  })
-    
+    const newReferralUserHistory = await prisma.referralHistory.create({
+      data: {
+        referralOwnerId: referralOwner.id,
+        referralUserId: referralUser?.id,
+      },
+    });
+
     const newPointsTransaction = await prisma.pointsTransaction.create({
       data: {
         memberId: referralOwner.id,
         type: 'EARNED' as PointsType,
         expiryDate: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
         referralHistoryId: newReferralUserHistory.id,
-    }
-    })
-    
+      },
+    });
+
     const newDiscountCoupon = await prisma.discountCoupon.create({
       data: {
         memberId: referralUser.id,
         expiryDate: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
         referralHistoryId: newReferralUserHistory.id,
-    }
-    })
-    
+      },
+    });
+
     res.status(200).json({
       success: true,
       message: 'Referral Number found',
       referralNumber,
-      newReferralUserHistory
-    });      
-    
+      newReferralUserHistory,
+    });
   } catch (error) {
     next(error);
   }
 }
 
-export async function getReferralHistory(
+export async function getReferralPointsById(
   req: Request,
   res: Response,
   next: NextFunction,
 ) {
   try {
-    const { id } = req.params
-    const referralHistories = await prisma.referralHistory.findMany({
+    const { payload } = req.body;
+    const points = await prisma.pointsTransaction.findMany({
       where: {
-        referralOwnerId: id,
+        memberId: payload.id,
       },
-      include: {
-        referralUser:true
-      }
-    })
+    });
+    
     res.status(200).json({
       success: true,
-      message: 'Referral Histories found',
-      referralHistories
+      message: 'Points found',
+      points,
     });
+
   } catch (error) {
     next(error);
   }

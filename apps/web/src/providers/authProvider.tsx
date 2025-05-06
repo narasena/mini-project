@@ -31,7 +31,7 @@ export default function AuthProvider({
     if (isLogin && token && publicRoutes.includes(pathName)) {
       handleSessionLogin();
       router.push('/');
-    } else if (!isLogin && !token && pathName !== '/login') {
+    } else if (!isLogin && !token && !publicRoutes.includes(pathName) ) {
       router.push('/login');
     }
   }, [isLogin, token, pathName, router, hasHydrated]);

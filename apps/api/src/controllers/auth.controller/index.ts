@@ -202,7 +202,6 @@ export async function verifyEmailVerificationCode(
   res.header('Access-Control-Allow-Origin', '*');
   try {
     const { email, code, type } = req.body;
-    console.log(req.body);
     const result = await verifyCode(email, code, type);
 
     req.body.verified = true;
