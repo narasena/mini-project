@@ -17,26 +17,6 @@ import { headers } from 'next/headers';
 export const Header = () => {
   const { isLogin, token, member, activeRole, switchRole, reset } =
     useAuthStore();
-  console.log(member, activeRole);
-
-  // Check for inconsistent auth state
-  React.useEffect(() => {
-    if (isLogin && !token) {
-      console.log('Inconsistent auth state detected: logged in but no token');
-      reset(); // Reset the auth state
-      window.location.href = '/login'; // Redirect to login
-    }
-  }, [isLogin, token, reset]);
-
-  // Log auth state changes
-  React.useEffect(() => {
-    console.log('Auth state:', {
-      isLogin,
-      hasToken: !!token,
-      member,
-      activeRole,
-    });
-  }, [isLogin, token, member, activeRole]);
 
   const [mobileMenuShown, setMobileMenuShown] = React.useState<boolean>(false);
   const [userMenuShown, setUserMenuShown] = React.useState<boolean>(false);
@@ -112,20 +92,6 @@ export const Header = () => {
     }
   };
 
-  // Single useEffect for auth state management and debugging
-  React.useEffect(() => {
-    // Handle inconsistent auth state
-    if (isLogin && !token) {
-      console.log('Inconsistent auth state detected: logged in but no token');
-      reset();
-      window.location.href = '/login';
-    }
-
-    // Optional: Log state changes in development only
-    if (process.env.NODE_ENV === 'development') {
-      console.log('Auth state:', { isLogin, hasToken: !!token, activeRole });
-    }
-  }, [isLogin, token, activeRole, reset]);
   return (
     <div className="h-max ">
       <nav className="s-navbar relative">

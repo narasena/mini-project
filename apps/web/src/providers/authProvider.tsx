@@ -7,18 +7,29 @@ import * as React from 'react';
 const publicRoutes = ['/login', '/register'];
 
 export default function AuthProvider({ children }: { children: React.ReactNode }) {
-  const { isLogin, token, setLogin, setToken, setMember } = useAuthStore();
+  const { isLogin, token, member, setLogin, setToken, setMember, hasHydrated } = useAuthStore();
   const pathName = usePathname();
   const router = useRouter();
 
+  // React.useEffect(() => {
+  //   if (!isLogin && !token && !publicRoutes.includes(pathName)) {
+  //     router.push('/login');
+  //   } else if (isLogin && token && publicRoutes.includes(pathName)) {
+  //     handleSessionLogin();
+  //     router.push('/');
+  //   }
+  // }, [isLogin, token, pathName]);
+
   React.useEffect(() => {
-    if (!isLogin && !token && !publicRoutes.includes(pathName)) {
-      router.push('/login');
-    } else if (isLogin && token && publicRoutes.includes(pathName)) {
+    if (!hasHydrated) return;
+
+    if (isLogin && token && publicRoutes.includes(pathName)) {
       handleSessionLogin();
       router.push('/');
+    } else if (!isLogin && !token && pathName !== '/login') {
+      router.push('/login');
     }
-  }, [isLogin, token, pathName, router]);
+  }, [isLogin, token, pathName, router, hasHydrated]);
 
   const handleSessionLogin = async () => {
     try {
@@ -41,12 +52,8 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
     }
   }, [token]);
 
-  // Only block rendering on protected routes when not logged in
-  if (!isLogin && !token && !publicRoutes.includes(pathName)) {
-    // We're already redirecting in the useEffect, so return null for protected routes
-    return null;
-  }
-
+  // 
+  console.log(isLogin, token, member);
   // For public routes or when logged in, render the children
   return <>{children}</>;
 }
