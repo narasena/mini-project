@@ -1,6 +1,5 @@
 'use client';
 import { SetStateAction, useState } from 'react';
-import Footer from '@/components/footer';
 const eventsData = [
   {
     title: 'Badzone Modification Contest',
