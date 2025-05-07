@@ -1,5 +1,3 @@
-import { CodeType } from "@/prisma-generated/client";
-
 export interface IVerificationCode {
     code: string;
     email: string
@@ -8,4 +6,9 @@ export interface IVerificationCode {
     isUsed: boolean
     attempts: number
     memberId?: string
+}
+
+enum CodeType {
+  REGISTRATION,
+  LOGIN
 }
