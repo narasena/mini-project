@@ -342,7 +342,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\One Drive\\OneDrive\\Purwadhika\\Course\\JCWD-3202\\Module 03\\mini-project\\apps\\api\\src\\prisma-generated\\client",
+      "value": "/Users/adityasetiawan/Desktop/mini projek mas seno/mini-project/apps/api/src/prisma-generated/client",
       "fromEnvVar": null
     },
     "config": {
@@ -351,12 +351,16 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "darwin",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "darwin"
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "D:\\One Drive\\OneDrive\\Purwadhika\\Course\\JCWD-3202\\Module 03\\mini-project\\apps\\api\\prisma\\schema.prisma",
+    "sourceFilePath": "/Users/adityasetiawan/Desktop/mini projek mas seno/mini-project/apps/api/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
