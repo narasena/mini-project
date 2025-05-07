@@ -238,8 +238,7 @@ model TicketTransaction {
   member                   Member                    @relation(fields: [memberId], references: [id])
   ticketCode               String                    @unique
   ticketTransactionDetails TicketTransactionDetail[]
-  pointTransactionId       String?
-  pointTransaction         PointsTransaction?        @relation(fields: [pointTransactionId], references: [id])
+  pointTransaction         PointsTransaction[]
   discountCouponId         String?
   discountCoupon           DiscountCoupon[]
   finalPrice               Int

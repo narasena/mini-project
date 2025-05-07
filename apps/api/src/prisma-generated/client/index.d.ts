@@ -2233,11 +2233,13 @@ export namespace Prisma {
 
   export type TicketTransactionCountOutputType = {
     ticketTransactionDetails: number
+    pointTransaction: number
     discountCoupon: number
   }
 
   export type TicketTransactionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ticketTransactionDetails?: boolean | TicketTransactionCountOutputTypeCountTicketTransactionDetailsArgs
+    pointTransaction?: boolean | TicketTransactionCountOutputTypeCountPointTransactionArgs
     discountCoupon?: boolean | TicketTransactionCountOutputTypeCountDiscountCouponArgs
   }
 
@@ -2257,6 +2259,13 @@ export namespace Prisma {
    */
   export type TicketTransactionCountOutputTypeCountTicketTransactionDetailsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TicketTransactionDetailWhereInput
+  }
+
+  /**
+   * TicketTransactionCountOutputType without action
+   */
+  export type TicketTransactionCountOutputTypeCountPointTransactionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PointsTransactionWhereInput
   }
 
   /**
@@ -13517,7 +13526,6 @@ export namespace Prisma {
     eventId: number | null
     memberId: string | null
     ticketCode: string | null
-    pointTransactionId: string | null
     discountCouponId: string | null
     finalPrice: number | null
     createdAt: Date | null
@@ -13530,7 +13538,6 @@ export namespace Prisma {
     eventId: number | null
     memberId: string | null
     ticketCode: string | null
-    pointTransactionId: string | null
     discountCouponId: string | null
     finalPrice: number | null
     createdAt: Date | null
@@ -13543,7 +13550,6 @@ export namespace Prisma {
     eventId: number
     memberId: number
     ticketCode: number
-    pointTransactionId: number
     discountCouponId: number
     finalPrice: number
     createdAt: number
@@ -13568,7 +13574,6 @@ export namespace Prisma {
     eventId?: true
     memberId?: true
     ticketCode?: true
-    pointTransactionId?: true
     discountCouponId?: true
     finalPrice?: true
     createdAt?: true
@@ -13581,7 +13586,6 @@ export namespace Prisma {
     eventId?: true
     memberId?: true
     ticketCode?: true
-    pointTransactionId?: true
     discountCouponId?: true
     finalPrice?: true
     createdAt?: true
@@ -13594,7 +13598,6 @@ export namespace Prisma {
     eventId?: true
     memberId?: true
     ticketCode?: true
-    pointTransactionId?: true
     discountCouponId?: true
     finalPrice?: true
     createdAt?: true
@@ -13694,7 +13697,6 @@ export namespace Prisma {
     eventId: number
     memberId: string
     ticketCode: string
-    pointTransactionId: string | null
     discountCouponId: string | null
     finalPrice: number
     createdAt: Date
@@ -13726,7 +13728,6 @@ export namespace Prisma {
     eventId?: boolean
     memberId?: boolean
     ticketCode?: boolean
-    pointTransactionId?: boolean
     discountCouponId?: boolean
     finalPrice?: boolean
     createdAt?: boolean
@@ -13745,7 +13746,6 @@ export namespace Prisma {
     eventId?: boolean
     memberId?: boolean
     ticketCode?: boolean
-    pointTransactionId?: boolean
     discountCouponId?: boolean
     finalPrice?: boolean
     createdAt?: boolean
@@ -13753,7 +13753,6 @@ export namespace Prisma {
     deletedAt?: boolean
     event?: boolean | EventDefaultArgs<ExtArgs>
     member?: boolean | MemberDefaultArgs<ExtArgs>
-    pointTransaction?: boolean | TicketTransaction$pointTransactionArgs<ExtArgs>
   }, ExtArgs["result"]["ticketTransaction"]>
 
   export type TicketTransactionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -13761,7 +13760,6 @@ export namespace Prisma {
     eventId?: boolean
     memberId?: boolean
     ticketCode?: boolean
-    pointTransactionId?: boolean
     discountCouponId?: boolean
     finalPrice?: boolean
     createdAt?: boolean
@@ -13769,7 +13767,6 @@ export namespace Prisma {
     deletedAt?: boolean
     event?: boolean | EventDefaultArgs<ExtArgs>
     member?: boolean | MemberDefaultArgs<ExtArgs>
-    pointTransaction?: boolean | TicketTransaction$pointTransactionArgs<ExtArgs>
   }, ExtArgs["result"]["ticketTransaction"]>
 
   export type TicketTransactionSelectScalar = {
@@ -13777,7 +13774,6 @@ export namespace Prisma {
     eventId?: boolean
     memberId?: boolean
     ticketCode?: boolean
-    pointTransactionId?: boolean
     discountCouponId?: boolean
     finalPrice?: boolean
     createdAt?: boolean
@@ -13785,7 +13781,7 @@ export namespace Prisma {
     deletedAt?: boolean
   }
 
-  export type TicketTransactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "eventId" | "memberId" | "ticketCode" | "pointTransactionId" | "discountCouponId" | "finalPrice" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["ticketTransaction"]>
+  export type TicketTransactionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "eventId" | "memberId" | "ticketCode" | "discountCouponId" | "finalPrice" | "createdAt" | "updatedAt" | "deletedAt", ExtArgs["result"]["ticketTransaction"]>
   export type TicketTransactionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     event?: boolean | EventDefaultArgs<ExtArgs>
     member?: boolean | MemberDefaultArgs<ExtArgs>
@@ -13797,12 +13793,10 @@ export namespace Prisma {
   export type TicketTransactionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     event?: boolean | EventDefaultArgs<ExtArgs>
     member?: boolean | MemberDefaultArgs<ExtArgs>
-    pointTransaction?: boolean | TicketTransaction$pointTransactionArgs<ExtArgs>
   }
   export type TicketTransactionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     event?: boolean | EventDefaultArgs<ExtArgs>
     member?: boolean | MemberDefaultArgs<ExtArgs>
-    pointTransaction?: boolean | TicketTransaction$pointTransactionArgs<ExtArgs>
   }
 
   export type $TicketTransactionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13811,7 +13805,7 @@ export namespace Prisma {
       event: Prisma.$EventPayload<ExtArgs>
       member: Prisma.$MemberPayload<ExtArgs>
       ticketTransactionDetails: Prisma.$TicketTransactionDetailPayload<ExtArgs>[]
-      pointTransaction: Prisma.$PointsTransactionPayload<ExtArgs> | null
+      pointTransaction: Prisma.$PointsTransactionPayload<ExtArgs>[]
       discountCoupon: Prisma.$DiscountCouponPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -13819,7 +13813,6 @@ export namespace Prisma {
       eventId: number
       memberId: string
       ticketCode: string
-      pointTransactionId: string | null
       discountCouponId: string | null
       finalPrice: number
       createdAt: Date
@@ -14222,7 +14215,7 @@ export namespace Prisma {
     event<T extends EventDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EventDefaultArgs<ExtArgs>>): Prisma__EventClient<$Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     member<T extends MemberDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MemberDefaultArgs<ExtArgs>>): Prisma__MemberClient<$Result.GetResult<Prisma.$MemberPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     ticketTransactionDetails<T extends TicketTransaction$ticketTransactionDetailsArgs<ExtArgs> = {}>(args?: Subset<T, TicketTransaction$ticketTransactionDetailsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TicketTransactionDetailPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    pointTransaction<T extends TicketTransaction$pointTransactionArgs<ExtArgs> = {}>(args?: Subset<T, TicketTransaction$pointTransactionArgs<ExtArgs>>): Prisma__PointsTransactionClient<$Result.GetResult<Prisma.$PointsTransactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    pointTransaction<T extends TicketTransaction$pointTransactionArgs<ExtArgs> = {}>(args?: Subset<T, TicketTransaction$pointTransactionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PointsTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     discountCoupon<T extends TicketTransaction$discountCouponArgs<ExtArgs> = {}>(args?: Subset<T, TicketTransaction$discountCouponArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DiscountCouponPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -14257,7 +14250,6 @@ export namespace Prisma {
     readonly eventId: FieldRef<"TicketTransaction", 'Int'>
     readonly memberId: FieldRef<"TicketTransaction", 'String'>
     readonly ticketCode: FieldRef<"TicketTransaction", 'String'>
-    readonly pointTransactionId: FieldRef<"TicketTransaction", 'String'>
     readonly discountCouponId: FieldRef<"TicketTransaction", 'String'>
     readonly finalPrice: FieldRef<"TicketTransaction", 'Int'>
     readonly createdAt: FieldRef<"TicketTransaction", 'DateTime'>
@@ -14699,6 +14691,11 @@ export namespace Prisma {
      */
     include?: PointsTransactionInclude<ExtArgs> | null
     where?: PointsTransactionWhereInput
+    orderBy?: PointsTransactionOrderByWithRelationInput | PointsTransactionOrderByWithRelationInput[]
+    cursor?: PointsTransactionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PointsTransactionScalarFieldEnum | PointsTransactionScalarFieldEnum[]
   }
 
   /**
@@ -17335,7 +17332,6 @@ export namespace Prisma {
     eventId: 'eventId',
     memberId: 'memberId',
     ticketCode: 'ticketCode',
-    pointTransactionId: 'pointTransactionId',
     discountCouponId: 'discountCouponId',
     finalPrice: 'finalPrice',
     createdAt: 'createdAt',
@@ -18476,7 +18472,6 @@ export namespace Prisma {
     eventId?: IntFilter<"TicketTransaction"> | number
     memberId?: StringFilter<"TicketTransaction"> | string
     ticketCode?: StringFilter<"TicketTransaction"> | string
-    pointTransactionId?: StringNullableFilter<"TicketTransaction"> | string | null
     discountCouponId?: StringNullableFilter<"TicketTransaction"> | string | null
     finalPrice?: IntFilter<"TicketTransaction"> | number
     createdAt?: DateTimeFilter<"TicketTransaction"> | Date | string
@@ -18485,7 +18480,7 @@ export namespace Prisma {
     event?: XOR<EventScalarRelationFilter, EventWhereInput>
     member?: XOR<MemberScalarRelationFilter, MemberWhereInput>
     ticketTransactionDetails?: TicketTransactionDetailListRelationFilter
-    pointTransaction?: XOR<PointsTransactionNullableScalarRelationFilter, PointsTransactionWhereInput> | null
+    pointTransaction?: PointsTransactionListRelationFilter
     discountCoupon?: DiscountCouponListRelationFilter
   }
 
@@ -18494,7 +18489,6 @@ export namespace Prisma {
     eventId?: SortOrder
     memberId?: SortOrder
     ticketCode?: SortOrder
-    pointTransactionId?: SortOrderInput | SortOrder
     discountCouponId?: SortOrderInput | SortOrder
     finalPrice?: SortOrder
     createdAt?: SortOrder
@@ -18503,7 +18497,7 @@ export namespace Prisma {
     event?: EventOrderByWithRelationInput
     member?: MemberOrderByWithRelationInput
     ticketTransactionDetails?: TicketTransactionDetailOrderByRelationAggregateInput
-    pointTransaction?: PointsTransactionOrderByWithRelationInput
+    pointTransaction?: PointsTransactionOrderByRelationAggregateInput
     discountCoupon?: DiscountCouponOrderByRelationAggregateInput
   }
 
@@ -18515,7 +18509,6 @@ export namespace Prisma {
     NOT?: TicketTransactionWhereInput | TicketTransactionWhereInput[]
     eventId?: IntFilter<"TicketTransaction"> | number
     memberId?: StringFilter<"TicketTransaction"> | string
-    pointTransactionId?: StringNullableFilter<"TicketTransaction"> | string | null
     discountCouponId?: StringNullableFilter<"TicketTransaction"> | string | null
     finalPrice?: IntFilter<"TicketTransaction"> | number
     createdAt?: DateTimeFilter<"TicketTransaction"> | Date | string
@@ -18524,7 +18517,7 @@ export namespace Prisma {
     event?: XOR<EventScalarRelationFilter, EventWhereInput>
     member?: XOR<MemberScalarRelationFilter, MemberWhereInput>
     ticketTransactionDetails?: TicketTransactionDetailListRelationFilter
-    pointTransaction?: XOR<PointsTransactionNullableScalarRelationFilter, PointsTransactionWhereInput> | null
+    pointTransaction?: PointsTransactionListRelationFilter
     discountCoupon?: DiscountCouponListRelationFilter
   }, "id" | "ticketCode">
 
@@ -18533,7 +18526,6 @@ export namespace Prisma {
     eventId?: SortOrder
     memberId?: SortOrder
     ticketCode?: SortOrder
-    pointTransactionId?: SortOrderInput | SortOrder
     discountCouponId?: SortOrderInput | SortOrder
     finalPrice?: SortOrder
     createdAt?: SortOrder
@@ -18554,7 +18546,6 @@ export namespace Prisma {
     eventId?: IntWithAggregatesFilter<"TicketTransaction"> | number
     memberId?: StringWithAggregatesFilter<"TicketTransaction"> | string
     ticketCode?: StringWithAggregatesFilter<"TicketTransaction"> | string
-    pointTransactionId?: StringNullableWithAggregatesFilter<"TicketTransaction"> | string | null
     discountCouponId?: StringNullableWithAggregatesFilter<"TicketTransaction"> | string | null
     finalPrice?: IntWithAggregatesFilter<"TicketTransaction"> | number
     createdAt?: DateTimeWithAggregatesFilter<"TicketTransaction"> | Date | string
@@ -19777,7 +19768,7 @@ export namespace Prisma {
     event: EventCreateNestedOneWithoutTicketTransactionsInput
     member: MemberCreateNestedOneWithoutTicketTransactionsInput
     ticketTransactionDetails?: TicketTransactionDetailCreateNestedManyWithoutTicketTransactionsInput
-    pointTransaction?: PointsTransactionCreateNestedOneWithoutTicketTransactionInput
+    pointTransaction?: PointsTransactionCreateNestedManyWithoutTicketTransactionInput
     discountCoupon?: DiscountCouponCreateNestedManyWithoutTicketTransactionInput
   }
 
@@ -19786,13 +19777,13 @@ export namespace Prisma {
     eventId: number
     memberId: string
     ticketCode: string
-    pointTransactionId?: string | null
     discountCouponId?: string | null
     finalPrice: number
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
     ticketTransactionDetails?: TicketTransactionDetailUncheckedCreateNestedManyWithoutTicketTransactionsInput
+    pointTransaction?: PointsTransactionUncheckedCreateNestedManyWithoutTicketTransactionInput
     discountCoupon?: DiscountCouponUncheckedCreateNestedManyWithoutTicketTransactionInput
   }
 
@@ -19807,7 +19798,7 @@ export namespace Prisma {
     event?: EventUpdateOneRequiredWithoutTicketTransactionsNestedInput
     member?: MemberUpdateOneRequiredWithoutTicketTransactionsNestedInput
     ticketTransactionDetails?: TicketTransactionDetailUpdateManyWithoutTicketTransactionsNestedInput
-    pointTransaction?: PointsTransactionUpdateOneWithoutTicketTransactionNestedInput
+    pointTransaction?: PointsTransactionUpdateManyWithoutTicketTransactionNestedInput
     discountCoupon?: DiscountCouponUpdateManyWithoutTicketTransactionNestedInput
   }
 
@@ -19816,13 +19807,13 @@ export namespace Prisma {
     eventId?: IntFieldUpdateOperationsInput | number
     memberId?: StringFieldUpdateOperationsInput | string
     ticketCode?: StringFieldUpdateOperationsInput | string
-    pointTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     discountCouponId?: NullableStringFieldUpdateOperationsInput | string | null
     finalPrice?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ticketTransactionDetails?: TicketTransactionDetailUncheckedUpdateManyWithoutTicketTransactionsNestedInput
+    pointTransaction?: PointsTransactionUncheckedUpdateManyWithoutTicketTransactionNestedInput
     discountCoupon?: DiscountCouponUncheckedUpdateManyWithoutTicketTransactionNestedInput
   }
 
@@ -19831,7 +19822,6 @@ export namespace Prisma {
     eventId: number
     memberId: string
     ticketCode: string
-    pointTransactionId?: string | null
     discountCouponId?: string | null
     finalPrice: number
     createdAt?: Date | string
@@ -19854,7 +19844,6 @@ export namespace Prisma {
     eventId?: IntFieldUpdateOperationsInput | number
     memberId?: StringFieldUpdateOperationsInput | string
     ticketCode?: StringFieldUpdateOperationsInput | string
-    pointTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     discountCouponId?: NullableStringFieldUpdateOperationsInput | string | null
     finalPrice?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20989,7 +20978,6 @@ export namespace Prisma {
     eventId?: SortOrder
     memberId?: SortOrder
     ticketCode?: SortOrder
-    pointTransactionId?: SortOrder
     discountCouponId?: SortOrder
     finalPrice?: SortOrder
     createdAt?: SortOrder
@@ -21007,7 +20995,6 @@ export namespace Prisma {
     eventId?: SortOrder
     memberId?: SortOrder
     ticketCode?: SortOrder
-    pointTransactionId?: SortOrder
     discountCouponId?: SortOrder
     finalPrice?: SortOrder
     createdAt?: SortOrder
@@ -21020,7 +21007,6 @@ export namespace Prisma {
     eventId?: SortOrder
     memberId?: SortOrder
     ticketCode?: SortOrder
-    pointTransactionId?: SortOrder
     discountCouponId?: SortOrder
     finalPrice?: SortOrder
     createdAt?: SortOrder
@@ -21751,7 +21737,6 @@ export namespace Prisma {
   export type TicketTransactionCreateNestedManyWithoutPointTransactionInput = {
     create?: XOR<TicketTransactionCreateWithoutPointTransactionInput, TicketTransactionUncheckedCreateWithoutPointTransactionInput> | TicketTransactionCreateWithoutPointTransactionInput[] | TicketTransactionUncheckedCreateWithoutPointTransactionInput[]
     connectOrCreate?: TicketTransactionCreateOrConnectWithoutPointTransactionInput | TicketTransactionCreateOrConnectWithoutPointTransactionInput[]
-    createMany?: TicketTransactionCreateManyPointTransactionInputEnvelope
     connect?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
   }
 
@@ -21764,7 +21749,6 @@ export namespace Prisma {
   export type TicketTransactionUncheckedCreateNestedManyWithoutPointTransactionInput = {
     create?: XOR<TicketTransactionCreateWithoutPointTransactionInput, TicketTransactionUncheckedCreateWithoutPointTransactionInput> | TicketTransactionCreateWithoutPointTransactionInput[] | TicketTransactionUncheckedCreateWithoutPointTransactionInput[]
     connectOrCreate?: TicketTransactionCreateOrConnectWithoutPointTransactionInput | TicketTransactionCreateOrConnectWithoutPointTransactionInput[]
-    createMany?: TicketTransactionCreateManyPointTransactionInputEnvelope
     connect?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
   }
 
@@ -21784,7 +21768,6 @@ export namespace Prisma {
     create?: XOR<TicketTransactionCreateWithoutPointTransactionInput, TicketTransactionUncheckedCreateWithoutPointTransactionInput> | TicketTransactionCreateWithoutPointTransactionInput[] | TicketTransactionUncheckedCreateWithoutPointTransactionInput[]
     connectOrCreate?: TicketTransactionCreateOrConnectWithoutPointTransactionInput | TicketTransactionCreateOrConnectWithoutPointTransactionInput[]
     upsert?: TicketTransactionUpsertWithWhereUniqueWithoutPointTransactionInput | TicketTransactionUpsertWithWhereUniqueWithoutPointTransactionInput[]
-    createMany?: TicketTransactionCreateManyPointTransactionInputEnvelope
     set?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
     disconnect?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
     delete?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
@@ -21806,7 +21789,6 @@ export namespace Prisma {
     create?: XOR<TicketTransactionCreateWithoutPointTransactionInput, TicketTransactionUncheckedCreateWithoutPointTransactionInput> | TicketTransactionCreateWithoutPointTransactionInput[] | TicketTransactionUncheckedCreateWithoutPointTransactionInput[]
     connectOrCreate?: TicketTransactionCreateOrConnectWithoutPointTransactionInput | TicketTransactionCreateOrConnectWithoutPointTransactionInput[]
     upsert?: TicketTransactionUpsertWithWhereUniqueWithoutPointTransactionInput | TicketTransactionUpsertWithWhereUniqueWithoutPointTransactionInput[]
-    createMany?: TicketTransactionCreateManyPointTransactionInputEnvelope
     set?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
     disconnect?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
     delete?: TicketTransactionWhereUniqueInput | TicketTransactionWhereUniqueInput[]
@@ -22129,10 +22111,10 @@ export namespace Prisma {
     connect?: TicketTransactionDetailWhereUniqueInput | TicketTransactionDetailWhereUniqueInput[]
   }
 
-  export type PointsTransactionCreateNestedOneWithoutTicketTransactionInput = {
-    create?: XOR<PointsTransactionCreateWithoutTicketTransactionInput, PointsTransactionUncheckedCreateWithoutTicketTransactionInput>
-    connectOrCreate?: PointsTransactionCreateOrConnectWithoutTicketTransactionInput
-    connect?: PointsTransactionWhereUniqueInput
+  export type PointsTransactionCreateNestedManyWithoutTicketTransactionInput = {
+    create?: XOR<PointsTransactionCreateWithoutTicketTransactionInput, PointsTransactionUncheckedCreateWithoutTicketTransactionInput> | PointsTransactionCreateWithoutTicketTransactionInput[] | PointsTransactionUncheckedCreateWithoutTicketTransactionInput[]
+    connectOrCreate?: PointsTransactionCreateOrConnectWithoutTicketTransactionInput | PointsTransactionCreateOrConnectWithoutTicketTransactionInput[]
+    connect?: PointsTransactionWhereUniqueInput | PointsTransactionWhereUniqueInput[]
   }
 
   export type DiscountCouponCreateNestedManyWithoutTicketTransactionInput = {
@@ -22147,6 +22129,12 @@ export namespace Prisma {
     connectOrCreate?: TicketTransactionDetailCreateOrConnectWithoutTicketTransactionsInput | TicketTransactionDetailCreateOrConnectWithoutTicketTransactionsInput[]
     createMany?: TicketTransactionDetailCreateManyTicketTransactionsInputEnvelope
     connect?: TicketTransactionDetailWhereUniqueInput | TicketTransactionDetailWhereUniqueInput[]
+  }
+
+  export type PointsTransactionUncheckedCreateNestedManyWithoutTicketTransactionInput = {
+    create?: XOR<PointsTransactionCreateWithoutTicketTransactionInput, PointsTransactionUncheckedCreateWithoutTicketTransactionInput> | PointsTransactionCreateWithoutTicketTransactionInput[] | PointsTransactionUncheckedCreateWithoutTicketTransactionInput[]
+    connectOrCreate?: PointsTransactionCreateOrConnectWithoutTicketTransactionInput | PointsTransactionCreateOrConnectWithoutTicketTransactionInput[]
+    connect?: PointsTransactionWhereUniqueInput | PointsTransactionWhereUniqueInput[]
   }
 
   export type DiscountCouponUncheckedCreateNestedManyWithoutTicketTransactionInput = {
@@ -22186,14 +22174,17 @@ export namespace Prisma {
     deleteMany?: TicketTransactionDetailScalarWhereInput | TicketTransactionDetailScalarWhereInput[]
   }
 
-  export type PointsTransactionUpdateOneWithoutTicketTransactionNestedInput = {
-    create?: XOR<PointsTransactionCreateWithoutTicketTransactionInput, PointsTransactionUncheckedCreateWithoutTicketTransactionInput>
-    connectOrCreate?: PointsTransactionCreateOrConnectWithoutTicketTransactionInput
-    upsert?: PointsTransactionUpsertWithoutTicketTransactionInput
-    disconnect?: PointsTransactionWhereInput | boolean
-    delete?: PointsTransactionWhereInput | boolean
-    connect?: PointsTransactionWhereUniqueInput
-    update?: XOR<XOR<PointsTransactionUpdateToOneWithWhereWithoutTicketTransactionInput, PointsTransactionUpdateWithoutTicketTransactionInput>, PointsTransactionUncheckedUpdateWithoutTicketTransactionInput>
+  export type PointsTransactionUpdateManyWithoutTicketTransactionNestedInput = {
+    create?: XOR<PointsTransactionCreateWithoutTicketTransactionInput, PointsTransactionUncheckedCreateWithoutTicketTransactionInput> | PointsTransactionCreateWithoutTicketTransactionInput[] | PointsTransactionUncheckedCreateWithoutTicketTransactionInput[]
+    connectOrCreate?: PointsTransactionCreateOrConnectWithoutTicketTransactionInput | PointsTransactionCreateOrConnectWithoutTicketTransactionInput[]
+    upsert?: PointsTransactionUpsertWithWhereUniqueWithoutTicketTransactionInput | PointsTransactionUpsertWithWhereUniqueWithoutTicketTransactionInput[]
+    set?: PointsTransactionWhereUniqueInput | PointsTransactionWhereUniqueInput[]
+    disconnect?: PointsTransactionWhereUniqueInput | PointsTransactionWhereUniqueInput[]
+    delete?: PointsTransactionWhereUniqueInput | PointsTransactionWhereUniqueInput[]
+    connect?: PointsTransactionWhereUniqueInput | PointsTransactionWhereUniqueInput[]
+    update?: PointsTransactionUpdateWithWhereUniqueWithoutTicketTransactionInput | PointsTransactionUpdateWithWhereUniqueWithoutTicketTransactionInput[]
+    updateMany?: PointsTransactionUpdateManyWithWhereWithoutTicketTransactionInput | PointsTransactionUpdateManyWithWhereWithoutTicketTransactionInput[]
+    deleteMany?: PointsTransactionScalarWhereInput | PointsTransactionScalarWhereInput[]
   }
 
   export type DiscountCouponUpdateManyWithoutTicketTransactionNestedInput = {
@@ -22222,6 +22213,19 @@ export namespace Prisma {
     update?: TicketTransactionDetailUpdateWithWhereUniqueWithoutTicketTransactionsInput | TicketTransactionDetailUpdateWithWhereUniqueWithoutTicketTransactionsInput[]
     updateMany?: TicketTransactionDetailUpdateManyWithWhereWithoutTicketTransactionsInput | TicketTransactionDetailUpdateManyWithWhereWithoutTicketTransactionsInput[]
     deleteMany?: TicketTransactionDetailScalarWhereInput | TicketTransactionDetailScalarWhereInput[]
+  }
+
+  export type PointsTransactionUncheckedUpdateManyWithoutTicketTransactionNestedInput = {
+    create?: XOR<PointsTransactionCreateWithoutTicketTransactionInput, PointsTransactionUncheckedCreateWithoutTicketTransactionInput> | PointsTransactionCreateWithoutTicketTransactionInput[] | PointsTransactionUncheckedCreateWithoutTicketTransactionInput[]
+    connectOrCreate?: PointsTransactionCreateOrConnectWithoutTicketTransactionInput | PointsTransactionCreateOrConnectWithoutTicketTransactionInput[]
+    upsert?: PointsTransactionUpsertWithWhereUniqueWithoutTicketTransactionInput | PointsTransactionUpsertWithWhereUniqueWithoutTicketTransactionInput[]
+    set?: PointsTransactionWhereUniqueInput | PointsTransactionWhereUniqueInput[]
+    disconnect?: PointsTransactionWhereUniqueInput | PointsTransactionWhereUniqueInput[]
+    delete?: PointsTransactionWhereUniqueInput | PointsTransactionWhereUniqueInput[]
+    connect?: PointsTransactionWhereUniqueInput | PointsTransactionWhereUniqueInput[]
+    update?: PointsTransactionUpdateWithWhereUniqueWithoutTicketTransactionInput | PointsTransactionUpdateWithWhereUniqueWithoutTicketTransactionInput[]
+    updateMany?: PointsTransactionUpdateManyWithWhereWithoutTicketTransactionInput | PointsTransactionUpdateManyWithWhereWithoutTicketTransactionInput[]
+    deleteMany?: PointsTransactionScalarWhereInput | PointsTransactionScalarWhereInput[]
   }
 
   export type DiscountCouponUncheckedUpdateManyWithoutTicketTransactionNestedInput = {
@@ -23143,7 +23147,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     event: EventCreateNestedOneWithoutTicketTransactionsInput
     ticketTransactionDetails?: TicketTransactionDetailCreateNestedManyWithoutTicketTransactionsInput
-    pointTransaction?: PointsTransactionCreateNestedOneWithoutTicketTransactionInput
+    pointTransaction?: PointsTransactionCreateNestedManyWithoutTicketTransactionInput
     discountCoupon?: DiscountCouponCreateNestedManyWithoutTicketTransactionInput
   }
 
@@ -23151,13 +23155,13 @@ export namespace Prisma {
     id?: string
     eventId: number
     ticketCode: string
-    pointTransactionId?: string | null
     discountCouponId?: string | null
     finalPrice: number
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
     ticketTransactionDetails?: TicketTransactionDetailUncheckedCreateNestedManyWithoutTicketTransactionsInput
+    pointTransaction?: PointsTransactionUncheckedCreateNestedManyWithoutTicketTransactionInput
     discountCoupon?: DiscountCouponUncheckedCreateNestedManyWithoutTicketTransactionInput
   }
 
@@ -23440,7 +23444,6 @@ export namespace Prisma {
     eventId?: IntFilter<"TicketTransaction"> | number
     memberId?: StringFilter<"TicketTransaction"> | string
     ticketCode?: StringFilter<"TicketTransaction"> | string
-    pointTransactionId?: StringNullableFilter<"TicketTransaction"> | string | null
     discountCouponId?: StringNullableFilter<"TicketTransaction"> | string | null
     finalPrice?: IntFilter<"TicketTransaction"> | number
     createdAt?: DateTimeFilter<"TicketTransaction"> | Date | string
@@ -24041,11 +24044,6 @@ export namespace Prisma {
   export type TicketTransactionCreateOrConnectWithoutPointTransactionInput = {
     where: TicketTransactionWhereUniqueInput
     create: XOR<TicketTransactionCreateWithoutPointTransactionInput, TicketTransactionUncheckedCreateWithoutPointTransactionInput>
-  }
-
-  export type TicketTransactionCreateManyPointTransactionInputEnvelope = {
-    data: TicketTransactionCreateManyPointTransactionInput | TicketTransactionCreateManyPointTransactionInput[]
-    skipDuplicates?: boolean
   }
 
   export type ReferralHistoryCreateWithoutPointTransactionInput = {
@@ -24713,7 +24711,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     member: MemberCreateNestedOneWithoutTicketTransactionsInput
     ticketTransactionDetails?: TicketTransactionDetailCreateNestedManyWithoutTicketTransactionsInput
-    pointTransaction?: PointsTransactionCreateNestedOneWithoutTicketTransactionInput
+    pointTransaction?: PointsTransactionCreateNestedManyWithoutTicketTransactionInput
     discountCoupon?: DiscountCouponCreateNestedManyWithoutTicketTransactionInput
   }
 
@@ -24721,13 +24719,13 @@ export namespace Prisma {
     id?: string
     memberId: string
     ticketCode: string
-    pointTransactionId?: string | null
     discountCouponId?: string | null
     finalPrice: number
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
     ticketTransactionDetails?: TicketTransactionDetailUncheckedCreateNestedManyWithoutTicketTransactionsInput
+    pointTransaction?: PointsTransactionUncheckedCreateNestedManyWithoutTicketTransactionInput
     discountCoupon?: DiscountCouponUncheckedCreateNestedManyWithoutTicketTransactionInput
   }
 
@@ -25506,41 +25504,20 @@ export namespace Prisma {
     data: XOR<TicketTransactionDetailUpdateManyMutationInput, TicketTransactionDetailUncheckedUpdateManyWithoutTicketTransactionsInput>
   }
 
-  export type PointsTransactionUpsertWithoutTicketTransactionInput = {
+  export type PointsTransactionUpsertWithWhereUniqueWithoutTicketTransactionInput = {
+    where: PointsTransactionWhereUniqueInput
     update: XOR<PointsTransactionUpdateWithoutTicketTransactionInput, PointsTransactionUncheckedUpdateWithoutTicketTransactionInput>
     create: XOR<PointsTransactionCreateWithoutTicketTransactionInput, PointsTransactionUncheckedCreateWithoutTicketTransactionInput>
-    where?: PointsTransactionWhereInput
   }
 
-  export type PointsTransactionUpdateToOneWithWhereWithoutTicketTransactionInput = {
-    where?: PointsTransactionWhereInput
+  export type PointsTransactionUpdateWithWhereUniqueWithoutTicketTransactionInput = {
+    where: PointsTransactionWhereUniqueInput
     data: XOR<PointsTransactionUpdateWithoutTicketTransactionInput, PointsTransactionUncheckedUpdateWithoutTicketTransactionInput>
   }
 
-  export type PointsTransactionUpdateWithoutTicketTransactionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    amount?: IntFieldUpdateOperationsInput | number
-    type?: EnumPointsTypeFieldUpdateOperationsInput | $Enums.PointsType
-    expiryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    ticketTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    member?: MemberUpdateOneRequiredWithoutPointTransactionNestedInput
-    referralHistory?: ReferralHistoryUpdateOneRequiredWithoutPointTransactionNestedInput
-  }
-
-  export type PointsTransactionUncheckedUpdateWithoutTicketTransactionInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    memberId?: StringFieldUpdateOperationsInput | string
-    amount?: IntFieldUpdateOperationsInput | number
-    type?: EnumPointsTypeFieldUpdateOperationsInput | $Enums.PointsType
-    expiryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    ticketTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
-    referralHistoryId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  export type PointsTransactionUpdateManyWithWhereWithoutTicketTransactionInput = {
+    where: PointsTransactionScalarWhereInput
+    data: XOR<PointsTransactionUpdateManyMutationInput, PointsTransactionUncheckedUpdateManyWithoutTicketTransactionInput>
   }
 
   export type DiscountCouponUpsertWithWhereUniqueWithoutTicketTransactionInput = {
@@ -25652,7 +25629,7 @@ export namespace Prisma {
     event: EventCreateNestedOneWithoutTicketTransactionsInput
     member: MemberCreateNestedOneWithoutTicketTransactionsInput
     ticketTransactionDetails?: TicketTransactionDetailCreateNestedManyWithoutTicketTransactionsInput
-    pointTransaction?: PointsTransactionCreateNestedOneWithoutTicketTransactionInput
+    pointTransaction?: PointsTransactionCreateNestedManyWithoutTicketTransactionInput
   }
 
   export type TicketTransactionUncheckedCreateWithoutDiscountCouponInput = {
@@ -25660,13 +25637,13 @@ export namespace Prisma {
     eventId: number
     memberId: string
     ticketCode: string
-    pointTransactionId?: string | null
     discountCouponId?: string | null
     finalPrice: number
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
     ticketTransactionDetails?: TicketTransactionDetailUncheckedCreateNestedManyWithoutTicketTransactionsInput
+    pointTransaction?: PointsTransactionUncheckedCreateNestedManyWithoutTicketTransactionInput
   }
 
   export type TicketTransactionCreateOrConnectWithoutDiscountCouponInput = {
@@ -25790,7 +25767,7 @@ export namespace Prisma {
     event?: EventUpdateOneRequiredWithoutTicketTransactionsNestedInput
     member?: MemberUpdateOneRequiredWithoutTicketTransactionsNestedInput
     ticketTransactionDetails?: TicketTransactionDetailUpdateManyWithoutTicketTransactionsNestedInput
-    pointTransaction?: PointsTransactionUpdateOneWithoutTicketTransactionNestedInput
+    pointTransaction?: PointsTransactionUpdateManyWithoutTicketTransactionNestedInput
   }
 
   export type TicketTransactionUncheckedUpdateWithoutDiscountCouponInput = {
@@ -25798,13 +25775,13 @@ export namespace Prisma {
     eventId?: IntFieldUpdateOperationsInput | number
     memberId?: StringFieldUpdateOperationsInput | string
     ticketCode?: StringFieldUpdateOperationsInput | string
-    pointTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     discountCouponId?: NullableStringFieldUpdateOperationsInput | string | null
     finalPrice?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ticketTransactionDetails?: TicketTransactionDetailUncheckedUpdateManyWithoutTicketTransactionsNestedInput
+    pointTransaction?: PointsTransactionUncheckedUpdateManyWithoutTicketTransactionNestedInput
   }
 
   export type TicketTransactionCreateWithoutTicketTransactionDetailsInput = {
@@ -25817,7 +25794,7 @@ export namespace Prisma {
     deletedAt?: Date | string | null
     event: EventCreateNestedOneWithoutTicketTransactionsInput
     member: MemberCreateNestedOneWithoutTicketTransactionsInput
-    pointTransaction?: PointsTransactionCreateNestedOneWithoutTicketTransactionInput
+    pointTransaction?: PointsTransactionCreateNestedManyWithoutTicketTransactionInput
     discountCoupon?: DiscountCouponCreateNestedManyWithoutTicketTransactionInput
   }
 
@@ -25826,12 +25803,12 @@ export namespace Prisma {
     eventId: number
     memberId: string
     ticketCode: string
-    pointTransactionId?: string | null
     discountCouponId?: string | null
     finalPrice: number
     createdAt?: Date | string
     updatedAt?: Date | string
     deletedAt?: Date | string | null
+    pointTransaction?: PointsTransactionUncheckedCreateNestedManyWithoutTicketTransactionInput
     discountCoupon?: DiscountCouponUncheckedCreateNestedManyWithoutTicketTransactionInput
   }
 
@@ -25891,7 +25868,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     event?: EventUpdateOneRequiredWithoutTicketTransactionsNestedInput
     member?: MemberUpdateOneRequiredWithoutTicketTransactionsNestedInput
-    pointTransaction?: PointsTransactionUpdateOneWithoutTicketTransactionNestedInput
+    pointTransaction?: PointsTransactionUpdateManyWithoutTicketTransactionNestedInput
     discountCoupon?: DiscountCouponUpdateManyWithoutTicketTransactionNestedInput
   }
 
@@ -25900,12 +25877,12 @@ export namespace Prisma {
     eventId?: IntFieldUpdateOperationsInput | number
     memberId?: StringFieldUpdateOperationsInput | string
     ticketCode?: StringFieldUpdateOperationsInput | string
-    pointTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     discountCouponId?: NullableStringFieldUpdateOperationsInput | string | null
     finalPrice?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    pointTransaction?: PointsTransactionUncheckedUpdateManyWithoutTicketTransactionNestedInput
     discountCoupon?: DiscountCouponUncheckedUpdateManyWithoutTicketTransactionNestedInput
   }
 
@@ -26322,7 +26299,6 @@ export namespace Prisma {
     id?: string
     eventId: number
     ticketCode: string
-    pointTransactionId?: string | null
     discountCouponId?: string | null
     finalPrice: number
     createdAt?: Date | string
@@ -26413,7 +26389,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     event?: EventUpdateOneRequiredWithoutTicketTransactionsNestedInput
     ticketTransactionDetails?: TicketTransactionDetailUpdateManyWithoutTicketTransactionsNestedInput
-    pointTransaction?: PointsTransactionUpdateOneWithoutTicketTransactionNestedInput
+    pointTransaction?: PointsTransactionUpdateManyWithoutTicketTransactionNestedInput
     discountCoupon?: DiscountCouponUpdateManyWithoutTicketTransactionNestedInput
   }
 
@@ -26421,13 +26397,13 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     eventId?: IntFieldUpdateOperationsInput | number
     ticketCode?: StringFieldUpdateOperationsInput | string
-    pointTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     discountCouponId?: NullableStringFieldUpdateOperationsInput | string | null
     finalPrice?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ticketTransactionDetails?: TicketTransactionDetailUncheckedUpdateManyWithoutTicketTransactionsNestedInput
+    pointTransaction?: PointsTransactionUncheckedUpdateManyWithoutTicketTransactionNestedInput
     discountCoupon?: DiscountCouponUncheckedUpdateManyWithoutTicketTransactionNestedInput
   }
 
@@ -26435,7 +26411,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     eventId?: IntFieldUpdateOperationsInput | number
     ticketCode?: StringFieldUpdateOperationsInput | string
-    pointTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     discountCouponId?: NullableStringFieldUpdateOperationsInput | string | null
     finalPrice?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -26549,18 +26524,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type TicketTransactionCreateManyPointTransactionInput = {
-    id?: string
-    eventId: number
-    memberId: string
-    ticketCode: string
-    discountCouponId?: string | null
-    finalPrice: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    deletedAt?: Date | string | null
   }
 
   export type TicketTransactionUpdateWithoutPointTransactionInput = {
@@ -26760,7 +26723,6 @@ export namespace Prisma {
     id?: string
     memberId: string
     ticketCode: string
-    pointTransactionId?: string | null
     discountCouponId?: string | null
     finalPrice: number
     createdAt?: Date | string
@@ -26778,7 +26740,7 @@ export namespace Prisma {
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     member?: MemberUpdateOneRequiredWithoutTicketTransactionsNestedInput
     ticketTransactionDetails?: TicketTransactionDetailUpdateManyWithoutTicketTransactionsNestedInput
-    pointTransaction?: PointsTransactionUpdateOneWithoutTicketTransactionNestedInput
+    pointTransaction?: PointsTransactionUpdateManyWithoutTicketTransactionNestedInput
     discountCoupon?: DiscountCouponUpdateManyWithoutTicketTransactionNestedInput
   }
 
@@ -26786,13 +26748,13 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     memberId?: StringFieldUpdateOperationsInput | string
     ticketCode?: StringFieldUpdateOperationsInput | string
-    pointTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     discountCouponId?: NullableStringFieldUpdateOperationsInput | string | null
     finalPrice?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     ticketTransactionDetails?: TicketTransactionDetailUncheckedUpdateManyWithoutTicketTransactionsNestedInput
+    pointTransaction?: PointsTransactionUncheckedUpdateManyWithoutTicketTransactionNestedInput
     discountCoupon?: DiscountCouponUncheckedUpdateManyWithoutTicketTransactionNestedInput
   }
 
@@ -26800,7 +26762,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     memberId?: StringFieldUpdateOperationsInput | string
     ticketCode?: StringFieldUpdateOperationsInput | string
-    pointTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
     discountCouponId?: NullableStringFieldUpdateOperationsInput | string | null
     finalPrice?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -27170,6 +27131,45 @@ export namespace Prisma {
     orderEmail?: StringFieldUpdateOperationsInput | string
     orderBirthDate?: StringFieldUpdateOperationsInput | string
     orderSex?: EnumSexFieldUpdateOperationsInput | $Enums.Sex
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PointsTransactionUpdateWithoutTicketTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    type?: EnumPointsTypeFieldUpdateOperationsInput | $Enums.PointsType
+    expiryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ticketTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    member?: MemberUpdateOneRequiredWithoutPointTransactionNestedInput
+    referralHistory?: ReferralHistoryUpdateOneRequiredWithoutPointTransactionNestedInput
+  }
+
+  export type PointsTransactionUncheckedUpdateWithoutTicketTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    memberId?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    type?: EnumPointsTypeFieldUpdateOperationsInput | $Enums.PointsType
+    expiryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ticketTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
+    referralHistoryId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PointsTransactionUncheckedUpdateManyWithoutTicketTransactionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    memberId?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    type?: EnumPointsTypeFieldUpdateOperationsInput | $Enums.PointsType
+    expiryDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    ticketTransactionId?: NullableStringFieldUpdateOperationsInput | string | null
+    referralHistoryId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     deletedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null

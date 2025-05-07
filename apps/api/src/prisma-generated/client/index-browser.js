@@ -261,7 +261,6 @@ exports.Prisma.TicketTransactionScalarFieldEnum = {
   eventId: 'eventId',
   memberId: 'memberId',
   ticketCode: 'ticketCode',
-  pointTransactionId: 'pointTransactionId',
   discountCouponId: 'discountCouponId',
   finalPrice: 'finalPrice',
   createdAt: 'createdAt',
