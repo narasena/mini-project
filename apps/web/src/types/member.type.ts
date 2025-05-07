@@ -1,4 +1,3 @@
-import { Sex } from "@/prisma-generated/client";
 
 export interface IMember {
     id: string;
@@ -14,4 +13,11 @@ export interface IMember {
     termsPrivactyAccepted: boolean
     isEmailVerified: boolean
 
+}
+
+enum Sex {
+  MALE,
+  FEMALE,
+  OTHER,
+  PREFER_NOT_TO_SAY
 }
