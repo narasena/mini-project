@@ -143,6 +143,7 @@ export const Header = () => {
                           <RxCross2 />
                         </span>
                       </button>
+                      <Link href={'/carievent'}>
                       <button
                         id="nes-btn-search"
                         type="button"
@@ -152,6 +153,7 @@ export const Header = () => {
                           <FaSearch />
                         </span>
                       </button>
+                      </Link>
                     </div>
                   </form>
                   <div
