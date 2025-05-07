@@ -89,7 +89,7 @@ export default function CreateEventPage() {
   }: {
     mainTab: TMainTabKeys;
     subTab: TSubTabKeys;
-  }): JSX.Element => {
+  }) => {
     const title = createEventTabs[mainTab][subTab];
     const isActive =
       activeTabs.mainTab === mainTab && activeTabs.subTab === subTab;
@@ -135,7 +135,7 @@ export default function CreateEventPage() {
       });
     }
   };
-  const CloseModalButton = (): JSX.Element => {
+  const CloseModalButton = () => {
     return (
       <button
         className="absolute top-[10px] right-[10px]"

@@ -143,7 +143,7 @@ export default function RegisterPage() {
     }
   }, [isEmailVerified]);
 
-  const LoadingScreen = (): JSX.Element => {
+  const LoadingScreen = () => {
     return (
       <div
         className={`flex items-center absolute top-0 z-[999] justify-center min-w-full min-h-screen bg-gray-700/50 ${isLoading ? 'block' : 'hidden'}`}

@@ -54,7 +54,7 @@ export default function LoginPage() {
       setIsLoading(false);
     }
   }
-  const LoadingScreen = ():JSX.Element => {
+  const LoadingScreen = () => {
     return (
       <div className={`flex items-center absolute top-0 z-[999] justify-center min-w-full min-h-screen bg-gray-700/50 ${isLoading? 'block' : 'hidden'}`}>
         <div className="flex size-32 items-center justify-center border border-gray-400 rounded-lg bg-white">
