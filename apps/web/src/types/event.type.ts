@@ -1,5 +1,3 @@
-import { TicketIDCard, TicketType } from "@/prisma-generated/client"
-
 export interface IEvent {
     id: number
     creatorId: string
@@ -34,4 +32,15 @@ export interface IEvent {
     oneEmailOneTransaction: boolean
     ticketDataFormUnique: boolean
     isDraft: boolean
+}
+
+enum TicketType {
+  BERBAYAR,
+  BAYAR_SESUKAMU,
+  GRATIS
+}
+
+enum TicketIDCard {
+  NO_ID,
+  WITH_ID
 }

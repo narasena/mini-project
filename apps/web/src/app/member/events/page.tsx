@@ -51,7 +51,7 @@ export default function DashboardMyEventPage() {
     'Nama Event (A-Z)',
     'Nama Event (Z-A)',
   ];
-  const EventNoData = (): JSX.Element => {
+  const EventNoData = () => {
     return (
       
     <div className="mt-[30px] mb-5 pl-5 text-center w-full max-w-full">
