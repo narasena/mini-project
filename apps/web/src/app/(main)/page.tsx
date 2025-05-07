@@ -196,7 +196,7 @@ export default function HomePage() {
             />
             <div className="p-3">
               <h3 className="text-sm font-semibold leading-tight">
-                Flow World Tour "Anime Shibari 2024 - 2025" - Jakarta
+                {`Flow World Tour "Anime Shibari 2024 - 2025" - Jakarta`}
               </h3>
               <p className="mt-1 text-gray-600 text-xs">02 May 2025</p>
               <p className="text-sm font-bold mt-1">Rp1.000.000</p>
@@ -276,7 +276,7 @@ export default function HomePage() {
             />
             <div className="p-3">
               <h3 className="text-sm font-semibold leading-tight">
-                Flow World Tour "Anime Shibari 2024 - 2025" - Jakarta
+                {`Flow World Tour "Anime Shibari 2024 - 2025" - Jakarta`}
               </h3>
               <p className="mt-1 text-gray-600 text-xs">02 May 2025</p>
               <p className="text-sm font-bold mt-1">Rp1.000.000</p>
@@ -882,7 +882,7 @@ export default function HomePage() {
             />
             <div className="p-3">
               <h3 className="text-sm font-semibold leading-tight">
-                Flow World Tour "Anime Shibari 2024 - 2025" - Jakarta
+                {`Flow World Tour "Anime Shibari 2024 - 2025" - Jakarta`}
               </h3>
               <p className="mt-1 text-gray-600 text-xs">02 May 2025</p>
               <p className="text-sm font-bold mt-1">Rp1.000.000</p>

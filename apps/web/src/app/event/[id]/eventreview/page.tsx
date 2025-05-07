@@ -236,7 +236,7 @@ const BannerCard: React.FC = () => {
           {event?.eventName}
         </h2>
         <p>
-          Superfriends! Supermusic Intimate Sessions kembali hadir di tahun 2025
+          {`Superfriends! Supermusic Intimate Sessions kembali hadir di tahun 2025
           dengan membawa format baru 'Acoustic Set'. Mulai April hingga Juni
           2025, rangkaian acara ini akan dilaksanakan di 25 Kota, menghadirkan
           25 Guest Stars serta Local Heroes dari berbagai wilayah di Indonesia.
@@ -245,7 +245,7 @@ const BannerCard: React.FC = () => {
           konsep pertunjukan musik yang lebih hangat dan intim serta menjadikan
           ruang yang mempertemukan Musisi dan Superfriends secara lebih personal
           dan bermakna karena INIRASANYASUPER!!! Guest Star : St.Loco Local
-          Heroes : Moccatune, Mighfar Suganda, XGO, Iwakvisual
+          Heroes : Moccatune, Mighfar Suganda, XGO, Iwakvisual`}
         </p>
 
         {/* Syarat & Ketentuan */}

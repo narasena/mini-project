@@ -105,7 +105,7 @@ const SearchPage: React.FC = () => {
       <h2
         style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '40px' }}
       >
-        Event dengan kata "education"
+        {`Event dengan kata "education"`}
       </h2>
 
       {/* Event List Card */}
