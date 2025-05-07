@@ -1,15 +1,33 @@
 // pages/voucher.tsx
 
-import React from 'react';
+'use client'
+import { IEvent } from '@/types/event.type';
+import apiInstance from '@/utils/axiosInstance';
+import { useParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 
 const E_Voucher: React.FC = () => {
+  const params = useParams();
+  const [event, setEvent] = useState<IEvent | null>(null);
+  const handleGetEventById = async () => {
+    try {
+      const response = await apiInstance.get(`/events/${params.id}`);
+      setEvent(response.data.event);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    handleGetEventById();
+  }, []);
+  
   const voucherData = {
     name: 'Aditya Setiawan',
     invoiceCode: 'MJH868BX',
     orderDate: '05 May 2025 10:34',
     reference: 'Online',
-    eventTitle: 'Webinar Ekspansi Bisnis ke Singapura',
-    eventDate: '08 May 2025 16:00 – 17:00',
+    eventTitle: event?.eventName,
+    eventDate: `${event?.eventStartDate} - ${event?.eventEndDate} | ${event?.eventStartTime} - ${event?.eventEndTime}`,
     eventLocation: 'Online',
     ticketUrl:
       'https://evoucher.loket.com/evoucher/4f741be8-a963-451a-8870-83eccde0e913?_gl=1*5a7u0a*_gcl_au*MTU3ODQ1NzI5NC4xNzQ1OTg3NzY2',
@@ -17,7 +35,7 @@ const E_Voucher: React.FC = () => {
     supportPhone: '+62 213 0003 160',
     website: 'https://www.loket.com/',
     eventBanner:
-      'https://assets.loket.com/neo/production/images/banner/20250429133940_6810742c07c7f.jpg', // URL gambar banner
+      event?.bannerImgUrl, // URL gambar banner
     barcodeImage:
       'https://png.pngtree.com/png-vector/20220605/ourmid/pngtree-barcode-vector-png-image_4889246.png', // URL barcode
   };
@@ -62,7 +80,7 @@ const E_Voucher: React.FC = () => {
       >
         {/* Event Banner Image (smaller size) */}
         <img
-          src={voucherData.eventBanner}
+          src={event?.bannerImgUrl!}
           alt="Event Banner"
           style={{
             width: '40%',
@@ -76,10 +94,10 @@ const E_Voucher: React.FC = () => {
         <div style={{ marginLeft: '20px', maxWidth: '50%' }}>
           <h2>{voucherData.eventTitle}</h2>
           <p>
-            <strong>Lokasi:</strong> {voucherData.eventLocation}
+            <strong>Lokasi:</strong> {event?.eventLocation}
           </p>
           <p>
-            <strong>Tanggal Event:</strong> {voucherData.eventDate}
+            <strong>Tanggal Event:</strong> {`${event?.eventStartDate} - ${event?.eventEndDate}`}
           </p>
         </div>
       </div>
@@ -156,7 +174,7 @@ const E_Voucher: React.FC = () => {
         <div style={{ flex: 1 }}>
           {/* Teks KOPLO PARTY MADNESS WITH FEEL KOPLO */}
           <p style={{ fontWeight: 'bold' }}>
-            KOPLO PARTY MADNESS WITH FEEL KOPLO
+            {event?.eventName}
           </p>
         </div>
 

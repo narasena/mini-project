@@ -1,11 +1,27 @@
 'use client';
-import React, { useState, useRef } from 'react';
+import { IEvent } from '@/types/event.type';
+import apiInstance from '@/utils/axiosInstance';
+import { useParams } from 'next/navigation';
+import React, { useState, useRef, useEffect } from 'react';
 
 const BannerCard: React.FC = () => {
   const [rating, setRating] = useState(0); // Track selected rating
   const [reviewText, setReviewText] = useState(''); // Track the review text
   const [descShown, setDescShown] = useState(true);
   const reviewRef = useRef<HTMLDivElement>(null); // Reference to scroll to the review section
+  const params = useParams();
+    const [event, setEvent] = useState<IEvent | null>(null);
+    const handleGetEventById = async () => {
+      try {
+        const response = await apiInstance.get(`/events/${params.id}`);
+        setEvent(response.data.event);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    useEffect(() => {
+      handleGetEventById();
+    }, []);
 
   const handleDescShow = () => {
     setDescShown(!descShown);
@@ -61,7 +77,7 @@ const BannerCard: React.FC = () => {
       >
         {/* Gambar */}
         <img
-          src="https://assets.loket.com/neo/production/images/banner/20250419124210_680337b2dfe4f.jpg"
+          src={event?.bannerImgUrl!}
           alt="Loket Banner"
           style={{
             width: '800px',
@@ -85,19 +101,21 @@ const BannerCard: React.FC = () => {
           }}
         >
           <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>
-            SUPERMUSIC INTIMATE SESSIONS 2025 - SBY
+            {event?.eventName}
           </h2>
           <p style={{ margin: '4px 0' }}>
-            <span>📅</span> 25 Apr 2025
+            <span>📅</span>{' '}
+            {`${event?.eventStartDate} - ${event?.eventEndDate}`}
           </p>
           <p style={{ margin: '4px 0' }}>
-            <span>🕓</span> 16:00 - 22:00 WIB
+            <span>🕓</span>{' '}
+            {`${event?.eventStartTime} - ${event?.eventEndTime}`}
           </p>
           <p style={{ margin: '4px 0' }}>
-            <span>📍</span> HEDON ESTATE, Jawa Timur
+            <span>📍</span> {event?.eventLocation}
           </p>
           <p style={{ marginTop: '8px', fontStyle: 'italic' }}>
-            Diselenggarakan oleh SUPERMUSIC
+            Diselenggarakan oleh {event?.organizerName}
           </p>
 
           {/* Card Review Button */}
@@ -215,7 +233,7 @@ const BannerCard: React.FC = () => {
         }}
       >
         <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>
-          SUPERMUSIC INTIMATE SESSIONS 2025
+          {event?.eventName}
         </h2>
         <p>
           Superfriends! Supermusic Intimate Sessions kembali hadir di tahun 2025
