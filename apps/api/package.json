@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/index.ts",
-  "scripts": {
+   "scripts": {
     "dev": "cross-env NODE_ENV=development ts-node-dev -r tsconfig-paths/register src/index.ts",
-    "build": "tsc && tsc-alias",
+    "build": "prisma generate --schema=prisma/schema.prisma --generator client --output=src/prisma-generated/client && tsc && tsc-alias",
     "serve": "cross-env NODE_ENV=production node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prisma": "dotenv -e .env.development -- ts-node -r tsconfig-paths/register src/config.ts && npx prisma"
+    "prisma": "prisma",
+    "postinstall": "prisma generate --schema=prisma/schema.prisma --generator client --output=src/prisma-generated/client"
   },
   "author": "",
   "license": "ISC",
