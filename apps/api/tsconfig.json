@@ -13,6 +13,6 @@
     }
   },
   // "include": ["src/**/*"],
-  "include": ["**/*.ts", "prisma/seedData/countries.ts", "src/app.ts.old"],
+  "include": ["**/*.ts", "prisma/seedData/countries.ts"],
   "exclude": ["node_modules"]
 }
