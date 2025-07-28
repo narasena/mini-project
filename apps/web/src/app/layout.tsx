@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import PrelineScriptWrapper from '@/components/PrelineScriptWrapper';
+
 import { ToastContainer } from 'react-toastify';
 import AuthProvider from '@/providers/authProvider';
 
@@ -22,8 +22,8 @@ export default function RootLayout({
       <body className={''}>
         <ToastContainer />
         <AuthProvider>{children}</AuthProvider>
+
       </body>
-      <PrelineScriptWrapper />
     </html>
   );
 }
