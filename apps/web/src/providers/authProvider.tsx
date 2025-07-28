@@ -4,7 +4,7 @@ import apiInstance from '@/utils/axiosInstance';
 import { usePathname, useRouter } from 'next/navigation';
 import * as React from 'react';
 
-const publicRoutes = ['/login', '/register'];
+const publicRoutes = ['/','/login', '/register'];
 
 export default function AuthProvider({
   children,
