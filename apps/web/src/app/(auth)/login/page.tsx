@@ -1,8 +1,7 @@
 'use client';
 import useAuthStore from '@/lib/store/auth-store';
-import axios from 'axios';
+import apiInstance from '@/utils/axiosInstance';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { set } from 'lodash';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import * as React from 'react';
@@ -16,7 +15,7 @@ export default function LoginPage() {
   const handleLogin = async (email: string) => {
     try {
       setIsLoading(true);
-      const response = await axios.post('http://localhost:8000/api/auth/login', { email, type: "LOGIN" });
+      const response = await apiInstance.post('/auth/login', { email, type: "LOGIN" });
       toast.success(response.data.message);
       setEmail(email);
       setIsOTPLoginSent(true);
@@ -38,7 +37,7 @@ export default function LoginPage() {
   const handleOTPVerify = async (code: string) => {
     try {
       setIsLoading(true);
-      const response = await axios.post('http://localhost:8000/api/auth/verify-login', {email, code, type: "LOGIN" });
+      const response = await apiInstance.post('/auth/verify-login', {email, code, type: "LOGIN" });
       toast.success(response.data.message);
       setLogin(true)
       setToken(response.data.data.token) // Assuming your API returns a token
