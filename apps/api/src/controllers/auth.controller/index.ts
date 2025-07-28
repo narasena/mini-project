@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { IAuthController } from './type';
 import { generateEmailVerificationCode } from '../../services/email.verification/generateVerificationCode';
 import fs from 'fs';
+import path from 'path';
 import { compile } from 'handlebars';
 import { transporter } from '../../utils/mailer/transporter.mailer';
 import { increaseAttemptCount } from '../../services/email.verification/attemptIncrement';
@@ -156,7 +157,7 @@ export async function sendEmailVerificationCode(
     console.log(verificationCode);
 
     const verifyEmailTemplate = fs.readFileSync(
-      './src/public/verify-email-template.html',
+      path.join(process.cwd(), 'src/public/verify-email-template.html'),
       'utf-8',
     );
 
