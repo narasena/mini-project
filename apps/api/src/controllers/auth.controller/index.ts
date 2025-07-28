@@ -156,8 +156,9 @@ export async function sendEmailVerificationCode(
       .code;
     console.log(verificationCode);
 
+    const templatePath = path.join(process.cwd(), 'apps/api/src/public/verify-email-template.html');
     const verifyEmailTemplate = fs.readFileSync(
-      path.join(process.cwd(), 'src/public/verify-email-template.html'),
+      fs.existsSync(templatePath) ? templatePath : path.join(process.cwd(), 'public/verify-email-template.html'),
       'utf-8',
     );
 

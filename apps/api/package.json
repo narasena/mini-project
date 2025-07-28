@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "dev": "nodemon",
-    "build": "prisma generate &&tsc && mkdir -p api && cp -r dist/src/* api/",
+    "build": "prisma generate &&tsc && mkdir -p api && cp -r dist/src/* api/ && cp -r src/public api/",
     "vercel-bulid": "prisma generate && tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prisma": "prisma",
