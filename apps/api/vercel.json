@@ -4,16 +4,14 @@
   "installCommand": "npm install",
   "builds": [
     {
-      "src": "dist/index.js",
+      "src": "src/index.ts",
       "use": "@vercel/node",
       "config": {
         "includeFiles": [
-          "dist/**",
-          "prisma/schema.prisma",
-          "src/prisma-generated/client/**"
+          "src/**",
         ]
       }
     }
   ],
-  "routes": [{ "src": "/(.*)", "dest": "dist/index.js" }]
+  "routes": [{ "src": "/(.*)", "dest": "src/index.ts" }]
 }
