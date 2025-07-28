@@ -8,6 +8,6 @@ node_modules
 .env.production.local
 .vercel
 
-/api**
-/dist**
-/prisma-generated
+api**
+dist**
+prisma-generated/
