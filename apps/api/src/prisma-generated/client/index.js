@@ -343,7 +343,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "D:\\One Drive\\OneDrive\\Purwadhika\\Course\\JCWD-3202\\Module 03\\mini-project\\apps\\api\\src\\prisma-generated\\client",
+      "value": "/home/cursemaker/02_Projects/01_Bootcamp/01_mini-project/apps/api/src/prisma-generated/client",
       "fromEnvVar": null
     },
     "config": {
@@ -352,7 +352,7 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "debian-openssl-3.0.x",
         "native": true
       },
       {
@@ -361,12 +361,11 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "D:\\One Drive\\OneDrive\\Purwadhika\\Course\\JCWD-3202\\Module 03\\mini-project\\apps\\api\\prisma\\schema.prisma",
+    "sourceFilePath": "/home/cursemaker/02_Projects/01_Bootcamp/01_mini-project/apps/api/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
-    "schemaEnvPath": "../../../.env"
+    "rootEnvPath": null
   },
   "relativePath": "../../../prisma",
   "clientVersion": "6.6.0",
@@ -424,8 +423,8 @@ exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
 // file annotations for bundling tools to include these files
-path.join(__dirname, "query_engine-windows.dll.node");
-path.join(process.cwd(), "src/prisma-generated/client/query_engine-windows.dll.node")
+path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");
+path.join(process.cwd(), "src/prisma-generated/client/libquery_engine-debian-openssl-3.0.x.so.node")
 
 // file annotations for bundling tools to include these files
 path.join(__dirname, "libquery_engine-darwin.dylib.node");

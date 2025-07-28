@@ -1,5 +1,5 @@
-import { loginMember, registerMember, registerMemberCheck, sendEmailVerificationCode, sessionLoginMember, verifyEmailVerificationCode, verifyLogin, verifyNewMember } from "@/controllers/auth.controller";
-import { verifyToken } from "@/middlewares/auth/verifyToken";
+import { loginMember, registerMember, registerMemberCheck, sendEmailVerificationCode, sessionLoginMember, verifyEmailVerificationCode, verifyLogin, verifyNewMember } from "../controllers/auth.controller";
+import { verifyToken } from "../middlewares/auth/verifyToken";
 import { Router } from "express";
 
 const authRouter = Router()

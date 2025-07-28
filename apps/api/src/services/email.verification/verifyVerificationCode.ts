@@ -1,6 +1,6 @@
-import { prisma } from "@/prisma";
-import { CodeType } from "@/prisma-generated/client";
-import { IVerificationCode } from "@/types/verification.type";
+import { prisma } from "../../prisma";
+import { CodeType } from "../../prisma-generated/client";
+import { IVerificationCode } from "../../types/verification.type";
 
 export async function verifyCode(
   email:string,

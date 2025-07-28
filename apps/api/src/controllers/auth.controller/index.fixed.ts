@@ -3,14 +3,14 @@ import { IAuthController } from './type';
 import { generateEmailVerificationCode } from '@/services/email.verification/generateVerificationCode';
 import fs from 'fs';
 import { compile } from 'handlebars';
-import { transporter } from '@/utils/mailer/transporter.mailer';
-import { increaseAttemptCount } from '@/services/email.verification/attemptIncrement';
-import { verifyCode } from '@/services/email.verification/verifyVerificationCode';
-import { prisma } from '@/prisma';
-import { Sex } from '@/prisma-generated/client';
-import { IJwtPayload, jwtSign } from '@/utils/jwt/jwt.sign';
-import { generateCodeEightCharsMix } from '@/utils/code.generator/codeGeneratorEightCharsMix';
-import { generateCodeTenChars } from '@/utils/code.generator/codeGeneratorTenChars';
+import { transporter } from '../../utils/mailer/transporter.mailer';
+import { increaseAttemptCount } from '../../services/email.verification/attemptIncrement';
+import { verifyCode } from '../../services/email.verification/verifyVerificationCode';
+import { prisma } from '../../prisma';
+import { Sex } from '../../prisma-generated/client';
+import { IJwtPayload, jwtSign } from '../../utils/jwt/jwt.sign';
+import { generateCodeEightCharsMix } from '../../utils/code.generator/codeGeneratorEightCharsMix';
+import { generateCodeTenChars } from '../../utils/code.generator/codeGeneratorTenChars';
 
 export async function registerMember(
   req: Request,

@@ -1,4 +1,4 @@
-import { CodeType } from "@/prisma-generated/client";
+import { CodeType } from "../prisma-generated/client";
 
 export interface IVerificationCode {
     code: string;

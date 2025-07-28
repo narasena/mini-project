@@ -1,5 +1,5 @@
-import { prisma } from '@/prisma';
-import { IEvent } from '@/types/event.type';
+import { prisma } from '../../prisma';
+import { IEvent } from '../../types/event.type';
 import { NextFunction, Request, Response } from 'express';
 
 

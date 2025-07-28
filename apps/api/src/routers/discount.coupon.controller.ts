@@ -1,5 +1,5 @@
-import { getDiscountCouponsById } from "@/controllers/discount.coupon.controller";
-import { verifyToken } from "@/middlewares/auth/verifyToken";
+import { getDiscountCouponsById } from "../controllers/discount.coupon.controller";
+import { verifyToken } from "../middlewares/auth/verifyToken";
 import { Router } from "express";
 
 const discountRouter = Router();

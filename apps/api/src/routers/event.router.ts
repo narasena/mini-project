@@ -1,5 +1,5 @@
-import { createEvent, findEventCategories, getEventByCreatorId, getEventById, getEvents } from "@/controllers/event.controller";
-import { verifyToken } from "@/middlewares/auth/verifyToken";
+import { createEvent, findEventCategories, getEventByCreatorId, getEventById, getEvents } from "../controllers/event.controller";
+import { verifyToken } from "../middlewares/auth/verifyToken";
 
 const eventRouter = require('express').Router();
 

@@ -1,4 +1,4 @@
-import { TicketIDCard, TicketType } from "@/prisma-generated/client"
+import { TicketIDCard, TicketType } from "../prisma-generated/client"
 
 export interface IEvent {
     id: number

@@ -1,6 +1,5 @@
-import { prisma } from "@/prisma";
-import { ICreatorProfile } from "@/types/creator.profile.type";
-import { generateCodeEightCharsMix } from "@/utils/code.generator/codeGeneratorEightCharsMix";
+import { prisma } from "../../prisma";
+import { generateCodeEightCharsMix } from "../../utils/code.generator/codeGeneratorEightCharsMix";
 
 export async function generateProfileLink(memberId:string) {
     const code = generateCodeEightCharsMix()

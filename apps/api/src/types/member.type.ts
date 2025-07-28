@@ -1,4 +1,4 @@
-import { Sex } from "@/prisma-generated/client";
+import { Sex } from "../prisma-generated/client";
 
 export interface IMember {
     id: string;

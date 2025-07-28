@@ -1,5 +1,5 @@
-import { prisma } from '@/prisma';
-import { PointsType } from '@/prisma-generated/client';
+import { prisma } from '../../prisma';
+import { PointsType } from '../../prisma-generated/client';
 import { NextFunction, Request, Response } from 'express';
 
 export async function findReferralNumber(
